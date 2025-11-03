@@ -5,16 +5,78 @@ setlocal enabledelayedexpansion
 :: ===============================================
 :: 🧹 SAFE CLEANUP TOOL - SMART SCAN EDITION
 :: TỰ ĐỘNG QUÉT & CHỈ DỌN PHẦN MỀM CÓ TRONG MÁY
+:: BẮT BUỘC QUYỀN ADMINISTRATOR
 :: ===============================================
 
-:: Kiểm tra quyền Administrator
+title 🧹 Safe Cleanup Tool - Đang kiểm tra quyền Administrator...
+
+:: ===============================================
+:: KIỂM TRA QUYỀN ADMINISTRATOR (BẮT BUỘC)
+:: ===============================================
+
+echo.
+echo ╔════════════════════════════════════════════════════════╗
+echo ║  🔒 ĐANG KIỂM TRA QUYỀN ADMINISTRATOR...               ║
+echo ╚════════════════════════════════════════════════════════╝
+echo.
+
+:: Phương pháp 1: Kiểm tra net session
 net session >nul 2>&1
+if %errorLevel% == 0 goto :admin_ok
+
+:: Phương pháp 2: Kiểm tra fsutil (backup)
+fsutil dirty query %systemdrive% >nul 2>&1
+if %errorLevel% == 0 goto :admin_ok
+
+:: Không có quyền Admin - Yêu cầu quyền
+cls
+echo.
+echo ╔════════════════════════════════════════════════════════╗
+echo ║  ⚠️  CẢNH BÁO: THIẾU QUYỀN ADMINISTRATOR              ║
+echo ╚════════════════════════════════════════════════════════╝
+echo.
+echo  [!] Script này YÊU CẦU quyền Administrator để chạy!
+echo.
+echo  📋 LÝ DO CẦN QUYỀN ADMIN:
+echo     • Dọn cache hệ thống Windows
+echo     • Xóa file trong thư mục C:\Windows
+echo     • Dọn thùng rác tất cả ổ đĩa
+echo     • Truy cập ProgramData
+echo.
+echo  🔄 ĐANG TỰ ĐỘNG YÊU CẦU QUYỀN ADMIN...
+echo.
+timeout /t 2 /nobreak >nul
+
+:: Tự động yêu cầu quyền Admin
+powershell -Command "Start-Process '%~f0' -Verb RunAs" 2>nul
 if %errorLevel% neq 0 (
-    echo [!] Cần quyền Administrator để chạy script này.
-    echo [*] Đang yêu cầu quyền Admin...
-    powershell -Command "Start-Process '%~f0' -Verb RunAs"
-    exit /b
+    echo.
+    echo  ❌ KHÔNG THỂ LẤY QUYỀN ADMIN!
+    echo.
+    echo  💡 CÁCH KHẮC PHỤC:
+    echo     1. Nhấp chuột phải vào file này
+    echo     2. Chọn "Run as administrator"
+    echo     3. Chấp nhận UAC prompt
+    echo.
+    echo  Nhấn phím bất kỳ để thoát...
+    pause >nul
+    exit /b 1
 )
+
+:: Thoát instance cũ (không có quyền admin)
+exit /b
+
+:admin_ok
+cls
+echo.
+echo ╔════════════════════════════════════════════════════════╗
+echo ║  ✅ QUYỀN ADMINISTRATOR - XÁC NHẬN THÀNH CÔNG         ║
+echo ╚════════════════════════════════════════════════════════╝
+echo.
+timeout /t 1 /nobreak >nul
+cls
+
+title 🧹 Safe Cleanup Tool - SMART SCAN - Administrator Mode
 
 echo.
 echo ╔════════════════════════════════════════════════════════╗
@@ -23,6 +85,7 @@ echo ║  🔍 Tự động quét phần mềm trong máy                   ║
 echo ║  🎯 Chỉ dọn những gì tìm thấy                         ║
 echo ║  🛡️ CHỈ XÓA: Cache, Logs, Temp                        ║
 echo ║  💾 KHÔNG XÓA: Dữ liệu, Settings, Files               ║
+echo ║  🔒 Đang chạy với quyền ADMINISTRATOR                 ║
 echo ╚════════════════════════════════════════════════════════╝
 echo.
 
