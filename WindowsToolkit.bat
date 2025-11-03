@@ -450,6 +450,7 @@ title Windows Toolkit v4.1 - Windows Activation
 echo.
 echo ================================================================
 echo  WINDOWS AND OFFICE ACTIVATION TOOL
+echo  Using: Open Source Activation Methods
 echo ================================================================
 echo.
 echo  Current Status:
@@ -524,26 +525,26 @@ set /p confirm_hwid="Continue with HWID Activation? (Y/N): "
 if /i not "%confirm_hwid%"=="Y" goto ACTIVATION_MENU
 
 echo.
-echo  Downloading and running HWID activation script...
-echo  Please wait...
+echo  Launching activation script...
+echo  Please wait, this may take 10-20 seconds...
 echo.
 
-powershell -Command "irm https://massgrave.dev/get | iex" >nul 2>&1
-
-if errorlevel 1 (
-    echo.
-    echo  ERROR: Could not download activation script
-    echo  Check your internet connection
-    echo.
-    pause
-    goto ACTIVATION_MENU
-)
+powershell -Command "irm https://massgrave.dev/get | iex"
 
 echo.
-echo  Activation complete!
-echo  Checking status...
+echo  ================================================================
+echo  ACTIVATION WINDOW OPENED
+echo  ================================================================
 echo.
-cscript //nologo %SystemRoot%\System32\slmgr.vbs /xpr
+echo  A new PowerShell window has opened with activation options.
+echo  Please follow the instructions in that window:
+echo.
+echo  1. Select your activation method from the menu
+echo  2. Wait for activation to complete
+echo  3. Check the results
+echo  4. Close the PowerShell window when done
+echo.
+echo  After closing, press any key here to continue...
 echo.
 pause
 goto ACTIVATION_MENU
@@ -565,26 +566,19 @@ set /p confirm_kms38="Continue with KMS38 Activation? (Y/N): "
 if /i not "%confirm_kms38%"=="Y" goto ACTIVATION_MENU
 
 echo.
-echo  Downloading and running KMS38 activation script...
-echo  Please wait...
+echo  Launching activation script...
+echo  Please wait, this may take 10-20 seconds...
 echo.
 
-powershell -Command "irm https://massgrave.dev/get | iex" >nul 2>&1
-
-if errorlevel 1 (
-    echo.
-    echo  ERROR: Could not download activation script
-    echo  Check your internet connection
-    echo.
-    pause
-    goto ACTIVATION_MENU
-)
+powershell -Command "irm https://massgrave.dev/get | iex"
 
 echo.
-echo  Activation complete!
-echo  Checking status...
+echo  ================================================================
+echo  ACTIVATION WINDOW OPENED
+echo  ================================================================
 echo.
-cscript //nologo %SystemRoot%\System32\slmgr.vbs /xpr
+echo  A new PowerShell window has opened with activation options.
+echo  Please follow the instructions in that window.
 echo.
 pause
 goto ACTIVATION_MENU
@@ -606,26 +600,19 @@ set /p confirm_onlinekms="Continue with Online KMS Activation? (Y/N): "
 if /i not "%confirm_onlinekms%"=="Y" goto ACTIVATION_MENU
 
 echo.
-echo  Downloading and running Online KMS activation script...
-echo  Please wait...
+echo  Launching activation script...
+echo  Please wait, this may take 10-20 seconds...
 echo.
 
-powershell -Command "irm https://massgrave.dev/get | iex" >nul 2>&1
-
-if errorlevel 1 (
-    echo.
-    echo  ERROR: Could not download activation script
-    echo  Check your internet connection
-    echo.
-    pause
-    goto ACTIVATION_MENU
-)
+powershell -Command "irm https://massgrave.dev/get | iex"
 
 echo.
-echo  Activation complete!
-echo  Checking status...
+echo  ================================================================
+echo  ACTIVATION WINDOW OPENED
+echo  ================================================================
 echo.
-cscript //nologo %SystemRoot%\System32\slmgr.vbs /xpr
+echo  A new PowerShell window has opened with activation options.
+echo  Please follow the instructions in that window.
 echo.
 pause
 goto ACTIVATION_MENU
@@ -647,23 +634,19 @@ set /p confirm_ohook="Continue with Ohook Office Activation? (Y/N): "
 if /i not "%confirm_ohook%"=="Y" goto ACTIVATION_MENU
 
 echo.
-echo  Downloading and running Ohook activation script...
-echo  Please wait...
+echo  Launching activation script...
+echo  Please wait, this may take 10-20 seconds...
 echo.
 
-powershell -Command "irm https://massgrave.dev/get | iex" >nul 2>&1
-
-if errorlevel 1 (
-    echo.
-    echo  ERROR: Could not download activation script
-    echo  Check your internet connection
-    echo.
-    pause
-    goto ACTIVATION_MENU
-)
+powershell -Command "irm https://massgrave.dev/get | iex"
 
 echo.
-echo  Office activation complete!
+echo  ================================================================
+echo  ACTIVATION WINDOW OPENED
+echo  ================================================================
+echo.
+echo  A new PowerShell window has opened with activation options.
+echo  Please follow the instructions in that window.
 echo.
 pause
 goto ACTIVATION_MENU
@@ -685,23 +668,19 @@ set /p confirm_kmsoffice="Continue with KMS Office Activation? (Y/N): "
 if /i not "%confirm_kmsoffice%"=="Y" goto ACTIVATION_MENU
 
 echo.
-echo  Downloading and running KMS Office activation script...
-echo  Please wait...
+echo  Launching activation script...
+echo  Please wait, this may take 10-20 seconds...
 echo.
 
-powershell -Command "irm https://massgrave.dev/get | iex" >nul 2>&1
-
-if errorlevel 1 (
-    echo.
-    echo  ERROR: Could not download activation script
-    echo  Check your internet connection
-    echo.
-    pause
-    goto ACTIVATION_MENU
-)
+powershell -Command "irm https://massgrave.dev/get | iex"
 
 echo.
-echo  Office activation complete!
+echo  ================================================================
+echo  ACTIVATION WINDOW OPENED
+echo  ================================================================
+echo.
+echo  A new PowerShell window has opened with activation options.
+echo  Please follow the instructions in that window.
 echo.
 pause
 goto ACTIVATION_MENU
@@ -716,15 +695,19 @@ echo ================================================================
 echo  ACTIVATION TROUBLESHOOT
 echo ================================================================
 echo.
-echo  Running Activation Troubleshoot tool...
+echo  Launching activation troubleshoot tool...
 echo  This will attempt to fix activation issues
 echo.
-pause
 
-powershell -Command "irm https://massgrave.dev/get | iex" >nul 2>&1
+powershell -Command "irm https://massgrave.dev/get | iex"
 
 echo.
-echo  Troubleshooting complete!
+echo  ================================================================
+echo  TROUBLESHOOT WINDOW OPENED
+echo  ================================================================
+echo.
+echo  A new PowerShell window has opened.
+echo  Please follow the troubleshooting steps in that window.
 echo.
 pause
 goto ACTIVATION_MENU
