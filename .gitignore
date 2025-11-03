@@ -1,0 +1,30 @@
+# CleanMaster .gitignore
+
+# Log files
+*.log
+
+# Windows temp files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Test files
+test_*.cmd
+test_*.bat
+test_*.ps1
+
+# Generated files
+*.tmp

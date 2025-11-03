@@ -1,583 +1,426 @@
-# Windows Professional Toolkit v6.0
+# CleanMaster v2.0 ??
 
-**DEEP CLEANING EDITION - Maximum Space Recovery**
+**Ultra Safe Windows Junk Cleaner - Auto Admin | Dry-Run Default | 30+ Days Filter**
 
-All-in-One System Management Tool - Pure CMD/Batch
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/Platform-Windows%2010%2F11-blue)](https://www.microsoft.com/windows)
+[![Language](https://img.shields.io/badge/Language-CMD%2FPowerShell-green)](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands)
 
 ---
 
-## ?? What's New in v6.0 DEEP CLEANING EDITION
+## ?? Overview
 
-### MASSIVE EXPANSION: 50+ Cleanup Targets!
+**CleanMaster** is a single-file, ultra-safe Windows cleaning tool that automatically removes old temporary files and caches without touching your important data or system files.
 
-**v6.0 is the most comprehensive Windows cleanup tool available:**
+### Why CleanMaster?
 
-- **50+ cleanup targets** (v5.1 had 30)
-- **NEW Nuclear Cleanup Mode** - recover 10-50+ GB of disk space
-- **Disk space reporting** - see before/after cleanup results
-- **7 browser support** - Chrome, Edge, Firefox, Brave, Opera, Vivaldi, IE
-- **Deep Windows system cleaning** - Store, Search, Notifications, .NET
-- **GPU cache cleanup** - NVIDIA, AMD, Intel shader caches
-- **Game launcher support** - Steam, Epic, Origin, Uplay, Battle.net, GOG
-- **Development tools** - npm, pip, gradle, maven, cargo, composer
-- **Professional apps** - Office, Adobe Creative Cloud, Adobe Reader
-- **Communication apps** - Teams, Discord, Slack, Zoom, Skype, WhatsApp, Telegram
+- ? **100% Safe** - Only touches whitelisted temp folders
+- ? **Auto Admin** - Automatically requests elevation when needed
+- ? **Dry-Run Default** - Preview before deletion (no accidents)
+- ? **Age-Based** - Only deletes files older than 30 days (customizable)
+- ? **Recoverable** - Sends files to Recycle Bin (not permanent deletion)
+- ? **No Installation** - Single .cmd file, runs immediately
+- ? **Detailed Logging** - Full audit trail of all operations
+- ? **Windows 10/11** - Tested and working
+
+---
+
+## ?? Quick Start
+
+### 1. Download
+Download `CleanMaster.cmd` from this repository.
+
+### 2. Preview (Safe, No Deletion)
+Double-click `CleanMaster.cmd` or run:
+```cmd
+CleanMaster.cmd
+```
+
+**Result:** Shows what would be deleted, but **doesn't delete anything**.
+
+### 3. Actually Clean
+```cmd
+CleanMaster.cmd --clean
+```
+
+**Result:** Shows preview, asks for confirmation, then deletes to Recycle Bin.
 
 ---
 
 ## ?? Features
 
-**4 Tools in One Comprehensive Package:**
+### Core Features
+- **Auto Admin Request** - Elevates privileges automatically via UAC
+- **Dry-Run Default** - `--dry` mode by default (safe preview)
+- **30-Day Filter** - Only processes files older than 30 days
+- **Recycle Bin** - Files sent to Recycle Bin (recoverable)
+- **Whitelist-Based** - Only scans approved safe locations
+- **Detailed Logs** - Timestamps, file paths, sizes, operations
+- **Error Handling** - Continues on error, logs everything
+- **No System Impact** - Never touches Registry, system files, or drivers
 
-### 1. ?? Cleanup Tool (7 Modes, 50+ Targets)
+### What Gets Cleaned
 
-**Cleanup Modes:**
-- **Quick:** ~500MB-1GB in 30 seconds - SAFE
-- **Standard:** ~1-3GB in 1-2 minutes - SAFE
-- **Deep:** ~3-10GB in 2-5 minutes - SAFE
-- **Ultra:** ~5-20GB in 5-10 minutes - CAREFUL
-- **Nuclear:** ~10-50+ GB in 10-20 minutes - MAXIMUM! ?
-- **Preview:** See before delete
-- **Custom:** Choose from 50 specific targets
+| Category | Location | Description |
+|----------|----------|-------------|
+| User Temp | `%TEMP%` | Temporary files from applications |
+| Local Temp | `%LOCALAPPDATA%\Temp` | Local application temp files |
+| Windows Temp | `C:\Windows\Temp` | System temporary files (admin only) |
+| Browser Caches | Chrome, Edge, Firefox | Browser cache and code cache |
+| Thumbnails | Explorer cache | Windows thumbnail cache |
+| Error Reports | WER | Windows Error Reporting archives |
+| Crash Dumps | `%LOCALAPPDATA%\CrashDumps` | Application crash dumps |
+| Log Files | `*.log` in temp | Old temporary log files |
+| IE Cache | INetCache | Internet Explorer cache |
+| Old Caches | WebCache.old | Old web cache data |
+| Recycle Bin | - | Emptied after cleanup (clean mode only) |
 
-**50+ Cleanup Categories:**
+### What's NEVER Touched
 
-**BASIC CLEANUP (10 targets):**
-- Temp files (Windows, User, System)
-- Prefetch files
-- Recent files & jump lists
-- DNS cache
-- Browser caches (all major browsers)
-- Recycle Bin
-- Thumbnail cache
-- Icon cache
-- Font cache
-- Event logs
-
-**WINDOWS SYSTEM (10 targets):**
-- Windows Update cache
-- Windows.old folder (old OS installations)
-- Temporary setup files
-- Memory dumps (crash dumps)
-- Error reports (WER)
-- Old Windows Updates (DISM cleanup)
-- Delivery Optimization cache
-- CBS logs
-- Installer cache
-- Driver packages (old/unused)
-
-**BROWSERS (7 targets):**
-- Google Chrome (cache, code cache, GPU cache)
-- Microsoft Edge (cache, code cache, GPU cache)
-- Mozilla Firefox (cache, startup cache, thumbnails)
-- Brave Browser
-- Opera Browser
-- Vivaldi Browser
-- Internet Explorer
-
-**APPLICATIONS (15 targets):**
-- Microsoft Teams (cache, blob storage, service worker)
-- Discord (cache, code cache, GPU cache)
-- Visual Studio Code (cache, logs)
-- Slack (cache, code cache)
-- Spotify (data cache)
-- Zoom (logs)
-- Skype (cache)
-- WhatsApp Desktop
-- Telegram Desktop
-- Steam (app cache, logs, dumps)
-- Epic Games Launcher (webcache, logs)
-- Origin (logs)
-- Uplay (cache, logs)
-- Battle.net (cache)
-- GOG Galaxy (logs)
-
-**PROFESSIONAL APPS (3 targets):**
-- Microsoft Office (cache, telemetry, recent files)
-- Adobe Creative Cloud (media cache)
-- Adobe Reader (cache)
-
-**GRAPHICS & GAMING (4 targets):**
-- DirectX Shader Cache
-- NVIDIA Cache (DX, GL, NV_Cache)
-- AMD Cache (DX, GL, Vulkan)
-- Intel Shader Cache
-
-**DEVELOPMENT TOOLS (6 targets):**
-- npm cache
-- pip cache (Python)
-- Gradle cache (Java)
-- Maven repository temp files
-- Cargo cache (Rust)
-- Composer cache (PHP)
-
-**ADVANCED SYSTEM (5 targets):**
-- Windows Store & UWP app caches
-- Windows Search database
-- Windows Notification database
-- .NET Framework temp assemblies
-- System Restore points (optimization)
-
-### 2. ? Windows Optimizer (15 Tweaks)
-
-- Quick Optimize - One-click optimization
-- WinUtil Tool - Chris Titus Tech's utility
-- Disable Visual Effects - Improve performance
-- Optimize Services - Disable unnecessary services
-- Optimize Startup - Manage startup programs
-- High Power Plan - Maximum performance mode
-- Network Optimization - TCP/IP tweaks
-- Remove Bloatware - Uninstall preinstalled apps
-- Disable Telemetry - Stop data collection
-- Privacy Settings - Enhance privacy
-- Disable Cortana - Remove voice assistant
-- Clean System Cache - Network cache cleanup
-- Defragment Drives - Optimize HDD
-- Update Group Policy - Apply system policies
-- Restore Defaults - Revert optimizations
-
-### 3. ?? Software Manager
-
-- List all installed software
-- Search and uninstall applications
-- Export software list to file
-
-### 4. ?? System Info (6 Modes)
-
-- Quick Overview - Essential info
-- Detailed Report - Full system information
-- Hardware Details - CPU, RAM, Storage
-- Storage Info - Disk usage by drive
-- Network Info - Network configuration
-- Export Full Report - Save to file
-
----
-
-## ?? Why v6.0 is the Best
-
-### Comparison with v5.1:
-
-| Feature | v5.1 | v6.0 |
-|---------|------|------|
-| Cleanup Targets | 30 | 50+ |
-| Browsers | 3 | 7 |
-| Cleanup Modes | 6 | 7 (added Nuclear) |
-| Space Recovery (max) | 15GB | 50+ GB |
-| Game Launchers | 3 | 6 |
-| Dev Tools | 0 | 6 |
-| GPU Caches | Basic | Full (NVIDIA/AMD/Intel) |
-| Disk Reporting | No | Yes |
-| Communication Apps | 4 | 7 |
-| Professional Apps | Limited | Full (Office + Adobe) |
-
-### What Makes v6.0 Special:
-
-? **Most Comprehensive** - 50+ cleanup targets covering every aspect of Windows  
-? **Deepest Cleaning** - Recursive deletion with `/s` flag for thorough cleaning  
-? **100% Safe** - Never touches documents, photos, videos, or music  
-? **Space Recovery** - Can free up 10-50+ GB with Nuclear mode  
-? **Professional Grade** - Supports Office, Adobe, Development tools  
-? **Gamer Friendly** - Cleans 6 game launchers thoroughly  
-? **Developer Ready** - Cleans npm, pip, gradle, maven, cargo, composer  
-? **GPU Optimized** - Cleans NVIDIA, AMD, Intel shader caches  
-? **Modern Browsers** - Supports all 7 major browsers  
-? **Smart Reporting** - Shows disk space before/after cleanup  
-
----
-
-## ?? Expected Space Recovery
-
-Based on typical Windows installations:
-
-| Cleanup Mode | Space Recovered | Time Required | Safety Level |
-|--------------|----------------|---------------|--------------|
-| Quick | 500MB - 1GB | 30 seconds | ????? Ultra Safe |
-| Standard | 1 - 3GB | 1-2 minutes | ????? Ultra Safe |
-| Deep | 3 - 10GB | 2-5 minutes | ????? Ultra Safe |
-| Ultra | 5 - 20GB | 5-10 minutes | ???? Very Safe |
-| **Nuclear** | **10 - 50+ GB** | **10-20 minutes** | ???? Very Safe |
-
-**Nuclear Mode Details:**
-- Removes ALL temp files, caches, and logs from every source
-- Cleans Windows.old, old driver packages, update files
-- Clears all browser data, app caches, game launcher caches
-- Optimizes system restore points and hibernation file
-- Cleans DirectX, GPU caches, .NET assemblies
-- Removes Office, Adobe, and development tool caches
-- **Result:** Maximum possible space recovery (10-50+ GB!)
-
----
-
-## ?? Safety Guarantee
-
-### 100% Safe - What We NEVER Touch:
-
-? **Personal Files:**
-- Documents
-- Photos
-- Videos
-- Music
-- Downloads (unless temp)
+? **User Data:**
+- Documents, Pictures, Videos, Music
+- Desktop files, Downloads
+- User profile data
 
 ? **System Critical:**
-- Windows System Files
-- Program Files
-- Installed Applications
-- Drivers (only old unused ones in Nuclear mode)
-- Registry (only safe optimization keys)
+- `C:\Windows\` (except Temp folder)
+- `C:\Program Files\`
+- `C:\Program Files (x86)\`
+- `C:\ProgramData\`
+- Registry
+- Drivers
+- System32
 
-? **What We DO Clean:**
-- Temporary files
-- Cache files
-- Log files
-- Old update files
-- Recycle bin
-- Browser caches
-- Application caches
-- Thumbnail caches
-- Old Windows installations (Windows.old)
-- Error reports
-- Memory dumps
+? **Special Files:**
+- Prefetch files
+- pagefile.sys
+- hiberfil.sys
+- System Restore points
+- Windows Update cache (`SoftwareDistribution`)
+- Event logs
+
+---
+
+## ?? Usage
+
+### Command Syntax
+```cmd
+CleanMaster.cmd [OPTIONS]
+```
+
+### Available Options
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `--dry` | Dry-run mode (preview only, no deletion) | ? Default |
+| `--clean` | Actually delete files (with confirmation) | - |
+| `--days N` | Only process files older than N days | 30 |
+| `--log "path"` | Custom log file location | Auto-generated |
+| `--yes` | Auto-confirm (skip prompts) | - |
+| `--help`, `-h` | Show help message | - |
+
+### Examples
+
+#### Example 1: Safe Preview (Default)
+```cmd
+CleanMaster.cmd
+```
+**Output:**
+```
+[SCAN] User TEMP...
+  [DRY] oldfile.tmp (2.5 MB, 45 days old)
+  [DRY] cache.dat (1.2 MB, 60 days old)
+  Found: 156 files (523.45 MB)
+
+SUMMARY:
+  Files Processed:     156
+  Total Size Found:    523.45 MB
+  Mode:                DRY-RUN (no files deleted)
+```
+
+#### Example 2: Clean with Confirmation
+```cmd
+CleanMaster.cmd --clean
+```
+Shows preview ? Asks "Type 'YES' to confirm" ? Deletes to Recycle Bin
+
+#### Example 3: Aggressive Cleanup (60+ Days)
+```cmd
+CleanMaster.cmd --clean --days 60
+```
+Only deletes files older than 60 days (very safe).
+
+#### Example 4: Automated (No Prompts)
+```cmd
+CleanMaster.cmd --clean --yes
+```
+Perfect for scheduled tasks - no user interaction required.
+
+#### Example 5: Custom Log Location
+```cmd
+CleanMaster.cmd --clean --log "C:\Logs\cleanup_%DATE%.log"
+```
+
+---
+
+## ?? Expected Results
+
+Based on typical Windows systems:
+
+| System Type | Files Found | Space Freed |
+|------------|-------------|-------------|
+| Home PC (30 days) | 100-500 | 500MB-2GB |
+| Work PC (30 days) | 500-2000 | 2GB-5GB |
+| Developer PC (30 days) | 1000-3000 | 5GB-15GB |
+| Server (30 days) | 2000-5000 | 10GB-30GB |
+
+---
+
+## ?? Safety Guarantees
+
+### Built-in Protection
+
+1. **Dry-Run Default**
+   - Must explicitly use `--clean` to delete
+   - No accidental deletion possible
+
+2. **Age Filter**
+   - Only files older than 30 days (default)
+   - Recent files always protected
+
+3. **Whitelist-Based**
+   - Only scans approved temp folders
+   - Cannot access user data
+
+4. **Auto-Skip Protection**
+   - Skips locked files (in use)
+   - Skips system files (attrib S)
+   - Skips hidden files
+   - Skips symlinks/junctions (reparse points)
+
+5. **Recycle Bin**
+   - All files sent to Recycle Bin
+   - Fully recoverable
+   - Not permanent deletion
+
+6. **Error Handling**
+   - Continues on error
+   - Logs all issues
+   - Never crashes
+
+### Security Features
+
+- ? Auto requests Admin via UAC (Windows security)
+- ? No Registry modifications
+- ? No service stops/starts
+- ? No driver manipulation
+- ? No system file changes
+- ? Completely transparent (full logging)
+
+---
+
+## ?? Logging
+
+### Log Format
+
+```
+2024-11-03 07:15:30 [SCAN] Scanning: C:\Users\John\AppData\Local\Temp
+2024-11-03 07:15:31 [DRY] C:\Users\John\AppData\Local\Temp\old.tmp | Size: 2621440 bytes | Age: 45 days
+2024-11-03 07:15:32 [DEL] C:\Users\John\AppData\Local\Temp\cache.dat | Size: 1258291 bytes
+2024-11-03 07:15:33 [ERR] C:\Users\John\AppData\Local\Temp\locked.file | Error: Access denied
+2024-11-03 07:15:35 [INFO] User TEMP - Files: 156, Size: 548847632 bytes
+2024-11-03 07:15:36 SUMMARY: Files=156, Size=548847632 bytes, Deleted=153, Errors=3
+```
+
+### Log Tags
+
+| Tag | Meaning |
+|-----|---------|
+| `[SCAN]` | Scanning directory |
+| `[DRY]` | Dry-run: would delete this file |
+| `[DEL]` | File deleted (sent to Recycle Bin) |
+| `[ERR]` | Error accessing/deleting file |
+| `[SKIP]` | Skipped (locked, not found, etc.) |
+| `[INFO]` | Informational message |
+
+---
+
+## ?? Exit Codes
+
+| Code | Meaning | Example Scenario |
+|------|---------|------------------|
+| `0` | Success | All operations completed successfully |
+| `1` | Partial success | Some files skipped (locked/no permission) |
+| `2` | Fatal error | Invalid parameters (bad --days value) |
+
+### Usage in Scripts
+
+```cmd
+CleanMaster.cmd --clean --yes
+if %errorlevel% equ 0 (
+    echo Success
+) else if %errorlevel% equ 1 (
+    echo Completed with errors
+) else (
+    echo Failed
+)
+```
+
+---
+
+## ?? Scheduled Task Setup
+
+### Windows Task Scheduler
+
+Run cleanup automatically every week:
+
+```cmd
+schtasks /create /tn "CleanMaster Weekly" ^
+  /tr "C:\Tools\CleanMaster.cmd --clean --yes --days 30" ^
+  /sc weekly /d SUN /st 02:00 /ru SYSTEM /rl HIGHEST
+```
+
+**Result:** Automatic cleanup every Sunday at 2:00 AM.
+
+### Manual Task Scheduler (GUI)
+
+1. Open **Task Scheduler**
+2. Create Basic Task
+3. **Name:** CleanMaster Weekly
+4. **Trigger:** Weekly, Sunday, 2:00 AM
+5. **Action:** Start a program
+   - **Program:** `C:\Path\To\CleanMaster.cmd`
+   - **Arguments:** `--clean --yes --days 30`
+6. ? **Run with highest privileges**
+
+---
+
+## ?? Comparison
+
+| Feature | CleanMaster | CCleaner | Disk Cleanup | BleachBit |
+|---------|-------------|----------|--------------|-----------|
+| **Single File** | ? | ? | ? | ? |
+| **Auto Admin** | ? | ? | ? | ? |
+| **Dry-Run Default** | ? | ? | ? | ? |
+| **Age Filter** | ? | ? | ? | ? |
+| **Recycle Bin** | ? | ? | ? | Optional |
+| **CLI Full** | ? | Limited | Limited | ? |
+| **Free** | ? | Freemium | ? | ? |
+| **Open Source** | ? | ? | ? | ? |
+| **No Install** | ? | ? | ? | ? |
+| **Detailed Log** | ? | ? | ? | ? |
+
+---
+
+## ?? Troubleshooting
+
+### "Access Denied" Errors
+
+**Cause:** File locked or insufficient permissions.
+
+**Solution:**
+1. Close all applications
+2. Run as Administrator (auto-requested)
+3. Increase `--days` (older files less likely locked)
+
+### No Files Found
+
+**Cause:** Files not old enough.
+
+**Solution:**
+- Check `--days` setting (default 30)
+- Try `--days 7` for more recent files
+- Run `--dry` mode first to verify
+
+### UAC Prompt Not Appearing
+
+**Cause:** UAC disabled or group policy.
+
+**Solution:**
+- Manually right-click ? "Run as administrator"
+- Check UAC settings in Control Panel
+
+### "Bad Parameters" Error
+
+**Cause:** Invalid command-line arguments.
+
+**Solution:**
+- Ensure `--days` is a number
+- Use quotes for paths with spaces
+- Run `--help` to see correct syntax
+
+---
+
+## ?? Best Practices
+
+### Recommended Workflow
+
+1. **First Time - Very Safe (90 days)**
+   ```cmd
+   CleanMaster.cmd --days 90
+   ```
+   Review output carefully.
+
+2. **Regular Monthly - Standard (30 days)**
+   ```cmd
+   CleanMaster.cmd --clean --days 30
+   ```
+   Good balance of safety and cleaning.
+
+3. **Emergency - Aggressive (14 days)**
+   ```cmd
+   CleanMaster.cmd --clean --days 14
+   ```
+   When disk is nearly full.
+
+### Safety Tips
+
+- ? Always preview first (default dry-run)
+- ? Start with high `--days` value (60+)
+- ? Review log file after cleanup
+- ? Test with dry-run before using `--yes`
+- ? Don't use `--days` < 7 (too aggressive)
+- ? Don't skip confirmation unless tested
 
 ---
 
 ## ?? Requirements
 
-- **OS:** Windows 7/8/10/11 (32-bit or 64-bit)
-- **Privileges:** Administrator rights required
-- **Runtime:** CMD only (no PowerShell dependencies for core features)
-- **Size:** ~50 KB (single file)
-- **Internet:** 100% offline - no internet required
+- **OS:** Windows 10 or Windows 11
+- **PowerShell:** 3.0+ (pre-installed on Windows 10/11)
+- **Privileges:** User (Admin auto-requested when needed)
+- **Dependencies:** None (self-contained)
+- **Size:** ~22 KB (single file)
 
 ---
 
-## ?? Installation & Usage
+## ?? Files
 
-### Quick Start:
-
-1. **Download** `WindowsToolkit.bat`
-2. **Right-click** on `WindowsToolkit.bat`
-3. **Select** "Run as administrator"
-4. **Click** "Yes" when prompted by UAC
-5. **Choose** your desired tool and options
-
-### Recommended Usage:
-
-**For Maximum Space Recovery:**
-1. Run **Preview Mode** first to see what will be cleaned
-2. Start with **Standard Cleanup** to test
-3. If satisfied, run **Nuclear Cleanup** for maximum results
-4. Restart your computer after cleanup
-
-**For Regular Maintenance:**
-- Run **Quick Cleanup** weekly
-- Run **Deep Cleanup** monthly
-- Run **Nuclear Cleanup** quarterly
-- Use **Custom Cleanup** to target specific areas
-
----
-
-## ?? Technical Details
-
-### Cleanup Techniques Used:
-
-- `del /f /s /q` - Force recursive deletion of files
-- `rd /s /q` - Remove directories and subdirectories
-- `for /d` loops - Iterate through directories
-- Service stop/start - Safe service manipulation
-- Process termination - Clean app cache while running
-- Registry optimization - Safe performance tweaks
-- DISM cleanup - Windows component store optimization
-- VSS shadow management - System restore optimization
-
-### Performance Optimizations:
-
-- Batch processing for speed
-- Parallel cleanup operations where safe
-- Minimal console output for faster execution
-- Optimized file deletion patterns
-- Smart service management
-
----
-
-## ??? What Gets Cleaned (Detailed)
-
-### Phase 1: Basic System Cleanup
 ```
-? User Temp files (%TEMP%)
-? Windows Temp files (%SystemRoot%\Temp)
-? Local Temp files (%LocalAppData%\Temp)
-? System Profile Temp files
-? Prefetch files (.pf)
-? Recent files and jump lists
-? DNS cache
-? Thumbnail database
-? Icon cache
-? Font cache
+CleanMaster/
+??? CleanMaster.cmd    # Main tool (all-in-one)
+??? README.md          # This file
+??? LICENSE            # MIT License
 ```
-
-### Phase 2: Windows System Files
-```
-? Windows Update cache
-? Windows.old folder (previous OS)
-? $Windows.~BT (upgrade temp)
-? $Windows.~WS (upgrade temp)
-? $Windows.~Q (upgrade temp)
-? Memory dumps
-? Error reports
-? CBS logs
-? DISM logs
-? NetSetup logs
-? Delivery Optimization
-? Old driver packages
-```
-
-### Phase 3: Logs & Event Logs
-```
-? Windows Event Logs (all categories)
-? CBS Logs
-? DISM Logs
-? Windows Error Reporting
-? Installer cache
-? Setup logs
-? Performance logs
-? WebCache.old
-```
-
-### Phase 4: Applications & Browsers
-```
-? Chrome (cache, code cache, GPU cache, shader cache)
-? Edge (cache, code cache, GPU cache)
-? Firefox (cache2, startup cache, thumbnails)
-? Brave (cache, code cache)
-? Opera (cache, GPU cache)
-? Vivaldi (cache)
-? Internet Explorer (history, cookies, cache)
-? Teams (cache, blob storage, service worker, tmp)
-? Discord (cache, code cache, GPU cache)
-? VSCode (cache, cached data, logs)
-? Slack (cache, code cache)
-? Spotify (data cache, storage)
-? Zoom (logs)
-? Skype (cache, local cache)
-? WhatsApp (cache)
-? Telegram (cache)
-```
-
-### Phase 5: Graphics & Gaming
-```
-? DirectX Shader Cache (D3DSCache)
-? NVIDIA (NV_Cache, DXCache, GLCache)
-? AMD (DxCache, GLCache, VkCache)
-? Intel (ShaderCache)
-? Steam (appcache, logs, dumps)
-? Epic Games (webcache, logs)
-? Origin (logs)
-? Uplay (cache, logs)
-? Battle.net (cache)
-? GOG Galaxy (logs)
-```
-
-### Phase 6: Professional Apps
-```
-? Microsoft Office (cache, telemetry, recent, WebServiceCache, Lync)
-? Adobe Creative Cloud (media cache, media cache files)
-? Adobe Reader (cache)
-```
-
-### Phase 7: Development Tools
-```
-? npm cache
-? pip cache (Python)
-? Gradle caches
-? Maven repository (temp/part files)
-? Cargo registry cache (Rust)
-? Composer cache (PHP)
-? Node.js cache
-```
-
-### Phase 8: Advanced System
-```
-? Windows Store cache
-? UWP app caches
-? Windows Search database (.edb)
-? Windows Notification database
-? .NET Framework temp assemblies
-? Visual Studio temp files
-? System Restore optimization
-? Hibernation file optimization
-```
-
----
-
-## ?? Perfect for Gamers
-
-Cleans game-related junk from:
-- Steam Workshop cache
-- Epic Games Launcher cache
-- Origin logs and cache
-- Ubisoft Connect (Uplay) cache
-- Battle.net Blizzard cache
-- GOG Galaxy logs
-- Plus: GPU shader caches (NVIDIA/AMD/Intel)
-- Plus: DirectX shader cache
-
-**Result:** Faster game loading, smoother performance!
-
----
-
-## ?? Perfect for Professionals
-
-Cleans professional app junk from:
-- Microsoft Office cache and telemetry
-- Adobe Creative Cloud media cache
-- Adobe Reader cache
-- Visual Studio Code cache
-- Microsoft Teams cache
-- Slack cache
-- Zoom logs
-
-**Result:** Faster app performance, more workspace!
-
----
-
-## ????? Perfect for Developers
-
-Cleans development tool junk from:
-- npm cache (Node.js)
-- pip cache (Python)
-- Gradle cache (Java/Kotlin/Android)
-- Maven repository temp files (Java)
-- Cargo cache (Rust)
-- Composer cache (PHP)
-- .NET Framework temp assemblies
-- Visual Studio temp files
-
-**Result:** Faster builds, more dev space!
-
----
-
-## ?? Performance Impact
-
-### After Running Nuclear Cleanup:
-
-**Disk Space:**
-- Free up 10-50+ GB of wasted space
-- Remove unnecessary cached files
-- Clean up old system files
-
-**System Performance:**
-- Faster boot time (cleaned startup cache)
-- Faster app launches (cleared app caches)
-- Smoother browsing (cleared browser caches)
-- Better gaming (cleared shader caches)
-- Improved I/O (less disk fragmentation)
-
-**Visual Improvements:**
-- Cleaner desktop (removed temp files)
-- Faster Explorer (rebuilt icon/thumbnail cache)
-- Updated Start Menu (cleared recent files)
-
----
-
-## ?? Important Notes
-
-### Before Running Nuclear Cleanup:
-
-1. **Close all applications** (they will be closed automatically if needed)
-2. **Save your work** in all open programs
-3. **Backup important data** (though your files are safe)
-4. **Have 10-20 minutes** available (don't interrupt the process)
-5. **Restart after cleanup** for best results
-
-### What to Expect:
-
-- Some applications may need to re-download caches
-- Browser history/passwords are SAFE (only cache cleaned)
-- Game saves are SAFE (only launcher caches cleaned)
-- Installed programs are SAFE (only caches cleaned)
-- You may need to re-login to some apps
-
----
-
-## ?? Comparison with Other Tools
-
-| Feature | v6.0 Toolkit | CCleaner | Windows Disk Cleanup | BleachBit |
-|---------|--------------|----------|---------------------|-----------|
-| Cleanup Targets | 50+ | ~30 | ~15 | ~40 |
-| Game Launchers | 6 | 1 | 0 | 2 |
-| Dev Tools | 6 | 0 | 0 | 2 |
-| GPU Caches | 3 (N/A/I) | 0 | 0 | 1 |
-| Browsers | 7 | 5 | 1 | 6 |
-| 100% Free | ? | Freemium | ? | ? |
-| Open Source | ? | ? | ? | ? |
-| Single File | ? | ? | ? | ? |
-| No Install | ? | ? | ? | ? |
-| Offline | ? | ? | ? | ? |
-| File Size | 50KB | 30MB+ | Built-in | 15MB+ |
-
----
-
-## ?? Bug Fixes from v5.1
-
-1. ? Fixed driver package cleanup (better safety checks)
-2. ? Fixed browser cache not fully cleaning (added /s recursive)
-3. ? Fixed Teams cache not clearing (added Service Worker cleanup)
-4. ? Fixed GPU cache cleanup (added all vendor paths)
-5. ? Fixed temp file cleanup (added System Profile temp)
-6. ? Improved error handling (all commands now have 2>nul)
-7. ? Better process termination (increased timeout to 2 seconds)
-8. ? Fixed Windows Store reset (added -i flag for silent mode)
-
----
-
-## ?? Version History
-
-### v6.0 - DEEP CLEANING EDITION (Current)
-- Added 20+ new cleanup targets (total 50+)
-- Added Nuclear Cleanup mode
-- Added disk space reporting
-- Added 4 more browsers (total 7)
-- Added 3 more game launchers (total 6)
-- Added development tools cleanup (npm, pip, etc)
-- Added GPU cache cleanup (NVIDIA, AMD, Intel)
-- Added professional app cleanup (Office, Adobe)
-- Added Windows Store, Search, Notifications cleanup
-- Added .NET Framework cleanup
-- Added driver package cleanup
-- Improved recursive deletion (/s flag)
-- Improved error handling
-- Fixed multiple bugs from v5.1
-
-### v5.1 - SAFE MODE
-- Removed dangerous cleanup operations
-- Added 10 more safe cleanup targets (total 30)
-- Better app cache cleaning
-- Enhanced browser cleanup
-- Added Event/CBS/Installer logs cleanup
-- Added Old Windows Updates cleanup (DISM)
-
-### v4.3 - OPTIMIZED EDITION
-- 75% code reduction
-- 69% file size reduction
-- 50% faster execution
-- Added 15 optimizer tweaks
 
 ---
 
 ## ?? Contributing
 
-Found a bug or want to suggest a new cleanup target? Contributions welcome!
+Found a bug or have a suggestion?
 
-**Potential additions for v7.0:**
-- Docker cache cleanup
-- VirtualBox cache cleanup
-- VMware cache cleanup
-- Android Studio cache
-- IntelliJ IDEA cache
-- PyCharm cache
-- More game clients
-- Cloud storage caches (Dropbox, OneDrive, Google Drive)
+1. Fork this repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+### Reporting Issues
+
+When reporting issues, please include:
+- Windows version (10 or 11)
+- Command used
+- Error message
+- Log file (if available)
 
 ---
 
@@ -585,53 +428,132 @@ Found a bug or want to suggest a new cleanup target? Contributions welcome!
 
 **MIT License** - Free and Open Source
 
-Copyright (c) 2024
+```
+MIT License
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so.
+Copyright (c) 2024 CleanMaster
 
-**THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.**
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
 
 ---
 
-## ? Quick Links
+## ? Quick Reference
 
-- **GitHub:** [Your Repository Link]
-- **Issues:** Report bugs or request features
-- **Discussions:** Share your experience and tips
+### Common Commands
+
+```cmd
+# Preview (safe, no deletion)
+CleanMaster.cmd
+
+# Clean with confirmation
+CleanMaster.cmd --clean
+
+# Clean older files (60+ days)
+CleanMaster.cmd --clean --days 60
+
+# Automated cleanup (no prompts)
+CleanMaster.cmd --clean --yes
+
+# Help
+CleanMaster.cmd --help
+```
+
+### Remember
+
+- ??? **Default = Safe** (dry-run mode)
+- ? **30 days** = default age filter
+- ?? **Recycle Bin** = files recoverable
+- ? **Confirmation** = required (unless --yes)
+- ?? **Logging** = automatic, detailed
 
 ---
 
-## ?? Star This Project
+## ?? Why Choose CleanMaster?
 
-If this toolkit saved you disk space and improved your PC performance, please consider giving it a ? star on GitHub!
+### Advantages
+
+1. **Safest by Design**
+   - Dry-run default
+   - Whitelist-only
+   - Recycle Bin support
+   - Age-based filtering
+
+2. **User-Friendly**
+   - No installation
+   - Auto admin request
+   - Clear messages
+   - Detailed logs
+
+3. **Automation-Ready**
+   - Full CLI support
+   - Exit codes
+   - Silent mode (`--yes`)
+   - Perfect for scheduled tasks
+
+4. **Transparent**
+   - Open source
+   - Readable code
+   - Full logging
+   - No hidden operations
+
+5. **Reliable**
+   - Error handling
+   - Never crashes
+   - Continues on error
+   - Tested on Win 10/11
 
 ---
 
 ## ?? Support
 
-Having issues? Check these common solutions:
+### Quick Answers
 
-**Q: "Access Denied" errors?**  
-A: Right-click ? Run as administrator
+**Q: Is it safe?**  
+A: Yes! Default dry-run, whitelist-only, Recycle Bin, age filter.
 
-**Q: Some files not deleted?**  
-A: Close all programs first, or use Nuclear mode which closes them automatically
+**Q: Will it delete my files?**  
+A: No! Only temporary files in temp folders. Never user data.
 
-**Q: How often should I run cleanup?**  
-A: Quick (weekly), Deep (monthly), Nuclear (quarterly)
+**Q: Can I recover deleted files?**  
+A: Yes! All files sent to Recycle Bin (recoverable).
 
-**Q: Is it safe to run Nuclear mode?**  
-A: Yes! Your documents, photos, videos are 100% safe. Only temp/cache files are removed.
+**Q: How often should I run it?**  
+A: Monthly with `--days 30` is recommended.
 
-**Q: Will this break Windows?**  
-A: No! Everything cleaned is safe to delete. Windows will recreate needed files.
-
-**Q: Do I need to backup before running?**  
-A: Not necessary, but always good practice for peace of mind.
+**Q: Does it need internet?**  
+A: No! 100% offline, no external dependencies.
 
 ---
 
-**Windows Professional Toolkit v6.0 - DEEP CLEANING EDITION**  
-*Maximum Space Recovery ? 50+ Cleanup Targets ? 100% Safe*
+## ?? Acknowledgments
 
-**Made with ?? for the Windows Community**
+Inspired by and improving upon:
+- CCleaner
+- BleachBit
+- Windows Disk Cleanup
+- Community feedback
+
+Special thanks to all contributors and testers!
+
+---
+
+**CleanMaster v2.0 - Clean Safe, Sleep Sound** ???
+
+*Made with ?? for the Windows Community*
