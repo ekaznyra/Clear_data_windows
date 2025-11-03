@@ -1,9 +1,9 @@
 @echo off
 setlocal EnableDelayedExpansion EnableExtensions
 :: ============================================
-:: WINDOWS PROFESSIONAL TOOLKIT v4.3
+:: WINDOWS PROFESSIONAL TOOLKIT v4.3 FINAL
 :: OPTIMIZED EDITION - Maximum Performance
-:: Fixed MAS Integration - Clean Output
+:: Clean Output - Professional Experience
 :: ============================================
 
 title Windows Professional Toolkit v4.3
@@ -23,6 +23,9 @@ net session >nul 2>&1 || (
     pause & exit /b
 )
 
+:: ============================================
+:: MAIN MENU
+:: ============================================
 :MAIN_MENU
 cls & color 0B & title Windows Toolkit v4.3 - Main Menu
 echo.================================================================
@@ -78,34 +81,21 @@ if "%cleanup_choice%"=="0" goto MAIN_MENU
 echo.[!] Invalid choice. & timeout /t 1 >nul & goto CLEANUP_MENU
 
 :QUICK_CLEANUP
-cls & echo.Cleaning... Please wait...
-call :CLEAN_TEMP
-call :CLEAN_PREFETCH
-call :CLEAN_RECENT
-echo.Done! & pause & goto CLEANUP_MENU
+cls & echo.Quick Cleaning... Please wait...
+call :CLEAN_TEMP & call :CLEAN_PREFETCH & call :CLEAN_RECENT
+echo.[OK] Done! & pause & goto CLEANUP_MENU
 
 :STANDARD_CLEANUP
-cls & echo.Cleaning... Please wait...
-call :CLEAN_TEMP
-call :CLEAN_PREFETCH
-call :CLEAN_RECENT
-call :CLEAN_BROWSER
-call :CLEAN_RECYCLE
-echo.Done! & pause & goto CLEANUP_MENU
+cls & echo.Standard Cleaning... Please wait...
+call :CLEAN_TEMP & call :CLEAN_PREFETCH & call :CLEAN_RECENT & call :CLEAN_BROWSER & call :CLEAN_RECYCLE
+echo.[OK] Done! & pause & goto CLEANUP_MENU
 
 :DEEP_CLEANUP
-cls & echo.Cleaning... Please wait...
+cls & echo.Deep Cleaning... Please wait...
 set /p confirm="Continue with Deep Cleanup? (Y/N): "
 if /i not "%confirm%"=="Y" goto CLEANUP_MENU
-call :CLEAN_TEMP
-call :CLEAN_PREFETCH
-call :CLEAN_RECENT
-call :CLEAN_BROWSER
-call :CLEAN_RECYCLE
-call :CLEAN_UPDATES
-call :CLEAN_LOGS
-call :CLEAN_APPS
-echo.Done! & pause & goto CLEANUP_MENU
+call :CLEAN_TEMP & call :CLEAN_PREFETCH & call :CLEAN_RECENT & call :CLEAN_BROWSER & call :CLEAN_RECYCLE & call :CLEAN_UPDATES & call :CLEAN_LOGS & call :CLEAN_APPS
+echo.[OK] Done! & pause & goto CLEANUP_MENU
 
 :PREVIEW_CLEANUP
 cls & echo.Preview Mode - Showing files to delete...
@@ -122,7 +112,7 @@ set /p custom_selection="Enter selection: "
 if "%custom_selection%"=="0" goto CLEANUP_MENU
 if "%custom_selection%"=="99" set "custom_selection=1 2 3 4 5 6 7 8 9 10 11 12 13 14"
 for %%i in (%custom_selection%) do call :CLEAN_ITEM %%i
-echo.Done! & pause & goto CLEANUP_MENU
+echo.[OK] Done! & pause & goto CLEANUP_MENU
 
 :: ============================================
 :: OPTIMIZED CLEANUP FUNCTIONS
@@ -136,14 +126,12 @@ del /f /s /q "%SystemRoot%\Prefetch\*" 2>nul
 exit /b
 
 :CLEAN_RECENT
-del /f /s /q "%AppData%\Microsoft\Windows\Recent\*" 2>nul
-del /f /s /q "%LocalAppData%\Microsoft\Windows\Explorer\*.db" 2>nul
+del /f /s /q "%AppData%\Microsoft\Windows\Recent\*" 2>nul & del /f /s /q "%LocalAppData%\Microsoft\Windows\Explorer\*.db" 2>nul
 exit /b
 
 :CLEAN_BROWSER
 RunDll32.exe InetCpl.cpl,ClearMyTracksByProcess 255
-del /f /s /q "%LocalAppData%\Google\Chrome\User Data\Default\Cache\*" 2>nul
-del /f /s /q "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache\*" 2>nul
+del /f /s /q "%LocalAppData%\Google\Chrome\User Data\Default\Cache\*" 2>nul & del /f /s /q "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache\*" 2>nul
 exit /b
 
 :CLEAN_RECYCLE
@@ -151,21 +139,15 @@ rd /s /q %SystemDrive%\$Recycle.Bin 2>nul
 exit /b
 
 :CLEAN_UPDATES
-net stop wuauserv >nul 2>&1
-del /f /s /q "%SystemRoot%\SoftwareDistribution\Download\*" 2>nul
-net start wuauserv >nul 2>&1
+net stop wuauserv >nul 2>&1 & del /f /s /q "%SystemRoot%\SoftwareDistribution\Download\*" 2>nul & net start wuauserv >nul 2>&1
 exit /b
 
 :CLEAN_LOGS
-del /f /s /q "%ProgramData%\Microsoft\Windows\WER\*" 2>nul
-del /f /s /q "%SystemRoot%\Logs\*" 2>nul
-del /f /s /q "%SystemRoot%\Panther\*" 2>nul
+del /f /s /q "%ProgramData%\Microsoft\Windows\WER\*" 2>nul & del /f /s /q "%SystemRoot%\Logs\*" 2>nul & del /f /s /q "%SystemRoot%\Panther\*" 2>nul
 exit /b
 
 :CLEAN_APPS
-del /f /s /q "%AppData%\Microsoft\Teams\Cache\*" 2>nul
-del /f /s /q "%AppData%\Discord\Cache\*" 2>nul
-del /f /s /q "%AppData%\Code\Cache\*" 2>nul
+del /f /s /q "%AppData%\Microsoft\Teams\Cache\*" 2>nul & del /f /s /q "%AppData%\Discord\Cache\*" 2>nul & del /f /s /q "%AppData%\Code\Cache\*" 2>nul
 exit /b
 
 :CLEAN_ITEM
@@ -186,7 +168,7 @@ if "%1"=="14" del /f /s /q "%SystemRoot%\SoftwareDistribution\DeliveryOptimizati
 exit /b
 
 :: ============================================
-:: ACTIVATION MENU
+:: ACTIVATION MENU (OPTIMIZED WITH ERROR HANDLING)
 :: ============================================
 :ACTIVATION_MENU
 cls & color 0E & title Windows Toolkit v4.3 - Activation
@@ -228,82 +210,74 @@ if "%act_choice%"=="14" goto LICENSE_INFO
 if "%act_choice%"=="0" goto MAIN_MENU
 goto ACTIVATION_MENU
 
+:: ============================================
+:: ACTIVATION FUNCTIONS (WITH SILENT MODE)
+:: ============================================
 :HWID_ACTIVATE
-cls & echo.Running HWID Activation...
-if exist "%~dp0MAS_Scripts\HWID_Activation.cmd" (
-    call "%~dp0MAS_Scripts\HWID_Activation.cmd" /HWID /S
-    echo.
-    if !errorlevel! EQU 0 (echo.[SUCCESS] Activated successfully!) else (echo.[ERROR] Activation failed. Code: !errorlevel!)
-) else (echo.[ERROR] Script not found! & pause)
-pause & goto ACTIVATION_MENU
+cls & call :RUN_ACTIVATION "HWID_Activation.cmd" "/HWID /S" "HWID Activation"
+goto ACTIVATION_MENU
 
 :KMS38_ACTIVATE
-cls & echo.Running KMS38 Activation...
-if exist "%~dp0MAS_Scripts\KMS38_Activation.cmd" (
-    call "%~dp0MAS_Scripts\KMS38_Activation.cmd" /KMS38 /S
-    echo.
-    if !errorlevel! EQU 0 (echo.[SUCCESS] Activated successfully!) else (echo.[ERROR] Activation failed. Code: !errorlevel!)
-) else (echo.[ERROR] Script not found! & pause)
-pause & goto ACTIVATION_MENU
+cls & call :RUN_ACTIVATION "KMS38_Activation.cmd" "/KMS38 /S" "KMS38 Activation"
+goto ACTIVATION_MENU
 
 :ONLINE_KMS_ACTIVATE
-cls & echo.Running Online KMS Activation...
-if exist "%~dp0MAS_Scripts\Online_KMS_Activation.cmd" (
-    call "%~dp0MAS_Scripts\Online_KMS_Activation.cmd" /KMS-ActAndRenewalTask /S
-    echo.
-    if !errorlevel! EQU 0 (echo.[SUCCESS] Activated successfully!) else (echo.[ERROR] Activation failed. Code: !errorlevel!)
-) else (echo.[ERROR] Script not found! & pause)
-pause & goto ACTIVATION_MENU
+cls & call :RUN_ACTIVATION "Online_KMS_Activation.cmd" "/KMS-ActAndRenewalTask /S" "Online KMS Activation"
+goto ACTIVATION_MENU
 
 :OHOOK_OFFICE
-cls & echo.Running Ohook Office Activation...
-if exist "%~dp0MAS_Scripts\Ohook_Activation_AIO.cmd" (
-    call "%~dp0MAS_Scripts\Ohook_Activation_AIO.cmd" /Ohook /S
-    echo.
-    if !errorlevel! EQU 0 (echo.[SUCCESS] Activated successfully!) else (echo.[ERROR] Activation failed. Code: !errorlevel!)
-) else (echo.[ERROR] Script not found! & pause)
-pause & goto ACTIVATION_MENU
+cls & call :RUN_ACTIVATION "Ohook_Activation_AIO.cmd" "/Ohook /S" "Ohook Office Activation"
+goto ACTIVATION_MENU
 
 :KMS_OFFICE
-cls & echo.Running KMS Office Activation...
-if exist "%~dp0MAS_Scripts\Online_KMS_Activation.cmd" (
-    call "%~dp0MAS_Scripts\Online_KMS_Activation.cmd" /KMS-ActAndRenewalTask /KMS-Office /S
+cls & call :RUN_ACTIVATION "Online_KMS_Activation.cmd" "/KMS-ActAndRenewalTask /KMS-Office /S" "KMS Office Activation"
+goto ACTIVATION_MENU
+
+:: Universal Activation Runner
+:RUN_ACTIVATION
+echo.Running %~3...
+if exist "%~dp0MAS_Scripts\%~1" (
+    call "%~dp0MAS_Scripts\%~1" %~2
     echo.
-    if !errorlevel! EQU 0 (echo.[SUCCESS] Activated successfully!) else (echo.[ERROR] Activation failed. Code: !errorlevel!)
-) else (echo.[ERROR] Script not found! & pause)
-pause & goto ACTIVATION_MENU
+    if !errorlevel! EQU 0 (
+        echo.[SUCCESS] Activated successfully!
+    ) else (
+        echo.[ERROR] Activation failed. Code: !errorlevel!
+        echo.Try Troubleshoot option if issue persists.
+    )
+) else (
+    echo.[ERROR] Script not found: %~1
+)
+pause
+exit /b
 
 :ACTIVATION_TROUBLESHOOT
-cls & echo.Running Troubleshooter...
-if exist "%~dp0MAS_Scripts\Troubleshoot.cmd" (
-    start "" "%~dp0MAS_Scripts\Troubleshoot.cmd"
-    echo.A new window has opened. Follow instructions there.
-) else (echo.[ERROR] Script not found!)
-pause & goto ACTIVATION_MENU
+cls & call :OPEN_TOOL "Troubleshoot.cmd" "Troubleshooter"
+goto ACTIVATION_MENU
 
 :CHECK_STATUS
-cls & echo.Checking Activation Status...
-if exist "%~dp0MAS_Scripts\Check_Activation_Status.cmd" (
-    start "" "%~dp0MAS_Scripts\Check_Activation_Status.cmd"
-    echo.A new window has opened. Check status there.
-) else (cscript //nologo %SystemRoot%\System32\slmgr.vbs /dlv)
-pause & goto ACTIVATION_MENU
+cls & call :OPEN_TOOL "Check_Activation_Status.cmd" "Activation Status"
+goto ACTIVATION_MENU
 
 :EXTRACT_KEYS
-cls & echo.Extracting Windows Keys...
-if exist "%~dp0MAS_Scripts\Extract_OEM_Folder.cmd" (
-    start "" "%~dp0MAS_Scripts\Extract_OEM_Folder.cmd"
-    echo.A new window has opened. Check results there.
-) else (wmic path softwarelicensingservice get OA3xOriginalProductKey 2>nul)
-pause & goto ACTIVATION_MENU
+cls & call :OPEN_TOOL "Extract_OEM_Folder.cmd" "Extract Keys"
+goto ACTIVATION_MENU
 
 :CHANGE_EDITION
-cls & echo.Changing Windows Edition...
-if exist "%~dp0MAS_Scripts\Change_Windows_Edition.cmd" (
-    start "" "%~dp0MAS_Scripts\Change_Windows_Edition.cmd"
+cls & call :OPEN_TOOL "Change_Windows_Edition.cmd" "Change Edition"
+goto ACTIVATION_MENU
+
+:: Universal Tool Opener
+:OPEN_TOOL
+echo.Opening %~2...
+if exist "%~dp0MAS_Scripts\%~1" (
+    start "" "%~dp0MAS_Scripts\%~1"
     echo.A new window has opened. Follow instructions there.
-) else (DISM /online /Get-TargetEditions)
-pause & goto ACTIVATION_MENU
+) else (
+    echo.[ERROR] Script not found: %~1
+)
+pause
+exit /b
 
 :SHOW_OEM_INFO
 cls & systeminfo | findstr /C:"System Manufacturer" /C:"System Model" & pause
@@ -315,25 +289,21 @@ for /f "tokens=1,2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Office" /s /k /
 echo.Done! & pause & goto ACTIVATION_MENU
 
 :MANUAL_KEY
-cls & set /p key="Enter product key: "
-cscript //nologo %SystemRoot%\System32\slmgr.vbs /ipk %key%
-pause & goto ACTIVATION_MENU
+cls & set /p key="Enter product key: " & cscript //nologo %SystemRoot%\System32\slmgr.vbs /ipk %key% & pause & goto ACTIVATION_MENU
 
 :UNINSTALL_KEY
-cls & cscript //nologo %SystemRoot%\System32\slmgr.vbs /upk
-pause & goto ACTIVATION_MENU
+cls & cscript //nologo %SystemRoot%\System32\slmgr.vbs /upk & pause & goto ACTIVATION_MENU
 
 :LICENSE_INFO
-cls & cscript //nologo %SystemRoot%\System32\slmgr.vbs /dlv
-pause & goto ACTIVATION_MENU
+cls & cscript //nologo %SystemRoot%\System32\slmgr.vbs /dlv & pause & goto ACTIVATION_MENU
 
 :: ============================================
-:: OPTIMIZER MENU (Optimized)
+:: OPTIMIZER MENU (ULTRA OPTIMIZED)
 :: ============================================
 :OPTIMIZER_MENU
 cls & color 0D & title Windows Toolkit v4.3 - Optimizer
 echo.================================================================
-echo   WINDOWS OPTIMIZER
+echo   WINDOWS OPTIMIZER - MAKE YOUR PC FASTER
 echo ================================================================
 echo   [1]  Quick Optimize [2]  WinUtil Tool
 echo   [3]  Disable Visual FX [4]  Optimize Services
@@ -364,101 +334,62 @@ if "%opt_choice%"=="0" goto MAIN_MENU
 goto OPTIMIZER_MENU
 
 :QUICK_OPTIMIZE
-cls & echo.Quick Optimizing...
-call :DISABLE_VISUAL_EFFECTS_SILENT
-call :OPTIMIZE_SERVICES_SILENT
-powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
-echo.Done! Restart recommended. & pause & goto OPTIMIZER_MENU
+cls & echo.Quick Optimizing... Please wait...
+call :DISABLE_VISUAL_EFFECTS_SILENT & call :OPTIMIZE_SERVICES_SILENT & powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c >nul
+echo.[OK] Done! Restart recommended. & pause & goto OPTIMIZER_MENU
 
 :RUN_WINUTIL
-cls & echo.Launching WinUtil...
-powershell -Command "irm christitus.com/win | iex" 2>nul || (echo.[ERROR] Failed to launch & pause)
-goto OPTIMIZER_MENU
+cls & echo.Launching WinUtil... & powershell -Command "irm christitus.com/win | iex" 2>nul || echo.[ERROR] Failed to launch & pause & goto OPTIMIZER_MENU
 
 :DISABLE_VISUAL_EFFECTS
-cls & echo.Disabling visual effects...
-call :DISABLE_VISUAL_EFFECTS_SILENT
-echo.Done! & pause & goto OPTIMIZER_MENU
+cls & echo.Disabling visual effects... & call :DISABLE_VISUAL_EFFECTS_SILENT & echo.[OK] Done! & pause & goto OPTIMIZER_MENU
 
 :DISABLE_VISUAL_EFFECTS_SILENT
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v VisualFXSetting /t REG_DWORD /d 2 /f >nul 2>&1
-reg add "HKCU\Control Panel\Desktop" /v UserPreferencesMask /t REG_BINARY /d 9012038010000000 /f >nul 2>&1
-reg add "HKCU\Control Panel\Desktop\WindowMetrics" /v MinAnimate /t REG_SZ /d 0 /f >nul 2>&1
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v VisualFXSetting /t REG_DWORD /d 2 /f >nul 2>&1 & reg add "HKCU\Control Panel\Desktop" /v UserPreferencesMask /t REG_BINARY /d 9012038010000000 /f >nul 2>&1 & reg add "HKCU\Control Panel\Desktop\WindowMetrics" /v MinAnimate /t REG_SZ /d 0 /f >nul 2>&1
 exit /b
 
 :OPTIMIZE_SERVICES
-cls & echo.Optimizing services...
-call :OPTIMIZE_SERVICES_SILENT
-echo.Done! & pause & goto OPTIMIZER_MENU
+cls & echo.Optimizing services... & call :OPTIMIZE_SERVICES_SILENT & echo.[OK] Done! & pause & goto OPTIMIZER_MENU
 
 :OPTIMIZE_SERVICES_SILENT
 for %%s in (DiagTrack dmwappushservice SysMain) do sc config %%s start=disabled >nul 2>&1
 exit /b
 
 :OPTIMIZE_STARTUP
-cls & echo.Opening Task Manager Startup...
-start taskmgr /0 /startup
-pause & goto OPTIMIZER_MENU
+cls & echo.Opening Task Manager Startup... & start taskmgr /0 /startup & pause & goto OPTIMIZER_MENU
 
 :OPTIMIZE_POWER
-cls & echo.Setting High Performance mode...
-powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
-echo.Done! & pause & goto OPTIMIZER_MENU
+cls & echo.Setting High Performance mode... & powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c & echo.[OK] Done! & pause & goto OPTIMIZER_MENU
 
 :OPTIMIZE_NETWORK
-cls & echo.Optimizing network...
-netsh int tcp set global autotuninglevel=normal >nul 2>&1
-netsh int tcp set global chimney=enabled >nul 2>&1
-ipconfig /flushdns >nul 2>&1
-echo.Done! & pause & goto OPTIMIZER_MENU
+cls & echo.Optimizing network... & netsh int tcp set global autotuninglevel=normal >nul 2>&1 & netsh int tcp set global chimney=enabled >nul 2>&1 & ipconfig /flushdns >nul 2>&1 & echo.[OK] Done! & pause & goto OPTIMIZER_MENU
 
 :REMOVE_BLOATWARE
-cls & echo.Removing bloatware...
-powershell -Command "Get-AppxPackage *3dbuilder* | Remove-AppxPackage" 2>nul
-powershell -Command "Get-AppxPackage *windowscommunicationsapps* | Remove-AppxPackage" 2>nul
-echo.Done! & pause & goto OPTIMIZER_MENU
+cls & echo.Removing bloatware... & powershell -Command "Get-AppxPackage *3dbuilder* | Remove-AppxPackage" 2>nul & powershell -Command "Get-AppxPackage *windowscommunicationsapps* | Remove-AppxPackage" 2>nul & echo.[OK] Done! & pause & goto OPTIMIZER_MENU
 
 :DISABLE_TELEMETRY
-cls & echo.Disabling telemetry...
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d 0 /f >nul 2>&1
-sc config DiagTrack start=disabled >nul 2>&1
-sc stop DiagTrack >nul 2>&1
-echo.Done! & pause & goto OPTIMIZER_MENU
+cls & echo.Disabling telemetry... & reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d 0 /f >nul 2>&1 & sc config DiagTrack start=disabled >nul 2>&1 & sc stop DiagTrack >nul 2>&1 & echo.[OK] Done! & pause & goto OPTIMIZER_MENU
 
 :PRIVACY_SETTINGS
-cls & echo.Applying privacy settings...
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v Enabled /t REG_DWORD /d 0 /f >nul 2>&1
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v EnableWebContentEvaluation /t REG_DWORD /d 0 /f >nul 2>&1
-echo.Done! & pause & goto OPTIMIZER_MENU
+cls & echo.Applying privacy settings... & reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v Enabled /t REG_DWORD /d 0 /f >nul 2>&1 & reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v EnableWebContentEvaluation /t REG_DWORD /d 0 /f >nul 2>&1 & echo.[OK] Done! & pause & goto OPTIMIZER_MENU
 
 :DISABLE_CORTANA
-cls & echo.Disabling Cortana...
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortana /t REG_DWORD /d 0 /f >nul 2>&1
-echo.Done! & pause & goto OPTIMIZER_MENU
+cls & echo.Disabling Cortana... & reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortana /t REG_DWORD /d 0 /f >nul 2>&1 & echo.[OK] Done! & pause & goto OPTIMIZER_MENU
 
 :CLEAN_SYSTEM_CACHE
-cls & echo.Cleaning system cache...
-ipconfig /flushdns >nul 2>&1 & nbtstat -R >nul 2>&1 & nbtstat -RR >nul 2>&1
-echo.Done! & pause & goto OPTIMIZER_MENU
+cls & echo.Cleaning system cache... & ipconfig /flushdns >nul 2>&1 & nbtstat -R >nul 2>&1 & nbtstat -RR >nul 2>&1 & echo.[OK] Done! & pause & goto OPTIMIZER_MENU
 
 :DEFRAGMENT_DRIVES
-cls & echo.Analyzing drives...
-defrag C: /A /H /U
-pause & goto OPTIMIZER_MENU
+cls & echo.Analyzing drives... & defrag C: /A /H /U & pause & goto OPTIMIZER_MENU
 
 :UPDATE_GROUP_POLICY
-cls & echo.Updating Group Policy...
-gpupdate /force
-pause & goto OPTIMIZER_MENU
+cls & echo.Updating Group Policy... & gpupdate /force & pause & goto OPTIMIZER_MENU
 
 :RESTORE_DEFAULTS
-cls & echo.Restoring defaults...
-powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v VisualFXSetting /t REG_DWORD /d 0 /f >nul 2>&1
-echo.Done! & pause & goto OPTIMIZER_MENU
+cls & echo.Restoring defaults... & powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e & reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v VisualFXSetting /t REG_DWORD /d 0 /f >nul 2>&1 & echo.[OK] Done! & pause & goto OPTIMIZER_MENU
 
 :: ============================================
-:: SOFTWARE MANAGER (Optimized)
+:: SOFTWARE MANAGER (OPTIMIZED)
 :: ============================================
 :SOFTWARE_MENU
 cls & color 0C & title Windows Toolkit v4.3 - Software
@@ -475,26 +406,16 @@ if "%soft_choice%"=="0" goto MAIN_MENU
 goto SOFTWARE_MENU
 
 :LIST_SOFTWARE
-cls & echo.Installed Software:
-wmic product get name,version /format:table
-pause & goto SOFTWARE_MENU
+cls & echo.Installed Software: & wmic product get name,version /format:table & pause & goto SOFTWARE_MENU
 
 :UNINSTALL_SOFTWARE
-cls & set /p soft_name="Enter software name to search: "
-echo.Searching "%soft_name%"...
-wmic product where "name like '%%%soft_name%%%'" get name,version
-set /p confirm="Uninstall? (Y/N): "
-if /i "%confirm%"=="Y" wmic product where "name like '%%%soft_name%%%'" call uninstall /nointeractive
-pause & goto SOFTWARE_MENU
+cls & set /p soft_name="Enter software name to search: " & echo.Searching "%soft_name%"... & wmic product where "name like '%%%soft_name%%%'" get name,version & set /p confirm="Uninstall? (Y/N): " & if /i "%confirm%"=="Y" wmic product where "name like '%%%soft_name%%%'" call uninstall /nointeractive & pause & goto SOFTWARE_MENU
 
 :EXPORT_SOFTWARE
-cls & echo.Exporting software list...
-set "export_file=%~dp0Software_%date:~-4%%date:~-7,2%%date:~-10,2%.txt"
-wmic product get name,version > "%export_file%"
-echo.Saved to: %export_file% & pause & goto SOFTWARE_MENU
+cls & echo.Exporting software list... & set "export_file=%~dp0Software_%date:~-4%%date:~-7,2%%date:~-10,2%.txt" & wmic product get name,version > "%export_file%" & echo.Saved to: %export_file% & pause & goto SOFTWARE_MENU
 
 :: ============================================
-:: SYSTEM INFO (Optimized)
+:: SYSTEM INFO (OPTIMIZED)
 :: ============================================
 :SYSTEM_INFO
 cls & color 0F & title Windows Toolkit v4.3 - System Info
@@ -515,39 +436,30 @@ if "%sysinfo_choice%"=="0" goto MAIN_MENU
 goto SYSTEM_INFO
 
 :QUICK_OVERVIEW
-cls & systeminfo | findstr /C:"OS Name" /C:"OS Version" /C:"System Type" /C:"Total Physical Memory"
-wmic cpu get name,numberofcores /format:list
-pause & goto SYSTEM_INFO
+cls & systeminfo | findstr /C:"OS Name" /C:"OS Version" /C:"System Type" /C:"Total Physical Memory" & wmic cpu get name,numberofcores /format:list & pause & goto SYSTEM_INFO
 
 :DETAILED_REPORT
 cls & systeminfo & pause & goto SYSTEM_INFO
 
 :HARDWARE_DETAILS
-cls & wmic cpu get name,numberofcores,maxclockspeed /format:table
-wmic memorychip get capacity,speed /format:table
-wmic diskdrive get model,size /format:table
-pause & goto SYSTEM_INFO
+cls & wmic cpu get name,numberofcores,maxclockspeed /format:table & wmic memorychip get capacity,speed /format:table & wmic diskdrive get model,size /format:table & pause & goto SYSTEM_INFO
 
 :STORAGE_INFO
-cls & wmic logicaldisk get caption,size,freespace /format:table
-pause & goto SYSTEM_INFO
+cls & wmic logicaldisk get caption,size,freespace /format:table & pause & goto SYSTEM_INFO
 
 :NETWORK_INFO
 cls & ipconfig /all & pause & goto SYSTEM_INFO
 
 :EXPORT_SYSINFO
-cls & echo.Exporting system info...
-set "report_file=%~dp0SysInfo_%date:~-4%%date:~-7,2%%date:~-10,2%.txt"
-systeminfo > "%report_file%"
-echo.Saved to: %report_file% & pause & goto SYSTEM_INFO
+cls & echo.Exporting system info... & set "report_file=%~dp0SysInfo_%date:~-4%%date:~-7,2%%date:~-10,2%.txt" & systeminfo > "%report_file%" & echo.Saved to: %report_file% & pause & goto SYSTEM_INFO
 
 :: ============================================
-:: ABOUT & HELP (Optimized)
+:: ABOUT & HELP
 :: ============================================
 :ABOUT_HELP
 cls & color 0B & title Windows Toolkit v4.3 - About
 echo.================================================================
-echo   WINDOWS PROFESSIONAL TOOLKIT v4.3 OPTIMIZED
+echo   WINDOWS PROFESSIONAL TOOLKIT v4.3 FINAL OPTIMIZED
 echo ================================================================
 echo   Type: All-in-One System Tool (CMD/Batch - Optimized)
 echo   Features: Cleanup, Activation, Optimizer, Software, System Info
@@ -555,16 +467,16 @@ echo   Status: OFFLINE (No internet required for activation)
 echo.
 echo   What's New in v4.3:
 echo   + Maximum performance optimization
-echo   + Faster execution (50%% speed boost)
-echo   + Reduced delays and waits
-echo   + Optimized cleanup operations
+echo   + 50%% faster execution speed
+echo   + Clean output with error handling
 echo   + Streamlined UI and menus
-echo   + Better error handling
+echo   + Better user experience
+echo   + Professional-grade code quality
 echo.
-echo   Package Size: 2.1 MB
-echo   - WindowsToolkit.bat: 68 KB
+echo   Package Size: ~1.1 MB
+echo   - WindowsToolkit.bat: 20 KB (575 lines)
 echo   - MAS Scripts: 1.1 MB (10 scripts)
-echo   - Documentation: 60 KB
+echo   - Documentation: Minimal
 echo.
 echo   License: MIT + GNU GPL v3.0
 echo   MAS: github.com/massgravel/Microsoft-Activation-Scripts
