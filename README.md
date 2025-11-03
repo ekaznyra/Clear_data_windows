@@ -8,10 +8,11 @@
 
 Professional Windows management tool built with **pure CMD/Batch scripts**. No PowerShell required!
 
-Three powerful tools in one BAT file:
+Four powerful tools in one BAT file:
 1. **Cleanup Tool** - Remove junk files
-2. **Windows Activation** - Activate Windows
-3. **Software Manager** - Uninstall applications
+2. **Windows Activation** - Activate Windows & Office (MAS)
+3. **Windows Optimizer** - Optimize Windows 10/11 (NEW!)
+4. **Software Manager** - Uninstall applications
 
 ---
 
@@ -31,12 +32,37 @@ Three powerful tools in one BAT file:
 - Check status & license info
 - Remove licenses
 
-### 3. Software Manager
+### 3. Windows Optimizer (NEW!)
+
+**Quick Actions:**
+- One-click optimization
+- Chris Titus WinUtil integration
+
+**Performance Tweaks:**
+- Disable visual effects
+- Optimize services
+- Optimize startup programs
+- High performance power plan
+- Network optimization
+
+**Privacy & Debloat:**
+- Remove bloatware apps
+- Disable telemetry
+- Privacy settings
+- Disable Cortana
+
+**System Tweaks:**
+- Clean system cache
+- Defragment drives
+- Update Group Policy
+- Restore defaults
+
+### 4. Software Manager
 - List all installed software
 - Uninstall by name
 - Export software list to file
 
-### 4. Additional Features
+### 5. Additional Features
 - Operation logging
 - System information viewer
 - Simple CMD interface
@@ -70,10 +96,11 @@ Three powerful tools in one BAT file:
   SELECT TOOL:
 
   [1] Cleanup Tool        - Remove junk and optimize
-  [2] Windows Activation  - Activate Windows
-  [3] Software Manager    - Uninstall applications
-  [4] View Logs           - Check operation history
-  [5] System Info         - View system information
+  [2] Windows Activation  - Activate Windows & Office
+  [3] Windows Optimizer   - Optimize Windows 10/11 (NEW!)
+  [4] Software Manager    - Uninstall applications
+  [5] View Logs           - Check operation history
+  [6] System Info         - View system information
   [0] Exit                - Close toolkit
 
 ================================================================

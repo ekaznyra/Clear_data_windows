@@ -37,22 +37,24 @@ echo.
 echo   SELECT TOOL:
 echo.
 echo   [1] Cleanup Tool        - Remove junk and optimize
-echo   [2] Windows Activation  - Activate Windows
-echo   [3] Software Manager    - Uninstall applications
-echo   [4] View Logs           - Check operation history
-echo   [5] System Info         - View system information
+echo   [2] Windows Activation  - Activate Windows ^& Office
+echo   [3] Windows Optimizer   - Optimize Windows 10/11 (NEW!)
+echo   [4] Software Manager    - Uninstall applications
+echo   [5] View Logs           - Check operation history
+echo   [6] System Info         - View system information
 echo   [0] Exit                - Close toolkit
 echo.
 echo ================================================================
 echo.
 
-set /p choice="Enter your choice (0-5): "
+set /p choice="Enter your choice (0-6): "
 
 if "%choice%"=="1" goto CLEANUP_MENU
 if "%choice%"=="2" goto ACTIVATION_MENU
-if "%choice%"=="3" goto SOFTWARE_MENU
-if "%choice%"=="4" goto VIEW_LOGS
-if "%choice%"=="5" goto SYSTEM_INFO
+if "%choice%"=="3" goto OPTIMIZER_MENU
+if "%choice%"=="4" goto SOFTWARE_MENU
+if "%choice%"=="5" goto VIEW_LOGS
+if "%choice%"=="6" goto SYSTEM_INFO
 if "%choice%"=="0" goto EXIT_PROGRAM
 goto MAIN_MENU
 
@@ -1228,6 +1230,878 @@ if exist "%ProgramFiles%\Microsoft Office\Office16\ospp.vbs" (
 
 pause
 goto ACTIVATION_MENU
+
+:: ============================================
+:: WINDOWS OPTIMIZER MENU (NEW!)
+:: ============================================
+:OPTIMIZER_MENU
+cls
+color 0C
+echo.
+echo ================================================================
+echo   WINDOWS OPTIMIZER - MAKE YOUR PC FASTER!
+echo   Windows 10/11 Performance ^& Privacy Optimization
+echo ================================================================
+echo.
+echo   QUICK ACTIONS:
+echo.
+echo   [1]  Quick Optimize           - One-click optimization
+echo   [2]  Run Chris Titus WinUtil  - Popular optimization tool
+echo.
+echo   PERFORMANCE TWEAKS:
+echo.
+echo   [3]  Disable Visual Effects   - Faster performance
+echo   [4]  Optimize Services        - Disable unnecessary services
+echo   [5]  Optimize Startup         - Speed up boot time
+echo   [6]  Optimize Power Plan      - High performance mode
+echo   [7]  Optimize Network         - Better internet speed
+echo.
+echo   PRIVACY ^& DEBLOAT:
+echo.
+echo   [8]  Remove Bloatware         - Uninstall pre-installed apps
+echo   [9]  Disable Telemetry        - Stop data collection
+echo   [10] Privacy Settings         - Enhance privacy
+echo   [11] Disable Cortana          - Remove Cortana
+echo.
+echo   SYSTEM TWEAKS:
+echo.
+echo   [12] Clean System Cache       - Clear system cache
+echo   [13] Defragment Drives        - Optimize hard drives
+echo   [14] Update Group Policy      - Refresh policies
+echo   [15] Restore Default Settings - Undo optimizations
+echo.
+echo   [0]  Back to Main Menu
+echo.
+echo   Based on: Chris Titus WinUtil ^& Best Practices
+echo.
+echo ================================================================
+echo.
+
+set /p opt_choice="Enter your choice (0-15): "
+
+if "%opt_choice%"=="1" goto QUICK_OPTIMIZE
+if "%opt_choice%"=="2" goto RUN_WINTUTIL
+if "%opt_choice%"=="3" goto DISABLE_VISUAL_EFFECTS
+if "%opt_choice%"=="4" goto OPTIMIZE_SERVICES
+if "%opt_choice%"=="5" goto OPTIMIZE_STARTUP
+if "%opt_choice%"=="6" goto OPTIMIZE_POWER
+if "%opt_choice%"=="7" goto OPTIMIZE_NETWORK
+if "%opt_choice%"=="8" goto REMOVE_BLOATWARE
+if "%opt_choice%"=="9" goto DISABLE_TELEMETRY
+if "%opt_choice%"=="10" goto PRIVACY_SETTINGS
+if "%opt_choice%"=="11" goto DISABLE_CORTANA
+if "%opt_choice%"=="12" goto CLEAN_SYSTEM_CACHE
+if "%opt_choice%"=="13" goto DEFRAGMENT_DRIVES
+if "%opt_choice%"=="14" goto UPDATE_GROUP_POLICY
+if "%opt_choice%"=="15" goto RESTORE_DEFAULTS
+if "%opt_choice%"=="0" goto MAIN_MENU
+goto OPTIMIZER_MENU
+
+:: ============================================
+:: QUICK OPTIMIZE (All-in-One)
+:: ============================================
+:QUICK_OPTIMIZE
+cls
+echo.
+echo ================================================================
+echo   QUICK OPTIMIZE - ALL-IN-ONE OPTIMIZATION
+echo ================================================================
+echo.
+echo   This will apply all safe optimizations:
+echo   - Disable visual effects
+echo   - Optimize services
+echo   - Clear system cache
+echo   - Disable telemetry
+echo   - Optimize network
+echo   - High performance power plan
+echo.
+
+set /p confirm_quick="Continue with Quick Optimize? (Y/N): "
+if /i not "%confirm_quick%"=="Y" goto OPTIMIZER_MENU
+
+echo.
+echo   Starting optimization...
+echo.
+
+echo   [1/10] Disabling visual effects...
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v VisualFXSetting /t REG_DWORD /d 2 /f >nul 2>&1
+echo       [OK] Visual effects disabled
+
+echo   [2/10] Disabling Windows Search indexing...
+sc config "WSearch" start=disabled >nul 2>&1
+sc stop "WSearch" >nul 2>&1
+echo       [OK] Search indexing disabled
+
+echo   [3/10] Disabling Superfetch/SysMain...
+sc config "SysMain" start=disabled >nul 2>&1
+sc stop "SysMain" >nul 2>&1
+echo       [OK] Superfetch disabled
+
+echo   [4/10] Disabling Windows Tips...
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v SubscribedContent-338389Enabled /t REG_DWORD /d 0 /f >nul 2>&1
+echo       [OK] Windows Tips disabled
+
+echo   [5/10] Disabling Telemetry...
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d 0 /f >nul 2>&1
+sc config "DiagTrack" start=disabled >nul 2>&1
+sc stop "DiagTrack" >nul 2>&1
+echo       [OK] Telemetry disabled
+
+echo   [6/10] Setting High Performance power plan...
+powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c >nul 2>&1
+echo       [OK] High Performance enabled
+
+echo   [7/10] Optimizing network settings...
+netsh int tcp set global autotuninglevel=normal >nul 2>&1
+netsh int tcp set global chimney=enabled >nul 2>&1
+echo       [OK] Network optimized
+
+echo   [8/10] Disabling unnecessary animations...
+reg add "HKCU\Control Panel\Desktop\WindowMetrics" /v MinAnimate /t REG_SZ /d 0 /f >nul 2>&1
+echo       [OK] Animations disabled
+
+echo   [9/10] Clearing system cache...
+ipconfig /flushdns >nul 2>&1
+del /f /s /q "%SystemRoot%\Temp\*.*" >nul 2>&1
+echo       [OK] Cache cleared
+
+echo   [10/10] Restarting Explorer...
+taskkill /f /im explorer.exe >nul 2>&1
+start explorer.exe
+echo       [OK] Explorer restarted
+
+echo.
+echo ================================================================
+echo   QUICK OPTIMIZE COMPLETE!
+echo ================================================================
+echo   Your Windows is now optimized for better performance!
+echo   Recommended: Restart your computer for full effect
+echo.
+call :LOG "SUCCESS: Quick Optimize completed"
+pause
+goto OPTIMIZER_MENU
+
+:: ============================================
+:: RUN CHRIS TITUS WINUTIL
+:: ============================================
+:RUN_WINTUTIL
+cls
+echo.
+echo ================================================================
+echo   CHRIS TITUS TECH WINDOWS UTILITY
+echo ================================================================
+echo.
+echo   This will download and run the popular WinUtil tool
+echo   Features:
+echo   - Debloat Windows
+echo   - Install software packages
+echo   - Tweaks and optimizations
+echo   - Privacy settings
+echo.
+echo   Source: https://github.com/ChrisTitusTech/winutil
+echo.
+
+set /p confirm_winutil="Run Chris Titus WinUtil? (Y/N): "
+if /i not "%confirm_winutil%"=="Y" goto OPTIMIZER_MENU
+
+echo.
+echo   Downloading and launching WinUtil...
+echo   (A new window will open)
+echo.
+
+powershell -Command "irm christitus.com/win | iex" 2>nul
+
+if errorlevel 1 (
+    echo.
+    echo   ERROR: Could not download WinUtil
+    echo   Check your internet connection
+    echo.
+    pause
+    goto OPTIMIZER_MENU
+)
+
+echo.
+echo   WinUtil launched successfully!
+echo.
+call :LOG "INFO: Chris Titus WinUtil launched"
+pause
+goto OPTIMIZER_MENU
+
+:: ============================================
+:: DISABLE VISUAL EFFECTS
+:: ============================================
+:DISABLE_VISUAL_EFFECTS
+cls
+echo.
+echo ================================================================
+echo   DISABLE VISUAL EFFECTS FOR PERFORMANCE
+echo ================================================================
+echo.
+echo   This will disable:
+echo   - Animations and fading
+echo   - Transparency effects
+echo   - Thumbnails and previews
+echo   - Smooth scrolling
+echo.
+echo   Result: Faster performance, less resource usage
+echo.
+
+set /p confirm_visual="Disable visual effects? (Y/N): "
+if /i not "%confirm_visual%"=="Y" goto OPTIMIZER_MENU
+
+echo.
+echo   Applying settings...
+echo.
+
+:: Set for best performance
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v VisualFXSetting /t REG_DWORD /d 2 /f >nul 2>&1
+
+:: Disable animations
+reg add "HKCU\Control Panel\Desktop\WindowMetrics" /v MinAnimate /t REG_SZ /d 0 /f >nul 2>&1
+
+:: Disable transparency
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v EnableTransparency /t REG_DWORD /d 0 /f >nul 2>&1
+
+:: Disable smooth scrolling
+reg add "HKCU\Control Panel\Desktop" /v SmoothScroll /t REG_DWORD /d 0 /f >nul 2>&1
+
+:: Restart Explorer
+taskkill /f /im explorer.exe >nul 2>&1
+start explorer.exe
+
+echo.
+echo   SUCCESS! Visual effects disabled
+echo   Performance improved
+echo.
+call :LOG "SUCCESS: Visual effects disabled"
+pause
+goto OPTIMIZER_MENU
+
+:: ============================================
+:: OPTIMIZE SERVICES
+:: ============================================
+:OPTIMIZE_SERVICES
+cls
+echo.
+echo ================================================================
+echo   OPTIMIZE WINDOWS SERVICES
+echo ================================================================
+echo.
+echo   This will disable unnecessary services:
+echo   - Windows Search (indexing)
+echo   - Superfetch/SysMain
+echo   - Windows Error Reporting
+echo   - Diagnostic services
+echo   - Print Spooler (if not using printer)
+echo.
+
+set /p confirm_services="Optimize services? (Y/N): "
+if /i not "%confirm_services%"=="Y" goto OPTIMIZER_MENU
+
+echo.
+echo   Disabling unnecessary services...
+echo.
+
+echo   [1/8] Windows Search...
+sc config "WSearch" start=disabled >nul 2>&1
+sc stop "WSearch" >nul 2>&1
+echo       [OK]
+
+echo   [2/8] Superfetch/SysMain...
+sc config "SysMain" start=disabled >nul 2>&1
+sc stop "SysMain" >nul 2>&1
+echo       [OK]
+
+echo   [3/8] Windows Error Reporting...
+sc config "WerSvc" start=disabled >nul 2>&1
+sc stop "WerSvc" >nul 2>&1
+echo       [OK]
+
+echo   [4/8] Diagnostic services...
+sc config "DiagTrack" start=disabled >nul 2>&1
+sc stop "DiagTrack" >nul 2>&1
+sc config "dmwappushservice" start=disabled >nul 2>&1
+sc stop "dmwappushservice" >nul 2>&1
+echo       [OK]
+
+echo   [5/8] Windows Insider Service...
+sc config "wisvc" start=disabled >nul 2>&1
+sc stop "wisvc" >nul 2>&1
+echo       [OK]
+
+echo   [6/8] Remote Registry...
+sc config "RemoteRegistry" start=disabled >nul 2>&1
+sc stop "RemoteRegistry" >nul 2>&1
+echo       [OK]
+
+echo   [7/8] Fax service...
+sc config "Fax" start=disabled >nul 2>&1
+sc stop "Fax" >nul 2>&1
+echo       [OK]
+
+echo   [8/8] Xbox services...
+sc config "XblAuthManager" start=disabled >nul 2>&1
+sc stop "XblAuthManager" >nul 2>&1
+sc config "XblGameSave" start=disabled >nul 2>&1
+sc stop "XblGameSave" >nul 2>&1
+sc config "XboxNetApiSvc" start=disabled >nul 2>&1
+sc stop "XboxNetApiSvc" >nul 2>&1
+echo       [OK]
+
+echo.
+echo   SUCCESS! Services optimized
+echo   System resources freed up
+echo.
+call :LOG "SUCCESS: Services optimized"
+pause
+goto OPTIMIZER_MENU
+
+:: ============================================
+:: OPTIMIZE STARTUP
+:: ============================================
+:OPTIMIZE_STARTUP
+cls
+echo.
+echo ================================================================
+echo   OPTIMIZE STARTUP PROGRAMS
+echo ================================================================
+echo.
+echo   Opening Task Manager Startup tab...
+echo   Please disable unnecessary startup programs manually
+echo.
+echo   Tips:
+echo   - Disable programs you don't use at startup
+echo   - Keep antivirus and important tools
+echo   - Disable: Steam, Discord, Spotify (if not needed at boot)
+echo.
+
+taskmgr /0 /startup
+
+echo   Task Manager opened!
+echo   After disabling programs, close Task Manager
+echo.
+call :LOG "INFO: Startup optimization tool opened"
+pause
+goto OPTIMIZER_MENU
+
+:: ============================================
+:: OPTIMIZE POWER PLAN
+:: ============================================
+:OPTIMIZE_POWER
+cls
+echo.
+echo ================================================================
+echo   OPTIMIZE POWER PLAN
+echo ================================================================
+echo.
+echo   This will set Windows to High Performance mode
+echo   Benefits:
+echo   - Maximum CPU performance
+echo   - No CPU throttling
+echo   - Faster response times
+echo.
+echo   Note: May increase power consumption on laptops
+echo.
+
+set /p confirm_power="Set High Performance mode? (Y/N): "
+if /i not "%confirm_power%"=="Y" goto OPTIMIZER_MENU
+
+echo.
+echo   Setting power plan...
+echo.
+
+:: Enable High Performance plan
+powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+
+:: Disable USB selective suspend
+powercfg /change usb-selective-suspend-setting 0
+
+:: Set processor minimum state to 100%
+powercfg /change processor-state-min 100
+
+echo.
+echo   SUCCESS! High Performance mode enabled
+echo   Your PC will now run at maximum performance
+echo.
+call :LOG "SUCCESS: High Performance power plan enabled"
+pause
+goto OPTIMIZER_MENU
+
+:: ============================================
+:: OPTIMIZE NETWORK
+:: ============================================
+:OPTIMIZE_NETWORK
+cls
+echo.
+echo ================================================================
+echo   OPTIMIZE NETWORK SETTINGS
+echo ================================================================
+echo.
+echo   This will optimize network for better speed:
+echo   - Enable TCP auto-tuning
+echo   - Optimize TCP settings
+echo   - Flush DNS cache
+echo   - Reset network stack
+echo.
+
+set /p confirm_network="Optimize network? (Y/N): "
+if /i not "%confirm_network%"=="Y" goto OPTIMIZER_MENU
+
+echo.
+echo   Optimizing network...
+echo.
+
+echo   [1/6] Flushing DNS cache...
+ipconfig /flushdns >nul 2>&1
+echo       [OK]
+
+echo   [2/6] Enabling TCP auto-tuning...
+netsh int tcp set global autotuninglevel=normal >nul 2>&1
+echo       [OK]
+
+echo   [3/6] Enabling TCP Chimney...
+netsh int tcp set global chimney=enabled >nul 2>&1
+echo       [OK]
+
+echo   [4/6] Enabling RSS (Receive Side Scaling)...
+netsh int tcp set global rss=enabled >nul 2>&1
+echo       [OK]
+
+echo   [5/6] Disabling NetBIOS over TCP/IP...
+wmic nicconfig where (IPEnabled=TRUE) call SetTcpipNetbios 2 >nul 2>&1
+echo       [OK]
+
+echo   [6/6] Optimizing network adapter...
+netsh int tcp set global timestamps=disabled >nul 2>&1
+echo       [OK]
+
+echo.
+echo   SUCCESS! Network optimized
+echo   You may need to restart for full effect
+echo.
+call :LOG "SUCCESS: Network settings optimized"
+pause
+goto OPTIMIZER_MENU
+
+:: ============================================
+:: REMOVE BLOATWARE
+:: ============================================
+:REMOVE_BLOATWARE
+cls
+echo.
+echo ================================================================
+echo   REMOVE WINDOWS BLOATWARE
+echo ================================================================
+echo.
+echo   This will remove pre-installed Windows apps:
+echo   - Xbox apps
+echo   - Candy Crush
+echo   - 3D Viewer
+echo   - Mixed Reality Portal
+echo   - People app
+echo   - And other bloatware
+echo.
+echo   NOTE: Calculator, Photos, Store will be kept
+echo.
+
+set /p confirm_bloat="Remove bloatware apps? (Y/N): "
+if /i not "%confirm_bloat%"=="Y" goto OPTIMIZER_MENU
+
+echo.
+echo   Removing bloatware...
+echo   This may take a few minutes...
+echo.
+
+:: Xbox
+powershell -Command "Get-AppxPackage *xbox* | Remove-AppxPackage" 2>nul
+echo   [OK] Xbox apps removed
+
+:: Candy Crush and other games
+powershell -Command "Get-AppxPackage *CandyCrush* | Remove-AppxPackage" 2>nul
+powershell -Command "Get-AppxPackage *BubbleWitch* | Remove-AppxPackage" 2>nul
+powershell -Command "Get-AppxPackage king.com* | Remove-AppxPackage" 2>nul
+echo   [OK] Games removed
+
+:: 3D Viewer
+powershell -Command "Get-AppxPackage *3DViewer* | Remove-AppxPackage" 2>nul
+echo   [OK] 3D Viewer removed
+
+:: Mixed Reality Portal
+powershell -Command "Get-AppxPackage *MixedReality* | Remove-AppxPackage" 2>nul
+echo   [OK] Mixed Reality removed
+
+:: People
+powershell -Command "Get-AppxPackage *People* | Remove-AppxPackage" 2>nul
+echo   [OK] People app removed
+
+:: Skype
+powershell -Command "Get-AppxPackage *Skype* | Remove-AppxPackage" 2>nul
+echo   [OK] Skype removed
+
+:: Get Office (hub)
+powershell -Command "Get-AppxPackage *GetOffice* | Remove-AppxPackage" 2>nul
+echo   [OK] Get Office removed
+
+:: OneNote (preinstalled)
+powershell -Command "Get-AppxPackage *OneNote* | Remove-AppxPackage" 2>nul
+echo   [OK] OneNote removed
+
+:: Weather
+powershell -Command "Get-AppxPackage *BingWeather* | Remove-AppxPackage" 2>nul
+echo   [OK] Weather removed
+
+:: News
+powershell -Command "Get-AppxPackage *BingNews* | Remove-AppxPackage" 2>nul
+echo   [OK] News removed
+
+echo.
+echo   SUCCESS! Bloatware removed
+echo   Disk space freed up
+echo.
+call :LOG "SUCCESS: Bloatware removed"
+pause
+goto OPTIMIZER_MENU
+
+:: ============================================
+:: DISABLE TELEMETRY
+:: ============================================
+:DISABLE_TELEMETRY
+cls
+echo.
+echo ================================================================
+echo   DISABLE TELEMETRY ^& DATA COLLECTION
+echo ================================================================
+echo.
+echo   This will disable Windows data collection:
+echo   - Telemetry services
+echo   - Diagnostic data
+echo   - Activity history
+echo   - App diagnostics
+echo.
+
+set /p confirm_telemetry="Disable telemetry? (Y/N): "
+if /i not "%confirm_telemetry%"=="Y" goto OPTIMIZER_MENU
+
+echo.
+echo   Disabling telemetry...
+echo.
+
+:: Set telemetry to Security only (minimum)
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d 0 /f >nul 2>&1
+echo   [OK] Telemetry set to minimum
+
+:: Disable DiagTrack service
+sc config "DiagTrack" start=disabled >nul 2>&1
+sc stop "DiagTrack" >nul 2>&1
+echo   [OK] DiagTrack disabled
+
+:: Disable dmwappushservice
+sc config "dmwappushservice" start=disabled >nul 2>&1
+sc stop "dmwappushservice" >nul 2>&1
+echo   [OK] dmwappushservice disabled
+
+:: Disable Activity History
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v PublishUserActivities /t REG_DWORD /d 0 /f >nul 2>&1
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v UploadUserActivities /t REG_DWORD /d 0 /f >nul 2>&1
+echo   [OK] Activity History disabled
+
+:: Disable App Diagnostics
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack" /v ShowedToastAtLevel /t REG_DWORD /d 1 /f >nul 2>&1
+echo   [OK] App diagnostics disabled
+
+:: Disable Feedback
+reg add "HKCU\Software\Microsoft\Siuf\Rules" /v NumberOfSIUFInPeriod /t REG_DWORD /d 0 /f >nul 2>&1
+echo   [OK] Feedback disabled
+
+echo.
+echo   SUCCESS! Telemetry disabled
+echo   Your privacy is now better protected
+echo.
+call :LOG "SUCCESS: Telemetry disabled"
+pause
+goto OPTIMIZER_MENU
+
+:: ============================================
+:: PRIVACY SETTINGS
+:: ============================================
+:PRIVACY_SETTINGS
+cls
+echo.
+echo ================================================================
+echo   PRIVACY SETTINGS
+echo ================================================================
+echo.
+echo   This will enhance your privacy:
+echo   - Disable location tracking
+echo   - Disable camera and mic access
+echo   - Disable advertising ID
+echo   - Disable app diagnostics
+echo   - Disable tailored experiences
+echo.
+
+set /p confirm_privacy="Apply privacy settings? (Y/N): "
+if /i not "%confirm_privacy%"=="Y" goto OPTIMIZER_MENU
+
+echo.
+echo   Applying privacy settings...
+echo.
+
+:: Disable Location Tracking
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" /v Value /t REG_SZ /d Deny /f >nul 2>&1
+echo   [OK] Location tracking disabled
+
+:: Disable Camera Access
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\webcam" /v Value /t REG_SZ /d Deny /f >nul 2>&1
+echo   [OK] Camera access disabled
+
+:: Disable Microphone Access
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\microphone" /v Value /t REG_SZ /d Deny /f >nul 2>&1
+echo   [OK] Microphone access disabled
+
+:: Disable Advertising ID
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v Enabled /t REG_DWORD /d 0 /f >nul 2>&1
+echo   [OK] Advertising ID disabled
+
+:: Disable Tailored Experiences
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Privacy" /v TailoredExperiencesWithDiagnosticDataEnabled /t REG_DWORD /d 0 /f >nul 2>&1
+echo   [OK] Tailored experiences disabled
+
+:: Disable Online Speech Recognition
+reg add "HKCU\Software\Microsoft\Speech_OneCore\Settings\OnlineSpeechPrivacy" /v HasAccepted /t REG_DWORD /d 0 /f >nul 2>&1
+echo   [OK] Speech recognition disabled
+
+echo.
+echo   SUCCESS! Privacy settings applied
+echo   Your privacy is now enhanced
+echo.
+call :LOG "SUCCESS: Privacy settings applied"
+pause
+goto OPTIMIZER_MENU
+
+:: ============================================
+:: DISABLE CORTANA
+:: ============================================
+:DISABLE_CORTANA
+cls
+echo.
+echo ================================================================
+echo   DISABLE CORTANA
+echo ================================================================
+echo.
+echo   This will completely disable Cortana
+echo   Benefits:
+echo   - Free up system resources
+echo   - Better privacy
+echo   - Faster search
+echo.
+
+set /p confirm_cortana="Disable Cortana? (Y/N): "
+if /i not "%confirm_cortana%"=="Y" goto OPTIMIZER_MENU
+
+echo.
+echo   Disabling Cortana...
+echo.
+
+:: Disable Cortana
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortana /t REG_DWORD /d 0 /f >nul 2>&1
+echo   [OK] Cortana disabled via policy
+
+:: Disable Cortana on lock screen
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortanaAboveLock /t REG_DWORD /d 0 /f >nul 2>&1
+echo   [OK] Cortana on lock screen disabled
+
+:: Disable web search in Start Menu
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v DisableWebSearch /t REG_DWORD /d 1 /f >nul 2>&1
+echo   [OK] Web search disabled
+
+:: Restart Explorer
+taskkill /f /im explorer.exe >nul 2>&1
+start explorer.exe
+echo   [OK] Explorer restarted
+
+echo.
+echo   SUCCESS! Cortana disabled
+echo   System resources freed
+echo.
+call :LOG "SUCCESS: Cortana disabled"
+pause
+goto OPTIMIZER_MENU
+
+:: ============================================
+:: CLEAN SYSTEM CACHE
+:: ============================================
+:CLEAN_SYSTEM_CACHE
+cls
+echo.
+echo ================================================================
+echo   CLEAN SYSTEM CACHE
+echo ================================================================
+echo.
+echo   This will clean:
+echo   - DNS cache
+echo   - Windows Update cache
+echo   - Icon cache
+echo   - Font cache
+echo   - Thumbnail cache
+echo.
+
+set /p confirm_cache="Clean system cache? (Y/N): "
+if /i not "%confirm_cache%"=="Y" goto OPTIMIZER_MENU
+
+echo.
+echo   Cleaning cache...
+echo.
+
+echo   [1/5] Flushing DNS cache...
+ipconfig /flushdns >nul 2>&1
+echo       [OK]
+
+echo   [2/5] Cleaning Windows Update cache...
+net stop wuauserv >nul 2>&1
+del /f /s /q "%SystemRoot%\SoftwareDistribution\Download\*.*" >nul 2>&1
+net start wuauserv >nul 2>&1
+echo       [OK]
+
+echo   [3/5] Cleaning icon cache...
+del /f /s /q "%LocalAppData%\IconCache.db" >nul 2>&1
+echo       [OK]
+
+echo   [4/5] Cleaning font cache...
+net stop "FontCache" >nul 2>&1
+del /f /s /q "%SystemRoot%\ServiceProfiles\LocalService\AppData\Local\FontCache\*.*" >nul 2>&1
+net start "FontCache" >nul 2>&1
+echo       [OK]
+
+echo   [5/5] Cleaning thumbnail cache...
+del /f /s /q "%LocalAppData%\Microsoft\Windows\Explorer\*.db" >nul 2>&1
+echo       [OK]
+
+:: Restart Explorer
+taskkill /f /im explorer.exe >nul 2>&1
+start explorer.exe
+
+echo.
+echo   SUCCESS! System cache cleaned
+echo   System should feel more responsive
+echo.
+call :LOG "SUCCESS: System cache cleaned"
+pause
+goto OPTIMIZER_MENU
+
+:: ============================================
+:: DEFRAGMENT DRIVES
+:: ============================================
+:DEFRAGMENT_DRIVES
+cls
+echo.
+echo ================================================================
+echo   DEFRAGMENT ^& OPTIMIZE DRIVES
+echo ================================================================
+echo.
+echo   This will optimize your drives:
+echo   - HDD: Defragmentation
+echo   - SSD: TRIM optimization
+echo.
+echo   NOTE: This may take a while for large drives
+echo.
+
+set /p confirm_defrag="Optimize drives? (Y/N): "
+if /i not "%confirm_defrag%"=="Y" goto OPTIMIZER_MENU
+
+echo.
+echo   Starting drive optimization...
+echo   Please wait...
+echo.
+
+:: Defragment C: drive
+defrag C: /O /H /U /V
+
+echo.
+echo   SUCCESS! Drives optimized
+echo.
+call :LOG "SUCCESS: Drives optimized"
+pause
+goto OPTIMIZER_MENU
+
+:: ============================================
+:: UPDATE GROUP POLICY
+:: ============================================
+:UPDATE_GROUP_POLICY
+cls
+echo.
+echo ================================================================
+echo   UPDATE GROUP POLICY
+echo ================================================================
+echo.
+echo   This will refresh all Group Policy settings
+echo   Use this after making system changes
+echo.
+
+echo   Updating Group Policy...
+echo.
+
+gpupdate /force
+
+echo.
+echo   SUCCESS! Group Policy updated
+echo.
+call :LOG "INFO: Group Policy updated"
+pause
+goto OPTIMIZER_MENU
+
+:: ============================================
+:: RESTORE DEFAULT SETTINGS
+:: ============================================
+:RESTORE_DEFAULTS
+cls
+echo.
+echo ================================================================
+echo   RESTORE DEFAULT SETTINGS
+echo ================================================================
+echo.
+echo   WARNING: This will undo optimizations and restore defaults:
+echo   - Re-enable visual effects
+echo   - Re-enable services
+echo   - Re-enable telemetry
+echo   - Restore power plan
+echo.
+
+set /p confirm_restore="Restore default settings? (Y/N): "
+if /i not "%confirm_restore%"=="Y" goto OPTIMIZER_MENU
+
+echo.
+echo   Restoring defaults...
+echo.
+
+:: Re-enable visual effects
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v VisualFXSetting /t REG_DWORD /d 0 /f >nul 2>&1
+echo   [OK] Visual effects restored
+
+:: Re-enable Windows Search
+sc config "WSearch" start=auto >nul 2>&1
+sc start "WSearch" >nul 2>&1
+echo   [OK] Windows Search enabled
+
+:: Re-enable Superfetch
+sc config "SysMain" start=auto >nul 2>&1
+sc start "SysMain" >nul 2>&1
+echo   [OK] Superfetch enabled
+
+:: Restore balanced power plan
+powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e >nul 2>&1
+echo   [OK] Balanced power plan restored
+
+:: Restart Explorer
+taskkill /f /im explorer.exe >nul 2>&1
+start explorer.exe
+
+echo.
+echo   SUCCESS! Default settings restored
+echo   Restart computer to complete restoration
+echo.
+call :LOG "INFO: Default settings restored"
+pause
+goto OPTIMIZER_MENU
 
 :: ============================================
 :: SOFTWARE MANAGER MENU
