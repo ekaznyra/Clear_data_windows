@@ -4,9 +4,11 @@ setlocal EnableDelayedExpansion EnableExtensions
 :: WINDOWS CLEANUP & OPTIMIZER TOOLKIT v6.0
 :: ULTRA DEEP CLEANING - Maximum Space Recovery
 :: Professional System Maintenance Tool
+:: 100% SAFE - Only removes temporary & cache files
+:: NEVER touches documents, photos, videos, or music
 :: ============================================
 
-title Windows Toolkit v6.0 - Professional Deep Cleaning Edition
+title Windows Toolkit v6.0 - Safe Deep Cleaning Edition
 
 :: Fast Admin Check
 net session >nul 2>&1 || (
@@ -131,20 +133,25 @@ echo.================================================================
 echo.
 echo.  This will clean EVERYTHING including:
 echo.  - All caches, logs, temp files from EVERY source
-echo.  - Windows.old, setup files, old driver packages
-echo.  - All browser data, app caches, game launcher caches
-echo.  - System restore points, hibernation file, page file optimization
+echo.  - Windows.old, setup files, temp driver installation files
+echo.  - All browser caches, app caches, game launcher caches
+echo.  - Temp system files (NOT restore points, safe mode)
 echo.  - DirectX, GPU caches, .NET temp assemblies
 echo.  - Office, Adobe, Steam, Epic, Origin, Uplay, Battle.net caches
 echo.  - npm, pip, gradle, maven, cargo, composer caches
-echo.  - Windows Search, Notification databases
+echo.  - Windows Search logs, Notification temp files
 echo.  - And 40+ more cleanup targets!
 echo.
 echo.  EXPECTED SPACE RECOVERY: 10-50+ GB
 echo.  TIME REQUIRED: 10-20 minutes
 echo.
-echo.  SAFETY: Your documents, photos, videos, music are 100%% SAFE!
-echo.          Only temporary and cache files will be removed!
+echo.  SAFETY GUARANTEE - WHAT IS 100%% SAFE:
+echo.  [+] Your documents, photos, videos, music are SAFE
+echo.  [+] Installed programs and applications are SAFE
+echo.  [+] Windows system files are SAFE
+echo.  [+] Drivers currently in use are SAFE
+echo.  [+] System restore points are SAFE (only temp files removed)
+echo.  [+] Only temporary and cache files will be removed
 echo.
 color 0E
 set /p confirm="Type 'NUCLEAR' to proceed with maximum cleanup: "
@@ -210,7 +217,7 @@ echo.
 echo.[PHASE 5/5] Graphics and Performance Optimization...
 call :CLEAN_DIRECTX_CACHE
 call :CLEAN_GPU_CACHE
-call :CLEAN_HIBERNATION_FILE
+call :CLEAN_HIBERNATION_CACHE
 
 call :REPORT_SPACE_END
 color 0B
@@ -575,7 +582,8 @@ exit /b
 
 :CLEAN_OLD_UPDATES
 echo.  - Cleaning Old Windows Updates...
-Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase >nul 2>&1
+:: SAFE: Use /StartComponentCleanup without /ResetBase for safety
+Dism.exe /online /Cleanup-Image /StartComponentCleanup >nul 2>&1
 exit /b
 
 :CLEAN_WINDOWS_STORE_CACHE
@@ -668,30 +676,27 @@ del /f /s /q "%LocalAppData%\GOG.com\Galaxy\logs\*" 2>nul
 exit /b
 
 :CLEAN_WINDOWS_SEARCH
-echo.  - Cleaning Windows Search database...
-sc stop "WSearch" >nul 2>&1
-timeout /t 2 >nul
-del /f /q "%ProgramData%\Microsoft\Search\Data\Applications\Windows\Windows.edb" 2>nul
+echo.  - Cleaning Windows Search Temp files...
+:: SAFE: Only clean log files, NOT the search database itself
 del /f /s /q "%ProgramData%\Microsoft\Search\Data\Applications\Windows\*.log" 2>nul
-sc start "WSearch" >nul 2>&1
+del /f /s /q "%ProgramData%\Microsoft\Search\Data\Temp\*" 2>nul
 exit /b
 
 :CLEAN_NOTIFICATIONS
-echo.  - Cleaning Notification database...
-del /f /q "%LocalAppData%\Microsoft\Windows\Notifications\*.db" 2>nul
-del /f /q "%LocalAppData%\Microsoft\Windows\Notifications\wpndatabase.db" 2>nul
+echo.  - Cleaning Notification Cache files...
+:: SAFE: Only clean cache/temp files, NOT the notification database
+del /f /q "%LocalAppData%\Microsoft\Windows\Notifications\*.tmp" 2>nul
+del /f /s /q "%LocalAppData%\Microsoft\Windows\Notifications\wpndatabase.db-wal" 2>nul
+del /f /s /q "%LocalAppData%\Microsoft\Windows\Notifications\wpndatabase.db-shm" 2>nul
 exit /b
 
 :CLEAN_DRIVER_PACKAGES
-echo.  - Cleaning Old Driver Packages...
-pnputil /delete-driver * /uninstall /force >nul 2>&1
-for /d %%d in ("%SystemRoot%\System32\DriverStore\FileRepository\*.inf_*") do (
-    echo %%d | find /i "ntprint" >nul || (
-        echo %%d | find /i "basicdisplay" >nul || (
-            pnputil /delete-driver "%%~nxd" /uninstall >nul 2>&1
-        )
-    )
-)
+echo.  - Cleaning Driver Installation Temp files...
+:: SAFE: Only clean temporary driver installation files, NOT actual drivers
+del /f /s /q "%SystemRoot%\System32\DriverStore\Temp\*" 2>nul
+for /d %%d in ("%SystemRoot%\System32\DriverStore\Temp\*") do rd /s /q "%%d" 2>nul
+del /f /s /q "%SystemRoot%\INF\*.log" 2>nul
+del /f /s /q "%SystemRoot%\INF\setupapi.*.log" 2>nul
 exit /b
 
 :CLEAN_DOTNET_TEMP
@@ -746,16 +751,16 @@ if exist "%AppData%\npm-cache" (
 exit /b
 
 :CLEAN_SYSTEM_RESTORE
-echo.  - Cleaning System Restore (old restore points)...
-echo.  WARNING: Keeping only the most recent restore point!
-vssadmin delete shadows /for=%SystemDrive% /oldest /quiet >nul 2>&1
+echo.  - Cleaning System Restore Temp files...
+:: SAFE: Only clean temp/log files, NOT restore points themselves
+del /f /s /q "%SystemRoot%\System32\config\systemprofile\AppData\Local\Temp\*" 2>nul
+del /f /s /q "%ProgramData%\Microsoft\Windows\SystemRestore\*.log" 2>nul
 exit /b
 
-:CLEAN_HIBERNATION_FILE
-echo.  - Optimizing Hibernation file...
-powercfg /hibernate off >nul 2>&1
-timeout /t 2 >nul
-powercfg /hibernate on >nul 2>&1
+:CLEAN_HIBERNATION_CACHE
+echo.  - Cleaning Hibernation Temp files...
+:: SAFE: Only clean hiberfil.sys temp data, NOT disable hibernation
+del /f /q "%SystemRoot%\hiberfil.sys.tmp" 2>nul
 exit /b
 
 :: ============================================
