@@ -43,7 +43,7 @@ goto :eof
 :: ===============================================
 :main
 
-echo [1/8] Dọn rác hệ thống và người dùng...
+echo [1/12] Dọn rác hệ thống và người dùng...
 echo.
 
 :: Temp folders
@@ -76,7 +76,7 @@ call :CleanDir "C:\Windows\Logs\DPX"
 call :CleanDir "%SystemRoot%\SoftwareDistribution\DeliveryOptimization"
 
 echo.
-echo [2/8] Dọn Windows Update cache...
+echo [2/12] Dọn Windows Update cache...
 echo.
 
 :: Windows Update Download cache (AN TOÀN)
@@ -86,7 +86,7 @@ call :CleanDir "C:\Windows\SoftwareDistribution\Download"
 call :CleanDir "C:\Windows\Installer\$PatchCache$"
 
 echo.
-echo [3/8] Dọn thùng rác (Recycle Bin)...
+echo [3/12] Dọn thùng rác (Recycle Bin)...
 echo.
 
 :: Recycle Bin trên tất cả ổ đĩa
@@ -97,7 +97,7 @@ for %%d in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do (
 )
 
 echo.
-echo [4/8] Dọn cache trình duyệt...
+echo [4/12] Dọn cache trình duyệt...
 echo.
 
 :: Chrome
@@ -126,9 +126,18 @@ call :CleanDir "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Cod
 
 :: Opera
 call :CleanDir "%AppData%\Opera Software\Opera Stable\Cache"
+call :CleanDir "%AppData%\Opera Software\Opera Stable\GPUCache"
+
+:: Vivaldi
+call :CleanDir "%LocalAppData%\Vivaldi\User Data\Default\Cache"
+call :CleanDir "%LocalAppData%\Vivaldi\User Data\Default\Code Cache"
+
+:: Coc Coc (phổ biến tại Việt Nam)
+call :CleanDir "%LocalAppData%\CocCoc\Browser\User Data\Default\Cache"
+call :CleanDir "%LocalAppData%\CocCoc\Browser\User Data\Default\Code Cache"
 
 echo.
-echo [5/8] Dọn cache ứng dụng chat và họp...
+echo [5/12] Dọn cache ứng dụng chat và nhắn tin...
 echo.
 
 :: Discord
@@ -157,14 +166,54 @@ call :CleanDir "%AppData%\Slack\GPUCache"
 :: Skype
 call :CleanDir "%AppData%\Microsoft\Skype for Desktop\Cache"
 
+:: Telegram
+call :CleanDir "%AppData%\Telegram Desktop\tdata\user_data"
+call :CleanDir "%AppData%\Telegram Desktop\tdata\emoji"
+
+:: Messenger Desktop
+call :CleanDir "%AppData%\Messenger\Cache"
+call :CleanDir "%AppData%\Messenger\Code Cache"
+
+:: WhatsApp Desktop
+call :CleanDir "%LocalAppData%\WhatsApp\Cache"
+
+:: Zalo (phổ biến tại Việt Nam)
+call :CleanDir "%AppData%\Zalo\ZaloData\Cache"
+
 echo.
-echo [6/8] Dọn cache ứng dụng giải trí và game...
+echo [6/12] Dọn cache game launchers...
 echo.
 
 :: Steam
 call :CleanDir "C:\Program Files (x86)\Steam\appcache"
 call :CleanDir "C:\Program Files (x86)\Steam\logs"
 call :CleanDir "C:\Program Files (x86)\Steam\dumps"
+call :CleanDir "C:\Program Files (x86)\Steam\config\htmlcache"
+
+:: Epic Games Launcher
+call :CleanDir "%LocalAppData%\EpicGamesLauncher\Saved\Logs"
+call :CleanDir "%LocalAppData%\EpicGamesLauncher\Saved\webcache"
+
+:: EA Origin
+call :CleanDir "%ProgramData%\Origin\Logs"
+call :CleanDir "%LocalAppData%\Origin\Logs"
+
+:: Battle.net (Blizzard)
+call :CleanDir "%ProgramData%\Blizzard Entertainment\Battle.net\Cache"
+call :CleanDir "%LocalAppData%\Blizzard Entertainment\Battle.net\Cache"
+
+:: Riot Games (League of Legends, Valorant)
+call :CleanDir "%LocalAppData%\Riot Games\Riot Client\Logs"
+
+:: Ubisoft Connect
+call :CleanDir "%LocalAppData%\Ubisoft Game Launcher\logs"
+
+:: GOG Galaxy
+call :CleanDir "%ProgramData%\GOG.com\Galaxy\logs"
+
+echo.
+echo [7/12] Dọn cache ứng dụng giải trí...
+echo.
 
 :: Spotify
 call :CleanDir "%AppData%\Spotify\Data"
@@ -185,7 +234,56 @@ call :CleanDir "%LocalAppData%\AMD\DxCache"
 call :CleanDir "%LocalAppData%\D3DSCache"
 
 echo.
-echo [7/8] Dọn cache công cụ lập trình...
+echo [8/12] Dọn cache Adobe Creative Cloud...
+echo.
+
+:: Adobe Photoshop
+for /d %%i in ("%AppData%\Adobe\Adobe Photoshop*") do (
+    call :CleanDir "%%i\Logs"
+)
+call :CleanDir "%LocalAppData%\Temp\Adobe"
+
+:: Adobe Premiere Pro
+call :CleanDir "%AppData%\Adobe\Common\Media Cache Files"
+call :CleanDir "%AppData%\Adobe\Common\Peak Files"
+
+:: Adobe After Effects
+call :CleanDir "%LocalAppData%\Temp\Adobe After Effects"
+
+:: Adobe Creative Cloud
+call :CleanDir "%LocalAppData%\Adobe\Adobe Creative Cloud\ACC\Cache"
+call :CleanDir "%AppData%\Adobe\Adobe Creative Cloud\logs"
+
+echo.
+echo [9/12] Dọn cache Microsoft Office...
+echo.
+
+:: Office Cache
+call :CleanDir "%LocalAppData%\Microsoft\Office\16.0\OfficeFileCache"
+call :CleanDir "%LocalAppData%\Microsoft\Office\16.0\WebServiceCache"
+
+:: OneNote Cache
+call :CleanDir "%LocalAppData%\Microsoft\OneNote\16.0\cache"
+
+:: Outlook Temp
+call :CleanDir "%Temp%\OutlookLogging"
+
+echo.
+echo [10/12] Dọn cache cloud storage...
+echo.
+
+:: OneDrive
+call :CleanDir "%LocalAppData%\Microsoft\OneDrive\logs"
+
+:: Dropbox
+call :CleanDir "%LocalAppData%\Dropbox\logs"
+call :CleanDir "%AppData%\Dropbox\logs"
+
+:: Google Drive
+call :CleanDir "%LocalAppData%\Google\DriveFS\Logs"
+
+echo.
+echo [11/12] Dọn cache công cụ lập trình...
 echo.
 
 :: Visual Studio Code
@@ -225,9 +323,52 @@ for /d %%i in ("%UserProfile%\.m2\repository\*") do (
     call :CleanDir "%%i\_remote.repositories"
 )
 
+:: Visual Studio
+for /d %%i in ("%LocalAppData%\Microsoft\VisualStudio\*") do (
+    call :CleanDir "%%i\ComponentModelCache"
+)
+call :CleanDir "%Temp%\VSFeedbackIntelliCodeLogs"
+
+:: Android Studio
+for /d %%i in ("%LocalAppData%\Google\AndroidStudio*") do (
+    call :CleanDir "%%i\log"
+)
+call :CleanDir "%UserProfile%\.android\cache"
+
+:: Docker Desktop
+call :CleanDir "%LocalAppData%\Docker\log"
+
 echo.
-echo [8/8] Dọn báo lỗi Windows và temp files...
+echo [12/12] Dọn rác khác và temp files...
 echo.
+
+:: WinRAR Temp
+for /d %%i in ("%Temp%\Rar*") do (
+    call :CleanDir "%%i"
+)
+
+:: 7-Zip Temp
+for /d %%i in ("%Temp%\7z*") do (
+    call :CleanDir "%%i"
+)
+
+:: Windows Store Cache
+for /d %%i in ("%LocalAppData%\Packages\Microsoft.WindowsStore_*") do (
+    call :CleanDir "%%i\LocalCache"
+)
+
+:: Windows Installer Temp
+for /d %%i in ("%Temp%\MSI*") do (
+    call :CleanDir "%%i"
+)
+
+:: DirectX Web Setup
+for /d %%i in ("%Temp%\DX*") do (
+    call :CleanDir "%%i"
+)
+
+:: Notepad++ Backup (nếu muốn giữ backup thì comment dòng này)
+rem call :CleanDir "%AppData%\Notepad++\backup"
 
 :: Windows Error Reporting
 call :CleanDir "%ProgramData%\Microsoft\Windows\WER\ReportArchive"
