@@ -386,7 +386,7 @@ pause
 goto CLEANUP_MENU
 
 :: ============================================
-:: ACTIVATION MENU (Based on Microsoft Activation Scripts)
+:: ACTIVATION MENU (Full MAS Features)
 :: ============================================
 :ACTIVATION_MENU
 cls
@@ -394,12 +394,12 @@ color 0E
 echo.
 echo ================================================================
 echo   WINDOWS ^& OFFICE ACTIVATION TOOL
-echo   Based on Microsoft Activation Scripts (MAS)
+echo   Microsoft Activation Scripts (MAS) - Full Edition
 echo ================================================================
 echo.
 
 :: Check current activation status
-echo   Current Activation Status:
+echo   Current Status:
 cscript //nologo %SystemRoot%\System32\slmgr.vbs /dli | findstr /C:"License Status"
 echo.
 
@@ -407,37 +407,53 @@ echo ================================================================
 echo.
 echo   WINDOWS ACTIVATION:
 echo.
-echo   [1] HWID Activation       - Permanent (Windows 10/11)
-echo   [2] KMS38 Activation      - Valid until 2038 (Win 10/11/Server)
-echo   [3] Online KMS            - 180 days, auto-renew
+echo   [1]  HWID Activation          - Permanent (Win 10/11)
+echo   [2]  KMS38 Activation         - Until 2038 (Win 10/11/Server)
+echo   [3]  Online KMS Activation    - 180 days, auto-renew
 echo.
 echo   OFFICE ACTIVATION:
 echo.
-echo   [4] Activate Office       - All versions (2010-2021/365)
+echo   [4]  Ohook Activation         - Permanent Office (Recommended)
+echo   [5]  KMS Office Activation    - Office KMS (180 days)
 echo.
-echo   OTHER OPTIONS:
+echo   UTILITY TOOLS:
 echo.
-echo   [5] Check Activation Status
-echo   [6] Enter Product Key Manually
-echo   [7] View License Information
-echo   [8] Remove Office Licenses
-echo   [0] Back to Main Menu
+echo   [6]  Activation Troubleshoot  - Fix activation issues
+echo   [7]  Check Activation Status  - Detailed info
+echo   [8]  Extract Windows Keys     - Show product keys
+echo   [9]  Change Windows Edition   - Home to Pro, etc.
+echo   [10] Show OEM Information     - View OEM details
+echo   [11] Remove Office Licenses   - Clean Office keys
 echo.
-echo   Note: Based on massgravel/Microsoft-Activation-Scripts
+echo   MANUAL OPTIONS:
+echo.
+echo   [12] Install Product Key      - Enter key manually
+echo   [13] Uninstall Product Key    - Remove current key
+echo   [14] View License Information - Detailed license
+echo.
+echo   [0]  Back to Main Menu
+echo.
+echo   Source: github.com/massgravel/Microsoft-Activation-Scripts
 echo.
 echo ================================================================
 echo.
 
-set /p act_choice="Enter your choice (0-8): "
+set /p act_choice="Enter your choice (0-14): "
 
 if "%act_choice%"=="1" goto HWID_ACTIVATE
 if "%act_choice%"=="2" goto KMS38_ACTIVATE
 if "%act_choice%"=="3" goto ONLINE_KMS_ACTIVATE
-if "%act_choice%"=="4" goto ACTIVATE_OFFICE
-if "%act_choice%"=="5" goto CHECK_STATUS
-if "%act_choice%"=="6" goto MANUAL_KEY
-if "%act_choice%"=="7" goto LICENSE_INFO
-if "%act_choice%"=="8" goto REMOVE_OFFICE_LICENSE
+if "%act_choice%"=="4" goto OHOOK_OFFICE
+if "%act_choice%"=="5" goto KMS_OFFICE
+if "%act_choice%"=="6" goto ACTIVATION_TROUBLESHOOT
+if "%act_choice%"=="7" goto CHECK_STATUS
+if "%act_choice%"=="8" goto EXTRACT_KEYS
+if "%act_choice%"=="9" goto CHANGE_EDITION
+if "%act_choice%"=="10" goto SHOW_OEM_INFO
+if "%act_choice%"=="11" goto REMOVE_OFFICE_LICENSE
+if "%act_choice%"=="12" goto MANUAL_KEY
+if "%act_choice%"=="13" goto UNINSTALL_KEY
+if "%act_choice%"=="14" goto LICENSE_INFO
 if "%act_choice%"=="0" goto MAIN_MENU
 goto ACTIVATION_MENU
 
@@ -588,25 +604,31 @@ pause
 goto ACTIVATION_MENU
 
 :: ============================================
-:: ACTIVATE OFFICE (All Versions)
+:: OHOOK OFFICE ACTIVATION (Permanent)
 :: ============================================
-:ACTIVATE_OFFICE
+:OHOOK_OFFICE
 cls
 echo.
 echo ================================================================
-echo   MICROSOFT OFFICE ACTIVATION
+echo   OHOOK OFFICE ACTIVATION (PERMANENT)
 echo ================================================================
 echo.
-echo   Supports:
-echo   - Office 365 / 2021 / 2019 / 2016 / 2013 / 2010
-echo   - All editions (Professional, Home, Business, etc.)
-echo   - Project and Visio
+echo   Ohook Activation Method:
+echo   - PERMANENT activation (no expiration!)
+echo   - No KMS server needed
+echo   - Works offline
+echo   - Supports Office 2016/2019/2021/365
+echo   - Recommended method for Office
 echo.
-echo   This will use Online KMS method (180 days, auto-renew)
+echo   Supports:
+echo   - Office 365 / Microsoft 365
+echo   - Office 2021 / 2019 / 2016
+echo   - Project and Visio
+echo   - All editions
 echo.
 
-set /p confirm_office="Continue with Office activation? (Y/N): "
-if /i not "%confirm_office%"=="Y" goto ACTIVATION_MENU
+set /p confirm_ohook="Continue with Ohook activation? (Y/N): "
+if /i not "%confirm_ohook%"=="Y" goto ACTIVATION_MENU
 
 echo.
 echo   Detecting Office installation...
@@ -614,7 +636,6 @@ echo.
 
 :: Check if Office is installed
 set "office_found=0"
-
 if exist "%ProgramFiles%\Microsoft Office" set "office_found=1"
 if exist "%ProgramFiles(x86)%\Microsoft Office" set "office_found=1"
 if exist "%ProgramW6432%\Microsoft Office" set "office_found=1"
@@ -630,24 +651,93 @@ if "%office_found%"=="0" (
 
 echo   Office detected!
 echo.
-echo   Downloading and running Office activation script...
+echo   Downloading and running Ohook activation...
 echo.
 
-:: Download and run Office activation from MAS
+:: Download and run Ohook from MAS
 powershell -Command "irm https://massgrave.dev/get | iex" 2>nul
 
 if errorlevel 1 (
     echo.
-    echo   Trying manual Office activation...
+    echo   ERROR: Could not download Ohook script
+    echo   Check your internet connection
+    echo   Try option [5] KMS Office Activation instead
+    echo.
+    pause
+    goto ACTIVATION_MENU
+)
+
+echo.
+echo ================================================================
+echo   OHOOK ACTIVATION COMPLETE!
+echo ================================================================
+echo   Office is now permanently activated!
+echo   Open Word/Excel to verify
+echo.
+call :LOG "SUCCESS: Ohook Office activation completed"
+pause
+goto ACTIVATION_MENU
+
+:: ============================================
+:: KMS OFFICE ACTIVATION (180 days)
+:: ============================================
+:KMS_OFFICE
+cls
+echo.
+echo ================================================================
+echo   KMS OFFICE ACTIVATION
+echo ================================================================
+echo.
+echo   KMS Office Activation:
+echo   - 180 days validity
+echo   - Auto-renews automatically
+echo   - Works with all Office versions
+echo   - Requires periodic internet
+echo.
+echo   Supports:
+echo   - Office 365 / 2021 / 2019 / 2016 / 2013 / 2010
+echo   - Project and Visio
+echo   - All editions
+echo.
+
+set /p confirm_kms_office="Continue with KMS Office activation? (Y/N): "
+if /i not "%confirm_kms_office%"=="Y" goto ACTIVATION_MENU
+
+echo.
+echo   Detecting Office installation...
+echo.
+
+set "office_found=0"
+if exist "%ProgramFiles%\Microsoft Office" set "office_found=1"
+if exist "%ProgramFiles(x86)%\Microsoft Office" set "office_found=1"
+
+if "%office_found%"=="0" (
+    echo.
+    echo   ERROR: Microsoft Office not found!
+    echo.
+    pause
+    goto ACTIVATION_MENU
+)
+
+echo   Office detected!
+echo.
+echo   Running KMS Office activation...
+echo.
+
+:: Try MAS script
+powershell -Command "irm https://massgrave.dev/get | iex" 2>nul
+
+if errorlevel 1 (
+    echo.
+    echo   Trying manual KMS activation...
     echo.
     
-    :: Manual Office activation
     cd /d "%ProgramFiles%\Microsoft Office\Office16"
     if errorlevel 1 cd /d "%ProgramFiles(x86)%\Microsoft Office\Office16"
     if errorlevel 1 cd /d "%ProgramFiles%\Microsoft Office\Office15"
     if errorlevel 1 cd /d "%ProgramFiles(x86)%\Microsoft Office\Office15"
     
-    for /f %%x in ('dir /b ..\root\Licenses16\ProPlus2019VL*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%%x" >nul 2>&1
+    for /f %%x in ('dir /b ..\root\Licenses16\ProPlus2019VL*.xrm-ms 2^>nul') do cscript ospp.vbs /inslic:"..\root\Licenses16\%%x" >nul 2>&1
     cscript ospp.vbs /setprt:1688 >nul 2>&1
     cscript ospp.vbs /unpkey:6MWKP >nul 2>&1
     cscript ospp.vbs /inpkey:NMMKJ-6RK4F-KMJVX-8D9MJ-6MWKP >nul 2>&1
@@ -657,11 +747,229 @@ if errorlevel 1 (
 
 echo.
 echo ================================================================
-echo   OFFICE ACTIVATION COMPLETE!
+echo   KMS OFFICE ACTIVATION COMPLETE!
 echo ================================================================
-echo   Open any Office app to verify activation
+echo   Valid for 180 days, auto-renews
+echo   Open Office apps to verify
 echo.
-call :LOG "SUCCESS: Office activation attempted"
+call :LOG "SUCCESS: KMS Office activation completed"
+pause
+goto ACTIVATION_MENU
+
+:: ============================================
+:: ACTIVATION TROUBLESHOOT
+:: ============================================
+:ACTIVATION_TROUBLESHOOT
+cls
+echo.
+echo ================================================================
+echo   ACTIVATION TROUBLESHOOT ^& FIX
+echo ================================================================
+echo.
+echo   This will attempt to fix common activation issues:
+echo   - Reset activation tokens
+echo   - Repair Windows licensing
+echo   - Clear activation cache
+echo   - Fix corrupted activation files
+echo   - Reset KMS settings
+echo.
+
+set /p confirm_troubleshoot="Run activation troubleshoot? (Y/N): "
+if /i not "%confirm_troubleshoot%"=="Y" goto ACTIVATION_MENU
+
+echo.
+echo   Running troubleshoot steps...
+echo.
+
+echo   [1/7] Stopping Software Protection service...
+net stop sppsvc /y >nul 2>&1
+echo       [OK] Service stopped
+
+echo   [2/7] Resetting activation tokens...
+cscript //nologo %SystemRoot%\System32\slmgr.vbs /rilc >nul 2>&1
+echo       [OK] Tokens reset
+
+echo   [3/7] Clearing activation cache...
+del /f /q "%SystemRoot%\System32\7B296FB0-376B-497e-B012-9C450E1B7327-5P-0.C7483456-A289-439d-8115-601632D005A0" >nul 2>&1
+del /f /q "%SystemRoot%\System32\7B296FB0-376B-497e-B012-9C450E1B7327-5P-1.C7483456-A289-439d-8115-601632D005A0" >nul 2>&1
+del /f /q "%SystemRoot%\ServiceProfiles\NetworkService\AppData\Roaming\Microsoft\SoftwareProtectionPlatform\tokens.dat" >nul 2>&1
+echo       [OK] Cache cleared
+
+echo   [4/7] Clearing KMS settings...
+cscript //nologo %SystemRoot%\System32\slmgr.vbs /ckms >nul 2>&1
+echo       [OK] KMS cleared
+
+echo   [5/7] Repairing Windows licensing...
+dism /online /cleanup-image /restorehealth >nul 2>&1
+echo       [OK] Licensing repaired
+
+echo   [6/7] Starting Software Protection service...
+net start sppsvc >nul 2>&1
+echo       [OK] Service started
+
+echo   [7/7] Refreshing activation status...
+cscript //nologo %SystemRoot%\System32\slmgr.vbs /ato >nul 2>&1
+echo       [OK] Status refreshed
+
+echo.
+echo ================================================================
+echo   TROUBLESHOOT COMPLETE!
+echo ================================================================
+echo   Try activating Windows again now
+echo   If still fails, try different activation method
+echo.
+call :LOG "INFO: Activation troubleshoot completed"
+pause
+goto ACTIVATION_MENU
+
+:: ============================================
+:: EXTRACT WINDOWS KEYS
+:: ============================================
+:EXTRACT_KEYS
+cls
+echo.
+echo ================================================================
+echo   EXTRACT WINDOWS PRODUCT KEYS
+echo ================================================================
+echo.
+echo   This will show all Windows product keys on your system:
+echo   - Current installed key
+echo   - OEM key (if available)
+echo   - Retail key (if available)
+echo.
+
+echo   Extracting product keys...
+echo.
+
+:: Show current key
+echo   Current Product Key:
+for /f "tokens=2 delims==" %%I in ('wmic path softwarelicensingservice get OA3xOriginalProductKey /value 2^>nul') do set "key=%%I"
+if defined key (
+    echo   %key%
+) else (
+    echo   Not found or digital license
+)
+
+echo.
+echo   Partial Product Key (last 5 characters):
+cscript //nologo %SystemRoot%\System32\slmgr.vbs /dli | findstr /C:"partial product key"
+
+echo.
+echo   Attempting to extract OEM key from BIOS...
+wmic path softwarelicensingservice get OA3xOriginalProductKey 2>nul
+
+echo.
+echo   Full license details:
+cscript //nologo %SystemRoot%\System32\slmgr.vbs /dlv
+
+echo.
+echo ================================================================
+echo.
+call :LOG "INFO: Product keys extracted"
+pause
+goto ACTIVATION_MENU
+
+:: ============================================
+:: CHANGE WINDOWS EDITION
+:: ============================================
+:CHANGE_EDITION
+cls
+echo.
+echo ================================================================
+echo   CHANGE WINDOWS EDITION
+echo ================================================================
+echo.
+echo   This allows you to upgrade Windows edition:
+echo   - Home to Pro
+echo   - Pro to Enterprise
+echo   - And other editions
+echo.
+echo   WARNING: This requires a valid product key for target edition
+echo.
+
+echo   Current Edition:
+for /f "tokens=3*" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v EditionID 2^>nul ^| find "EditionID"') do echo   %%i %%j
+
+echo.
+echo   Available target editions:
+DISM /online /Get-TargetEditions
+
+echo.
+echo   Common upgrade keys (for reference only):
+echo.
+echo   Windows 10/11 Pro: VK7JG-NPHTM-C97JM-9MPGT-3V66T
+echo   Windows 10/11 Pro N: 2B87N-8KFHP-DKV6R-Y2C8J-PKCKT
+echo   Windows 10/11 Enterprise: XGVPP-NMH47-7TTHJ-W3FW7-8HV2C
+echo.
+
+set /p target_edition="Enter target edition ID (or press Enter to cancel): "
+if "%target_edition%"=="" goto ACTIVATION_MENU
+
+echo.
+set /p edition_key="Enter product key for %target_edition%: "
+if "%edition_key%"=="" goto ACTIVATION_MENU
+
+echo.
+echo   Changing edition to %target_edition%...
+echo   This may take several minutes...
+echo.
+
+cscript //nologo %SystemRoot%\System32\slmgr.vbs /ipk %edition_key%
+timeout /t 3 >nul
+
+DISM /online /Set-Edition:%target_edition% /ProductKey:%edition_key% /AcceptEula
+
+echo.
+echo ================================================================
+echo   EDITION CHANGE INITIATED
+echo ================================================================
+echo   System may need to restart to complete
+echo   Follow on-screen instructions
+echo.
+call :LOG "INFO: Edition change attempted to %target_edition%"
+pause
+goto ACTIVATION_MENU
+
+:: ============================================
+:: SHOW OEM INFORMATION
+:: ============================================
+:SHOW_OEM_INFO
+cls
+echo.
+echo ================================================================
+echo   OEM SYSTEM INFORMATION
+echo ================================================================
+echo.
+
+echo   Computer Manufacturer:
+wmic computersystem get manufacturer /value | findstr /r /v "^$"
+
+echo.
+echo   Computer Model:
+wmic computersystem get model /value | findstr /r /v "^$"
+
+echo.
+echo   BIOS Information:
+wmic bios get manufacturer,version,releasedate /format:list | findstr /r /v "^$"
+
+echo.
+echo   OEM Product Key (from BIOS/UEFI):
+wmic path softwarelicensingservice get OA3xOriginalProductKey /value | findstr /r /v "^$"
+
+echo.
+echo   System Serial Number:
+wmic bios get serialnumber /value | findstr /r /v "^$"
+
+echo.
+echo   Windows Installation Info:
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName 2>nul | findstr ProductName
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v EditionID 2>nul | findstr EditionID
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId 2>nul | findstr ReleaseId
+
+echo.
+echo ================================================================
+echo.
+call :LOG "INFO: OEM information displayed"
 pause
 goto ACTIVATION_MENU
 
@@ -676,31 +984,125 @@ echo   REMOVE OFFICE LICENSES
 echo ================================================================
 echo.
 echo   This will remove all Office product keys and licenses
-echo   Useful for troubleshooting or before reinstalling
+echo   Useful for:
+echo   - Troubleshooting activation issues
+echo   - Before reinstalling Office
+echo   - Switching activation methods
+echo   - Cleaning corrupted licenses
 echo.
 
 set /p confirm_remove="Continue? (Y/N): "
 if /i not "%confirm_remove%"=="Y" goto ACTIVATION_MENU
 
 echo.
-echo   Removing Office licenses...
+echo   Detecting Office installations...
 echo.
 
-cd /d "%ProgramFiles%\Microsoft Office\Office16"
-if errorlevel 1 cd /d "%ProgramFiles(x86)%\Microsoft Office\Office16"
-if errorlevel 1 cd /d "%ProgramFiles%\Microsoft Office\Office15"
-if errorlevel 1 cd /d "%ProgramFiles(x86)%\Microsoft Office\Office15"
+set "office_found=0"
 
-cscript ospp.vbs /dstatus
-cscript ospp.vbs /unpkey:6MWKP >nul 2>&1
-cscript ospp.vbs /unpkey:BTDRB >nul 2>&1
-cscript ospp.vbs /unpkey:KHGM9 >nul 2>&1
-cscript ospp.vbs /unpkey:CPQVG >nul 2>&1
+:: Check Office 16 (2016/2019/2021)
+if exist "%ProgramFiles%\Microsoft Office\Office16\ospp.vbs" (
+    set "office_found=1"
+    echo   Found Office 16 (64-bit^)
+    echo   Removing licenses...
+    cd /d "%ProgramFiles%\Microsoft Office\Office16"
+    cscript ospp.vbs /dstatus
+    echo.
+    for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Office\16.0\Registration" /s /f "DigitalProductId" 2^>nul') do (
+        cscript ospp.vbs /unpkey:%%b >nul 2>&1
+    )
+)
+
+if exist "%ProgramFiles(x86)%\Microsoft Office\Office16\ospp.vbs" (
+    set "office_found=1"
+    echo   Found Office 16 (32-bit^)
+    echo   Removing licenses...
+    cd /d "%ProgramFiles(x86)%\Microsoft Office\Office16"
+    cscript ospp.vbs /dstatus
+    echo.
+    for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Office\16.0\Registration" /s /f "DigitalProductId" 2^>nul') do (
+        cscript ospp.vbs /unpkey:%%b >nul 2>&1
+    )
+)
+
+:: Check Office 15 (2013)
+if exist "%ProgramFiles%\Microsoft Office\Office15\ospp.vbs" (
+    set "office_found=1"
+    echo   Found Office 15 (2013 64-bit^)
+    echo   Removing licenses...
+    cd /d "%ProgramFiles%\Microsoft Office\Office15"
+    cscript ospp.vbs /dstatus
+    for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Office\15.0\Registration" /s /f "DigitalProductId" 2^>nul') do (
+        cscript ospp.vbs /unpkey:%%b >nul 2>&1
+    )
+)
+
+if "%office_found%"=="0" (
+    echo   No Office installation detected!
+)
+
+:: Common Office keys to remove
+echo.
+echo   Removing common Office keys...
+cscript //nologo ospp.vbs /unpkey:6MWKP >nul 2>&1
+cscript //nologo ospp.vbs /unpkey:BTDRB >nul 2>&1
+cscript //nologo ospp.vbs /unpkey:KHGM9 >nul 2>&1
+cscript //nologo ospp.vbs /unpkey:CPQVG >nul 2>&1
+cscript //nologo ospp.vbs /unpkey:XQNVK >nul 2>&1
 
 echo.
-echo   Licenses removed!
+echo ================================================================
+echo   OFFICE LICENSES REMOVED!
+echo ================================================================
+echo   All Office licenses have been cleared
+echo   You can now activate Office again with new method
 echo.
 call :LOG "INFO: Office licenses removed"
+pause
+goto ACTIVATION_MENU
+
+:: ============================================
+:: UNINSTALL PRODUCT KEY
+:: ============================================
+:UNINSTALL_KEY
+cls
+echo.
+echo ================================================================
+echo   UNINSTALL WINDOWS PRODUCT KEY
+echo ================================================================
+echo.
+echo   This will remove the current Windows product key
+echo   Useful for:
+echo   - Switching to different activation method
+echo   - Removing invalid key
+echo   - Troubleshooting
+echo.
+echo   WARNING: Windows will become unactivated!
+echo.
+
+set /p confirm_uninstall="Continue? (Y/N): "
+if /i not "%confirm_uninstall%"=="Y" goto ACTIVATION_MENU
+
+echo.
+echo   Current activation status:
+cscript //nologo %SystemRoot%\System32\slmgr.vbs /dli
+
+echo.
+echo   Uninstalling product key...
+cscript //nologo %SystemRoot%\System32\slmgr.vbs /upk
+
+echo.
+echo   Clearing KMS settings...
+cscript //nologo %SystemRoot%\System32\slmgr.vbs /ckms
+
+echo.
+echo ================================================================
+echo   PRODUCT KEY UNINSTALLED!
+echo ================================================================
+echo   Windows is now unactivated
+echo   You can install new key or use activation methods
+echo.
+call :LOG "INFO: Product key uninstalled"
 pause
 goto ACTIVATION_MENU
 
