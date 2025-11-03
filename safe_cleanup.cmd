@@ -4,6 +4,7 @@ setlocal enabledelayedexpansion
 
 :: ===============================================
 :: 🧹 SAFE CLEANUP TOOL - Xóa rác an toàn
+:: CHỈ XÓA CACHE/LOGS/TEMP - KHÔNG ĐỤNG DỮ LIỆU!
 :: ===============================================
 
 :: Kiểm tra quyền Administrator
@@ -18,6 +19,8 @@ if %errorLevel% neq 0 (
 echo.
 echo ╔════════════════════════════════════════════════════════╗
 echo ║  🧹 SAFE CLEANUP TOOL - Xóa rác an toàn               ║
+echo ║  CHỈ XÓA: Cache, Logs, Temp                           ║
+echo ║  KHÔNG XÓA: Dữ liệu, Settings, Files người dùng       ║
 echo ╚════════════════════════════════════════════════════════╝
 echo.
 echo [*] Bắt đầu dọn rác hệ thống...
@@ -43,7 +46,7 @@ goto :eof
 :: ===============================================
 :main
 
-echo [1/12] Dọn rác hệ thống và người dùng...
+echo [1/16] Dọn rác hệ thống và người dùng...
 echo.
 
 :: Temp folders
@@ -61,7 +64,7 @@ call :CleanDir "%AppData%\Microsoft\Windows\Recent"
 call :CleanDir "%LocalAppData%\Microsoft\Windows\INetCache"
 call :CleanDir "%LocalAppData%\Microsoft\Windows\WebCache"
 
-:: Thumbnail cache
+:: Thumbnail cache (CHỈ XÓA CACHE, KHÔNG XÓA FILE)
 del /f /q "%LocalAppData%\Microsoft\Windows\Explorer\thumbcache_*.db" >nul 2>&1
 
 :: Font cache
@@ -76,7 +79,7 @@ call :CleanDir "C:\Windows\Logs\DPX"
 call :CleanDir "%SystemRoot%\SoftwareDistribution\DeliveryOptimization"
 
 echo.
-echo [2/12] Dọn Windows Update cache...
+echo [2/16] Dọn Windows Update cache...
 echo.
 
 :: Windows Update Download cache (AN TOÀN)
@@ -86,7 +89,7 @@ call :CleanDir "C:\Windows\SoftwareDistribution\Download"
 call :CleanDir "C:\Windows\Installer\$PatchCache$"
 
 echo.
-echo [3/12] Dọn thùng rác (Recycle Bin)...
+echo [3/16] Dọn thùng rác (Recycle Bin)...
 echo.
 
 :: Recycle Bin trên tất cả ổ đĩa
@@ -97,7 +100,7 @@ for %%d in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do (
 )
 
 echo.
-echo [4/12] Dọn cache trình duyệt...
+echo [4/16] Dọn cache trình duyệt...
 echo.
 
 :: Chrome
@@ -136,8 +139,12 @@ call :CleanDir "%LocalAppData%\Vivaldi\User Data\Default\Code Cache"
 call :CleanDir "%LocalAppData%\CocCoc\Browser\User Data\Default\Cache"
 call :CleanDir "%LocalAppData%\CocCoc\Browser\User Data\Default\Code Cache"
 
+:: Internet Explorer
+call :CleanDir "%LocalAppData%\Microsoft\Windows\INetCache"
+call :CleanDir "%LocalAppData%\Microsoft\Windows\Temporary Internet Files"
+
 echo.
-echo [5/12] Dọn cache ứng dụng chat và nhắn tin...
+echo [5/16] Dọn cache ứng dụng chat và nhắn tin...
 echo.
 
 :: Discord
@@ -180,8 +187,17 @@ call :CleanDir "%LocalAppData%\WhatsApp\Cache"
 :: Zalo (phổ biến tại Việt Nam)
 call :CleanDir "%AppData%\Zalo\ZaloData\Cache"
 
+:: Viber
+call :CleanDir "%AppData%\ViberPC\cache"
+
+:: Line
+call :CleanDir "%LocalAppData%\LINE\Cache"
+
+:: WeChat
+call :CleanDir "%AppData%\Tencent\WeChat\All Users\CefResources\cache"
+
 echo.
-echo [6/12] Dọn cache game launchers...
+echo [6/16] Dọn cache game launchers...
 echo.
 
 :: Steam
@@ -211,16 +227,35 @@ call :CleanDir "%LocalAppData%\Ubisoft Game Launcher\logs"
 :: GOG Galaxy
 call :CleanDir "%ProgramData%\GOG.com\Galaxy\logs"
 
+:: Rockstar Games Launcher
+call :CleanDir "%LocalAppData%\Rockstar Games\Launcher\logs"
+
+:: Bethesda Launcher
+call :CleanDir "%LocalAppData%\Bethesda.net Launcher\logs"
+
 echo.
-echo [7/12] Dọn cache ứng dụng giải trí...
+echo [7/16] Dọn cache ứng dụng giải trí...
 echo.
 
 :: Spotify
 call :CleanDir "%AppData%\Spotify\Data"
 call :CleanDir "%LocalAppData%\Spotify\Data"
 
+:: iTunes (CHỈ CACHE, KHÔNG XÓA NHẠC)
+call :CleanDir "%AppData%\Apple Computer\iTunes\iPhone Software Updates"
+call :CleanDir "%LocalAppData%\Apple Computer\iTunes\iPod Software Updates"
+
 :: VLC
 call :CleanDir "%AppData%\vlc\art"
+
+:: Windows Media Player
+call :CleanDir "%LocalAppData%\Microsoft\Media Player\Art Cache"
+
+:: QuickTime
+call :CleanDir "%LocalAppData%\Apple Computer\QuickTime\downloads"
+
+:: TikTok
+call :CleanDir "%AppData%\TikTok\Cache"
 
 :: NVIDIA GPU cache (AN TOÀN)
 call :CleanDir "%LocalAppData%\NVIDIA\DXCache"
@@ -234,10 +269,10 @@ call :CleanDir "%LocalAppData%\AMD\DxCache"
 call :CleanDir "%LocalAppData%\D3DSCache"
 
 echo.
-echo [8/12] Dọn cache Adobe Creative Cloud...
+echo [8/16] Dọn cache Adobe Creative Cloud...
 echo.
 
-:: Adobe Photoshop
+:: Adobe Photoshop (CHỈ LOGS/TEMP, KHÔNG XÓA PROJECT)
 for /d %%i in ("%AppData%\Adobe\Adobe Photoshop*") do (
     call :CleanDir "%%i\Logs"
 )
@@ -254,11 +289,17 @@ call :CleanDir "%LocalAppData%\Temp\Adobe After Effects"
 call :CleanDir "%LocalAppData%\Adobe\Adobe Creative Cloud\ACC\Cache"
 call :CleanDir "%AppData%\Adobe\Adobe Creative Cloud\logs"
 
+:: Adobe Illustrator
+call :CleanDir "%AppData%\Adobe\Adobe Illustrator*\Logs"
+
+:: Adobe InDesign
+call :CleanDir "%AppData%\Adobe\InDesign\*\Caches"
+
 echo.
-echo [9/12] Dọn cache Microsoft Office...
+echo [9/16] Dọn cache Microsoft Office...
 echo.
 
-:: Office Cache
+:: Office Cache (CHỈ CACHE, KHÔNG XÓA DOCUMENTS)
 call :CleanDir "%LocalAppData%\Microsoft\Office\16.0\OfficeFileCache"
 call :CleanDir "%LocalAppData%\Microsoft\Office\16.0\WebServiceCache"
 
@@ -268,11 +309,17 @@ call :CleanDir "%LocalAppData%\Microsoft\OneNote\16.0\cache"
 :: Outlook Temp
 call :CleanDir "%Temp%\OutlookLogging"
 
+:: Word Temp
+del /f /q "%AppData%\Microsoft\Word\~$*" >nul 2>&1
+
+:: Excel Temp
+del /f /q "%AppData%\Microsoft\Excel\~$*" >nul 2>&1
+
 echo.
-echo [10/12] Dọn cache cloud storage...
+echo [10/16] Dọn cache cloud storage...
 echo.
 
-:: OneDrive
+:: OneDrive (CHỈ LOGS, KHÔNG XÓA FILES)
 call :CleanDir "%LocalAppData%\Microsoft\OneDrive\logs"
 
 :: Dropbox
@@ -282,8 +329,11 @@ call :CleanDir "%AppData%\Dropbox\logs"
 :: Google Drive
 call :CleanDir "%LocalAppData%\Google\DriveFS\Logs"
 
+:: iCloud
+call :CleanDir "%LocalAppData%\Apple Computer\iCloud\Logs"
+
 echo.
-echo [11/12] Dọn cache công cụ lập trình...
+echo [11/16] Dọn cache công cụ lập trình...
 echo.
 
 :: Visual Studio Code
@@ -299,7 +349,32 @@ for /d %%i in ("%LocalAppData%\JetBrains\*") do (
     call :CleanDir "%%i\tmp"
 )
 
-:: Node.js npm cache
+:: Visual Studio (CHỈ CACHE, KHÔNG XÓA PROJECTS)
+for /d %%i in ("%LocalAppData%\Microsoft\VisualStudio\*") do (
+    call :CleanDir "%%i\ComponentModelCache"
+)
+call :CleanDir "%Temp%\VSFeedbackIntelliCodeLogs"
+
+:: Android Studio
+for /d %%i in ("%LocalAppData%\Google\AndroidStudio*") do (
+    call :CleanDir "%%i\log"
+)
+call :CleanDir "%UserProfile%\.android\cache"
+
+:: Sublime Text
+call :CleanDir "%AppData%\Sublime Text*\Cache"
+
+:: Atom
+call :CleanDir "%AppData%\Atom\Cache"
+call :CleanDir "%AppData%\Atom\GPUCache"
+
+:: Brackets
+call :CleanDir "%AppData%\Brackets\cache"
+
+:: Eclipse
+call :CleanDir "%UserProfile%\.eclipse\*\*.log"
+
+:: Node.js npm cache (CHỈ CACHE, KHÔNG XÓA node_modules)
 if exist "%AppData%\npm-cache" (
     echo [clean] %AppData%\npm-cache
     call npm cache clean --force >nul 2>&1
@@ -318,31 +393,110 @@ call :CleanDir "%LocalAppData%\pip\cache"
 :: Gradle cache (Java/Android)
 call :CleanDir "%UserProfile%\.gradle\caches\build-cache-1"
 
-:: Maven local repository old files
+:: Maven logs
 for /d %%i in ("%UserProfile%\.m2\repository\*") do (
     call :CleanDir "%%i\_remote.repositories"
 )
 
-:: Visual Studio
-for /d %%i in ("%LocalAppData%\Microsoft\VisualStudio\*") do (
-    call :CleanDir "%%i\ComponentModelCache"
-)
-call :CleanDir "%Temp%\VSFeedbackIntelliCodeLogs"
-
-:: Android Studio
-for /d %%i in ("%LocalAppData%\Google\AndroidStudio*") do (
-    call :CleanDir "%%i\log"
-)
-call :CleanDir "%UserProfile%\.android\cache"
-
 :: Docker Desktop
 call :CleanDir "%LocalAppData%\Docker\log"
 
+:: Git temp
+for /d %%i in ("%Temp%\.git*") do (
+    call :CleanDir "%%i"
+)
+
+:: Postman
+call :CleanDir "%AppData%\Postman\logs"
+
 echo.
-echo [12/12] Dọn rác khác và temp files...
+echo [12/16] Dọn cache công cụ thiết kế & đồ họa...
 echo.
 
-:: WinRAR Temp
+:: Figma Desktop
+call :CleanDir "%AppData%\Figma\Cache"
+call :CleanDir "%AppData%\Figma\Code Cache"
+
+:: Canva Desktop
+call :CleanDir "%AppData%\Canva\Cache"
+
+:: Blender (CHỈ TEMP, KHÔNG XÓA PROJECTS)
+call :CleanDir "%LocalAppData%\Blender Foundation\Blender\*\cache"
+call :CleanDir "%Temp%\blender_*"
+
+:: AutoCAD (CHỈ LOGS/TEMP, KHÔNG XÓA DWG FILES)
+call :CleanDir "%LocalAppData%\Autodesk\Autodesk Desktop App\Logs"
+for /d %%i in ("%AppData%\Autodesk\AutoCAD*") do (
+    call :CleanDir "%%i\PlotterLog"
+    call :CleanDir "%%i\Logs"
+)
+
+:: SketchUp
+call :CleanDir "%LocalAppData%\SketchUp\SketchUp*\working"
+
+:: GIMP
+call :CleanDir "%AppData%\GIMP\*\tmp"
+
+:: Paint.NET
+call :CleanDir "%LocalAppData%\paint.net\thumbnails"
+
+:: Inkscape
+call :CleanDir "%AppData%\Inkscape\cache"
+
+:: CorelDRAW
+call :CleanDir "%AppData%\Corel\Messages\*\Logs"
+
+echo.
+echo [13/16] Dọn cache công cụ video & streaming...
+echo.
+
+:: OBS Studio (CHỈ LOGS, KHÔNG XÓA RECORDINGS)
+call :CleanDir "%AppData%\obs-studio\logs"
+call :CleanDir "%AppData%\obs-studio\crashes"
+
+:: Bandicam (CHỈ TEMP, KHÔNG XÓA VIDEOS)
+call :CleanDir "%Temp%\Bandicam"
+
+:: CapCut (CHỈ CACHE, KHÔNG XÓA PROJECTS)
+call :CleanDir "%AppData%\CapCut\Cache"
+call :CleanDir "%LocalAppData%\CapCut\Cache"
+
+:: Camtasia
+call :CleanDir "%LocalAppData%\TechSmith\Camtasia Studio\*\Cache"
+
+:: DaVinci Resolve (CHỈ CACHE, KHÔNG XÓA PROJECTS)
+call :CleanDir "%AppData%\Blackmagic Design\DaVinci Resolve\logs"
+
+:: Adobe Audition
+call :CleanDir "%AppData%\Adobe\Audition\*\Peak Files"
+
+:: Audacity (CHỈ TEMP, KHÔNG XÓA AUDIO FILES)
+call :CleanDir "%Temp%\audacity_*"
+
+echo.
+echo [14/16] Dọn cache công cụ download & torrent...
+echo.
+
+:: Internet Download Manager (CHỈ TEMP, KHÔNG XÓA DOWNLOADS)
+call :CleanDir "%AppData%\IDM\DwnlData\Temp"
+
+:: uTorrent (CHỈ LOGS, KHÔNG XÓA TORRENTS)
+call :CleanDir "%AppData%\uTorrent\logs"
+
+:: qBittorrent
+call :CleanDir "%LocalAppData%\qBittorrent\logs"
+
+:: Free Download Manager
+call :CleanDir "%AppData%\Free Download Manager\logs"
+
+:: JDownloader
+call :CleanDir "%AppData%\JDownloader\logs"
+
+echo.
+echo [15/16] Dọn cache công cụ khác...
+echo.
+
+:: WinRAR Temp (CHỈ TEMP, KHÔNG XÓA ARCHIVES)
 for /d %%i in ("%Temp%\Rar*") do (
     call :CleanDir "%%i"
 )
@@ -352,10 +506,75 @@ for /d %%i in ("%Temp%\7z*") do (
     call :CleanDir "%%i"
 )
 
+:: WinZip Temp
+for /d %%i in ("%Temp%\wz*") do (
+    call :CleanDir "%%i"
+)
+
+:: CCleaner Temp
+call :CleanDir "%LocalAppData%\Temp\CCleaner"
+
+:: TeamViewer Logs
+call :CleanDir "%ProgramData%\TeamViewer\Logs"
+
+:: AnyDesk Logs
+call :CleanDir "%ProgramData%\AnyDesk\logs"
+
+:: Chrome Remote Desktop
+call :CleanDir "%LocalAppData%\Google\Chrome Remote Desktop\Logs"
+
+:: FileZilla (CHỈ LOGS, KHÔNG XÓA BOOKMARKS)
+call :CleanDir "%AppData%\FileZilla\logs"
+
+:: PuTTY Logs
+call :CleanDir "%AppData%\PuTTY\Logs"
+
+:: VMware (CHỈ LOGS/TEMP, KHÔNG XÓA VMs)
+call :CleanDir "%AppData%\VMware\logs"
+call :CleanDir "%Temp%\vmware-*"
+
+:: VirtualBox (CHỈ LOGS, KHÔNG XÓA VMs)
+call :CleanDir "%UserProfile%\.VirtualBox\VBoxSVC.log*"
+
+:: XAMPP Logs
+call :CleanDir "C:\xampp\apache\logs"
+call :CleanDir "C:\xampp\mysql\data\*.err"
+
+:: MySQL Workbench
+call :CleanDir "%AppData%\MySQL\Workbench\log"
+
+:: MongoDB Compass
+call :CleanDir "%AppData%\MongoDB Compass\logs"
+
+:: LibreOffice (CHỈ CACHE, KHÔNG XÓA DOCUMENTS)
+call :CleanDir "%AppData%\LibreOffice\*\cache"
+
+:: WPS Office (CHỈ CACHE, KHÔNG XÓA DOCUMENTS)
+call :CleanDir "%AppData%\kingsoft\office6\cache"
+
+:: Foxit Reader (CHỈ CACHE, KHÔNG XÓA PDFs)
+call :CleanDir "%AppData%\Foxit Software\Foxit Reader\Cache"
+
+:: Adobe Acrobat Reader (CHỈ CACHE, KHÔNG XÓA PDFs)
+call :CleanDir "%LocalAppData%\Adobe\Acrobat\DC\Cache"
+
+:: Notepad++ (CHỈ BACKUP CŨ - COMMENTED)
+rem call :CleanDir "%AppData%\Notepad++\backup"
+
 :: Windows Store Cache
 for /d %%i in ("%LocalAppData%\Packages\Microsoft.WindowsStore_*") do (
     call :CleanDir "%%i\LocalCache"
 )
+
+:: Microsoft Store Apps Cache
+for /d %%i in ("%LocalAppData%\Packages\*") do (
+    call :CleanDir "%%i\LocalCache"
+    call :CleanDir "%%i\TempState"
+)
+
+echo.
+echo [16/16] Dọn rác Windows và temp files...
+echo.
 
 :: Windows Installer Temp
 for /d %%i in ("%Temp%\MSI*") do (
@@ -366,9 +585,6 @@ for /d %%i in ("%Temp%\MSI*") do (
 for /d %%i in ("%Temp%\DX*") do (
     call :CleanDir "%%i"
 )
-
-:: Notepad++ Backup (nếu muốn giữ backup thì comment dòng này)
-rem call :CleanDir "%AppData%\Notepad++\backup"
 
 :: Windows Error Reporting
 call :CleanDir "%ProgramData%\Microsoft\Windows\WER\ReportArchive"
@@ -382,16 +598,25 @@ call :CleanDir "%ProgramData%\Microsoft\Windows Defender\Scans\History\Results\R
 :: Minidump
 call :CleanDir "C:\Windows\Minidump"
 
-:: Memory dumps (AN TOÀN)
+:: Memory dumps (AN TOÀN - CHỈ DUMPS, KHÔNG XÓA HỆ THỐNG)
 del /f /q "C:\Windows\*.dmp" >nul 2>&1
 del /f /q "C:\Windows\memory.dmp" >nul 2>&1
 
 :: Temp installers
 call :CleanDir "%SystemDrive%\Temp"
 
+:: Adobe Flash Player Cache (legacy)
+call :CleanDir "%AppData%\Adobe\Flash Player\AssetCache"
+
+:: Java Cache
+call :CleanDir "%LocalAppData%\Sun\Java\Deployment\cache"
+call :CleanDir "%AppData%\Sun\Java\Deployment\cache"
+
 echo.
 echo ════════════════════════════════════════════════════════
 echo ✅ Hoàn tất dọn rác an toàn.
+echo 🛡️ CHỈ XÓA: Cache, Logs, Temp files
+echo 💾 KHÔNG XÓA: Dữ liệu, Settings, Files người dùng
 echo ════════════════════════════════════════════════════════
 echo.
 
