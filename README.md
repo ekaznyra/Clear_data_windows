@@ -1,6 +1,13 @@
-# Windows Professional Toolkit
+# ?? Windows Professional Toolkit
 
-**Version 3.0** - All-in-One System Tool (CMD/Batch)
+**Version 4.0 - ULTIMATE EDITION** ?
+
+![Version](https://img.shields.io/badge/version-4.0-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)
+![Language](https://img.shields.io/badge/language-CMD%2FBatch-yellow.svg)
+
+**All-in-One System Tool - Pure CMD/Batch - No PowerShell Required!**
 
 ---
 
@@ -8,21 +15,36 @@
 
 Professional Windows management tool built with **pure CMD/Batch scripts**. No PowerShell required!
 
-Four powerful tools in one BAT file:
-1. **Cleanup Tool** - Remove junk files
-2. **Windows Activation** - Activate Windows & Office (MAS)
-3. **Windows Optimizer** - Optimize Windows 10/11 (NEW!)
-4. **Software Manager** - Uninstall applications
+**Four powerful tools in one beautiful BAT file:**
+
+?? **Cleanup Tool** - Remove junk files & free disk space (5 modes)  
+?? **Windows Activation** - Activate Windows & Office with MAS (14 methods)  
+? **Windows Optimizer** - Make your PC faster & smoother (15 tweaks)  
+?? **Software Manager** - Uninstall applications easily  
+
+**Plus:** Logging, System Info, About & Help
 
 ---
 
 ## Features
 
-### 1. Cleanup Tool
-- **Quick Cleanup** - Basic (200-500 MB)
-- **Standard Cleanup** - Recommended (500MB-3GB)
-- **Deep Cleanup** - Comprehensive (2-10GB+)
-- **Preview Mode** - See before delete
+### 1. ?? Cleanup Tool
+
+**5 Cleanup Modes:**
+- ? **Quick Cleanup** - Fast & safe (200-500 MB) - 30 seconds
+- ? **Standard Cleanup** - Recommended (500MB-3GB) - 1-2 minutes  
+- ?? **Deep Cleanup** - Maximum cleaning (2-10GB+) - 2-5 minutes
+- ??? **Preview Mode** - See before delete - No actual deletion
+- ?? **Custom Cleanup** - Choose what to clean - NEW in v4.0!
+
+**14+ Cleanup Targets:**
+- Windows Temp, User Temp, Prefetch
+- Browser Caches (Chrome, Edge, Firefox)
+- Windows Update Cache, Error Reports
+- Recycle Bin, Recent Items, Thumbnails
+- DNS Cache, Font Cache, Icon Cache
+- App Caches (Teams, Discord, VS Code, Spotify, Slack, Zoom)
+- Windows Logs, Delivery Optimization
 
 ### 2. Windows Activation (Based on MAS)
 - **HWID** - Permanent activation (Windows 10/11)
@@ -284,16 +306,45 @@ A: CMD works everywhere, no execution policy issues, faster, simpler.
 
 ---
 
-## Changelog
+## ?? What's New in v4.0
 
-### Version 3.0 (2025-11-03)
-- Complete rewrite using CMD/Batch
-- Removed PowerShell dependency
-- Added 3 main tools in one
-- Clean English interface
-- Professional menu system
-- Automatic logging
-- System information viewer
+### ?? **ULTIMATE EDITION** - Major UI Overhaul!
+
+**? NEW FEATURES:**
+- ?? **Custom Cleanup Mode** - Choose exactly what to clean
+- ?? **About & Help Section** - Complete documentation and guides
+- ?? **Beautiful ASCII Art** - Professional UI with box-drawing characters
+- ?? **Emoji Icons** - Better visual navigation
+- ? **Better Error Handling** - Clearer messages and validation
+
+**?? UI IMPROVEMENTS:**
+- ASCII art headers for all menus
+- Unicode box-drawing borders
+- Color-coded sections
+- Professional window titles
+- Helpful tips and recommendations
+
+**?? NEW DOCUMENTATION:**
+- CHANGELOG.md - Complete version history
+- LICENSE - MIT License file
+- Enhanced README with badges
+- Updated all guides
+
+### Previous Versions
+
+**Version 3.0** (2025-11-03)
+- Added Windows Optimizer (15 features)
+- Microsoft Activation Scripts integration (14 methods)
+- Enhanced cleanup with 4 modes
+- Complete documentation suite
+
+**Version 2.0** (2025-11-02)
+- Migrated to pure CMD/Batch
+- Fixed encoding issues
+- English interface
+
+**Version 1.0** (2025-11-01)
+- Initial release with PowerShell
 
 ---
 
