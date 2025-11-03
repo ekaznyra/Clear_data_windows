@@ -1,0 +1,23 @@
+# WinClean Pro - Git Ignore
+
+# Logs
+logs/
+*.log
+
+# Generated reports
+analysis_report.txt
+cleanup_report_*.html
+
+# Windows
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Backup files
+*.bak
+*.tmp
+*.old
+
+# Testing
+test_results/
+sandbox/

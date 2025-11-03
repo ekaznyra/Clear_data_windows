@@ -1,0 +1,85 @@
+================================================================================
+  WINCLEAN PRO v3.0.0 - INSTALLATION INSTRUCTIONS
+================================================================================
+
+QUICK INSTALL (30 seconds):
+--------------------------
+1. Download WinCleanPro.cmd
+2. Right-click → "Run as administrator"
+3. Press 2 for Standard Clean
+4. Wait 5 minutes
+5. Done!
+
+
+DETAILED INSTALL:
+----------------
+
+STEP 1: Download
+   - Save WinCleanPro.cmd to any folder
+   - Recommended: C:\Tools\WinCleanPro\
+
+STEP 2: Run
+   Method A: Right-click → "Run as administrator"
+   Method B: Double-click (will auto-request admin)
+
+STEP 3: Select Profile
+   [1] Quick    - 2 min   (Weekly)
+   [2] Standard - 5 min   (Monthly) ⭐ RECOMMENDED
+   [3] Deep     - 15 min  (Quarterly)
+
+
+WHAT YOU GET:
+------------
+✓ Clean system temp files
+✓ Clear browser cache (Chrome, Edge, Firefox)
+✓ Empty recycle bin
+✓ Remove app caches (Discord, Teams, etc)
+✓ Clean GPU cache
+✓ Remove crash dumps
+✓ Free 10-50 GB of space
+
+
+SAFETY:
+------
+✓ Never deletes personal files
+✓ Never deletes settings
+✓ Never deletes game saves
+✓ 100% reversible (cache rebuilds)
+
+
+TROUBLESHOOTING:
+---------------
+
+Problem: "Access Denied"
+Fix: Run as Administrator
+
+Problem: Won't start
+Fix: Check antivirus, add to exceptions
+
+Problem: Nothing happens
+Fix: Right-click → "Run as administrator"
+
+
+AUTOMATION (Optional):
+---------------------
+To run weekly automatically:
+
+1. Open Task Scheduler
+2. Create Basic Task
+3. Name: WinClean Weekly
+4. Trigger: Weekly, Sunday, 2 AM
+5. Action: WinCleanPro.cmd
+6. Finish
+
+
+SUPPORT:
+-------
+📖 Full Documentation: README.md
+🚀 Quick Start: QUICKSTART.md
+💬 Issues: GitHub Issues
+📧 Email: support@wincleanpro.com
+
+
+================================================================================
+Ready? Run WinCleanPro.cmd now!
+================================================================================
