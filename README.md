@@ -14,7 +14,7 @@ Professional Windows management tool built with **pure CMD/Batch scripts**.
 
 Four powerful tools in one BAT file:
 - **Cleanup Tool** - Remove junk files and free disk space (5 modes)
-- **Windows Activation** - Activate Windows and Office with MAS (14 methods)
+- **Windows Activation** - Activate Windows and Office (14 methods)
 - **Windows Optimizer** - Make your PC faster and smoother (15 tweaks)
 - **Software Manager** - Uninstall applications easily
 - **System Info** - View detailed system information (6 modes)
@@ -41,7 +41,7 @@ Four powerful tools in one BAT file:
 - App Caches (Teams, Discord, VS Code, Spotify, Slack, Zoom)
 - Windows Logs, Delivery Optimization
 
-### 2. Windows Activation (Based on MAS)
+### 2. Windows Activation
 
 - **HWID** - Permanent activation (Windows 10/11)
 - **KMS38** - Valid until 2038 (Win 10/11/Server)
@@ -58,7 +58,7 @@ Four powerful tools in one BAT file:
 
 **Quick Actions:**
 - One-click optimization
-- Chris Titus WinUtil integration
+- WinUtil integration
 
 **Performance Tweaks:**
 - Disable visual effects
@@ -164,7 +164,7 @@ Four powerful tools in one BAT file:
  MAIN MENU - SELECT YOUR TOOL
 
  [1] Cleanup Tool        - Remove junk and free disk space
- [2] Windows Activation  - Activate Windows and Office (MAS)
+ [2] Windows Activation  - Activate Windows and Office
  [3] Windows Optimizer   - Make your PC faster and smoother
  [4] Software Manager    - Uninstall applications easily
  [5] System Info         - View detailed system information
@@ -192,7 +192,7 @@ Four powerful tools in one BAT file:
 ### For Advanced Users
 
 - **[2] Activation** ? HWID for permanent Windows 10/11 activation
-- **[3] Optimizer** ? Chris Titus WinUtil for advanced tweaks
+- **[3] Optimizer** ? WinUtil for advanced tweaks
 - **[4] Software Manager** ? Remove unwanted software
 - **[5] System Info** ? Export full system report
 
@@ -320,13 +320,8 @@ A: Unicode causes ????? issues on many systems. ASCII works everywhere!
 
 ## Credits
 
-### Based On
-
-- **Microsoft Activation Scripts** by massgravel
-  - https://github.com/massgravel/Microsoft-Activation-Scripts
-
-- **Chris Titus Tech WinUtil** by ChrisTitusTech
-  - https://github.com/ChrisTitusTech/winutil
+- Based on various open-source Windows optimization tools
+- No external dependencies required
 
 ---
 

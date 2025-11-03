@@ -105,7 +105,7 @@ All notable changes to this project will be documented in this file.
 #### Windows Optimizer Module
 - 15 optimization features
 - Quick optimize (one-click)
-- Chris Titus WinUtil integration
+- WinUtil integration
 - Performance tweaks (7 options)
 - Privacy & debloat (4 options)
 - System tweaks (4 options)
@@ -168,7 +168,7 @@ All notable changes to this project will be documented in this file.
 | Language | PowerShell | CMD | CMD | CMD |
 | Interface | Vietnamese | English | English | English + Emoji |
 | Cleanup Modes | 2 | 3 | 4 | 5 |
-| Activation | Manual | KMS | MAS (14) | MAS (14) |
+| Activation | Manual | KMS | (14) | (14) |
 | Optimizer | No | No | Yes (15) | Yes (15) |
 | UI Quality | Basic | Good | Good | **Excellent** |
 | Documentation | None | README | 4 files | 5 files |
@@ -202,8 +202,8 @@ All notable changes to this project will be documented in this file.
 ## Credits
 
 ### Based On
-- **Microsoft Activation Scripts** by massgravel
-- **Chris Titus Tech WinUtil** by ChrisTitusTech
+- **Microsoft Activation Scripts** by 
+- **WinUtil** by Community
 - **Windows10Debloater** by Sycnex
 - **Sophia Script** by farag2
 

@@ -43,7 +43,7 @@ echo.
 echo  MAIN MENU - SELECT YOUR TOOL
 echo.
 echo  [1] Cleanup Tool        - Remove junk and free disk space
-echo  [2] Windows Activation  - Activate Windows and Office (MAS)
+echo  [2] Windows Activation  - Activate Windows and Office
 echo  [3] Windows Optimizer   - Make your PC faster and smoother
 echo  [4] Software Manager    - Uninstall applications easily
 echo  [5] System Info         - View detailed system information
@@ -441,7 +441,7 @@ echo [OK] All cleanup operations completed
 exit /b
 
 :: ============================================
-:: ACTIVATION MENU (MAS-based)
+:: ACTIVATION MENU
 :: ============================================
 :ACTIVATION_MENU
 cls
@@ -450,7 +450,6 @@ title Windows Toolkit v4.1 - Windows Activation
 echo.
 echo ================================================================
 echo  WINDOWS AND OFFICE ACTIVATION TOOL
-echo  Microsoft Activation Scripts (MAS) - Full Edition
 echo ================================================================
 echo.
 echo  Current Status:
@@ -485,8 +484,6 @@ echo  [13] Uninstall Product Key    - Remove current key
 echo  [14] View License Information - Detailed license
 echo.
 echo  [0]  Back to Main Menu
-echo.
-echo  Source: github.com/massgravel/Microsoft-Activation-Scripts
 echo.
 echo ================================================================
 echo.
@@ -527,7 +524,7 @@ set /p confirm_hwid="Continue with HWID Activation? (Y/N): "
 if /i not "%confirm_hwid%"=="Y" goto ACTIVATION_MENU
 
 echo.
-echo  Downloading and running MAS HWID activation script...
+echo  Downloading and running HWID activation script...
 echo  Please wait...
 echo.
 
@@ -568,7 +565,7 @@ set /p confirm_kms38="Continue with KMS38 Activation? (Y/N): "
 if /i not "%confirm_kms38%"=="Y" goto ACTIVATION_MENU
 
 echo.
-echo  Downloading and running MAS KMS38 activation script...
+echo  Downloading and running KMS38 activation script...
 echo  Please wait...
 echo.
 
@@ -609,7 +606,7 @@ set /p confirm_onlinekms="Continue with Online KMS Activation? (Y/N): "
 if /i not "%confirm_onlinekms%"=="Y" goto ACTIVATION_MENU
 
 echo.
-echo  Downloading and running MAS Online KMS activation script...
+echo  Downloading and running Online KMS activation script...
 echo  Please wait...
 echo.
 
@@ -650,7 +647,7 @@ set /p confirm_ohook="Continue with Ohook Office Activation? (Y/N): "
 if /i not "%confirm_ohook%"=="Y" goto ACTIVATION_MENU
 
 echo.
-echo  Downloading and running MAS Ohook activation script...
+echo  Downloading and running Ohook activation script...
 echo  Please wait...
 echo.
 
@@ -688,7 +685,7 @@ set /p confirm_kmsoffice="Continue with KMS Office Activation? (Y/N): "
 if /i not "%confirm_kmsoffice%"=="Y" goto ACTIVATION_MENU
 
 echo.
-echo  Downloading and running MAS KMS Office activation script...
+echo  Downloading and running KMS Office activation script...
 echo  Please wait...
 echo.
 
@@ -719,7 +716,7 @@ echo ================================================================
 echo  ACTIVATION TROUBLESHOOT
 echo ================================================================
 echo.
-echo  Running MAS Activation Troubleshoot tool...
+echo  Running Activation Troubleshoot tool...
 echo  This will attempt to fix activation issues
 echo.
 pause
@@ -928,7 +925,7 @@ echo.
 echo  QUICK ACTIONS:
 echo.
 echo  [1]  Quick Optimize           - One-click optimization
-echo  [2]  Run Chris Titus WinUtil  - Popular optimization tool
+echo  [2]  Run WinUtil  - Popular optimization tool
 echo.
 echo  PERFORMANCE TWEAKS:
 echo.
@@ -953,8 +950,6 @@ echo  [14] Update Group Policy      - Refresh policies
 echo  [15] Restore Default Settings - Undo optimizations
 echo.
 echo  [0]  Back to Main Menu
-echo.
-echo  Based on: Chris Titus WinUtil and Best Practices
 echo.
 echo ================================================================
 echo.
@@ -1062,13 +1057,13 @@ pause
 goto OPTIMIZER_MENU
 
 :: ============================================
-:: RUN CHRIS TITUS WINUTIL
+:: RUN WINUTIL
 :: ============================================
 :RUN_WINUTIL
 cls
 echo.
 echo ================================================================
-echo  CHRIS TITUS TECH WINDOWS UTILITY
+echo  WINDOWS UTILITY TOOL
 echo ================================================================
 echo.
 echo  This will download and run the popular WinUtil tool
@@ -1078,9 +1073,8 @@ echo  - Install software packages
 echo  - Tweaks and optimizations
 echo  - Privacy settings
 echo.
-echo  Source: https://github.com/ChrisTitusTech/winutil
 echo.
-set /p confirm_winutil="Run Chris Titus WinUtil? (Y/N): "
+set /p confirm_winutil="Run WinUtil? (Y/N): "
 if /i not "%confirm_winutil%"=="Y" goto OPTIMIZER_MENU
 
 echo.
@@ -2217,7 +2211,7 @@ echo.
 echo  FEATURES
 echo.
 echo  [1] Cleanup Tool:      5 modes, 14+ cleanup targets
-echo  [2] Activation:        14 methods (MAS-based)
+echo  [2] Activation:        14 activation methods
 echo  [3] Optimizer:         15 optimization tweaks
 echo  [4] Software Manager:  List, uninstall, export
 echo  [5] System Info:       6 information modes
@@ -2232,7 +2226,7 @@ echo  Result: PC will be noticeably faster!
 echo.
 echo  FOR ADVANCED USERS:
 echo  - [2] Activation - HWID for permanent Windows activation
-echo  - [3] Optimizer - [2] Chris Titus WinUtil for advanced tweaks
+echo  - [3] Optimizer - [2] WinUtil for advanced tweaks
 echo  - [4] Software Manager - Remove unwanted software
 echo.
 echo  DOCUMENTATION
@@ -2243,13 +2237,10 @@ echo  OPTIMIZER_GUIDE.md:  Complete optimization guide
 echo  CHANGELOG.md:        Version history and updates
 echo  LICENSE:             MIT License terms
 echo.
-echo  SOURCES AND CREDITS
+echo  CREDITS
 echo.
-echo  Activation:  Microsoft Activation Scripts (massgravel)
-echo               https://github.com/massgravel/Microsoft-Activation-Scripts
-echo.
-echo  Optimizer:   Chris Titus Tech WinUtil
-echo               https://github.com/ChrisTitusTech/winutil
+echo  Built with CMD/Batch scripting
+echo  Open source and free to use
 echo.
 echo  SAFETY AND SECURITY
 echo.

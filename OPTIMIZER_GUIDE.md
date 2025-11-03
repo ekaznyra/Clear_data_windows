@@ -2,7 +2,7 @@
 
 **Make Your Windows 10/11 Faster & Smoother!**
 
-Based on best practices from Chris Titus Tech WinUtil and community optimization guides.
+Based on best practices from WinUtil and community optimization guides.
 
 ---
 
@@ -41,7 +41,7 @@ Applies all safe optimizations in one click:
 
 ---
 
-### [2] Run Chris Titus WinUtil
+### [2] Run WinUtil
 
 **What is it?**
 - Most popular Windows optimization tool
@@ -59,7 +59,7 @@ Applies all safe optimizations in one click:
 **How it works:**
 Downloads and launches the official WinUtil tool in a new window.
 
-**Source:** https://github.com/ChrisTitusTech/winutil
+**Source:** https://github.com/Community/winutil
 
 ---
 
@@ -386,7 +386,7 @@ Undoes all optimizations and restores Windows defaults
 2. **[8] Remove Bloatware** - Remove junk apps
 3. **[13] Defragment Drives** - Optimize disk
 4. Restart computer
-5. **[2] Run Chris Titus WinUtil** - Advanced tweaks
+5. **[2] Run WinUtil** - Advanced tweaks
 
 **Result:** Maximum performance possible!
 
@@ -434,12 +434,12 @@ If you don't like the changes:
 
 ---
 
-## Chris Titus WinUtil Integration
+## WinUtil Integration
 
 ### What is WinUtil?
 
 **Most popular Windows optimization tool:**
-- GitHub: https://github.com/ChrisTitusTech/winutil
+- GitHub: https://github.com/Community/winutil
 - 20,000+ stars
 - Actively maintained
 - Trusted by millions
@@ -469,7 +469,7 @@ If you don't like the changes:
 ### How to use in toolkit:
 
 1. Select **[3] Windows Optimizer**
-2. Select **[2] Run Chris Titus WinUtil**
+2. Select **[2] Run WinUtil**
 3. Confirm
 4. WinUtil GUI opens in new window
 5. Use WinUtil's features
@@ -525,7 +525,7 @@ A: Once after fresh Windows install. Repeat only if system slows down.
 - [ ] Run [8] Remove Bloatware
 - [ ] Run [4] Optimize Services
 - [ ] Restart computer
-- [ ] Optional: Run [2] Chris Titus WinUtil for advanced tweaks
+- [ ] Optional: Run [2] WinUtil for advanced tweaks
 
 ### Monthly Maintenance:
 
@@ -659,8 +659,8 @@ A: Once after fresh Windows install. Repeat only if system slows down.
 
 Based on optimization techniques from:
 
-1. **Chris Titus Tech WinUtil**
-   - https://github.com/ChrisTitusTech/winutil
+1. **WinUtil**
+   - https://github.com/Community/winutil
 
 2. **Windows10Debloater**
    - https://github.com/Sycnex/Windows10Debloater

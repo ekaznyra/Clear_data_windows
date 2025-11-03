@@ -1,13 +1,13 @@
 # Windows Activation Guide
 
-**Based on Microsoft Activation Scripts (MAS)**
+**Based on Windows Activation**
 
 ---
 
 ## Overview
 
-This toolkit includes professional activation methods from the official MAS project:
-- GitHub: https://github.com/massgravel/Microsoft-Activation-Scripts
+This toolkit includes professional activation methods from the official project:
+- GitHub: https://github.com//Microsoft-Activation-Scripts
 - Documentation: https://massgrave.dev
 
 All methods are **safe, tested, and widely used** by millions of users.
@@ -307,16 +307,16 @@ A:
 - **Online KMS**: 99%
 
 **Q: Where does the script come from?**
-A: Official Microsoft Activation Scripts project on GitHub (massgravel/Microsoft-Activation-Scripts). Open source, verified by thousands.
+A: Official Microsoft Activation Scripts project on GitHub (/Microsoft-Activation-Scripts). Open source, verified by thousands.
 
 ---
 
 ## Credits
 
 All activation methods based on:
-- **Microsoft Activation Scripts (MAS)**
-- GitHub: https://github.com/massgravel/Microsoft-Activation-Scripts
-- Created by: @massgravel and contributors
+- **Windows Activation**
+- GitHub: https://github.com//Microsoft-Activation-Scripts
+- Created by: @ and contributors
 - Trusted by millions worldwide
 
 This toolkit simply provides an easy interface to these proven methods.
