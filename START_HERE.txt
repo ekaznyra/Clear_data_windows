@@ -1,0 +1,217 @@
+===============================================================================
+                          START HERE - READ THIS FIRST!
+===============================================================================
+
+Bạn đang gặp vấn đề file không chạy được? Đây là giải pháp từng bước:
+
+===============================================================================
+BƯỚC 1: CHỌN FILE PHÙ HỢP
+===============================================================================
+
+Thử theo thứ tự này:
+
+1. SimpleTest.cmd           <--- BẮT ĐẦU TỪ ĐÂY!
+   - File đơn giản nhất
+   - Chỉ 3 chức năng cơ bản
+   - Để TEST xem máy bạn có chạy được không
+
+2. WindowsCleanupTool.cmd   <--- DÙNG FILE NÀY!
+   - 25 chức năng đầy đủ
+   - Không có ký tự Unicode
+   - Tương thích tốt nhất với Windows
+
+3. UltimateSystemTool.cmd   <--- Nếu 2 file trên không được
+   - Version đầy đủ với giao diện đẹp
+   - Dùng Unicode characters
+   - Chỉ hoạt động tốt trên Windows 10/11 mới
+
+===============================================================================
+BƯỚC 2: CÁCH CHẠY ĐÚNG
+===============================================================================
+
+⚠️ QUAN TRỌNG: PHẢI CHẠY VỚI QUYỀN ADMINISTRATOR!
+
+Cách 1 (KHUYẾN NGHỊ):
+--------------------
+1. Tải file về Desktop
+2. CHUỘT PHẢI vào file SimpleTest.cmd
+3. Chọn "Run as administrator" (Chạy với quyền quản trị)
+4. Nhấn "Yes" khi Windows hỏi
+5. Cửa sổ đen sẽ hiện ra - đừng đóng!
+
+Cách 2 (Nếu cách 1 không được):
+--------------------------------
+1. Nhấn phím Windows + X
+2. Chọn "Command Prompt (Admin)" hoặc "Windows PowerShell (Admin)"
+3. Gõ: cd Desktop  (nếu file ở Desktop)
+4. Gõ: SimpleTest.cmd
+5. Nhấn Enter
+
+===============================================================================
+BƯỚC 3: NẾU VẪN KHÔNG CHẠY ĐƯỢC
+===============================================================================
+
+Đọc file: TROUBLESHOOTING.txt
+
+File đó có hướng dẫn chi tiết cho mọi lỗi có thể xảy ra:
+- Access Denied
+- Window đóng ngay lập tức
+- Lỗi không tìm thấy lệnh
+- Antivirus chặn
+- Và nhiều lỗi khác...
+
+===============================================================================
+TẠI SAO CÓ NHIỀU FILE VẬY?
+===============================================================================
+
+SimpleTest.cmd
+--------------
+✓ Đơn giản nhất
+✓ Dễ chạy nhất
+✓ Để kiểm tra xem máy bạn có hỗ trợ batch files không
+✓ Chỉ 3 chức năng: Quick Clean, Deep Clean, System Info
+
+WindowsCleanupTool.cmd
+----------------------
+✓ Tương thích tốt nhất
+✓ 25 chức năng đầy đủ
+✓ Không dùng ký tự đặc biệt
+✓ Hoạt động trên Windows 7/8/10/11
+✓ ĐÂY LÀ FILE NÊN DÙNG!
+
+UltimateSystemTool.cmd
+----------------------
+✓ Giao diện đẹp với Unicode
+✓ 25 chức năng đầy đủ
+✓ Có thể không hiển thị đúng trên máy cũ
+✓ Tốt nhất cho Windows 10/11 mới
+
+TEST_MENU.cmd
+-------------
+✓ Chỉ hiển thị menu
+✓ Không làm gì cả
+✓ Để xem giao diện
+
+===============================================================================
+CÁC FILE HƯỚNG DẪN
+===============================================================================
+
+README.md
+---------
+- Tài liệu đầy đủ bằng tiếng Anh
+- Mô tả chi tiết 25 chức năng
+- Khuyến nghị công cụ mã nguồn mở
+
+HOW_TO_USE.txt
+--------------
+- Hướng dẫn sử dụng nhanh
+- Lịch bảo trì khuyến nghị
+- Kết quả mong đợi
+
+TROUBLESHOOTING.txt
+-------------------
+- Khắc phục mọi lỗi
+- Hướng dẫn từng bước
+- Giải pháp cho vấn đề phổ biến
+
+START_HERE.txt
+--------------
+- File này đây!
+- Đọc đầu tiên
+
+===============================================================================
+CHECKLIST TRƯỚC KHI CHẠY
+===============================================================================
+
+[ ] Đã tải file về Desktop hoặc Downloads
+[ ] File có đuôi .cmd (không phải .txt)
+[ ] Đã CHUỘT PHẢI và chọn "Run as administrator"
+[ ] Đã nhấn "Yes" khi Windows hỏi
+[ ] Đã tắt antivirus tạm thời (nếu cần)
+[ ] Đã đóng tất cả chương trình khác
+
+===============================================================================
+LỖI THƯỜNG GẶP VÀ CÁCH FIX NHANH
+===============================================================================
+
+LỖI: "Access is denied"
+FIX: Bạn chưa chạy với quyền Administrator
+     → Chuột phải → "Run as administrator"
+
+LỖI: Cửa sổ mở rồi đóng ngay
+FIX: Bạn double-click thay vì chạy as admin
+     → PHẢI chuột phải → "Run as administrator"
+
+LỖI: Antivirus chặn
+FIX: Tạm thời tắt antivirus
+     → Thêm file vào exclusion list
+     → Chạy lại
+
+LỖI: Không có quyền
+FIX: Account của bạn không phải Administrator
+     → Đăng nhập bằng account Administrator
+     → Hoặc hỏi người quản lý máy
+
+===============================================================================
+TEST NHANH - 30 GIÂY
+===============================================================================
+
+1. Mở Notepad
+2. Copy paste đoạn này:
+
+@echo off
+echo Testing...
+net session >nul 2>&1
+if %errorLevel% equ 0 (
+    echo SUCCESS! You have admin rights!
+) else (
+    echo ERROR! Not running as admin!
+)
+pause
+
+3. Save as: test.cmd (chọn "All Files")
+4. Chuột phải → Run as administrator
+5. Nếu thấy "SUCCESS!" thì máy bạn OK!
+
+===============================================================================
+KHUYẾN NGHỊ CUỐI CÙNG
+===============================================================================
+
+Bắt đầu với SimpleTest.cmd!
+
+Nếu SimpleTest.cmd chạy được:
+→ Dùng WindowsCleanupTool.cmd cho đầy đủ chức năng
+
+Nếu SimpleTest.cmd KHÔNG chạy:
+→ Đọc TROUBLESHOOTING.txt
+→ Làm theo hướng dẫn step by step
+
+===============================================================================
+THÔNG TIN QUAN TRỌNG
+===============================================================================
+
+✓ Tất cả file đều AN TOÀN
+✓ Không xóa file cá nhân
+✓ Không cài thêm gì
+✓ Chỉ dùng lệnh Windows built-in
+✓ Có thể khôi phục nếu cần
+
+⚠️ Luôn tạo System Restore Point trước!
+   → Chạy Function [21] trong tool
+
+===============================================================================
+HỖ TRỢ
+===============================================================================
+
+Nếu tất cả đều không hoạt động:
+1. Máy bạn có thể bị hỏng Windows
+2. Cần chạy: sfc /scannow
+3. Cần cài lại Windows (worst case)
+
+===============================================================================
+
+✨ Chúc bạn thành công! ✨
+
+Hãy bắt đầu với SimpleTest.cmd và đọc TROUBLESHOOTING.txt nếu gặp vấn đề!
+
+===============================================================================
