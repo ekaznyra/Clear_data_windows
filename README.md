@@ -84,10 +84,40 @@ Professional Windows management tool built with **pure CMD/Batch scripts**. No P
 - Uninstall by name
 - Export software list to file
 
-### 5. Additional Features
-- Operation logging
-- System information viewer
-- Simple CMD interface
+### 5. ?? View Logs
+- Real-time operation logs
+- Last 50 log entries
+- Timestamp for each operation
+- Error tracking
+
+### 6. ?? System Information (ENHANCED!)
+
+**6 Information Modes:**
+- ?? **Quick Overview** - Essential system info at a glance
+- ??? **Detailed Report** - Complete system analysis
+- ?? **Hardware Details** - CPU, RAM, GPU, Motherboard, BIOS
+- ?? **Storage Information** - Disks, partitions, space usage
+- ?? **Network Information** - Adapters, IP config, connectivity test
+- ?? **Export Full Report** - Save complete report to text file
+
+**Information Includes:**
+- Computer name, user, domain
+- Operating system details and version
+- CPU: Name, cores, speed
+- RAM: Total, available, virtual memory
+- GPU: Model, driver, VRAM
+- Storage: Disks, partitions, free space (with health indicators)
+- Network: Adapters, IP addresses, connectivity status
+- BIOS and motherboard information
+- Windows updates history
+- System uptime
+
+### 7. ?? About & Help
+- Complete tool information
+- Quick start guides (beginner & advanced)
+- Documentation links
+- Safety information
+- Credits and sources
 
 ---
 
