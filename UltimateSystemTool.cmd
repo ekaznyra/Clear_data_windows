@@ -327,11 +327,11 @@ cls
 color 0A
 echo.
 echo ╔══════════════════════════════════════════════════════════════════════════╗
-echo ║                      DỌN DẸP ỨNG DỤNG - APPLICATION                      ║
+echo ║                     APPLICATION CACHE CLEANUP                            ║
 echo ╚══════════════════════════════════════════════════════════════════════════╝
 echo.
 
-echo Đang dọn dẹp cache ứng dụng...
+echo Cleaning application caches...
 echo.
 
 :: Discord
@@ -411,7 +411,7 @@ echo [√] Cleaning general app temp...
 del /f /s /q "%LOCALAPPDATA%\Temp\*" >nul 2>&1
 
 echo.
-echo ✅ Hoàn thành! Đã dọn dẹp cache các ứng dụng.
+echo ✅ Complete! Application caches cleaned.
 echo.
 pause
 goto MAIN_MENU
