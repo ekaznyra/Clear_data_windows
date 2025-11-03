@@ -1,8 +1,8 @@
 # Windows Professional Toolkit
 
-**Version 4.1 - ASCII EDITION**
+**Version 4.2 - OFFLINE EDITION**
 
-All-in-One System Tool - Pure CMD/Batch - No Unicode!
+All-in-One System Tool - Pure CMD/Batch - Full MAS Integration!
 
 ---
 
@@ -10,9 +10,9 @@ All-in-One System Tool - Pure CMD/Batch - No Unicode!
 
 Professional Windows management tool built with **pure CMD/Batch scripts**.
 
-**NO UNICODE CHARACTERS - WORKS ON ALL WINDOWS!**
+**OFFLINE ACTIVATION - NO INTERNET REQUIRED!**
 
-Four powerful tools in one BAT file:
+Five powerful tools in one BAT file:
 - **Cleanup Tool** - Remove junk files and free disk space (5 modes)
 - **Windows Activation** - Activate Windows and Office (14 methods)
 - **Windows Optimizer** - Make your PC faster and smoother (15 tweaks)
@@ -41,7 +41,9 @@ Four powerful tools in one BAT file:
 - App Caches (Teams, Discord, VS Code, Spotify, Slack, Zoom)
 - Windows Logs, Delivery Optimization
 
-### 2. Windows Activation
+### 2. Windows Activation (OFFLINE!)
+
+**ALL MAS SCRIPTS INCLUDED LOCALLY - NO INTERNET NEEDED!**
 
 - **HWID** - Permanent activation (Windows 10/11)
 - **KMS38** - Valid until 2038 (Win 10/11/Server)
@@ -53,6 +55,12 @@ Four powerful tools in one BAT file:
 - Change Windows edition
 - Remove Office licenses
 - Manual key installation
+
+**FEATURES:**
+- 10 MAS scripts integrated (1.1MB)
+- Works completely offline
+- Faster than online method
+- No external dependencies
 
 ### 3. Windows Optimizer
 
@@ -109,27 +117,35 @@ Four powerful tools in one BAT file:
 
 ---
 
-## What's New in v4.1
+## What's New in v4.2
 
-### ASCII EDITION - No More ????? Issues!
+### OFFLINE EDITION - Full MAS Integration!
 
-**MAJOR FIX:**
-- Removed ALL Unicode box-drawing characters
-- Simple ASCII-only interface (=, -, |)
-- Works on ALL Windows CMD versions
-- No more encoding problems
-- No more ????? garbage characters
+**MAJOR UPGRADE:**
+- ALL MAS scripts included locally (1.1MB)
+- No internet required for activation
+- Faster activation (direct local execution)
+- 100% reliable (no external server dependency)
+- 10 MAS scripts integrated
 
-**CHANGES:**
-- Removed log file generation (cleaner)
-- Removed HOW_TO_RUN.txt (unnecessary)
-- Simplified all menus
-- Pure ASCII only
+**WHAT'S INCLUDED:**
+- HWID_Activation.cmd (82 KB)
+- KMS38_Activation.cmd (86 KB)
+- Ohook_Activation_AIO.cmd (164 KB)
+- Online_KMS_Activation.cmd (173 KB)
+- Troubleshoot.cmd (57 KB)
+- Check_Activation_Status.cmd (48 KB)
+- Change_Windows_Edition.cmd (49 KB)
+- Change_Office_Edition.cmd (56 KB)
+- Extract_OEM_Folder.cmd (26 KB)
+- TSforge_Activation.cmd (358 KB)
 
-**WHY?**
-- Unicode characters showed as ????? on many systems
-- Caused encoding issues
-- ASCII works everywhere, always!
+**BENEFITS:**
+- Work offline completely
+- No more "irm massgrave.dev" calls
+- Faster than remote execution
+- More reliable and stable
+- Full MAS functionality preserved
 
 ---
 

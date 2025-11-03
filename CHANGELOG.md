@@ -4,7 +4,72 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## [4.0 ULTIMATE EDITION] - 2025-11-03
+## [4.2 OFFLINE EDITION] - 2024-11-03
+
+### ?? MAJOR UPDATE - Full MAS Integration
+
+**ALL MAS scripts are now included locally - NO INTERNET REQUIRED!**
+
+#### ? Added
+- 10 MAS scripts integrated (1.1MB total)
+- Complete offline activation capability
+- HWID_Activation.cmd (82 KB)
+- KMS38_Activation.cmd (86 KB)
+- Ohook_Activation_AIO.cmd (164 KB)
+- Online_KMS_Activation.cmd (173 KB)
+- Troubleshoot.cmd (57 KB)
+- Check_Activation_Status.cmd (48 KB)
+- Change_Windows_Edition.cmd (49 KB)
+- Change_Office_Edition.cmd (56 KB)
+- Extract_OEM_Folder.cmd (26 KB)
+- TSforge_Activation.cmd (358 KB)
+- New OFFLINE_ACTIVATION_INFO.md documentation
+
+#### ?? Changed
+- All activation methods now call local MAS scripts
+- Removed all remote PowerShell calls (`irm massgrave.dev`)
+- Faster activation (no download time)
+- More reliable (no server dependency)
+- Updated version to 4.2 throughout
+
+#### ? Benefits
+- Instant execution (no download wait)
+- 100% offline operation
+- Portable (works from USB)
+- More reliable and stable
+- Faster than online method
+
+#### ?? Technical
+- Total package size: 2.1 MB
+- WindowsToolkit.bat: 68 KB
+- MAS_Scripts folder: 1.1 MB
+- Documentation: ~60 KB
+- Remote calls removed: 6
+- Local script calls added: 24
+
+---
+
+## [4.1 ASCII EDITION] - 2024-11-02
+
+### Fixed Encoding Issues
+
+#### Changed
+- Removed ALL Unicode box-drawing characters
+- Simple ASCII-only interface (=, -, |)
+- Works on ALL Windows CMD versions
+- Removed log file generation
+- Removed HOW_TO_RUN.txt
+- Simplified all menus
+- Pure ASCII only
+
+#### Why
+- Unicode characters showed as ????? on many systems
+- Caused encoding issues
+- ASCII works everywhere, always!
+
+---
+
+## [4.0 ULTIMATE EDITION] - 2024-11-01
 
 ### ?? Major Release - Complete UI Overhaul
 

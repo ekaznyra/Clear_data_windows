@@ -1,11 +1,11 @@
 @echo off
 :: ============================================
-:: WINDOWS PROFESSIONAL TOOLKIT v4.1
+:: WINDOWS PROFESSIONAL TOOLKIT v4.2
 :: All-in-One System Tool (CMD/Batch)
-:: ASCII ONLY - NO UNICODE
+:: OFFLINE EDITION - FULL MAS INTEGRATION
 :: ============================================
 
-title Windows Professional Toolkit v4.1
+title Windows Professional Toolkit v4.2
 
 :: Check Admin rights
 net session >nul 2>&1
@@ -31,12 +31,13 @@ if %errorLevel% neq 0 (
 :MAIN_MENU
 cls
 color 0B
-title Windows Toolkit v4.1 - Main Menu
+title Windows Toolkit v4.2 - Main Menu
 echo.
 echo ================================================================
 echo.
-echo         WINDOWS PROFESSIONAL TOOLKIT v4.1
+echo         WINDOWS PROFESSIONAL TOOLKIT v4.2
 echo         All-in-One System Management Tool
+echo         OFFLINE EDITION - Full MAS Integration
 echo.
 echo ================================================================
 echo.
@@ -73,7 +74,7 @@ goto MAIN_MENU
 :CLEANUP_MENU
 cls
 color 0A
-title Windows Toolkit v4.1 - Cleanup Tool
+title Windows Toolkit v4.2 - Cleanup Tool
 echo.
 echo ================================================================
 echo  CLEANUP TOOL - REMOVE JUNK FILES AND FREE DISK SPACE
@@ -446,7 +447,7 @@ exit /b
 :ACTIVATION_MENU
 cls
 color 0E
-title Windows Toolkit v4.1 - Windows Activation
+title Windows Toolkit v4.2 - Windows Activation
 echo.
 echo ================================================================
 echo  WINDOWS AND OFFICE ACTIVATION TOOL
@@ -525,28 +526,16 @@ set /p confirm_hwid="Continue with HWID Activation? (Y/N): "
 if /i not "%confirm_hwid%"=="Y" goto ACTIVATION_MENU
 
 echo.
-echo  Launching activation script...
-echo  Please wait, this may take 10-20 seconds...
+echo  Running HWID Activation...
+echo  Please wait...
 echo.
-
-powershell -Command "irm https://massgrave.dev/get | iex"
-
-echo.
-echo  ================================================================
-echo  ACTIVATION WINDOW OPENED
-echo  ================================================================
-echo.
-echo  A new PowerShell window has opened with activation options.
-echo  Please follow the instructions in that window:
-echo.
-echo  1. Select your activation method from the menu
-echo  2. Wait for activation to complete
-echo  3. Check the results
-echo  4. Close the PowerShell window when done
-echo.
-echo  After closing, press any key here to continue...
-echo.
-pause
+if exist "%~dp0MAS_Scripts\HWID_Activation.cmd" (
+    call "%~dp0MAS_Scripts\HWID_Activation.cmd" /HWID
+) else (
+    echo  [ERROR] HWID_Activation.cmd not found!
+    echo  Please ensure MAS_Scripts folder exists.
+    pause
+)
 goto ACTIVATION_MENU
 
 :: ============================================
@@ -566,21 +555,16 @@ set /p confirm_kms38="Continue with KMS38 Activation? (Y/N): "
 if /i not "%confirm_kms38%"=="Y" goto ACTIVATION_MENU
 
 echo.
-echo  Launching activation script...
-echo  Please wait, this may take 10-20 seconds...
+echo  Running KMS38 Activation...
+echo  Please wait...
 echo.
-
-powershell -Command "irm https://massgrave.dev/get | iex"
-
-echo.
-echo  ================================================================
-echo  ACTIVATION WINDOW OPENED
-echo  ================================================================
-echo.
-echo  A new PowerShell window has opened with activation options.
-echo  Please follow the instructions in that window.
-echo.
-pause
+if exist "%~dp0MAS_Scripts\KMS38_Activation.cmd" (
+    call "%~dp0MAS_Scripts\KMS38_Activation.cmd" /KMS38
+) else (
+    echo  [ERROR] KMS38_Activation.cmd not found!
+    echo  Please ensure MAS_Scripts folder exists.
+    pause
+)
 goto ACTIVATION_MENU
 
 :: ============================================
@@ -600,21 +584,16 @@ set /p confirm_onlinekms="Continue with Online KMS Activation? (Y/N): "
 if /i not "%confirm_onlinekms%"=="Y" goto ACTIVATION_MENU
 
 echo.
-echo  Launching activation script...
-echo  Please wait, this may take 10-20 seconds...
+echo  Running Online KMS Activation...
+echo  Please wait...
 echo.
-
-powershell -Command "irm https://massgrave.dev/get | iex"
-
-echo.
-echo  ================================================================
-echo  ACTIVATION WINDOW OPENED
-echo  ================================================================
-echo.
-echo  A new PowerShell window has opened with activation options.
-echo  Please follow the instructions in that window.
-echo.
-pause
+if exist "%~dp0MAS_Scripts\Online_KMS_Activation.cmd" (
+    call "%~dp0MAS_Scripts\Online_KMS_Activation.cmd" /KMS-ActAndRenewalTask
+) else (
+    echo  [ERROR] Online_KMS_Activation.cmd not found!
+    echo  Please ensure MAS_Scripts folder exists.
+    pause
+)
 goto ACTIVATION_MENU
 
 :: ============================================
@@ -634,21 +613,16 @@ set /p confirm_ohook="Continue with Ohook Office Activation? (Y/N): "
 if /i not "%confirm_ohook%"=="Y" goto ACTIVATION_MENU
 
 echo.
-echo  Launching activation script...
-echo  Please wait, this may take 10-20 seconds...
+echo  Running Ohook Office Activation...
+echo  Please wait...
 echo.
-
-powershell -Command "irm https://massgrave.dev/get | iex"
-
-echo.
-echo  ================================================================
-echo  ACTIVATION WINDOW OPENED
-echo  ================================================================
-echo.
-echo  A new PowerShell window has opened with activation options.
-echo  Please follow the instructions in that window.
-echo.
-pause
+if exist "%~dp0MAS_Scripts\Ohook_Activation_AIO.cmd" (
+    call "%~dp0MAS_Scripts\Ohook_Activation_AIO.cmd" /Ohook
+) else (
+    echo  [ERROR] Ohook_Activation_AIO.cmd not found!
+    echo  Please ensure MAS_Scripts folder exists.
+    pause
+)
 goto ACTIVATION_MENU
 
 :: ============================================
@@ -668,21 +642,16 @@ set /p confirm_kmsoffice="Continue with KMS Office Activation? (Y/N): "
 if /i not "%confirm_kmsoffice%"=="Y" goto ACTIVATION_MENU
 
 echo.
-echo  Launching activation script...
-echo  Please wait, this may take 10-20 seconds...
+echo  Running KMS Office Activation...
+echo  Please wait...
 echo.
-
-powershell -Command "irm https://massgrave.dev/get | iex"
-
-echo.
-echo  ================================================================
-echo  ACTIVATION WINDOW OPENED
-echo  ================================================================
-echo.
-echo  A new PowerShell window has opened with activation options.
-echo  Please follow the instructions in that window.
-echo.
-pause
+if exist "%~dp0MAS_Scripts\Online_KMS_Activation.cmd" (
+    call "%~dp0MAS_Scripts\Online_KMS_Activation.cmd" /KMS-ActAndRenewalTask /KMS-Office
+) else (
+    echo  [ERROR] Online_KMS_Activation.cmd not found!
+    echo  Please ensure MAS_Scripts folder exists.
+    pause
+)
 goto ACTIVATION_MENU
 
 :: ============================================
@@ -695,21 +664,16 @@ echo ================================================================
 echo  ACTIVATION TROUBLESHOOT
 echo ================================================================
 echo.
-echo  Launching activation troubleshoot tool...
+echo  Running Activation Troubleshooter...
 echo  This will attempt to fix activation issues
 echo.
-
-powershell -Command "irm https://massgrave.dev/get | iex"
-
-echo.
-echo  ================================================================
-echo  TROUBLESHOOT WINDOW OPENED
-echo  ================================================================
-echo.
-echo  A new PowerShell window has opened.
-echo  Please follow the troubleshooting steps in that window.
-echo.
-pause
+if exist "%~dp0MAS_Scripts\Troubleshoot.cmd" (
+    call "%~dp0MAS_Scripts\Troubleshoot.cmd"
+) else (
+    echo  [ERROR] Troubleshoot.cmd not found!
+    echo  Please ensure MAS_Scripts folder exists.
+    pause
+)
 goto ACTIVATION_MENU
 
 :: ============================================
@@ -722,13 +686,17 @@ echo ================================================================
 echo  ACTIVATION STATUS
 echo ================================================================
 echo.
-echo  Windows Activation Status:
-echo.
-cscript //nologo %SystemRoot%\System32\slmgr.vbs /dlv
-echo.
-echo ================================================================
-echo.
-pause
+if exist "%~dp0MAS_Scripts\Check_Activation_Status.cmd" (
+    call "%~dp0MAS_Scripts\Check_Activation_Status.cmd"
+) else (
+    echo  Windows Activation Status:
+    echo.
+    cscript //nologo %SystemRoot%\System32\slmgr.vbs /dlv
+    echo.
+    echo ================================================================
+    echo.
+    pause
+)
 goto ACTIVATION_MENU
 
 :: ============================================
@@ -741,15 +709,19 @@ echo ================================================================
 echo  EXTRACT WINDOWS PRODUCT KEYS
 echo ================================================================
 echo.
-echo  Installed Product Key:
-wmic path softwarelicensingservice get OA3xOriginalProductKey 2>nul
-echo.
-echo  Current Product Key (Partial):
-cscript //nologo %SystemRoot%\System32\slmgr.vbs /dli | findstr /C:"partial"
-echo.
-echo ================================================================
-echo.
-pause
+if exist "%~dp0MAS_Scripts\Extract_OEM_Folder.cmd" (
+    call "%~dp0MAS_Scripts\Extract_OEM_Folder.cmd"
+) else (
+    echo  Installed Product Key:
+    wmic path softwarelicensingservice get OA3xOriginalProductKey 2>nul
+    echo.
+    echo  Current Product Key (Partial):
+    cscript //nologo %SystemRoot%\System32\slmgr.vbs /dli | findstr /C:"partial"
+    echo.
+    echo ================================================================
+    echo.
+    pause
+)
 goto ACTIVATION_MENU
 
 :: ============================================
@@ -762,16 +734,20 @@ echo ================================================================
 echo  CHANGE WINDOWS EDITION
 echo ================================================================
 echo.
-echo  Current Edition:
-wmic os get Caption
-echo.
-echo  Available Editions:
-DISM /online /Get-TargetEditions
-echo.
-echo  To change edition, use option [12] Install Product Key
-echo  with a valid product key for the target edition
-echo.
-pause
+if exist "%~dp0MAS_Scripts\Change_Windows_Edition.cmd" (
+    call "%~dp0MAS_Scripts\Change_Windows_Edition.cmd"
+) else (
+    echo  Current Edition:
+    wmic os get Caption
+    echo.
+    echo  Available Editions:
+    DISM /online /Get-TargetEditions
+    echo.
+    echo  To change edition, use option [12] Install Product Key
+    echo  with a valid product key for the target edition
+    echo.
+    pause
+)
 goto ACTIVATION_MENU
 
 :: ============================================
@@ -898,7 +874,7 @@ goto ACTIVATION_MENU
 :OPTIMIZER_MENU
 cls
 color 0C
-title Windows Toolkit v4.1 - Windows Optimizer
+title Windows Toolkit v4.2 - Windows Optimizer
 echo.
 echo ================================================================
 echo  WINDOWS OPTIMIZER - MAKE YOUR PC FASTER!
@@ -1694,7 +1670,7 @@ goto OPTIMIZER_MENU
 :SOFTWARE_MENU
 cls
 color 0D
-title Windows Toolkit v4.1 - Software Manager
+title Windows Toolkit v4.2 - Software Manager
 echo.
 echo ================================================================
 echo  SOFTWARE MANAGER - UNINSTALL APPLICATIONS
@@ -1807,7 +1783,7 @@ goto SOFTWARE_MENU
 :SYSTEM_INFO
 cls
 color 0E
-title Windows Toolkit v4.1 - System Information
+title Windows Toolkit v4.2 - System Information
 echo.
 echo ================================================================
 echo  SYSTEM INFORMATION - COMPLETE PC DETAILS
@@ -2098,7 +2074,7 @@ set "report_file=%report_file: =0%"
 
 (
 echo ================================================================
-echo   WINDOWS PROFESSIONAL TOOLKIT v4.1
+echo   WINDOWS PROFESSIONAL TOOLKIT v4.2
 echo   COMPLETE SYSTEM INFORMATION REPORT
 echo   Generated: %date% %time%
 echo ================================================================
@@ -2177,7 +2153,7 @@ goto SYSTEM_INFO
 :ABOUT_HELP
 cls
 color 0B
-title Windows Toolkit v4.1 - About and Help
+title Windows Toolkit v4.2 - About and Help
 echo.
 echo ================================================================
 echo  ABOUT AND HELP - WINDOWS PROFESSIONAL TOOLKIT
@@ -2242,11 +2218,11 @@ goto MAIN_MENU
 :EXIT_PROGRAM
 cls
 color 0B
-title Windows Toolkit v4.1 - Goodbye!
+title Windows Toolkit v4.2 - Goodbye!
 echo.
 echo ================================================================
 echo.
-echo          THANK YOU FOR USING WINDOWS TOOLKIT v4.1!
+echo          THANK YOU FOR USING WINDOWS TOOLKIT v4.2!
 echo.
 echo ================================================================
 echo.
