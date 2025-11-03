@@ -3,6 +3,7 @@ setlocal EnableDelayedExpansion EnableExtensions
 :: ============================================
 :: WINDOWS PROFESSIONAL TOOLKIT v4.3
 :: OPTIMIZED EDITION - Maximum Performance
+:: Fixed MAS Integration - Clean Output
 :: ============================================
 
 title Windows Professional Toolkit v4.3
@@ -229,48 +230,80 @@ goto ACTIVATION_MENU
 
 :HWID_ACTIVATE
 cls & echo.Running HWID Activation...
-if exist "%~dp0MAS_Scripts\HWID_Activation.cmd" (call "%~dp0MAS_Scripts\HWID_Activation.cmd" /HWID) else (echo.[ERROR] Script not found! & pause)
-goto ACTIVATION_MENU
+if exist "%~dp0MAS_Scripts\HWID_Activation.cmd" (
+    call "%~dp0MAS_Scripts\HWID_Activation.cmd" /HWID /S
+    echo.
+    if !errorlevel! EQU 0 (echo.[SUCCESS] Activated successfully!) else (echo.[ERROR] Activation failed. Code: !errorlevel!)
+) else (echo.[ERROR] Script not found! & pause)
+pause & goto ACTIVATION_MENU
 
 :KMS38_ACTIVATE
 cls & echo.Running KMS38 Activation...
-if exist "%~dp0MAS_Scripts\KMS38_Activation.cmd" (call "%~dp0MAS_Scripts\KMS38_Activation.cmd" /KMS38) else (echo.[ERROR] Script not found! & pause)
-goto ACTIVATION_MENU
+if exist "%~dp0MAS_Scripts\KMS38_Activation.cmd" (
+    call "%~dp0MAS_Scripts\KMS38_Activation.cmd" /KMS38 /S
+    echo.
+    if !errorlevel! EQU 0 (echo.[SUCCESS] Activated successfully!) else (echo.[ERROR] Activation failed. Code: !errorlevel!)
+) else (echo.[ERROR] Script not found! & pause)
+pause & goto ACTIVATION_MENU
 
 :ONLINE_KMS_ACTIVATE
 cls & echo.Running Online KMS Activation...
-if exist "%~dp0MAS_Scripts\Online_KMS_Activation.cmd" (call "%~dp0MAS_Scripts\Online_KMS_Activation.cmd" /KMS-ActAndRenewalTask) else (echo.[ERROR] Script not found! & pause)
-goto ACTIVATION_MENU
+if exist "%~dp0MAS_Scripts\Online_KMS_Activation.cmd" (
+    call "%~dp0MAS_Scripts\Online_KMS_Activation.cmd" /KMS-ActAndRenewalTask /S
+    echo.
+    if !errorlevel! EQU 0 (echo.[SUCCESS] Activated successfully!) else (echo.[ERROR] Activation failed. Code: !errorlevel!)
+) else (echo.[ERROR] Script not found! & pause)
+pause & goto ACTIVATION_MENU
 
 :OHOOK_OFFICE
 cls & echo.Running Ohook Office Activation...
-if exist "%~dp0MAS_Scripts\Ohook_Activation_AIO.cmd" (call "%~dp0MAS_Scripts\Ohook_Activation_AIO.cmd" /Ohook) else (echo.[ERROR] Script not found! & pause)
-goto ACTIVATION_MENU
+if exist "%~dp0MAS_Scripts\Ohook_Activation_AIO.cmd" (
+    call "%~dp0MAS_Scripts\Ohook_Activation_AIO.cmd" /Ohook /S
+    echo.
+    if !errorlevel! EQU 0 (echo.[SUCCESS] Activated successfully!) else (echo.[ERROR] Activation failed. Code: !errorlevel!)
+) else (echo.[ERROR] Script not found! & pause)
+pause & goto ACTIVATION_MENU
 
 :KMS_OFFICE
 cls & echo.Running KMS Office Activation...
-if exist "%~dp0MAS_Scripts\Online_KMS_Activation.cmd" (call "%~dp0MAS_Scripts\Online_KMS_Activation.cmd" /KMS-ActAndRenewalTask /KMS-Office) else (echo.[ERROR] Script not found! & pause)
-goto ACTIVATION_MENU
+if exist "%~dp0MAS_Scripts\Online_KMS_Activation.cmd" (
+    call "%~dp0MAS_Scripts\Online_KMS_Activation.cmd" /KMS-ActAndRenewalTask /KMS-Office /S
+    echo.
+    if !errorlevel! EQU 0 (echo.[SUCCESS] Activated successfully!) else (echo.[ERROR] Activation failed. Code: !errorlevel!)
+) else (echo.[ERROR] Script not found! & pause)
+pause & goto ACTIVATION_MENU
 
 :ACTIVATION_TROUBLESHOOT
 cls & echo.Running Troubleshooter...
-if exist "%~dp0MAS_Scripts\Troubleshoot.cmd" (call "%~dp0MAS_Scripts\Troubleshoot.cmd") else (echo.[ERROR] Script not found! & pause)
-goto ACTIVATION_MENU
+if exist "%~dp0MAS_Scripts\Troubleshoot.cmd" (
+    start "" "%~dp0MAS_Scripts\Troubleshoot.cmd"
+    echo.A new window has opened. Follow instructions there.
+) else (echo.[ERROR] Script not found!)
+pause & goto ACTIVATION_MENU
 
 :CHECK_STATUS
 cls & echo.Checking Activation Status...
-if exist "%~dp0MAS_Scripts\Check_Activation_Status.cmd" (call "%~dp0MAS_Scripts\Check_Activation_Status.cmd") else (cscript //nologo %SystemRoot%\System32\slmgr.vbs /dlv & pause)
-goto ACTIVATION_MENU
+if exist "%~dp0MAS_Scripts\Check_Activation_Status.cmd" (
+    start "" "%~dp0MAS_Scripts\Check_Activation_Status.cmd"
+    echo.A new window has opened. Check status there.
+) else (cscript //nologo %SystemRoot%\System32\slmgr.vbs /dlv)
+pause & goto ACTIVATION_MENU
 
 :EXTRACT_KEYS
 cls & echo.Extracting Windows Keys...
-if exist "%~dp0MAS_Scripts\Extract_OEM_Folder.cmd" (call "%~dp0MAS_Scripts\Extract_OEM_Folder.cmd") else (wmic path softwarelicensingservice get OA3xOriginalProductKey 2>nul & pause)
-goto ACTIVATION_MENU
+if exist "%~dp0MAS_Scripts\Extract_OEM_Folder.cmd" (
+    start "" "%~dp0MAS_Scripts\Extract_OEM_Folder.cmd"
+    echo.A new window has opened. Check results there.
+) else (wmic path softwarelicensingservice get OA3xOriginalProductKey 2>nul)
+pause & goto ACTIVATION_MENU
 
 :CHANGE_EDITION
 cls & echo.Changing Windows Edition...
-if exist "%~dp0MAS_Scripts\Change_Windows_Edition.cmd" (call "%~dp0MAS_Scripts\Change_Windows_Edition.cmd") else (DISM /online /Get-TargetEditions & pause)
-goto ACTIVATION_MENU
+if exist "%~dp0MAS_Scripts\Change_Windows_Edition.cmd" (
+    start "" "%~dp0MAS_Scripts\Change_Windows_Edition.cmd"
+    echo.A new window has opened. Follow instructions there.
+) else (DISM /online /Get-TargetEditions)
+pause & goto ACTIVATION_MENU
 
 :SHOW_OEM_INFO
 cls & systeminfo | findstr /C:"System Manufacturer" /C:"System Model" & pause
