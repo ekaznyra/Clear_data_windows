@@ -23,11 +23,13 @@ Three powerful tools in one BAT file:
 - **Deep Cleanup** - Comprehensive (2-10GB+)
 - **Preview Mode** - See before delete
 
-### 2. Windows Activation
-- KMS Activation (automatic)
-- Manual product key entry
-- Check activation status
-- View license information
+### 2. Windows Activation (Based on MAS)
+- **HWID** - Permanent activation (Windows 10/11)
+- **KMS38** - Valid until 2038 (Win 10/11/Server)
+- **Online KMS** - 180 days, auto-renew (All Windows)
+- **Office** - Activate all Office versions
+- Check status & license info
+- Remove licenses
 
 ### 3. Software Manager
 - List all installed software
@@ -116,19 +118,38 @@ Cleans everything above plus:
 
 ## Windows Activation
 
-### KMS Activation
-- Automatic activation
-- 180-day validity (auto-renews)
-- No product key needed
+**Based on Microsoft Activation Scripts (MAS)**  
+Source: https://github.com/massgravel/Microsoft-Activation-Scripts
 
-### Manual Key Entry
-- Enter your own 25-character key
-- Format: XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
+### HWID Activation (Recommended)
+- **PERMANENT** activation (lifetime!)
+- Works on Windows 10/11
+- Survives reinstalls on same hardware
+- Most reliable method
 
-### Status Check
-- View current activation status
-- License information
-- Expiration date
+### KMS38 Activation
+- Valid until year **2038** (19 years!)
+- Works on Windows 10/11/Server
+- No renewal needed
+- Offline activation
+
+### Online KMS Activation
+- Valid for 180 days
+- Auto-renews automatically
+- Works on all Windows versions
+- Requires periodic internet
+
+### Office Activation
+- Supports Office 365/2021/2019/2016/2013/2010
+- All editions (Professional, Home, Business)
+- Project and Visio support
+- 180-day validity, auto-renew
+
+### Other Features
+- Manual product key entry
+- Check activation status (Windows + Office)
+- View license information
+- Remove Office licenses
 
 ---
 

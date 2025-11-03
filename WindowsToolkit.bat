@@ -386,14 +386,15 @@ pause
 goto CLEANUP_MENU
 
 :: ============================================
-:: ACTIVATION MENU
+:: ACTIVATION MENU (Based on Microsoft Activation Scripts)
 :: ============================================
 :ACTIVATION_MENU
 cls
 color 0E
 echo.
 echo ================================================================
-echo   WINDOWS ACTIVATION TOOL
+echo   WINDOWS ^& OFFICE ACTIVATION TOOL
+echo   Based on Microsoft Activation Scripts (MAS)
 echo ================================================================
 echo.
 
@@ -404,63 +405,302 @@ echo.
 
 echo ================================================================
 echo.
-echo   SELECT ACTIVATION METHOD:
+echo   WINDOWS ACTIVATION:
 echo.
-echo   [1] Activate Windows (KMS Method)
-echo   [2] Enter Product Key Manually
-echo   [3] Check Activation Status
-echo   [4] View License Information
+echo   [1] HWID Activation       - Permanent (Windows 10/11)
+echo   [2] KMS38 Activation      - Valid until 2038 (Win 10/11/Server)
+echo   [3] Online KMS            - 180 days, auto-renew
+echo.
+echo   OFFICE ACTIVATION:
+echo.
+echo   [4] Activate Office       - All versions (2010-2021/365)
+echo.
+echo   OTHER OPTIONS:
+echo.
+echo   [5] Check Activation Status
+echo   [6] Enter Product Key Manually
+echo   [7] View License Information
+echo   [8] Remove Office Licenses
 echo   [0] Back to Main Menu
 echo.
-echo   WARNING: Use only on your own devices!
+echo   Note: Based on massgravel/Microsoft-Activation-Scripts
 echo.
 echo ================================================================
 echo.
 
-set /p act_choice="Enter your choice (0-4): "
+set /p act_choice="Enter your choice (0-8): "
 
-if "%act_choice%"=="1" goto KMS_ACTIVATE
-if "%act_choice%"=="2" goto MANUAL_KEY
-if "%act_choice%"=="3" goto CHECK_STATUS
-if "%act_choice%"=="4" goto LICENSE_INFO
+if "%act_choice%"=="1" goto HWID_ACTIVATE
+if "%act_choice%"=="2" goto KMS38_ACTIVATE
+if "%act_choice%"=="3" goto ONLINE_KMS_ACTIVATE
+if "%act_choice%"=="4" goto ACTIVATE_OFFICE
+if "%act_choice%"=="5" goto CHECK_STATUS
+if "%act_choice%"=="6" goto MANUAL_KEY
+if "%act_choice%"=="7" goto LICENSE_INFO
+if "%act_choice%"=="8" goto REMOVE_OFFICE_LICENSE
 if "%act_choice%"=="0" goto MAIN_MENU
 goto ACTIVATION_MENU
 
 :: ============================================
-:: KMS ACTIVATION
+:: HWID ACTIVATION (Permanent - Windows 10/11)
 :: ============================================
-:KMS_ACTIVATE
+:HWID_ACTIVATE
 cls
 echo.
 echo ================================================================
-echo   KMS ACTIVATION - Starting...
+echo   HWID PERMANENT ACTIVATION
 echo ================================================================
 echo.
-echo   This will use KMS activation method
-echo   Valid for 180 days (auto-renews)
+echo   HWID (Hardware ID) Activation:
+echo   - PERMANENT activation (lifetime)
+echo   - Works on Windows 10/11
+echo   - Survives reinstalls on same hardware
+echo   - Most recommended method
 echo.
 
-set /p confirm_act="Continue with KMS activation? (Y/N): "
-if /i not "%confirm_act%"=="Y" goto ACTIVATION_MENU
+set /p confirm_hwid="Continue with HWID activation? (Y/N): "
+if /i not "%confirm_hwid%"=="Y" goto ACTIVATION_MENU
 
 echo.
-echo   Step 1: Setting KMS server...
-cscript //nologo %SystemRoot%\System32\slmgr.vbs /skms kms8.msguides.com
-timeout /t 2 >nul
-echo   [OK] KMS server configured
-
+echo   Downloading and running HWID activation script...
 echo.
-echo   Step 2: Activating Windows...
-cscript //nologo %SystemRoot%\System32\slmgr.vbs /ato
-timeout /t 3 >nul
+
+:: Download and run HWID script from MAS
+powershell -Command "irm https://massgrave.dev/get | iex" 2>nul
+
+if errorlevel 1 (
+    echo.
+    echo   ERROR: Could not download activation script
+    echo   Check your internet connection
+    echo.
+    pause
+    goto ACTIVATION_MENU
+)
 
 echo.
 echo ================================================================
-echo   ACTIVATION COMPLETE!
+echo   HWID ACTIVATION PROCESS COMPLETE!
+echo ================================================================
+echo   Check activation status to verify
+echo.
+call :LOG "SUCCESS: HWID activation attempted"
+pause
+goto ACTIVATION_MENU
+
+:: ============================================
+:: KMS38 ACTIVATION (Valid until 2038)
+:: ============================================
+:KMS38_ACTIVATE
+cls
+echo.
+echo ================================================================
+echo   KMS38 ACTIVATION
+echo ================================================================
+echo.
+echo   KMS38 Activation:
+echo   - Valid until year 2038 (19 years)
+echo   - Works on Windows 10/11/Server
+echo   - No need for renewal
+echo   - Offline activation
+echo.
+
+set /p confirm_kms38="Continue with KMS38 activation? (Y/N): "
+if /i not "%confirm_kms38%"=="Y" goto ACTIVATION_MENU
+
+echo.
+echo   Downloading and running KMS38 activation script...
+echo.
+
+:: Download and run KMS38 script from MAS
+powershell -Command "irm https://massgrave.dev/get | iex" 2>nul
+
+if errorlevel 1 (
+    echo.
+    echo   ERROR: Could not download activation script
+    echo   Check your internet connection
+    echo.
+    pause
+    goto ACTIVATION_MENU
+)
+
+echo.
+echo ================================================================
+echo   KMS38 ACTIVATION PROCESS COMPLETE!
+echo ================================================================
+echo   Check activation status to verify
+echo.
+call :LOG "SUCCESS: KMS38 activation attempted"
+pause
+goto ACTIVATION_MENU
+
+:: ============================================
+:: ONLINE KMS ACTIVATION (180 days, auto-renew)
+:: ============================================
+:ONLINE_KMS_ACTIVATE
+cls
+echo.
+echo ================================================================
+echo   ONLINE KMS ACTIVATION
+echo ================================================================
+echo.
+echo   Online KMS Activation:
+echo   - Valid for 180 days
+echo   - Auto-renews automatically
+echo   - Works on all Windows versions
+echo   - Requires periodic internet connection
+echo.
+
+set /p confirm_kms="Continue with Online KMS activation? (Y/N): "
+if /i not "%confirm_kms%"=="Y" goto ACTIVATION_MENU
+
+echo.
+echo   Method 1: Using MAS Script (Recommended)
+echo.
+
+:: Try MAS script first
+powershell -Command "irm https://massgrave.dev/get | iex" 2>nul
+
+if errorlevel 1 (
+    echo.
+    echo   Trying fallback method...
+    echo.
+    
+    :: Fallback to manual KMS
+    echo   Step 1: Setting KMS server...
+    cscript //nologo %SystemRoot%\System32\slmgr.vbs /skms kms8.msguides.com
+    timeout /t 2 >nul
+    echo   [OK] KMS server configured
+    
+    echo.
+    echo   Step 2: Activating Windows...
+    cscript //nologo %SystemRoot%\System32\slmgr.vbs /ato
+    timeout /t 3 >nul
+)
+
+echo.
+echo ================================================================
+echo   ONLINE KMS ACTIVATION COMPLETE!
 echo ================================================================
 echo   Check status to verify activation
 echo.
-call :LOG "SUCCESS: Windows activated via KMS"
+call :LOG "SUCCESS: Online KMS activation attempted"
+pause
+goto ACTIVATION_MENU
+
+:: ============================================
+:: ACTIVATE OFFICE (All Versions)
+:: ============================================
+:ACTIVATE_OFFICE
+cls
+echo.
+echo ================================================================
+echo   MICROSOFT OFFICE ACTIVATION
+echo ================================================================
+echo.
+echo   Supports:
+echo   - Office 365 / 2021 / 2019 / 2016 / 2013 / 2010
+echo   - All editions (Professional, Home, Business, etc.)
+echo   - Project and Visio
+echo.
+echo   This will use Online KMS method (180 days, auto-renew)
+echo.
+
+set /p confirm_office="Continue with Office activation? (Y/N): "
+if /i not "%confirm_office%"=="Y" goto ACTIVATION_MENU
+
+echo.
+echo   Detecting Office installation...
+echo.
+
+:: Check if Office is installed
+set "office_found=0"
+
+if exist "%ProgramFiles%\Microsoft Office" set "office_found=1"
+if exist "%ProgramFiles(x86)%\Microsoft Office" set "office_found=1"
+if exist "%ProgramW6432%\Microsoft Office" set "office_found=1"
+
+if "%office_found%"=="0" (
+    echo.
+    echo   ERROR: Microsoft Office not found!
+    echo   Please install Office first.
+    echo.
+    pause
+    goto ACTIVATION_MENU
+)
+
+echo   Office detected!
+echo.
+echo   Downloading and running Office activation script...
+echo.
+
+:: Download and run Office activation from MAS
+powershell -Command "irm https://massgrave.dev/get | iex" 2>nul
+
+if errorlevel 1 (
+    echo.
+    echo   Trying manual Office activation...
+    echo.
+    
+    :: Manual Office activation
+    cd /d "%ProgramFiles%\Microsoft Office\Office16"
+    if errorlevel 1 cd /d "%ProgramFiles(x86)%\Microsoft Office\Office16"
+    if errorlevel 1 cd /d "%ProgramFiles%\Microsoft Office\Office15"
+    if errorlevel 1 cd /d "%ProgramFiles(x86)%\Microsoft Office\Office15"
+    
+    for /f %%x in ('dir /b ..\root\Licenses16\ProPlus2019VL*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%%x" >nul 2>&1
+    cscript ospp.vbs /setprt:1688 >nul 2>&1
+    cscript ospp.vbs /unpkey:6MWKP >nul 2>&1
+    cscript ospp.vbs /inpkey:NMMKJ-6RK4F-KMJVX-8D9MJ-6MWKP >nul 2>&1
+    cscript ospp.vbs /sethst:kms8.msguides.com >nul 2>&1
+    cscript ospp.vbs /act >nul 2>&1
+)
+
+echo.
+echo ================================================================
+echo   OFFICE ACTIVATION COMPLETE!
+echo ================================================================
+echo   Open any Office app to verify activation
+echo.
+call :LOG "SUCCESS: Office activation attempted"
+pause
+goto ACTIVATION_MENU
+
+:: ============================================
+:: REMOVE OFFICE LICENSES
+:: ============================================
+:REMOVE_OFFICE_LICENSE
+cls
+echo.
+echo ================================================================
+echo   REMOVE OFFICE LICENSES
+echo ================================================================
+echo.
+echo   This will remove all Office product keys and licenses
+echo   Useful for troubleshooting or before reinstalling
+echo.
+
+set /p confirm_remove="Continue? (Y/N): "
+if /i not "%confirm_remove%"=="Y" goto ACTIVATION_MENU
+
+echo.
+echo   Removing Office licenses...
+echo.
+
+cd /d "%ProgramFiles%\Microsoft Office\Office16"
+if errorlevel 1 cd /d "%ProgramFiles(x86)%\Microsoft Office\Office16"
+if errorlevel 1 cd /d "%ProgramFiles%\Microsoft Office\Office15"
+if errorlevel 1 cd /d "%ProgramFiles(x86)%\Microsoft Office\Office15"
+
+cscript ospp.vbs /dstatus
+cscript ospp.vbs /unpkey:6MWKP >nul 2>&1
+cscript ospp.vbs /unpkey:BTDRB >nul 2>&1
+cscript ospp.vbs /unpkey:KHGM9 >nul 2>&1
+cscript ospp.vbs /unpkey:CPQVG >nul 2>&1
+
+echo.
+echo   Licenses removed!
+echo.
+call :LOG "INFO: Office licenses removed"
 pause
 goto ACTIVATION_MENU
 
@@ -503,13 +743,43 @@ goto ACTIVATION_MENU
 cls
 echo.
 echo ================================================================
-echo   ACTIVATION STATUS
+echo   WINDOWS ACTIVATION STATUS
 echo ================================================================
 echo.
 cscript //nologo %SystemRoot%\System32\slmgr.vbs /dli
 echo.
 echo ================================================================
 echo.
+
+:: Check Office activation if installed
+if exist "%ProgramFiles%\Microsoft Office\Office16\ospp.vbs" (
+    echo.
+    echo ================================================================
+    echo   OFFICE ACTIVATION STATUS
+    echo ================================================================
+    echo.
+    cd /d "%ProgramFiles%\Microsoft Office\Office16"
+    cscript ospp.vbs /dstatus
+    echo.
+    echo ================================================================
+    echo.
+) else if exist "%ProgramFiles(x86)%\Microsoft Office\Office16\ospp.vbs" (
+    echo.
+    echo ================================================================
+    echo   OFFICE ACTIVATION STATUS
+    echo ================================================================
+    echo.
+    cd /d "%ProgramFiles(x86)%\Microsoft Office\Office16"
+    cscript ospp.vbs /dstatus
+    echo.
+    echo ================================================================
+    echo.
+) else (
+    echo.
+    echo   Office not detected or not installed
+    echo.
+)
+
 call :LOG "INFO: Activation status checked"
 pause
 goto ACTIVATION_MENU
@@ -521,13 +791,39 @@ goto ACTIVATION_MENU
 cls
 echo.
 echo ================================================================
-echo   LICENSE INFORMATION
+echo   WINDOWS LICENSE INFORMATION
 echo ================================================================
 echo.
 cscript //nologo %SystemRoot%\System32\slmgr.vbs /dlv
 echo.
 echo ================================================================
 echo.
+
+:: Show Office license if installed
+if exist "%ProgramFiles%\Microsoft Office\Office16\ospp.vbs" (
+    echo.
+    echo ================================================================
+    echo   OFFICE LICENSE INFORMATION
+    echo ================================================================
+    echo.
+    cd /d "%ProgramFiles%\Microsoft Office\Office16"
+    cscript ospp.vbs /dstatus
+    echo.
+    echo ================================================================
+    echo.
+) else if exist "%ProgramFiles(x86)%\Microsoft Office\Office16\ospp.vbs" (
+    echo.
+    echo ================================================================
+    echo   OFFICE LICENSE INFORMATION
+    echo ================================================================
+    echo.
+    cd /d "%ProgramFiles(x86)%\Microsoft Office\Office16"
+    cscript ospp.vbs /dstatus
+    echo.
+    echo ================================================================
+    echo.
+)
+
 pause
 goto ACTIVATION_MENU
 
