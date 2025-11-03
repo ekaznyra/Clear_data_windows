@@ -1,0 +1,88 @@
+{
+  "_comment": "🧹 Safe Cleanup - Configuration File",
+  "_version": "2.0.0-analytical-pro",
+  
+  "backup": {
+    "enabled": true,
+    "retention_hours": 24,
+    "location": "%TEMP%\\SafeCleanup_Backup",
+    "max_backups": 5
+  },
+  
+  "analysis": {
+    "deep_scan": false,
+    "include_hidden": false,
+    "old_file_days": 90,
+    "scan_dev_projects": true,
+    "dev_folders": ["Documents", "Desktop", "Projects", "Code", "Dev"]
+  },
+  
+  "cleanup": {
+    "auto_confirm": false,
+    "skip_errors": true,
+    "show_progress": true,
+    "parallel_processing": false
+  },
+  
+  "reporting": {
+    "generate_html": true,
+    "generate_json": true,
+    "generate_csv": false,
+    "auto_open_report": false
+  },
+  
+  "exclude_paths": [
+    "C:\\Important",
+    "D:\\Backups"
+  ],
+  
+  "custom_cache_locations": [
+    {
+      "name": "Custom App Cache",
+      "path": "%AppData%\\CustomApp\\Cache",
+      "enabled": true
+    }
+  ],
+  
+  "dev_mode": {
+    "enabled": false,
+    "targets": [
+      "node_modules",
+      "__pycache__",
+      ".gradle/caches",
+      "bin",
+      "obj",
+      "build",
+      "dist",
+      ".next",
+      ".nuxt"
+    ],
+    "min_size_mb": 10
+  },
+  
+  "ai_suggestions": {
+    "enabled": true,
+    "priority_threshold": "MEDIUM",
+    "max_suggestions": 10
+  },
+  
+  "schedule": {
+    "auto_cleanup": false,
+    "frequency": "weekly",
+    "day_of_week": "sunday",
+    "time": "02:00"
+  },
+  
+  "notifications": {
+    "show_completion": true,
+    "show_errors": true,
+    "sound_enabled": false
+  },
+  
+  "advanced": {
+    "log_level": "INFO",
+    "temp_file_retention": 0,
+    "compress_backup": false,
+    "verify_integrity": true
+  }
+}

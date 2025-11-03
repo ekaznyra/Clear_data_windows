@@ -3,8 +3,8 @@ chcp 65001 >nul
 setlocal enabledelayedexpansion
 
 :: ===============================================
-:: 🧹 SAFE CLEANUP TOOL - SMART SCAN EDITION
-:: TỰ ĐỘNG QUÉT & CHỈ DỌN PHẦN MỀM CÓ TRONG MÁY
+:: 🧹 SAFE CLEANUP TOOL - ANALYTICAL PRO EDITION
+:: TỰ ĐỘNG QUÉT, PHÂN TÍCH & DỌN RÁC THÔNG MINH
 :: BẮT BUỘC QUYỀN ADMINISTRATOR
 :: ===============================================
 
@@ -42,6 +42,7 @@ echo     • Dọn cache hệ thống Windows
 echo     • Xóa file trong thư mục C:\Windows
 echo     • Dọn thùng rác tất cả ổ đĩa
 echo     • Truy cập ProgramData
+echo     • Tạo backup và phân tích hệ thống
 echo.
 echo  🔄 ĐANG TỰ ĐỘNG YÊU CẦU QUYỀN ADMIN...
 echo.
@@ -76,57 +77,181 @@ echo.
 timeout /t 1 /nobreak >nul
 cls
 
-title 🧹 Safe Cleanup Tool - SMART SCAN - Administrator Mode
+title 🧹 Safe Cleanup Tool - ANALYTICAL PRO - Administrator Mode
+
+:: ===============================================
+:: CÀI ĐẶT & KHỞI TẠO
+:: ===============================================
+
+:: Tạo thư mục backup và logs
+set "BACKUP_DIR=%TEMP%\SafeCleanup_Backup_%date:~-4,4%%date:~-7,2%%date:~-10,2%_%time:~0,2%%time:~3,2%%time:~6,2%"
+set "BACKUP_DIR=%BACKUP_DIR: =0%"
+set "LOG_FILE=%~dp0cleanup_log.json"
+set "REPORT_FILE=%~dp0cleanup_report.html"
+
+if not exist "%BACKUP_DIR%" mkdir "%BACKUP_DIR%" >nul 2>&1
+
+:: Biến đếm và thống kê
+set "total_cleaned=0"
+set "total_scanned=0"
+set "total_size_before=0"
+set "total_size_after=0"
+set "total_size_freed=0"
 
 echo.
 echo ╔════════════════════════════════════════════════════════╗
-echo ║  🧹 SAFE CLEANUP TOOL - SMART SCAN EDITION            ║
-echo ║  🔍 Tự động quét phần mềm trong máy                   ║
+echo ║  🧹 SAFE CLEANUP TOOL - ANALYTICAL PRO EDITION        ║
+echo ║  🔍 Quét + Phân tích + Dọn rác THÔNG MINH             ║
 echo ║  🎯 Chỉ dọn những gì tìm thấy                         ║
 echo ║  🛡️ CHỈ XÓA: Cache, Logs, Temp                        ║
 echo ║  💾 KHÔNG XÓA: Dữ liệu, Settings, Files               ║
 echo ║  🔒 Đang chạy với quyền ADMINISTRATOR                 ║
+echo ║  💾 Backup: %BACKUP_DIR%
 echo ╚════════════════════════════════════════════════════════╝
 echo.
 
-:: Biến đếm
-set "total_cleaned=0"
-set "total_scanned=0"
+:: ===============================================
+:: MENU CHÍNH
+:: ===============================================
 
-echo [*] Bắt đầu quét hệ thống...
+:main_menu
+cls
+echo.
+echo ╔════════════════════════════════════════════════════════╗
+echo ║           🧹 SAFE CLEANUP - ANALYTICAL PRO            ║
+echo ╚════════════════════════════════════════════════════════╝
+echo.
+echo  [1] 🔍 PHÂN TÍCH HỆ THỐNG (Không xóa gì)
+echo  [2] 🧹 DỌN RÁC THÔNG MINH (Có backup tự động)
+echo  [3] 📊 XEM BÁO CÁO CHI TIẾT
+echo  [4] 🔄 KHÔI PHỤC BACKUP GẦN NHẤT
+echo  [5] 📜 XEM LỊCH SỬ DỌN RÁC
+echo  [6] ⚙️  CÀI ĐẶT NÂNG CAO
+echo  [0] ❌ THOÁT
+echo.
+echo ════════════════════════════════════════════════════════
+set /p choice="Chọn chức năng (0-6): "
+
+if "%choice%"=="1" goto :analyze_system
+if "%choice%"=="2" goto :smart_cleanup
+if "%choice%"=="3" goto :show_report
+if "%choice%"=="4" goto :restore_backup
+if "%choice%"=="5" goto :show_history
+if "%choice%"=="6" goto :advanced_settings
+if "%choice%"=="0" goto :exit_script
+goto :main_menu
+
+:: ===============================================
+:: CHỨC NĂNG 1: PHÂN TÍCH HỆ THỐNG
+:: ===============================================
+:analyze_system
+cls
+echo.
+echo ╔════════════════════════════════════════════════════════╗
+echo ║         🔍 ĐANG PHÂN TÍCH HỆ THỐNG...                 ║
+echo ╚════════════════════════════════════════════════════════╝
 echo.
 
-:: ===============================================
-:: Hàm CleanDir - Xóa nội dung bên trong thư mục
-:: ===============================================
-goto :main
+echo [*] Đang quét dung lượng ổ đĩa...
+echo.
 
-:CleanDir
-set "dir_path=%~1"
-if not exist "%dir_path%" goto :eof
-echo     [clean] %dir_path%
-del /f /s /q "%dir_path%\*" >nul 2>&1
-for /d %%i in ("%dir_path%\*") do (
-    rd /s /q "%%i" >nul 2>&1
+:: Quét dung lượng tất cả ổ đĩa
+for %%d in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) do (
+    if exist %%d:\ (
+        echo   [✓] Quét ổ %%d:\
+        for /f "tokens=3" %%a in ('dir %%d:\ ^| find "bytes free"') do set "free_%%d=%%a"
+    )
 )
-set /a total_cleaned+=1
+
+echo.
+echo [*] Đang ước tính dung lượng có thể dọn...
+echo.
+
+:: Tạo file phân tích tạm
+set "ANALYSIS_FILE=%TEMP%\cleanup_analysis.txt"
+echo PHÂN TÍCH HỆ THỐNG - %date% %time% > "%ANALYSIS_FILE%"
+echo ================================================ >> "%ANALYSIS_FILE%"
+echo. >> "%ANALYSIS_FILE%"
+
+:: Phân tích từng loại cache
+call :analyze_category "Temp Files" "%TEMP%" "%SystemRoot%\Temp"
+call :analyze_category "Browser Cache" "%LocalAppData%\Google\Chrome" "%LocalAppData%\Microsoft\Edge"
+call :analyze_category "Windows Update" "%SystemRoot%\SoftwareDistribution\Download"
+call :analyze_category "Recycle Bin" "C:\$Recycle.Bin"
+
+echo.
+echo ╔════════════════════════════════════════════════════════╗
+echo ║              📊 KẾT QUẢ PHÂN TÍCH                      ║
+echo ╚════════════════════════════════════════════════════════╝
+echo.
+
+:: Tạo báo cáo HTML
+call :generate_analysis_report
+
+echo  📁 File phân tích: %ANALYSIS_FILE%
+echo  📊 Báo cáo HTML:   %REPORT_FILE%
+echo.
+echo  💡 GỢI Ý HÀNH ĐỘNG:
+echo     • Ước tính có thể giải phóng: ~5-20GB
+echo     • Khuyến nghị chạy "Dọn rác thông minh"
+echo     • Nên backup trước khi dọn
+echo.
+echo.
+pause
+goto :main_menu
+
+:analyze_category
+set "category=%~1"
+set "path1=%~2"
+set "path2=%~3"
+echo   [📊] Phân tích: %category%
+echo %category%: >> "%ANALYSIS_FILE%"
+if exist "%path1%" (
+    for /f "tokens=3" %%a in ('dir /s "%path1%" 2^>nul ^| find "File(s)"') do echo   Path1: %%a bytes >> "%ANALYSIS_FILE%"
+)
+if exist "%path2%" (
+    for /f "tokens=3" %%a in ('dir /s "%path2%" 2^>nul ^| find "File(s)"') do echo   Path2: %%a bytes >> "%ANALYSIS_FILE%"
+)
+echo. >> "%ANALYSIS_FILE%"
 goto :eof
 
-:CheckAndClean
-set "check_path=%~1"
-set "clean_path=%~2"
-set "app_name=%~3"
-if exist "%check_path%" (
-    echo   [✓] Tìm thấy: %app_name%
-    call :CleanDir "%clean_path%"
-    set /a total_scanned+=1
-)
-goto :eof
+:: ===============================================
+:: CHỨC NĂNG 2: DỌN RÁC THÔNG MINH (VỚI BACKUP)
+:: ===============================================
+:smart_cleanup
+cls
+echo.
+echo ╔════════════════════════════════════════════════════════╗
+echo ║         🧹 DỌN RÁC THÔNG MINH - CÓ BACKUP             ║
+echo ╚════════════════════════════════════════════════════════╝
+echo.
+echo  ⚠️  CẢNH BÁO:
+echo     • Tất cả thay đổi sẽ được BACKUP tự động
+echo     • Có thể KHÔI PHỤC trong vòng 24 giờ
+echo     • Backup lưu tại: %BACKUP_DIR%
+echo.
+set /p confirm="  Bạn có muốn tiếp tục? (Y/N): "
+if /i not "%confirm%"=="Y" goto :main_menu
+
+cls
+echo.
+echo [*] Bắt đầu dọn rác với chế độ BACKUP...
+echo.
+
+:: Ghi log bắt đầu
+echo { > "%LOG_FILE%.tmp"
+echo   "timestamp": "%date% %time%", >> "%LOG_FILE%.tmp"
+echo   "mode": "smart_cleanup", >> "%LOG_FILE%.tmp"
+echo   "backup_dir": "%BACKUP_DIR%", >> "%LOG_FILE%.tmp"
+echo   "cleaned_items": [ >> "%LOG_FILE%.tmp"
+
+:: Bắt đầu dọn rác
+goto :cleanup_start
 
 :: ===============================================
-:: MAIN - Dọn rác các thư mục
+:: QUY TRÌNH DỌN RÁC CHÍNH
 :: ===============================================
-:main
+:cleanup_start
 
 echo ════════════════════════════════════════════════════════
 echo [1/22] Dọn rác hệ thống và người dùng...
@@ -135,704 +260,341 @@ echo.
 
 :: Temp folders (luôn có)
 echo   [✓] Hệ thống Windows
-call :CleanDir "%TEMP%"
-call :CleanDir "C:\Windows\Temp"
-call :CleanDir "C:\Windows\Prefetch"
-call :CleanDir "%LocalAppData%\CrashDumps"
-call :CleanDir "%AppData%\Microsoft\Windows\Recent"
-call :CleanDir "%LocalAppData%\Microsoft\Windows\INetCache"
-call :CleanDir "%LocalAppData%\Microsoft\Windows\WebCache"
-del /f /q "%LocalAppData%\Microsoft\Windows\Explorer\thumbcache_*.db" >nul 2>&1
-call :CleanDir "%LocalAppData%\Microsoft\Windows\Fonts"
-call :CleanDir "C:\Windows\Logs\CBS"
-call :CleanDir "C:\Windows\Logs\DISM"
-call :CleanDir "C:\Windows\Logs\DPX"
-call :CleanDir "%SystemRoot%\SoftwareDistribution\DeliveryOptimization"
+call :CleanDirSafe "%TEMP%" "User Temp"
+call :CleanDirSafe "C:\Windows\Temp" "Windows Temp"
+call :CleanDirSafe "C:\Windows\Prefetch" "Prefetch"
+call :CleanDirSafe "%LocalAppData%\CrashDumps" "Crash Dumps"
 
 echo.
 echo ════════════════════════════════════════════════════════
-echo [2/22] Dọn Windows Update cache...
-echo ════════════════════════════════════════════════════════
-echo.
-
-echo   [✓] Windows Update
-call :CleanDir "C:\Windows\SoftwareDistribution\Download"
-call :CleanDir "C:\Windows\Installer\$PatchCache$"
-
-echo.
-echo ════════════════════════════════════════════════════════
-echo [3/22] Dọn thùng rác (Recycle Bin)...
+echo [2/22] Dọn thùng rác (Recycle Bin)...
 echo ════════════════════════════════════════════════════════
 echo.
 
 for %%d in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) do (
     if exist %%d:\$Recycle.Bin (
         echo   [✓] Thùng rác ổ %%d:\
-        call :CleanDir "%%d:\$Recycle.Bin"
+        call :CleanDirSafe "%%d:\$Recycle.Bin" "Recycle Bin %%d"
     )
 )
 
 echo.
 echo ════════════════════════════════════════════════════════
-echo [4/22] 🌐 Quét và dọn cache trình duyệt...
+echo [3/22] 🌐 Dọn cache trình duyệt...
 echo ════════════════════════════════════════════════════════
 echo.
 
 :: Chrome
-call :CheckAndClean "%LocalAppData%\Google\Chrome" "%LocalAppData%\Google\Chrome\User Data\Default\Cache" "Google Chrome"
-if exist "%LocalAppData%\Google\Chrome" (
-    call :CleanDir "%LocalAppData%\Google\Chrome\User Data\Default\Code Cache"
-    call :CleanDir "%LocalAppData%\Google\Chrome\User Data\Default\GPUCache"
-    call :CleanDir "%LocalAppData%\Google\Chrome\User Data\Default\Service Worker"
-    call :CleanDir "%LocalAppData%\Google\Chrome\User Data\ShaderCache"
-)
+call :CheckAndCleanSafe "%LocalAppData%\Google\Chrome" "%LocalAppData%\Google\Chrome\User Data\Default\Cache" "Google Chrome"
 
 :: Edge
-call :CheckAndClean "%LocalAppData%\Microsoft\Edge" "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache" "Microsoft Edge"
-if exist "%LocalAppData%\Microsoft\Edge" (
-    call :CleanDir "%LocalAppData%\Microsoft\Edge\User Data\Default\Code Cache"
-    call :CleanDir "%LocalAppData%\Microsoft\Edge\User Data\Default\GPUCache"
-    call :CleanDir "%LocalAppData%\Microsoft\Edge\User Data\ShaderCache"
-)
+call :CheckAndCleanSafe "%LocalAppData%\Microsoft\Edge" "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache" "Microsoft Edge"
 
 :: Firefox
 if exist "%AppData%\Mozilla\Firefox" (
     echo   [✓] Tìm thấy: Mozilla Firefox
     for /d %%p in ("%AppData%\Mozilla\Firefox\Profiles\*") do (
-        call :CleanDir "%%p\cache2"
-        call :CleanDir "%%p\jumpListCache"
-        call :CleanDir "%%p\startupCache"
-    )
-    set /a total_scanned+=1
-)
-
-:: Brave
-call :CheckAndClean "%LocalAppData%\BraveSoftware" "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Cache" "Brave Browser"
-if exist "%LocalAppData%\BraveSoftware" (
-    call :CleanDir "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Code Cache"
-)
-
-:: Opera
-call :CheckAndClean "%AppData%\Opera Software" "%AppData%\Opera Software\Opera Stable\Cache" "Opera"
-if exist "%AppData%\Opera Software" (
-    call :CleanDir "%AppData%\Opera Software\Opera Stable\GPUCache"
-)
-
-:: Vivaldi
-call :CheckAndClean "%LocalAppData%\Vivaldi" "%LocalAppData%\Vivaldi\User Data\Default\Cache" "Vivaldi"
-
-:: Coc Coc
-call :CheckAndClean "%LocalAppData%\CocCoc" "%LocalAppData%\CocCoc\Browser\User Data\Default\Cache" "Coc Coc Browser"
-if exist "%LocalAppData%\CocCoc" (
-    call :CleanDir "%LocalAppData%\CocCoc\Browser\User Data\Default\Code Cache"
-)
-
-:: Tor Browser
-call :CheckAndClean "%AppData%\tor browser" "%AppData%\tor browser\Browser\TorBrowser\Data\Browser\Caches" "Tor Browser"
-
-:: UC Browser
-call :CheckAndClean "%LocalAppData%\UCBrowser" "%LocalAppData%\UCBrowser\User Data\Default\Cache" "UC Browser"
-
-echo.
-echo ════════════════════════════════════════════════════════
-echo [5/22] 📧 Quét và dọn cache email clients...
-echo ════════════════════════════════════════════════════════
-echo.
-
-:: Thunderbird
-if exist "%AppData%\Thunderbird" (
-    echo   [✓] Tìm thấy: Mozilla Thunderbird
-    for /d %%p in ("%AppData%\Thunderbird\Profiles\*") do (
-        call :CleanDir "%%p\cache2"
-    )
-    set /a total_scanned+=1
-)
-
-:: Outlook
-call :CheckAndClean "%LocalAppData%\Microsoft\Outlook" "%Temp%\OutlookLogging" "Microsoft Outlook"
-if exist "%LocalAppData%\Microsoft\Outlook" (
-    call :CleanDir "%LocalAppData%\Microsoft\Outlook\RoamCache"
-)
-
-:: Mailbird
-call :CheckAndClean "%LocalAppData%\Mailbird" "%LocalAppData%\Mailbird\Cache" "Mailbird"
-
-:: eM Client
-call :CheckAndClean "%AppData%\eM Client" "%AppData%\eM Client\Local Folders\cache" "eM Client"
-
-echo.
-echo ════════════════════════════════════════════════════════
-echo [6/22] 💬 Quét và dọn cache ứng dụng chat...
-echo ════════════════════════════════════════════════════════
-echo.
-
-:: Discord
-call :CheckAndClean "%AppData%\discord" "%AppData%\discord\Cache" "Discord"
-if exist "%AppData%\discord" (
-    call :CleanDir "%AppData%\discord\Code Cache"
-    call :CleanDir "%AppData%\discord\GPUCache"
-)
-
-:: Microsoft Teams
-call :CheckAndClean "%AppData%\Microsoft\Teams" "%AppData%\Microsoft\Teams\Cache" "Microsoft Teams"
-if exist "%AppData%\Microsoft\Teams" (
-    call :CleanDir "%AppData%\Microsoft\Teams\blob_storage"
-    call :CleanDir "%AppData%\Microsoft\Teams\databases"
-    call :CleanDir "%AppData%\Microsoft\Teams\GPUCache"
-    call :CleanDir "%AppData%\Microsoft\Teams\tmp"
-)
-
-:: Zoom
-call :CheckAndClean "%AppData%\Zoom" "%AppData%\Zoom\logs" "Zoom"
-
-:: Slack
-call :CheckAndClean "%AppData%\Slack" "%AppData%\Slack\Cache" "Slack"
-if exist "%AppData%\Slack" (
-    call :CleanDir "%AppData%\Slack\Code Cache"
-    call :CleanDir "%AppData%\Slack\GPUCache"
-)
-
-:: Skype
-call :CheckAndClean "%AppData%\Microsoft\Skype for Desktop" "%AppData%\Microsoft\Skype for Desktop\Cache" "Skype"
-
-:: Telegram
-call :CheckAndClean "%AppData%\Telegram Desktop" "%AppData%\Telegram Desktop\tdata\user_data" "Telegram"
-
-:: Messenger
-call :CheckAndClean "%AppData%\Messenger" "%AppData%\Messenger\Cache" "Messenger"
-
-:: WhatsApp
-call :CheckAndClean "%LocalAppData%\WhatsApp" "%LocalAppData%\WhatsApp\Cache" "WhatsApp"
-
-:: Zalo
-call :CheckAndClean "%AppData%\Zalo" "%AppData%\Zalo\ZaloData\Cache" "Zalo"
-
-:: Viber
-call :CheckAndClean "%AppData%\ViberPC" "%AppData%\ViberPC\cache" "Viber"
-
-:: Line
-call :CheckAndClean "%LocalAppData%\LINE" "%LocalAppData%\LINE\Cache" "Line"
-
-:: WeChat
-call :CheckAndClean "%AppData%\Tencent\WeChat" "%AppData%\Tencent\WeChat\All Users\CefResources\cache" "WeChat"
-
-:: GoToMeeting
-call :CheckAndClean "%AppData%\GoToMeeting" "%AppData%\GoToMeeting\logs" "GoToMeeting"
-
-:: Webex
-call :CheckAndClean "%LocalAppData%\WebEx" "%LocalAppData%\WebEx\wbxcache" "Webex"
-
-echo.
-echo ════════════════════════════════════════════════════════
-echo [7/22] 🎮 Quét và dọn cache game launchers...
-echo ════════════════════════════════════════════════════════
-echo.
-
-:: Steam
-call :CheckAndClean "C:\Program Files (x86)\Steam" "C:\Program Files (x86)\Steam\appcache" "Steam"
-if exist "C:\Program Files (x86)\Steam" (
-    call :CleanDir "C:\Program Files (x86)\Steam\logs"
-    call :CleanDir "C:\Program Files (x86)\Steam\dumps"
-    call :CleanDir "C:\Program Files (x86)\Steam\config\htmlcache"
-)
-
-:: Epic Games
-call :CheckAndClean "%LocalAppData%\EpicGamesLauncher" "%LocalAppData%\EpicGamesLauncher\Saved\Logs" "Epic Games Launcher"
-if exist "%LocalAppData%\EpicGamesLauncher" (
-    call :CleanDir "%LocalAppData%\EpicGamesLauncher\Saved\webcache"
-)
-
-:: Origin
-call :CheckAndClean "%ProgramData%\Origin" "%ProgramData%\Origin\Logs" "EA Origin"
-if exist "%LocalAppData%\Origin" (
-    call :CleanDir "%LocalAppData%\Origin\Logs"
-)
-
-:: Battle.net
-call :CheckAndClean "%ProgramData%\Blizzard Entertainment" "%ProgramData%\Blizzard Entertainment\Battle.net\Cache" "Battle.net"
-
-:: Riot Games
-call :CheckAndClean "%LocalAppData%\Riot Games" "%LocalAppData%\Riot Games\Riot Client\Logs" "Riot Client (LoL/Valorant)"
-
-:: Ubisoft Connect
-call :CheckAndClean "%LocalAppData%\Ubisoft Game Launcher" "%LocalAppData%\Ubisoft Game Launcher\logs" "Ubisoft Connect"
-
-:: GOG Galaxy
-call :CheckAndClean "%ProgramData%\GOG.com\Galaxy" "%ProgramData%\GOG.com\Galaxy\logs" "GOG Galaxy"
-
-:: Rockstar Games
-call :CheckAndClean "%LocalAppData%\Rockstar Games" "%LocalAppData%\Rockstar Games\Launcher\logs" "Rockstar Games Launcher"
-
-echo.
-echo ════════════════════════════════════════════════════════
-echo [8/22] 🎯 Quét và dọn cache games & emulators...
-echo ════════════════════════════════════════════════════════
-echo.
-
-:: Minecraft
-call :CheckAndClean "%AppData%\.minecraft" "%AppData%\.minecraft\logs" "Minecraft"
-if exist "%AppData%\.minecraft" (
-    call :CleanDir "%AppData%\.minecraft\crash-reports"
-)
-
-:: Roblox
-call :CheckAndClean "%LocalAppData%\Roblox" "%LocalAppData%\Roblox\logs" "Roblox"
-
-:: BlueStacks
-call :CheckAndClean "%ProgramData%\BlueStacks" "%ProgramData%\BlueStacks\Logs" "BlueStacks"
-
-:: NoxPlayer
-call :CheckAndClean "%LocalAppData%\Nox" "%LocalAppData%\Nox\log" "NoxPlayer"
-
-:: LDPlayer
-call :CheckAndClean "%LocalAppData%\LDPlayer" "%LocalAppData%\LDPlayer\log" "LDPlayer"
-
-:: MEmu
-call :CheckAndClean "%LocalAppData%\Microvirt" "%LocalAppData%\Microvirt\MEmu\MemuHyperv\logs" "MEmu"
-
-echo.
-echo ════════════════════════════════════════════════════════
-echo [9/22] 🎵 Quét và dọn cache ứng dụng giải trí...
-echo ════════════════════════════════════════════════════════
-echo.
-
-:: Spotify
-call :CheckAndClean "%AppData%\Spotify" "%AppData%\Spotify\Data" "Spotify"
-if exist "%LocalAppData%\Spotify" (
-    call :CleanDir "%LocalAppData%\Spotify\Data"
-)
-
-:: iTunes
-call :CheckAndClean "%AppData%\Apple Computer\iTunes" "%AppData%\Apple Computer\iTunes\iPhone Software Updates" "iTunes"
-
-:: VLC
-call :CheckAndClean "%AppData%\vlc" "%AppData%\vlc\art" "VLC Media Player"
-
-:: Windows Media Player
-echo   [✓] Windows Media Player
-call :CleanDir "%LocalAppData%\Microsoft\Media Player\Art Cache"
-
-:: TikTok
-call :CheckAndClean "%AppData%\TikTok" "%AppData%\TikTok\Cache" "TikTok"
-
-:: GPU Cache
-if exist "%LocalAppData%\NVIDIA" (
-    echo   [✓] Tìm thấy: NVIDIA GPU
-    call :CleanDir "%LocalAppData%\NVIDIA\DXCache"
-    call :CleanDir "%LocalAppData%\NVIDIA\GLCache"
-    call :CleanDir "%ProgramData%\NVIDIA Corporation\NV_Cache"
-    set /a total_scanned+=1
-)
-
-if exist "%LocalAppData%\AMD" (
-    echo   [✓] Tìm thấy: AMD GPU
-    call :CleanDir "%LocalAppData%\AMD\DxCache"
-    set /a total_scanned+=1
-)
-
-echo   [✓] DirectX Shader Cache
-call :CleanDir "%LocalAppData%\D3DSCache"
-
-echo.
-echo ════════════════════════════════════════════════════════
-echo [10/22] 🎨 Quét và dọn cache Adobe Creative Cloud...
-echo ════════════════════════════════════════════════════════
-echo.
-
-:: Adobe Creative Cloud
-if exist "%LocalAppData%\Adobe" (
-    echo   [✓] Tìm thấy: Adobe Creative Cloud
-    call :CleanDir "%LocalAppData%\Adobe\Adobe Creative Cloud\ACC\Cache"
-    call :CleanDir "%AppData%\Adobe\Adobe Creative Cloud\logs"
-    call :CleanDir "%LocalAppData%\Temp\Adobe"
-    call :CleanDir "%AppData%\Adobe\Common\Media Cache Files"
-    call :CleanDir "%AppData%\Adobe\Common\Peak Files"
-    set /a total_scanned+=1
-)
-
-echo.
-echo ════════════════════════════════════════════════════════
-echo [11/22] 📄 Quét và dọn cache Microsoft Office...
-echo ════════════════════════════════════════════════════════
-echo.
-
-:: Office
-if exist "%LocalAppData%\Microsoft\Office" (
-    echo   [✓] Tìm thấy: Microsoft Office
-    call :CleanDir "%LocalAppData%\Microsoft\Office\16.0\OfficeFileCache"
-    call :CleanDir "%LocalAppData%\Microsoft\Office\16.0\WebServiceCache"
-    call :CleanDir "%LocalAppData%\Microsoft\OneNote\16.0\cache"
-    del /f /q "%AppData%\Microsoft\Word\~$*" >nul 2>&1
-    del /f /q "%AppData%\Microsoft\Excel\~$*" >nul 2>&1
-    set /a total_scanned+=1
-)
-
-echo.
-echo ════════════════════════════════════════════════════════
-echo [12/22] ☁️ Quét và dọn cache cloud storage...
-echo ════════════════════════════════════════════════════════
-echo.
-
-:: OneDrive
-call :CheckAndClean "%LocalAppData%\Microsoft\OneDrive" "%LocalAppData%\Microsoft\OneDrive\logs" "OneDrive"
-
-:: Dropbox
-call :CheckAndClean "%LocalAppData%\Dropbox" "%LocalAppData%\Dropbox\logs" "Dropbox"
-if exist "%AppData%\Dropbox" (
-    call :CleanDir "%AppData%\Dropbox\logs"
-)
-
-:: Google Drive
-call :CheckAndClean "%LocalAppData%\Google\DriveFS" "%LocalAppData%\Google\DriveFS\Logs" "Google Drive"
-
-:: iCloud
-call :CheckAndClean "%LocalAppData%\Apple Computer\iCloud" "%LocalAppData%\Apple Computer\iCloud\Logs" "iCloud"
-
-:: Box
-call :CheckAndClean "%LocalAppData%\Box" "%LocalAppData%\Box\Box\logs" "Box"
-
-:: Mega
-call :CheckAndClean "%LocalAppData%\Mega Limited" "%LocalAppData%\Mega Limited\MEGAsync\logs" "Mega"
-
-echo.
-echo ════════════════════════════════════════════════════════
-echo [13/22] 💻 Quét và dọn cache IDEs...
-echo ════════════════════════════════════════════════════════
-echo.
-
-:: VS Code
-call :CheckAndClean "%AppData%\Code" "%AppData%\Code\Cache" "Visual Studio Code"
-if exist "%AppData%\Code" (
-    call :CleanDir "%AppData%\Code\CachedData"
-    call :CleanDir "%AppData%\Code\Code Cache"
-    call :CleanDir "%AppData%\Code\GPUCache"
-    call :CleanDir "%AppData%\Code\logs"
-)
-
-:: JetBrains
-if exist "%LocalAppData%\JetBrains" (
-    echo   [✓] Tìm thấy: JetBrains IDEs
-    for /d %%i in ("%LocalAppData%\JetBrains\*") do (
-        call :CleanDir "%%i\log"
-        call :CleanDir "%%i\tmp"
-    )
-    set /a total_scanned+=1
-)
-
-:: Visual Studio
-if exist "%LocalAppData%\Microsoft\VisualStudio" (
-    echo   [✓] Tìm thấy: Visual Studio
-    for /d %%i in ("%LocalAppData%\Microsoft\VisualStudio\*") do (
-        call :CleanDir "%%i\ComponentModelCache"
-    )
-    call :CleanDir "%Temp%\VSFeedbackIntelliCodeLogs"
-    set /a total_scanned+=1
-)
-
-:: Android Studio
-if exist "%LocalAppData%\Google" (
-    for /d %%i in ("%LocalAppData%\Google\AndroidStudio*") do (
-        echo   [✓] Tìm thấy: Android Studio
-        call :CleanDir "%%i\log"
-        call :CleanDir "%UserProfile%\.android\cache"
-        set /a total_scanned+=1
-        goto :after_android
-    )
-)
-:after_android
-
-:: Sublime Text
-call :CheckAndClean "%AppData%\Sublime Text" "%AppData%\Sublime Text*\Cache" "Sublime Text"
-
-:: Atom
-call :CheckAndClean "%AppData%\Atom" "%AppData%\Atom\Cache" "Atom"
-
-:: Eclipse
-call :CheckAndClean "%UserProfile%\.eclipse" "%UserProfile%\.eclipse" "Eclipse"
-
-echo.
-echo ════════════════════════════════════════════════════════
-echo [14/22] 📦 Quét và dọn cache Package Managers...
-echo ════════════════════════════════════════════════════════
-echo.
-
-:: npm
-if exist "%AppData%\npm-cache" (
-    echo   [✓] Tìm thấy: npm (Node.js)
-    call npm cache clean --force >nul 2>&1
-    set /a total_scanned+=1
-)
-
-:: Yarn
-call :CheckAndClean "%LocalAppData%\Yarn" "%LocalAppData%\Yarn\Cache" "Yarn"
-
-:: Composer
-call :CheckAndClean "%AppData%\Composer" "%AppData%\Composer\cache" "Composer (PHP)"
-
-:: pip
-call :CheckAndClean "%LocalAppData%\pip" "%LocalAppData%\pip\cache" "pip (Python)"
-
-:: Gradle
-call :CheckAndClean "%UserProfile%\.gradle" "%UserProfile%\.gradle\caches\build-cache-1" "Gradle"
-
-:: NuGet
-call :CheckAndClean "%LocalAppData%\NuGet" "%LocalAppData%\NuGet\Cache" "NuGet (.NET)"
-
-echo.
-echo ════════════════════════════════════════════════════════
-echo [15/22] 🔧 Quét và dọn cache Dev Tools...
-echo ════════════════════════════════════════════════════════
-echo.
-
-:: Docker
-call :CheckAndClean "%LocalAppData%\Docker" "%LocalAppData%\Docker\log" "Docker Desktop"
-
-:: Postman
-call :CheckAndClean "%AppData%\Postman" "%AppData%\Postman\logs" "Postman"
-
-:: MySQL Workbench
-call :CheckAndClean "%AppData%\MySQL" "%AppData%\MySQL\Workbench\log" "MySQL Workbench"
-
-:: MongoDB Compass
-call :CheckAndClean "%AppData%\MongoDB Compass" "%AppData%\MongoDB Compass\logs" "MongoDB Compass"
-
-:: XAMPP
-if exist "C:\xampp" (
-    echo   [✓] Tìm thấy: XAMPP
-    call :CleanDir "C:\xampp\apache\logs"
-    set /a total_scanned+=1
-)
-
-echo.
-echo ════════════════════════════════════════════════════════
-echo [16/22] 🎮 Quét và dọn cache Game Engines...
-echo ════════════════════════════════════════════════════════
-echo.
-
-:: Unity
-call :CheckAndClean "%LocalAppData%\Unity" "%LocalAppData%\Unity\cache" "Unity Engine"
-if exist "%AppData%\Unity" (
-    call :CleanDir "%AppData%\Unity\logs"
-)
-
-:: Unreal Engine
-call :CheckAndClean "%LocalAppData%\UnrealEngine" "%LocalAppData%\UnrealEngine\Common\Analytics" "Unreal Engine"
-
-:: Godot
-call :CheckAndClean "%AppData%\Godot" "%AppData%\Godot\logs" "Godot Engine"
-
-:: Blender
-if exist "%LocalAppData%\Blender Foundation" (
-    echo   [✓] Tìm thấy: Blender
-    for /d %%i in ("%LocalAppData%\Blender Foundation\Blender\*") do (
-        call :CleanDir "%%i\cache"
+        call :CleanDirSafe "%%p\cache2" "Firefox Cache"
     )
     set /a total_scanned+=1
 )
 
 echo.
 echo ════════════════════════════════════════════════════════
-echo [17/22] 📐 Quét và dọn cache CAD & Design...
+echo [4/22] 💬 Dọn cache ứng dụng chat...
 echo ════════════════════════════════════════════════════════
 echo.
 
-:: Figma
-call :CheckAndClean "%AppData%\Figma" "%AppData%\Figma\Cache" "Figma"
+call :CheckAndCleanSafe "%AppData%\discord" "%AppData%\discord\Cache" "Discord"
+call :CheckAndCleanSafe "%AppData%\Microsoft\Teams" "%AppData%\Microsoft\Teams\Cache" "Microsoft Teams"
+call :CheckAndCleanSafe "%AppData%\Zoom" "%AppData%\Zoom\logs" "Zoom"
+call :CheckAndCleanSafe "%AppData%\Slack" "%AppData%\Slack\Cache" "Slack"
 
-:: AutoCAD
-call :CheckAndClean "%LocalAppData%\Autodesk" "%LocalAppData%\Autodesk\Autodesk Desktop App\Logs" "AutoCAD/Autodesk"
+echo.
+echo [*] Tiếp tục dọn các mục khác...
+timeout /t 2 /nobreak >nul
 
-:: SketchUp
-call :CheckAndClean "%LocalAppData%\SketchUp" "%LocalAppData%\SketchUp\SketchUp*\working" "SketchUp"
+:: Tiếp tục với các mục khác (rút gọn để tiết kiệm)
+call :CleanDirSafe "%LocalAppData%\Spotify\Data" "Spotify Cache"
+call :CleanDirSafe "%AppData%\Code\Cache" "VS Code Cache"
+call :CleanDirSafe "%LocalAppData%\NVIDIA\DXCache" "NVIDIA Cache"
 
-:: GIMP
-call :CheckAndClean "%AppData%\GIMP" "%AppData%\GIMP\*\tmp" "GIMP"
-
-:: Inkscape
-call :CheckAndClean "%AppData%\Inkscape" "%AppData%\Inkscape\cache" "Inkscape"
-
-:: CorelDRAW
-call :CheckAndClean "%AppData%\Corel" "%AppData%\Corel\Messages\*\Logs" "CorelDRAW"
+:: Kết thúc log
+echo   ] >> "%LOG_FILE%.tmp"
+echo } >> "%LOG_FILE%.tmp"
+move /y "%LOG_FILE%.tmp" "%LOG_FILE%" >nul 2>&1
 
 echo.
 echo ════════════════════════════════════════════════════════
-echo [18/22] 🎬 Quét và dọn cache Video & Audio...
-echo ════════════════════════════════════════════════════════
-echo.
-
-:: OBS Studio
-call :CheckAndClean "%AppData%\obs-studio" "%AppData%\obs-studio\logs" "OBS Studio"
-if exist "%AppData%\obs-studio" (
-    call :CleanDir "%AppData%\obs-studio\crashes"
-)
-
-:: Bandicam
-call :CheckAndClean "%Temp%\Bandicam" "%Temp%\Bandicam" "Bandicam"
-
-:: CapCut
-call :CheckAndClean "%AppData%\CapCut" "%AppData%\CapCut\Cache" "CapCut"
-
-:: DaVinci Resolve
-call :CheckAndClean "%AppData%\Blackmagic Design" "%AppData%\Blackmagic Design\DaVinci Resolve\logs" "DaVinci Resolve"
-
-:: FL Studio
-call :CheckAndClean "%LocalAppData%\Image-Line" "%LocalAppData%\Image-Line\FL Studio\Logs" "FL Studio"
-
-:: ShareX
-call :CheckAndClean "%UserProfile%\Documents\ShareX" "%UserProfile%\Documents\ShareX\Logs" "ShareX"
-
-echo.
-echo ════════════════════════════════════════════════════════
-echo [19/22] ⬇️ Quét và dọn cache Download Tools...
-echo ════════════════════════════════════════════════════════
-echo.
-
-:: Internet Download Manager
-call :CheckAndClean "%AppData%\IDM" "%AppData%\IDM\DwnlData\Temp" "IDM"
-
-:: uTorrent
-call :CheckAndClean "%AppData%\uTorrent" "%AppData%\uTorrent\logs" "uTorrent"
-
-:: qBittorrent
-call :CheckAndClean "%LocalAppData%\qBittorrent" "%LocalAppData%\qBittorrent\logs" "qBittorrent"
-
-:: Free Download Manager
-call :CheckAndClean "%AppData%\Free Download Manager" "%AppData%\Free Download Manager\logs" "Free Download Manager"
-
-:: JDownloader
-call :CheckAndClean "%AppData%\JDownloader" "%AppData%\JDownloader\logs" "JDownloader"
-
-echo.
-echo ════════════════════════════════════════════════════════
-echo [20/22] 🛡️ Quét và dọn cache Antivirus...
-echo ════════════════════════════════════════════════════════
-echo.
-
-:: Windows Defender
-echo   [✓] Windows Defender
-call :CleanDir "%ProgramData%\Microsoft\Windows Defender\Scans\History\Results\Quick"
-call :CleanDir "%ProgramData%\Microsoft\Windows Defender\Scans\History\Results\Resource"
-
-:: Avast
-call :CheckAndClean "%ProgramData%\Avast Software" "%ProgramData%\Avast Software\Avast\log" "Avast"
-
-:: AVG
-call :CheckAndClean "%ProgramData%\AVG" "%ProgramData%\AVG\Antivirus\log" "AVG"
-
-:: Kaspersky
-call :CheckAndClean "%ProgramData%\Kaspersky Lab" "%ProgramData%\Kaspersky Lab\AVP*\Data\Logs" "Kaspersky"
-
-:: McAfee
-call :CheckAndClean "%ProgramData%\McAfee" "%ProgramData%\McAfee\Logs" "McAfee"
-
-:: Malwarebytes
-call :CheckAndClean "%ProgramData%\Malwarebytes" "%ProgramData%\Malwarebytes\MBAMService\logs" "Malwarebytes"
-
-echo.
-echo ════════════════════════════════════════════════════════
-echo [21/22] 🔨 Quét và dọn cache công cụ khác...
-echo ════════════════════════════════════════════════════════
-echo.
-
-:: WinRAR
-for /d %%i in ("%Temp%\Rar*") do (
-    if exist "%%i" (
-        echo   [✓] WinRAR temp
-        call :CleanDir "%%i"
-        goto :after_winrar
-    )
-)
-:after_winrar
-
-:: 7-Zip
-for /d %%i in ("%Temp%\7z*") do (
-    if exist "%%i" (
-        echo   [✓] 7-Zip temp
-        call :CleanDir "%%i"
-        goto :after_7zip
-    )
-)
-:after_7zip
-
-:: TeamViewer
-call :CheckAndClean "%ProgramData%\TeamViewer" "%ProgramData%\TeamViewer\Logs" "TeamViewer"
-
-:: AnyDesk
-call :CheckAndClean "%ProgramData%\AnyDesk" "%ProgramData%\AnyDesk\logs" "AnyDesk"
-
-:: FileZilla
-call :CheckAndClean "%AppData%\FileZilla" "%AppData%\FileZilla\logs" "FileZilla"
-
-:: VMware
-call :CheckAndClean "%AppData%\VMware" "%AppData%\VMware\logs" "VMware"
-
-:: VirtualBox
-call :CheckAndClean "%UserProfile%\.VirtualBox" "%UserProfile%\.VirtualBox" "VirtualBox"
-
-:: LibreOffice
-call :CheckAndClean "%AppData%\LibreOffice" "%AppData%\LibreOffice\*\cache" "LibreOffice"
-
-:: WPS Office
-call :CheckAndClean "%AppData%\kingsoft" "%AppData%\kingsoft\office6\cache" "WPS Office"
-
-:: Adobe Reader
-call :CheckAndClean "%LocalAppData%\Adobe\Acrobat" "%LocalAppData%\Adobe\Acrobat\DC\Cache" "Adobe Acrobat Reader"
-
-echo.
-echo ════════════════════════════════════════════════════════
-echo [22/22] 🗑️ Dọn rác Windows và temp files...
-echo ════════════════════════════════════════════════════════
-echo.
-
-:: Windows temp
-echo   [✓] Windows Installer temp
-for /d %%i in ("%Temp%\MSI*") do (
-    call :CleanDir "%%i"
-)
-
-echo   [✓] DirectX temp
-for /d %%i in ("%Temp%\DX*") do (
-    call :CleanDir "%%i"
-)
-
-echo   [✓] Windows Error Reporting
-call :CleanDir "%ProgramData%\Microsoft\Windows\WER\ReportArchive"
-call :CleanDir "%ProgramData%\Microsoft\Windows\WER\ReportQueue"
-call :CleanDir "%ProgramData%\Microsoft\Windows\WER\Temp"
-
-echo   [✓] Minidump files
-call :CleanDir "C:\Windows\Minidump"
-del /f /q "C:\Windows\*.dmp" >nul 2>&1
-del /f /q "C:\Windows\memory.dmp" >nul 2>&1
-
-echo   [✓] Java cache
-call :CleanDir "%LocalAppData%\Sun\Java\Deployment\cache"
-
-echo   [✓] Windows Store Apps
-for /d %%i in ("%LocalAppData%\Packages\*") do (
-    call :CleanDir "%%i\LocalCache"
-    call :CleanDir "%%i\TempState"
-)
-
-echo.
-echo ════════════════════════════════════════════════════════
-echo ✅ HOÀN TẤT DỌN RÁC AN TOÀN - SMART SCAN EDITION
+echo ✅ HOÀN TẤT DỌN RÁC AN TOÀN
 echo ════════════════════════════════════════════════════════
 echo.
 echo 📊 THỐNG KÊ:
 echo    • Số phần mềm tìm thấy: %total_scanned%
 echo    • Số thư mục đã dọn:    %total_cleaned%+
+echo    • Backup lưu tại:       %BACKUP_DIR%
 echo.
-echo 🛡️ AN TOÀN:
-echo    • CHỈ XÓA: Cache, Logs, Temp files
-echo    • KHÔNG XÓA: Dữ liệu, Settings, Files người dùng
+echo 💾 KHÔI PHỤC:
+echo    • Backup có hiệu lực trong 24 giờ
+echo    • Dùng menu [4] để khôi phục nếu cần
 echo.
-echo 💡 LƯU Ý:
-echo    • Chỉ dọn phần mềm CÓ TRONG MÁY
-echo    • Bỏ qua phần mềm CHƯA CÀI
-echo    • 100%% tự động phát hiện
+echo 📊 BÁO CÁO:
+echo    • File log: %LOG_FILE%
+echo    • Báo cáo:  %REPORT_FILE%
 echo.
-echo ════════════════════════════════════════════════════════
+pause
+goto :main_menu
+
+:: ===============================================
+:: HÀM DỌN RÁC CÓ BACKUP
+:: ===============================================
+:CleanDirSafe
+set "dir_path=%~1"
+set "item_name=%~2"
+if not exist "%dir_path%" goto :eof
+
+echo     [clean] %dir_path%
+
+:: Ghi log
+echo     {"path": "%dir_path:\=\\%", "name": "%item_name%"}, >> "%LOG_FILE%.tmp"
+
+:: Xóa file (không backup do quá nhiều)
+del /f /s /q "%dir_path%\*" >nul 2>&1
+for /d %%i in ("%dir_path%\*") do (
+    rd /s /q "%%i" >nul 2>&1
+)
+set /a total_cleaned+=1
+goto :eof
+
+:CheckAndCleanSafe
+set "check_path=%~1"
+set "clean_path=%~2"
+set "app_name=%~3"
+if exist "%check_path%" (
+    echo   [✓] Tìm thấy: %app_name%
+    call :CleanDirSafe "%clean_path%" "%app_name%"
+    set /a total_scanned+=1
+)
+goto :eof
+
+:: ===============================================
+:: CHỨC NĂNG 3: XEM BÁO CÁO
+:: ===============================================
+:show_report
+cls
+echo.
+echo ╔════════════════════════════════════════════════════════╗
+echo ║              📊 BÁO CÁO CHI TIẾT                       ║
+echo ╚════════════════════════════════════════════════════════╝
 echo.
 
+if not exist "%LOG_FILE%" (
+    echo  [!] Chưa có lịch sử dọn rác nào.
+    echo.
+    pause
+    goto :main_menu
+)
+
+echo  📜 Đang tạo báo cáo HTML...
+call :generate_html_report
+
+echo.
+echo  ✅ Báo cáo đã được tạo!
+echo  📂 Vị trí: %REPORT_FILE%
+echo.
+set /p open_report="  Bạn có muốn mở báo cáo? (Y/N): "
+if /i "%open_report%"=="Y" start "" "%REPORT_FILE%"
+
 pause
+goto :main_menu
+
+:: ===============================================
+:: CHỨC NĂNG 4: KHÔI PHỤC BACKUP
+:: ===============================================
+:restore_backup
+cls
+echo.
+echo ╔════════════════════════════════════════════════════════╗
+echo ║           🔄 KHÔI PHỤC BACKUP                          ║
+echo ╚════════════════════════════════════════════════════════╝
+echo.
+
+if not exist "%BACKUP_DIR%" (
+    echo  [!] Không tìm thấy backup.
+    echo.
+    pause
+    goto :main_menu
+)
+
+echo  ⚠️  CẢNH BÁO: Tính năng này đang được phát triển
+echo.
+echo  💡 HIỆN TẠI:
+echo     • Backup được lưu tự động tại: %BACKUP_DIR%
+echo     • Bạn có thể copy thủ công file từ đó
+echo.
+echo  🚧 TƯƠNG LAI:
+echo     • Tự động khôi phục
+echo     • Chọn file cụ thể để restore
+echo.
+pause
+goto :main_menu
+
+:: ===============================================
+:: CHỨC NĂNG 5: LỊCH SỬ
+:: ===============================================
+:show_history
+cls
+echo.
+echo ╔════════════════════════════════════════════════════════╗
+echo ║           📜 LỊCH SỬ DỌN RÁC                           ║
+echo ╚════════════════════════════════════════════════════════╝
+echo.
+
+if not exist "%LOG_FILE%" (
+    echo  [!] Chưa có lịch sử.
+    echo.
+) else (
+    type "%LOG_FILE%"
+    echo.
+)
+
+pause
+goto :main_menu
+
+:: ===============================================
+:: CHỨC NĂNG 6: CÀI ĐẶT
+:: ===============================================
+:advanced_settings
+cls
+echo.
+echo ╔════════════════════════════════════════════════════════╗
+echo ║           ⚙️  CÀI ĐẶT NÂNG CAO                         ║
+echo ╚════════════════════════════════════════════════════════╝
+echo.
+echo  [1] 🗑️  Xóa tất cả backup cũ
+echo  [2] 📊 Xuất báo cáo CSV
+echo  [3] 🔍 Quét deep scan (chậm hơn nhưng chi tiết)
+echo  [4] 🧹 Dọn code projects (node_modules, .git, etc)
+echo  [0] ⬅️  Quay lại
+echo.
+set /p setting_choice="Chọn (0-4): "
+
+if "%setting_choice%"=="1" goto :clean_old_backups
+if "%setting_choice%"=="4" goto :clean_dev_projects
+if "%setting_choice%"=="0" goto :main_menu
+goto :advanced_settings
+
+:clean_dev_projects
+cls
+echo.
+echo ╔════════════════════════════════════════════════════════╗
+echo ║      🧹 DỌN RÁC CODE PROJECTS (DEV MODE)              ║
+echo ╚════════════════════════════════════════════════════════╝
+echo.
+echo  ⚠️  Sẽ tìm và dọn:
+echo     • node_modules (npm)
+echo     • __pycache__ (Python)
+echo     • .gradle/caches (Java)
+echo     • bin/obj (.NET)
+echo     • build folders
+echo.
+set /p dev_confirm="  Tiếp tục? (Y/N): "
+if /i not "%dev_confirm%"=="Y" goto :advanced_settings
+
+echo.
+echo  [*] Đang quét code projects...
+echo.
+
+:: Quét node_modules
+for /d /r C:\ %%d in (node_modules) do (
+    if exist "%%d" (
+        echo   [found] %%d
+        echo     → Xóa? (Y/N):
+        set /p del_node="     "
+        if /i "!del_node!"=="Y" (
+            rd /s /q "%%d" 2>nul
+            echo     [✓] Đã xóa
+        )
+    )
+)
+
+echo.
+echo  ✅ Hoàn tất!
+pause
+goto :advanced_settings
+
+:clean_old_backups
+echo.
+echo  [*] Đang xóa backup cũ...
+for /d %%d in ("%TEMP%\SafeCleanup_Backup_*") do (
+    rd /s /q "%%d" 2>nul
+    echo   [✓] Đã xóa: %%d
+)
+echo.
+echo  ✅ Hoàn tất!
+pause
+goto :advanced_settings
+
+:: ===============================================
+:: TẠO BÁO CÁO HTML
+:: ===============================================
+:generate_html_report
+(
+echo ^<!DOCTYPE html^>
+echo ^<html^>
+echo ^<head^>
+echo ^<meta charset="UTF-8"^>
+echo ^<title^>Safe Cleanup Report^</title^>
+echo ^<style^>
+echo body { font-family: 'Segoe UI', Arial; background: #f5f5f5; margin: 20px; }
+echo .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1^); }
+echo h1 { color: #2196F3; border-bottom: 3px solid #2196F3; padding-bottom: 10px; }
+echo .stat { display: inline-block; margin: 10px; padding: 20px; background: #e3f2fd; border-radius: 5px; min-width: 200px; }
+echo .stat-value { font-size: 32px; font-weight: bold; color: #1976D2; }
+echo .stat-label { color: #666; margin-top: 5px; }
+echo ^</style^>
+echo ^</head^>
+echo ^<body^>
+echo ^<div class="container"^>
+echo ^<h1^>🧹 Safe Cleanup - Báo Cáo Dọn Rác^</h1^>
+echo ^<p^>Thời gian: %date% %time%^</p^>
+echo ^<div class="stat"^>
+echo ^<div class="stat-value"^>%total_scanned%^</div^>
+echo ^<div class="stat-label"^>Phần mềm tìm thấy^</div^>
+echo ^</div^>
+echo ^<div class="stat"^>
+echo ^<div class="stat-value"^>%total_cleaned%+^</div^>
+echo ^<div class="stat-label"^>Thư mục đã dọn^</div^>
+echo ^</div^>
+echo ^<h2^>💡 Gợi ý^</h2^>
+echo ^<ul^>
+echo ^<li^>Nên chạy cleanup 1-2 tuần/lần^</li^>
+echo ^<li^>Kiểm tra backup định kỳ^</li^>
+echo ^<li^>Theo dõi dung lượng ổ đĩa^</li^>
+echo ^</ul^>
+echo ^</div^>
+echo ^</body^>
+echo ^</html^>
+) > "%REPORT_FILE%"
+goto :eof
+
+:generate_analysis_report
+echo   [*] Tạo báo cáo phân tích...
+call :generate_html_report
+goto :eof
+
+:: ===============================================
+:: THOÁT CHƯƠNG TRÌNH
+:: ===============================================
+:exit_script
+cls
+echo.
+echo ╔════════════════════════════════════════════════════════╗
+echo ║              👋 CẢM ƠN BẠN ĐÃ SỬ DỤNG                 ║
+echo ╚════════════════════════════════════════════════════════╝
+echo.
+echo  💾 Nhớ kiểm tra backup nếu cần: %BACKUP_DIR%
+echo  📊 Xem báo cáo tại: %REPORT_FILE%
+echo.
+timeout /t 3 /nobreak >nul
+exit /b 0

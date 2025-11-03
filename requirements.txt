@@ -1,0 +1,16 @@
+# 🧹 Safe Cleanup - Python Dependencies
+# Cài đặt: pip install -r requirements.txt
+
+# Core dependencies
+pandas>=1.5.0              # Data analysis
+rich>=13.0.0               # Beautiful terminal output
+
+# Optional - Advanced features
+# plotly>=5.0.0            # Interactive charts (nếu muốn dashboard)
+# streamlit>=1.20.0        # Web dashboard (tương lai)
+# scikit-learn>=1.2.0      # ML predictions (AI mode)
+
+# Development dependencies (optional)
+# pytest>=7.0.0            # Testing
+# black>=22.0.0            # Code formatting
+# flake8>=5.0.0            # Linting
