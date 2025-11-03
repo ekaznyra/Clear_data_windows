@@ -1,41 +1,36 @@
-# ?? Windows Professional Toolkit
+# Windows Professional Toolkit
 
-**Version 4.0 - ULTIMATE EDITION** ?
+**Version 4.1 - ASCII EDITION**
 
-![Version](https://img.shields.io/badge/version-4.0-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)
-![Language](https://img.shields.io/badge/language-CMD%2FBatch-yellow.svg)
-
-**All-in-One System Tool - Pure CMD/Batch - No PowerShell Required!**
+All-in-One System Tool - Pure CMD/Batch - No Unicode!
 
 ---
 
 ## Overview
 
-Professional Windows management tool built with **pure CMD/Batch scripts**. No PowerShell required!
+Professional Windows management tool built with **pure CMD/Batch scripts**.
 
-**Four powerful tools in one beautiful BAT file:**
+**NO UNICODE CHARACTERS - WORKS ON ALL WINDOWS!**
 
-?? **Cleanup Tool** - Remove junk files & free disk space (5 modes)  
-?? **Windows Activation** - Activate Windows & Office with MAS (14 methods)  
-? **Windows Optimizer** - Make your PC faster & smoother (15 tweaks)  
-?? **Software Manager** - Uninstall applications easily  
-
-**Plus:** Logging, System Info, About & Help
+Four powerful tools in one BAT file:
+- **Cleanup Tool** - Remove junk files and free disk space (5 modes)
+- **Windows Activation** - Activate Windows and Office with MAS (14 methods)
+- **Windows Optimizer** - Make your PC faster and smoother (15 tweaks)
+- **Software Manager** - Uninstall applications easily
+- **System Info** - View detailed system information (6 modes)
 
 ---
 
 ## Features
 
-### 1. ?? Cleanup Tool
+### 1. Cleanup Tool
 
 **5 Cleanup Modes:**
-- ? **Quick Cleanup** - Fast & safe (200-500 MB) - 30 seconds
-- ? **Standard Cleanup** - Recommended (500MB-3GB) - 1-2 minutes  
-- ?? **Deep Cleanup** - Maximum cleaning (2-10GB+) - 2-5 minutes
-- ??? **Preview Mode** - See before delete - No actual deletion
-- ?? **Custom Cleanup** - Choose what to clean - NEW in v4.0!
+- Quick Cleanup - Fast and safe (200-500 MB) - 30 seconds
+- Standard Cleanup - Recommended (500MB-3GB) - 1-2 minutes
+- Deep Cleanup - Maximum cleaning (2-10GB+) - 2-5 minutes
+- Preview Mode - See before delete
+- Custom Cleanup - Choose what to clean (NEW!)
 
 **14+ Cleanup Targets:**
 - Windows Temp, User Temp, Prefetch
@@ -47,14 +42,19 @@ Professional Windows management tool built with **pure CMD/Batch scripts**. No P
 - Windows Logs, Delivery Optimization
 
 ### 2. Windows Activation (Based on MAS)
+
 - **HWID** - Permanent activation (Windows 10/11)
 - **KMS38** - Valid until 2038 (Win 10/11/Server)
 - **Online KMS** - 180 days, auto-renew (All Windows)
-- **Office** - Activate all Office versions
-- Check status & license info
-- Remove licenses
+- **Ohook Office** - Permanent Office activation
+- **KMS Office** - 180-day Office activation
+- Check status and license info
+- Extract Windows keys
+- Change Windows edition
+- Remove Office licenses
+- Manual key installation
 
-### 3. Windows Optimizer (NEW!)
+### 3. Windows Optimizer
 
 **Quick Actions:**
 - One-click optimization
@@ -67,7 +67,7 @@ Professional Windows management tool built with **pure CMD/Batch scripts**. No P
 - High performance power plan
 - Network optimization
 
-**Privacy & Debloat:**
+**Privacy and Debloat:**
 - Remove bloatware apps
 - Disable telemetry
 - Privacy settings
@@ -80,25 +80,20 @@ Professional Windows management tool built with **pure CMD/Batch scripts**. No P
 - Restore defaults
 
 ### 4. Software Manager
+
 - List all installed software
 - Uninstall by name
 - Export software list to file
 
-### 5. ?? View Logs
-- Real-time operation logs
-- Last 50 log entries
-- Timestamp for each operation
-- Error tracking
-
-### 6. ?? System Information (ENHANCED!)
+### 5. System Information
 
 **6 Information Modes:**
-- ?? **Quick Overview** - Essential system info at a glance
-- ??? **Detailed Report** - Complete system analysis
-- ?? **Hardware Details** - CPU, RAM, GPU, Motherboard, BIOS
-- ?? **Storage Information** - Disks, partitions, space usage
-- ?? **Network Information** - Adapters, IP config, connectivity test
-- ?? **Export Full Report** - Save complete report to text file
+- Quick Overview - Essential system info
+- Detailed Report - Complete system analysis
+- Hardware Details - CPU, RAM, GPU, Motherboard, BIOS
+- Storage Information - Disks, partitions, space usage
+- Network Information - Adapters, IP config, connectivity test
+- Export Full Report - Save complete report to text file
 
 **Information Includes:**
 - Computer name, user, domain
@@ -106,18 +101,35 @@ Professional Windows management tool built with **pure CMD/Batch scripts**. No P
 - CPU: Name, cores, speed
 - RAM: Total, available, virtual memory
 - GPU: Model, driver, VRAM
-- Storage: Disks, partitions, free space (with health indicators)
+- Storage: Disks, partitions, free space
 - Network: Adapters, IP addresses, connectivity status
 - BIOS and motherboard information
 - Windows updates history
 - System uptime
 
-### 7. ?? About & Help
-- Complete tool information
-- Quick start guides (beginner & advanced)
-- Documentation links
-- Safety information
-- Credits and sources
+---
+
+## What's New in v4.1
+
+### ASCII EDITION - No More ????? Issues!
+
+**MAJOR FIX:**
+- Removed ALL Unicode box-drawing characters
+- Simple ASCII-only interface (=, -, |)
+- Works on ALL Windows CMD versions
+- No more encoding problems
+- No more ????? garbage characters
+
+**CHANGES:**
+- Removed log file generation (cleaner)
+- Removed HOW_TO_RUN.txt (unnecessary)
+- Simplified all menus
+- Pure ASCII only
+
+**WHY?**
+- Unicode characters showed as ????? on many systems
+- Caused encoding issues
+- ASCII works everywhere, always!
 
 ---
 
@@ -127,12 +139,14 @@ Professional Windows management tool built with **pure CMD/Batch scripts**. No P
 - Administrator rights
 - No PowerShell needed
 - No installation required
+- **Works with ANY CMD encoding!**
 
 ---
 
 ## How to Use
 
 ### Simple Method
+
 1. Download `WindowsToolkit.bat`
 2. Right-click on file
 3. Select **"Run as administrator"**
@@ -140,113 +154,47 @@ Professional Windows management tool built with **pure CMD/Batch scripts**. No P
 5. Done!
 
 ### Menu Navigation
+
 ```
 ================================================================
-           WINDOWS PROFESSIONAL TOOLKIT v3.0
+         WINDOWS PROFESSIONAL TOOLKIT v4.1
+         All-in-One System Management Tool
 ================================================================
 
-  SELECT TOOL:
+ MAIN MENU - SELECT YOUR TOOL
 
-  [1] Cleanup Tool        - Remove junk and optimize
-  [2] Windows Activation  - Activate Windows & Office
-  [3] Windows Optimizer   - Optimize Windows 10/11 (NEW!)
-  [4] Software Manager    - Uninstall applications
-  [5] View Logs           - Check operation history
-  [6] System Info         - View system information
-  [0] Exit                - Close toolkit
+ [1] Cleanup Tool        - Remove junk and free disk space
+ [2] Windows Activation  - Activate Windows and Office (MAS)
+ [3] Windows Optimizer   - Make your PC faster and smoother
+ [4] Software Manager    - Uninstall applications easily
+ [5] System Info         - View detailed system information
+ [6] About and Help      - Information and documentation
+ [0] Exit                - Close toolkit
 
 ================================================================
 ```
 
 ---
 
-## Cleanup Tool
+## Quick Start
 
-### Quick Cleanup
-Cleans:
-- Windows Temp
-- User Temp
-- Recent Items
-- Thumbnail Cache
+### For Beginners
 
-**Space freed:** 200-500 MB  
-**Time:** 30 seconds
+1. Run WindowsToolkit.bat as Admin
+2. Select [1] Cleanup Tool
+3. Select [2] Standard Cleanup
+4. Select [3] Windows Optimizer
+5. Select [1] Quick Optimize
+6. Restart your PC
 
-### Standard Cleanup
-Cleans everything above plus:
-- Prefetch files
-- Windows Update cache
-- Error reports
-- Crash dumps
-- Browser caches (Chrome, Edge, Firefox)
-- Recycle Bin
+**Result: Your PC will be faster!**
 
-**Space freed:** 500 MB - 3 GB  
-**Time:** 1-2 minutes
+### For Advanced Users
 
-### Deep Cleanup
-Cleans everything above plus:
-- Windows logs
-- Delivery Optimization
-- App caches (Teams, Discord, VS Code, Spotify, Slack, Zoom)
-
-**Space freed:** 2-10+ GB  
-**Time:** 2-5 minutes
-
----
-
-## Windows Activation
-
-**Based on Microsoft Activation Scripts (MAS)**  
-Source: https://github.com/massgravel/Microsoft-Activation-Scripts
-
-### HWID Activation (Recommended)
-- **PERMANENT** activation (lifetime!)
-- Works on Windows 10/11
-- Survives reinstalls on same hardware
-- Most reliable method
-
-### KMS38 Activation
-- Valid until year **2038** (19 years!)
-- Works on Windows 10/11/Server
-- No renewal needed
-- Offline activation
-
-### Online KMS Activation
-- Valid for 180 days
-- Auto-renews automatically
-- Works on all Windows versions
-- Requires periodic internet
-
-### Office Activation
-- Supports Office 365/2021/2019/2016/2013/2010
-- All editions (Professional, Home, Business)
-- Project and Visio support
-- 180-day validity, auto-renew
-
-### Other Features
-- Manual product key entry
-- Check activation status (Windows + Office)
-- View license information
-- Remove Office licenses
-
----
-
-## Software Manager
-
-### List Software
-Shows all installed applications with:
-- Software name
-- Version number
-- Vendor/Publisher
-
-### Uninstall
-- Search by name
-- Confirm before uninstall
-- Uses Windows built-in uninstaller
-
-### Export List
-Saves complete software list to text file with timestamp.
+- **[2] Activation** ? HWID for permanent Windows 10/11 activation
+- **[3] Optimizer** ? Chris Titus WinUtil for advanced tweaks
+- **[4] Software Manager** ? Remove unwanted software
+- **[5] System Info** ? Export full system report
 
 ---
 
@@ -255,10 +203,11 @@ Saves complete software list to text file with timestamp.
 - **100% Safe** - Pure CMD/Batch script
 - **No Viruses** - Open source code
 - **No Installation** - Just run the BAT file
-- **Logging** - All operations logged
+- **No Data Collection** - Your privacy is protected
 - **Tested** - Works on all Windows versions
 
 ### What It Does NOT Do
+
 - Does NOT delete personal files
 - Does NOT damage Windows
 - Does NOT install anything
@@ -267,61 +216,54 @@ Saves complete software list to text file with timestamp.
 
 ---
 
-## Logging
+## Documentation
 
-All operations are automatically logged to `ToolkitLog.txt` in the same folder.
+All guides available in workspace:
 
-Log format:
-```
-[2025-11-03 14:30:15] ==================== QUICK CLEANUP START ====================
-[2025-11-03 14:30:16] SUCCESS: Windows Temp cleaned
-[2025-11-03 14:30:17] SUCCESS: User Temp cleaned
-[2025-11-03 14:30:20] ==================== QUICK CLEANUP END ====================
-```
+- **README.md** - This file (general usage)
+- **ACTIVATION_GUIDE.md** - Detailed activation methods
+- **OPTIMIZER_GUIDE.md** - Complete optimization guide
+- **SYSTEM_INFO_GUIDE.md** - System information guide
+- **CHANGELOG.md** - Version history
+- **LICENSE** - MIT License
 
 ---
 
 ## Troubleshooting
 
 ### "Access Denied"
-**Solution:** Run as Administrator (right-click -> Run as administrator)
 
-### Software list not showing
-**Solution:** Some apps don't register in Windows. Try Control Panel instead.
+**Solution:** Run as Administrator (right-click ? Run as administrator)
 
-### Activation failed
-**Solutions:**
-- Check internet connection
-- Try manual key method
-- Disable antivirus temporarily
+### Some features dont work
+
+**Solution:** Check internet connection (required for activation and WinUtil)
 
 ### Cleanup freed less space
-**Solutions:**
-- Close all browsers and apps
-- Try Deep Cleanup mode
-- Some files may be in use
+
+**Solution:** Close all browsers and apps before running cleanup
 
 ---
 
 ## FAQ
 
-**Q: Is this safe?**  
+**Q: Is this safe?**
 A: Yes! Pure CMD script, no viruses, open source.
 
-**Q: Will it delete my files?**  
+**Q: Will it delete my files?**
 A: NO. Only deletes temp files, cache, logs. Never touches personal files.
 
-**Q: Need installation?**  
+**Q: Need installation?**
 A: No installation needed. Just run the BAT file.
 
-**Q: Works on Windows 11?**  
+**Q: Works on Windows 11?**
 A: Yes! Supports Windows 7, 8, 10, and 11.
 
-**Q: Is activation legal?**  
+**Q: Is activation legal?**
 A: Use only on your own devices. Check your local laws.
 
-**Q: Why CMD not PowerShell?**  
-A: CMD works everywhere, no execution policy issues, faster, simpler.
+**Q: Why no Unicode?**
+A: Unicode causes ????? issues on many systems. ASCII works everywhere!
 
 ---
 
@@ -329,76 +271,74 @@ A: CMD works everywhere, no execution policy issues, faster, simpler.
 
 ```
 /workspace/
-  - WindowsToolkit.bat     (Main tool - run this!)
-  - ToolkitLog.txt         (Auto-created after first use)
-  - README.md              (This file)
+  - WindowsToolkit.bat        (Main tool - 2,296 lines!)
+  - README.md                 (This file)
+  - ACTIVATION_GUIDE.md       (Activation documentation)
+  - OPTIMIZER_GUIDE.md        (Optimization documentation)
+  - SYSTEM_INFO_GUIDE.md      (System info documentation)
+  - CHANGELOG.md              (Version history)
+  - LICENSE                   (MIT License)
 ```
 
 ---
 
-## ?? What's New in v4.0
+## Version History
 
-### ?? **ULTIMATE EDITION** - Major UI Overhaul!
+### Version 4.1 (2025-11-03) - ASCII EDITION
 
-**? NEW FEATURES:**
-- ?? **Custom Cleanup Mode** - Choose exactly what to clean
-- ?? **About & Help Section** - Complete documentation and guides
-- ?? **Beautiful ASCII Art** - Professional UI with box-drawing characters
-- ?? **Emoji Icons** - Better visual navigation
-- ? **Better Error Handling** - Clearer messages and validation
+- **FIXED:** Removed all Unicode characters (no more ?????)
+- Simplified UI with ASCII only (=, -, |)
+- Removed log file generation
+- Removed HOW_TO_RUN.txt
+- Works on ALL Windows systems now!
 
-**?? UI IMPROVEMENTS:**
-- ASCII art headers for all menus
-- Unicode box-drawing borders
-- Color-coded sections
-- Professional window titles
-- Helpful tips and recommendations
+### Version 4.0 (2025-11-03)
 
-**?? NEW DOCUMENTATION:**
-- CHANGELOG.md - Complete version history
-- LICENSE - MIT License file
-- Enhanced README with badges
-- Updated all guides
+- Added Custom Cleanup Mode
+- Added About & Help Section
+- Enhanced System Info (6 modes)
+- Added SYSTEM_INFO_GUIDE.md
 
-### Previous Versions
+### Version 3.0 (2025-11-03)
 
-**Version 3.0** (2025-11-03)
 - Added Windows Optimizer (15 features)
 - Microsoft Activation Scripts integration (14 methods)
 - Enhanced cleanup with 4 modes
 - Complete documentation suite
 
-**Version 2.0** (2025-11-02)
+### Version 2.0 (2025-11-02)
+
 - Migrated to pure CMD/Batch
 - Fixed encoding issues
 - English interface
 
-**Version 1.0** (2025-11-01)
+### Version 1.0 (2025-11-01)
+
 - Initial release with PowerShell
+
+---
+
+## Credits
+
+### Based On
+
+- **Microsoft Activation Scripts** by massgravel
+  - https://github.com/massgravel/Microsoft-Activation-Scripts
+
+- **Chris Titus Tech WinUtil** by ChrisTitusTech
+  - https://github.com/ChrisTitusTech/winutil
 
 ---
 
 ## License
 
-**MIT License** - Free to use and modify
+**MIT License** - Free and Open Source
 
-Use at your own risk. No warranty provided.  
+Use at your own risk. No warranty provided.
 For personal/educational use only.
-
----
-
-## Quick Reference
-
-| Task | Menu Option |
-|------|-------------|
-| Clean junk files | [1] -> [2] Standard |
-| Activate Windows | [2] -> [1] KMS |
-| Uninstall app | [3] -> [2] Uninstall |
-| View logs | [4] |
-| System info | [5] |
 
 ---
 
 **Made with CMD/Batch - No PowerShell Required!**
 
-**Version 3.0 | 2025-11-03**
+**Version 4.1 ASCII Edition | 2025-11-03**
