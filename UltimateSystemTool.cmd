@@ -10,7 +10,6 @@
 :: ============================================================================
 
 title Ultimate Windows System Tool v5.0 - Professional Edition
-chcp 65001 >nul 2>&1
 color 0B
 
 :: Welcome Screen with Loading Animation
@@ -18,12 +17,12 @@ cls
 color 0B
 echo.
 echo.
-echo   +========================================================================+
-echo   ^|                                                                        ^|
-echo   ^|           ULTIMATE WINDOWS SYSTEM TOOL v5.0 - PROFESSIONAL            ^|
-echo   ^|               Comprehensive System Optimization Suite                 ^|
-echo   ^|                                                                        ^|
-echo   +========================================================================+
+echo   ========================================================================
+echo                                                                          
+echo            ULTIMATE WINDOWS SYSTEM TOOL v5.0 - PROFESSIONAL             
+echo                Comprehensive System Optimization Suite                  
+echo                                                                          
+echo   ========================================================================
 echo.
 echo                       Loading / Dang tai...
 echo.
@@ -36,11 +35,11 @@ if %errorLevel% neq 0 (
     cls
     color 0E
     echo.
-    echo   +========================================================================+
-    echo   ^|                                                                        ^|
-    echo   ^|         ADMINISTRATOR RIGHTS REQUIRED / CAN QUYEN ADMINISTRATOR        ^|
-    echo   ^|                                                                        ^|
-    echo   +========================================================================+
+    echo   ========================================================================
+    echo                                                                          
+    echo          ADMINISTRATOR RIGHTS REQUIRED / CAN QUYEN ADMINISTRATOR        
+    echo                                                                          
+    echo   ========================================================================
     echo.
     echo   This tool requires Administrator privileges to function properly.
     echo   Cong cu nay can quyen Administrator de hoat dong dung cach.
@@ -57,11 +56,11 @@ if %errorLevel% neq 0 (
 cls
 color 0A
 echo.
-echo   +========================================================================+
-echo   ^|                                                                        ^|
-echo   ^|       ADMINISTRATOR RIGHTS CONFIRMED / XAC NHAN QUYEN ADMINISTRATOR    ^|
-echo   ^|                                                                        ^|
-echo   +========================================================================+
+echo   ========================================================================
+echo                                                                          
+echo        ADMINISTRATOR RIGHTS CONFIRMED / XAC NHAN QUYEN ADMINISTRATOR    
+echo                                                                          
+echo   ========================================================================
 echo.
 timeout /t 1 /nobreak >nul
 
@@ -69,143 +68,143 @@ timeout /t 1 /nobreak >nul
 cls
 color 0B
 echo.
-echo  +==============================================================================+
-echo  ^|                                                                              ^|
-echo  ^|              ULTIMATE WINDOWS SYSTEM TOOL v5.0 - PROFESSIONAL               ^|
-echo  ^|              Comprehensive Optimization Suite - 76 Functions                ^|
-echo  ^|                      English / Vietnamese Interface                         ^|
-echo  ^|                                                                              ^|
-echo  +==============================================================================+
+echo  ================================================================================
+echo                                                                                
+echo               ULTIMATE WINDOWS SYSTEM TOOL v5.0 - PROFESSIONAL                
+echo               Comprehensive Optimization Suite - 76 Functions                 
+echo                       English / Vietnamese Interface                          
+echo                                                                                
+echo  ================================================================================
 echo.
-echo  +------------------------------------------------------------------------------+
-echo  ^|  CATEGORY 1: SYSTEM CLEANUP [1-12] - DON DEP HE THONG                       ^|
-echo  +------------------------------------------------------------------------------+
-echo  ^|  [1]  Quick System Cleanup                  - Don Dep Nhanh He Thong       ^|
-echo  ^|  [2]  Deep System Cleanup                   - Don Dep Sau He Thong         ^|
-echo  ^|  [3]  Browser Cache Cleanup                 - Don Dep Cache Trinh Duyet    ^|
-echo  ^|  [4]  Application Cache Cleanup             - Don Dep Cache Ung Dung       ^|
-echo  ^|  [5]  Windows Update Cleanup                - Don Dep Windows Update        ^|
-echo  ^|  [6]  Thumbnail Cache Cleanup               - Don Dep Thumbnail Cache       ^|
-echo  ^|  [7]  Icon Cache Cleanup                    - Don Dep Icon Cache            ^|
-echo  ^|  [8]  Font Cache Cleanup                    - Don Dep Font Cache            ^|
-echo  ^|  [9]  Windows Installer Cleanup             - Don Dep Windows Installer     ^|
-echo  ^|  [10] Old Windows Installation Cleanup      - Don Dep Windows Cu            ^|
-echo  ^|  [11] Recycle Bin Cleanup                   - Don Dep Thung Rac             ^|
-echo  ^|  [12] Memory Dump Files Cleanup             - Don Dep File Dump Bo Nho      ^|
-echo  +------------------------------------------------------------------------------+
+echo  -------------------------------------------------------------------------------
+echo   CATEGORY 1: SYSTEM CLEANUP [1-12] - DON DEP HE THONG                       
+echo  -------------------------------------------------------------------------------
+echo   [1]  Quick System Cleanup                  - Don Dep Nhanh He Thong       
+echo   [2]  Deep System Cleanup                   - Don Dep Sau He Thong         
+echo   [3]  Browser Cache Cleanup                 - Don Dep Cache Trinh Duyet    
+echo   [4]  Application Cache Cleanup             - Don Dep Cache Ung Dung       
+echo   [5]  Windows Update Cleanup                - Don Dep Windows Update        
+echo   [6]  Thumbnail Cache Cleanup               - Don Dep Thumbnail Cache       
+echo   [7]  Icon Cache Cleanup                    - Don Dep Icon Cache            
+echo   [8]  Font Cache Cleanup                    - Don Dep Font Cache            
+echo   [9]  Windows Installer Cleanup             - Don Dep Windows Installer     
+echo   [10] Old Windows Installation Cleanup      - Don Dep Windows Cu            
+echo   [11] Recycle Bin Cleanup                   - Don Dep Thung Rac             
+echo   [12] Memory Dump Files Cleanup             - Don Dep File Dump Bo Nho      
+echo  -------------------------------------------------------------------------------
 echo.
-echo  +------------------------------------------------------------------------------+
-echo  ^|  CATEGORY 2: PRIVACY PROTECTION [13-20] - BAO VE RIENG TU                   ^|
-echo  +------------------------------------------------------------------------------+
-echo  ^|  [13] Clear Recent Documents                - Xoa Tai Lieu Gan Day          ^|
-echo  ^|  [14] Clear Run History                     - Xoa Lich Su Run               ^|
-echo  ^|  [15] Clear Search History                  - Xoa Lich Su Tim Kiem          ^|
-echo  ^|  [16] Clear Clipboard History               - Xoa Lich Su Clipboard         ^|
-echo  ^|  [17] Clear Windows Error Reports           - Xoa Bao Cao Loi Windows       ^|
-echo  ^|  [18] Disable Telemetry and Tracking        - Tat Thu Thap Du Lieu          ^|
-echo  ^|  [19] Clear Event Logs                      - Xoa Nhat Ky Su Kien           ^|
-echo  ^|  [20] Clear DNS Cache                       - Xoa Cache DNS                 ^|
-echo  +------------------------------------------------------------------------------+
+echo  -------------------------------------------------------------------------------
+echo   CATEGORY 2: PRIVACY PROTECTION [13-20] - BAO VE RIENG TU                   
+echo  -------------------------------------------------------------------------------
+echo   [13] Clear Recent Documents                - Xoa Tai Lieu Gan Day          
+echo   [14] Clear Run History                     - Xoa Lich Su Run               
+echo   [15] Clear Search History                  - Xoa Lich Su Tim Kiem          
+echo   [16] Clear Clipboard History               - Xoa Lich Su Clipboard         
+echo   [17] Clear Windows Error Reports           - Xoa Bao Cao Loi Windows       
+echo   [18] Disable Telemetry and Tracking        - Tat Thu Thap Du Lieu          
+echo   [19] Clear Event Logs                      - Xoa Nhat Ky Su Kien           
+echo   [20] Clear DNS Cache                       - Xoa Cache DNS                 
+echo  -------------------------------------------------------------------------------
 echo.
-echo  +------------------------------------------------------------------------------+
-echo  ^|  CATEGORY 3: NETWORK OPTIMIZATION [21-26] - TOI UU MANG                     ^|
-echo  +------------------------------------------------------------------------------+
-echo  ^|  [21] Reset Network Settings                - Reset Cai Dat Mang            ^|
-echo  ^|  [22] Optimize Network Performance          - Toi Uu Hieu Suat Mang         ^|
-echo  ^|  [23] Clear ARP Cache                       - Xoa Cache ARP                 ^|
-echo  ^|  [24] Reset Winsock                         - Reset Winsock                 ^|
-echo  ^|  [25] Renew IP Address                      - Lam Moi Dia Chi IP            ^|
-echo  ^|  [26] Fix Network Adapter                   - Sua Card Mang                 ^|
-echo  +------------------------------------------------------------------------------+
+echo  -------------------------------------------------------------------------------
+echo   CATEGORY 3: NETWORK OPTIMIZATION [21-26] - TOI UU MANG                     
+echo  -------------------------------------------------------------------------------
+echo   [21] Reset Network Settings                - Reset Cai Dat Mang            
+echo   [22] Optimize Network Performance          - Toi Uu Hieu Suat Mang         
+echo   [23] Clear ARP Cache                       - Xoa Cache ARP                 
+echo   [24] Reset Winsock                         - Reset Winsock                 
+echo   [25] Renew IP Address                      - Lam Moi Dia Chi IP            
+echo   [26] Fix Network Adapter                   - Sua Card Mang                 
+echo  -------------------------------------------------------------------------------
 echo.
-echo  +------------------------------------------------------------------------------+
-echo  ^|  CATEGORY 4: DISK MANAGEMENT [27-32] - QUAN LY O DIA                        ^|
-echo  +------------------------------------------------------------------------------+
-echo  ^|  [27] Disk Cleanup (Windows Built-in)       - Don Dep O Dia (Tich Hop)      ^|
-echo  ^|  [28] Disk Error Check                      - Kiem Tra Loi O Dia            ^|
-echo  ^|  [29] Disk Optimization (Defrag/TRIM)       - Toi Uu O Dia                  ^|
-echo  ^|  [30] Analyze Disk Space                    - Phan Tich Dung Luong          ^|
-echo  ^|  [31] Clean Windows.old Folder              - Xoa Thu Muc Windows.old       ^|
-echo  ^|  [32] Compact OS (Compress System)          - Nen He Thong                  ^|
-echo  +------------------------------------------------------------------------------+
+echo  -------------------------------------------------------------------------------
+echo   CATEGORY 4: DISK MANAGEMENT [27-32] - QUAN LY O DIA                        
+echo  -------------------------------------------------------------------------------
+echo   [27] Disk Cleanup (Windows Built-in)       - Don Dep O Dia (Tich Hop)      
+echo   [28] Disk Error Check                      - Kiem Tra Loi O Dia            
+echo   [29] Disk Optimization (Defrag/TRIM)       - Toi Uu O Dia                  
+echo   [30] Analyze Disk Space                    - Phan Tich Dung Luong          
+echo   [31] Clean Windows.old Folder              - Xoa Thu Muc Windows.old       
+echo   [32] Compact OS (Compress System)          - Nen He Thong                  
+echo  -------------------------------------------------------------------------------
 echo.
-echo  +------------------------------------------------------------------------------+
-echo  ^|  CATEGORY 5: PERFORMANCE OPTIMIZATION [33-44] - TOI UU HIEU SUAT            ^|
-echo  +------------------------------------------------------------------------------+
-echo  ^|  [33] Disable Startup Programs              - Tat Chuong Trinh Khoi Dong    ^|
-echo  ^|  [34] Optimize Services                     - Toi Uu Dich Vu                ^|
-echo  ^|  [35] Clear Prefetch Files                  - Xoa File Prefetch             ^|
-echo  ^|  [36] Clear SuperFetch Cache                - Xoa Cache SuperFetch          ^|
-echo  ^|  [37] Disable Visual Effects                - Tat Hieu Ung Hinh Anh         ^|
-echo  ^|  [38] Optimize Power Plan (High Perf)       - Toi Uu Che Do Nguon           ^|
-echo  ^|  [39] Disable Hibernation                   - Tat Che Do Ngu Dong           ^|
-echo  ^|  [40] Clear Memory Cache                    - Xoa Cache Bo Nho              ^|
-echo  ^|  [41] Optimize Search Index                 - Toi Uu Tim Kiem               ^|
-echo  ^|  [42] Disable Windows Animations            - Tat Hoat Anh Windows          ^|
-echo  ^|  [43] Optimize SSD Settings                 - Toi Uu SSD                    ^|
-echo  ^|  [44] Reduce Menu Show Delay                - Giam Tre Hien Thi Menu        ^|
-echo  +------------------------------------------------------------------------------+
+echo  -------------------------------------------------------------------------------
+echo   CATEGORY 5: PERFORMANCE OPTIMIZATION [33-44] - TOI UU HIEU SUAT            
+echo  -------------------------------------------------------------------------------
+echo   [33] Disable Startup Programs              - Tat Chuong Trinh Khoi Dong    
+echo   [34] Optimize Services                     - Toi Uu Dich Vu                
+echo   [35] Clear Prefetch Files                  - Xoa File Prefetch             
+echo   [36] Clear SuperFetch Cache                - Xoa Cache SuperFetch          
+echo   [37] Disable Visual Effects                - Tat Hieu Ung Hinh Anh         
+echo   [38] Optimize Power Plan (High Perf)       - Toi Uu Che Do Nguon           
+echo   [39] Disable Hibernation                   - Tat Che Do Ngu Dong           
+echo   [40] Clear Memory Cache                    - Xoa Cache Bo Nho              
+echo   [41] Optimize Search Index                 - Toi Uu Tim Kiem               
+echo   [42] Disable Windows Animations            - Tat Hoat Anh Windows          
+echo   [43] Optimize SSD Settings                 - Toi Uu SSD                    
+echo   [44] Reduce Menu Show Delay                - Giam Tre Hien Thi Menu        
+echo  -------------------------------------------------------------------------------
 echo.
-echo  +------------------------------------------------------------------------------+
-echo  ^|  CATEGORY 6: SYSTEM MAINTENANCE [45-50] - BAO TRI HE THONG                  ^|
-echo  +------------------------------------------------------------------------------+
-echo  ^|  [45] System File Checker (SFC)             - Kiem Tra File He Thong        ^|
-echo  ^|  [46] DISM System Repair                    - Sua Chua He Thong DISM        ^|
-echo  ^|  [47] Windows Component Cleanup             - Don Dep Thanh Phan Windows    ^|
-echo  ^|  [48] Update Windows Drivers                - Cap Nhat Driver Windows       ^|
-echo  ^|  [49] Rebuild Icon Cache                    - Xay Dung Lai Icon Cache       ^|
-echo  ^|  [50] Rebuild Windows Search Index          - Xay Dung Lai Tim Kiem         ^|
-echo  +------------------------------------------------------------------------------+
+echo  -------------------------------------------------------------------------------
+echo   CATEGORY 6: SYSTEM MAINTENANCE [45-50] - BAO TRI HE THONG                  
+echo  -------------------------------------------------------------------------------
+echo   [45] System File Checker (SFC)             - Kiem Tra File He Thong        
+echo   [46] DISM System Repair                    - Sua Chua He Thong DISM        
+echo   [47] Windows Component Cleanup             - Don Dep Thanh Phan Windows    
+echo   [48] Update Windows Drivers                - Cap Nhat Driver Windows       
+echo   [49] Rebuild Icon Cache                    - Xay Dung Lai Icon Cache       
+echo   [50] Rebuild Windows Search Index          - Xay Dung Lai Tim Kiem         
+echo  -------------------------------------------------------------------------------
 echo.
-echo  +------------------------------------------------------------------------------+
-echo  ^|  CATEGORY 7: REGISTRY OPTIMIZATION [51-55] - TOI UU REGISTRY                ^|
-echo  +------------------------------------------------------------------------------+
-echo  ^|  [51] Clean Registry (Safe)                 - Don Dep Registry (An Toan)    ^|
-echo  ^|  [52] Optimize Registry                     - Toi Uu Registry               ^|
-echo  ^|  [53] Backup Registry                       - Sao Luu Registry              ^|
-echo  ^|  [54] Disable Cortana                       - Tat Cortana                   ^|
-echo  ^|  [55] Disable Windows Tips                  - Tat Goi Y Windows             ^|
-echo  +------------------------------------------------------------------------------+
+echo  -------------------------------------------------------------------------------
+echo   CATEGORY 7: REGISTRY OPTIMIZATION [51-55] - TOI UU REGISTRY                
+echo  -------------------------------------------------------------------------------
+echo   [51] Clean Registry (Safe)                 - Don Dep Registry (An Toan)    
+echo   [52] Optimize Registry                     - Toi Uu Registry               
+echo   [53] Backup Registry                       - Sao Luu Registry              
+echo   [54] Disable Cortana                       - Tat Cortana                   
+echo   [55] Disable Windows Tips                  - Tat Goi Y Windows             
+echo  -------------------------------------------------------------------------------
 echo.
-echo  +------------------------------------------------------------------------------+
-echo  ^|  CATEGORY 8: ADVANCED TOOLS [56-70] - CONG CU NANG CAO                      ^|
-echo  +------------------------------------------------------------------------------+
-echo  ^|  [56] Create System Restore Point           - Tao Diem Khoi Phuc He Thong   ^|
-echo  ^|  [57] View System Information               - Xem Thong Tin He Thong        ^|
-echo  ^|  [58] Export Installed Programs List        - Xuat Danh Sach Chuong Trinh   ^|
-echo  ^|  [59] Check Disk Health (SMART)             - Kiem Tra Suc Khoe O Dia       ^|
-echo  ^|  [60] Clear Windows Store Cache             - Xoa Cache Windows Store       ^|
-echo  ^|  [61] Reset Windows Update Components       - Reset Thanh Phan Update        ^|
-echo  ^|  [62] Optimize Boot Time                    - Toi Uu Thoi Gian Khoi Dong    ^|
-echo  ^|  [63] Clean All Temporary Files             - Xoa Tat Ca File Tam           ^|
-echo  ^|  [64] Generate System Report                - Tao Bao Cao He Thong          ^|
-echo  ^|  [65] Clean Software Cache (WPS/Adobe)      - Xoa Cache Phan Mem            ^|
-echo  ^|  [66] Clean Delivery Optimization           - Xoa Delivery Optimization     ^|
-echo  ^|  [67] Clean Update Backup (LCU)             - Xoa Sao Luu Cap Nhat          ^|
-echo  ^|  [68] Optimize Memory (RAM)                 - Toi Uu Bo Nho RAM             ^|
-echo  ^|  [69] Show Disk Space Report                - Xem Bao Cao Dung Luong        ^|
-echo  ^|  [70] Refresh Icon Cache                    - Lam Moi Icon Cache            ^|
-echo  +------------------------------------------------------------------------------+
+echo  -------------------------------------------------------------------------------
+echo   CATEGORY 8: ADVANCED TOOLS [56-70] - CONG CU NANG CAO                      
+echo  -------------------------------------------------------------------------------
+echo   [56] Create System Restore Point           - Tao Diem Khoi Phuc He Thong   
+echo   [57] View System Information               - Xem Thong Tin He Thong        
+echo   [58] Export Installed Programs List        - Xuat Danh Sach Chuong Trinh   
+echo   [59] Check Disk Health (SMART)             - Kiem Tra Suc Khoe O Dia       
+echo   [60] Clear Windows Store Cache             - Xoa Cache Windows Store       
+echo   [61] Reset Windows Update Components       - Reset Thanh Phan Update        
+echo   [62] Optimize Boot Time                    - Toi Uu Thoi Gian Khoi Dong    
+echo   [63] Clean All Temporary Files             - Xoa Tat Ca File Tam           
+echo   [64] Generate System Report                - Tao Bao Cao He Thong          
+echo   [65] Clean Software Cache (WPS/Adobe)      - Xoa Cache Phan Mem            
+echo   [66] Clean Delivery Optimization           - Xoa Delivery Optimization     
+echo   [67] Clean Update Backup (LCU)             - Xoa Sao Luu Cap Nhat          
+echo   [68] Optimize Memory (RAM)                 - Toi Uu Bo Nho RAM             
+echo   [69] Show Disk Space Report                - Xem Bao Cao Dung Luong        
+echo   [70] Refresh Icon Cache                    - Lam Moi Icon Cache            
+echo  -------------------------------------------------------------------------------
 echo.
-echo  +------------------------------------------------------------------------------+
-echo  ^|  CATEGORY 9: SYSTEM UTILITIES [71-76] - TIEN ICH HE THONG (NEW!)            ^|
-echo  +------------------------------------------------------------------------------+
-echo  ^|  [71] Check System Information              - Kiem Tra Thong Tin May        ^|
-echo  ^|  [72] Windows Settings Center               - Trung Tam Cai Dat Windows     ^|
-echo  ^|  [73] Office Repair and Reset               - Sua Chua va Reset Office      ^|
-echo  ^|  [74] Remove Bloatware (Safe)               - Xoa Ung Dung Rac (An Toan)    ^|
-echo  ^|  [75] Bitlocker Management                  - Quan Ly Bitlocker             ^|
-echo  ^|  [76] Check Activation Status               - Kiem Tra Trang Thai Kich Hoat ^|
-echo  +------------------------------------------------------------------------------+
+echo  -------------------------------------------------------------------------------
+echo   CATEGORY 9: SYSTEM UTILITIES [71-76] - TIEN ICH HE THONG (NEW!)            
+echo  -------------------------------------------------------------------------------
+echo   [71] Check System Information              - Kiem Tra Thong Tin May        
+echo   [72] Windows Settings Center               - Trung Tam Cai Dat Windows     
+echo   [73] Office Repair and Reset               - Sua Chua va Reset Office      
+echo   [74] Remove Bloatware (Safe)               - Xoa Ung Dung Rac (An Toan)    
+echo   [75] Bitlocker Management                  - Quan Ly Bitlocker             
+echo   [76] Check Activation Status               - Kiem Tra Trang Thai Kich Hoat 
+echo  -------------------------------------------------------------------------------
 echo.
-echo  +==============================================================================+
-echo  ^|                        QUICK ACTIONS - THAO TAC NHANH                        ^|
-echo  +==============================================================================+
-echo  ^|  [88] RUN ALL CLEANUP TASKS                 - CHAY TAT CA DON DEP           ^|
-echo  ^|  [99] FULL SYSTEM OPTIMIZATION              - TOI UU TOAN BO HE THONG       ^|
-echo  +------------------------------------------------------------------------------+
-echo  ^|  [0]  EXIT - THOAT                                                           ^|
-echo  +==============================================================================+
+echo  ================================================================================
+echo                         QUICK ACTIONS - THAO TAC NHANH                        
+echo  ================================================================================
+echo   [88] RUN ALL CLEANUP TASKS                 - CHAY TAT CA DON DEP           
+echo   [99] FULL SYSTEM OPTIMIZATION              - TOI UU TOAN BO HE THONG       
+echo  -------------------------------------------------------------------------------
+echo   [0]  EXIT - THOAT                                                           
+echo  ================================================================================
 echo.
 set /p choice=   SELECT FUNCTION / CHON CHUC NANG (0-99): 
 
