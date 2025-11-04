@@ -33,8 +33,8 @@ elseif ($WinVer.Major -eq 6 -and $WinVer.Minor -eq 2) { $WIN_VERSION = "8" }
 elseif ($WinVer.Major -eq 6 -and $WinVer.Minor -eq 1) { $WIN_VERSION = "7" }
 else { $WIN_VERSION = "Unknown" }
 
-# Language setting
-$global:LANG = "BOTH"
+# Language setting (EN = English, VI = Vietnamese)
+if (-not $global:LANG) { $global:LANG = "EN" }
 
 # Welcome Screen
 function Show-Welcome {
@@ -51,100 +51,119 @@ function Show-Welcome {
     Start-Sleep -Seconds 1
 }
 
-# Main Menu - Bilingual
+# Main Menu - Router
 function Show-MainMenu {
+    if ($global:LANG -eq "VI") {
+        Show-MainMenuVI
+    } else {
+        Show-MainMenuEN
+    }
+}
+
+# Main Menu - English
+function Show-MainMenuEN {
     Clear-Host
     Write-Host "`n ================================================================================" -ForegroundColor Cyan
     Write-Host "                                                                                " -ForegroundColor White
     Write-Host "               ULTIMATE WINDOWS SYSTEM TOOL v5.0 - PROFESSIONAL                " -ForegroundColor White
-    Write-Host "               Comprehensive Optimization Suite - 82 Functions                 " -ForegroundColor Gray
-    Write-Host "                Backup, Restore, Optimize, Clean - All-in-One Tool             " -ForegroundColor Yellow
-    Write-Host "                      Windows $WIN_VERSION Detected | Press `` for language                " -ForegroundColor Green
+    Write-Host "               PowerShell Enhanced Edition - 10 Core Functions                 " -ForegroundColor Gray
+    Write-Host "                      Press `` to switch to Vietnamese                          " -ForegroundColor Green
     Write-Host "                                                                                " -ForegroundColor White
     Write-Host " ================================================================================" -ForegroundColor Cyan
     
     Write-Host "`n -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
-    Write-Host "  CATEGORY 1: SYSTEM CLEANUP [1-12] - DON DEP HE THONG                       " -ForegroundColor Yellow
+    Write-Host "  CATEGORY 1: SYSTEM CLEANUP [1-2]                                           " -ForegroundColor Yellow
     Write-Host " -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
-    Write-Host "  [1]  Quick System Cleanup                  - Don Dep Nhanh He Thong       " -ForegroundColor White
-    Write-Host "  [2]  Deep System Cleanup                   - Don Dep Sau He Thong         " -ForegroundColor White
-    Write-Host "  [3]  Browser Cache Cleanup                 - Don Dep Cache Trinh Duyet    " -ForegroundColor White
-    Write-Host "  [4]  Application Cache Cleanup             - Don Dep Cache Ung Dung       " -ForegroundColor White
-    Write-Host "  [5]  Windows Update Cleanup                - Don Dep Windows Update        " -ForegroundColor White
-    Write-Host "  [6]  Thumbnail Cache Cleanup               - Don Dep Thumbnail Cache       " -ForegroundColor White
-    Write-Host "  [7]  Icon Cache Cleanup                    - Don Dep Icon Cache            " -ForegroundColor White
-    Write-Host "  [8]  Font Cache Cleanup                    - Don Dep Font Cache            " -ForegroundColor White
-    Write-Host "  [9]  Windows Installer Cleanup             - Don Dep Windows Installer     " -ForegroundColor White
-    Write-Host "  [10] Old Windows Installation Cleanup      - Don Dep Windows Cu            " -ForegroundColor White
-    Write-Host "  [11] Recycle Bin Cleanup                   - Don Dep Thung Rac             " -ForegroundColor White
-    Write-Host "  [12] Memory Dump Files Cleanup             - Don Dep File Dump Bo Nho      " -ForegroundColor White
+    Write-Host "  [1]  Quick System Cleanup          - Fast essential cleanup                " -ForegroundColor White
+    Write-Host "  [2]  Deep System Cleanup           - Comprehensive deep clean              " -ForegroundColor White
     
     Write-Host "`n -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
-    Write-Host "  CATEGORY 2: PRIVACY PROTECTION [13-20] - BAO VE RIENG TU                   " -ForegroundColor Yellow
+    Write-Host "  CATEGORY 10: BACKUP AND RECOVERY [77-82]                                   " -ForegroundColor Yellow
     Write-Host " -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
-    Write-Host "  [13] Clear Recent Documents                - Xoa Tai Lieu Gan Day          " -ForegroundColor White
-    Write-Host "  [14] Clear Run History                     - Xoa Lich Su Run               " -ForegroundColor White
-    Write-Host "  [15] Clear Search History                  - Xoa Lich Su Tim Kiem          " -ForegroundColor White
-    Write-Host "  [16] Clear Clipboard History               - Xoa Lich Su Clipboard         " -ForegroundColor White
-    Write-Host "  [17] Clear Windows Error Reports           - Xoa Bao Cao Loi Windows       " -ForegroundColor White
-    Write-Host "  [18] Disable Telemetry and Tracking        - Tat Thu Thap Du Lieu          " -ForegroundColor White
-    Write-Host "  [19] Clear Event Logs                      - Xoa Nhat Ky Su Kien           " -ForegroundColor White
-    Write-Host "  [20] Clear DNS Cache                       - Xoa Cache DNS                 " -ForegroundColor White
-    
-    Write-Host "`n -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
-    Write-Host "  CATEGORY 3: NETWORK OPTIMIZATION [21-26] - TOI UU MANG                     " -ForegroundColor Yellow
-    Write-Host " -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
-    Write-Host "  [21] Reset Network Settings                - Reset Cai Dat Mang            " -ForegroundColor White
-    Write-Host "  [22] Optimize Network Performance          - Toi Uu Hieu Suat Mang         " -ForegroundColor White
-    Write-Host "  [23] Clear ARP Cache                       - Xoa Cache ARP                 " -ForegroundColor White
-    Write-Host "  [24] Reset Winsock                         - Reset Winsock                 " -ForegroundColor White
-    Write-Host "  [25] Renew IP Address                      - Lam Moi Dia Chi IP            " -ForegroundColor White
-    Write-Host "  [26] Fix Network Adapter                   - Sua Card Mang                 " -ForegroundColor White
-    
-    Write-Host "`n -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
-    Write-Host "  CATEGORY 4: DISK MANAGEMENT [27-32] - QUAN LY O DIA                        " -ForegroundColor Yellow
-    Write-Host " -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
-    Write-Host "  [27] Disk Cleanup (Windows Built-in)       - Don Dep O Dia (Tich Hop)      " -ForegroundColor White
-    Write-Host "  [28] Disk Error Check                      - Kiem Tra Loi O Dia            " -ForegroundColor White
-    Write-Host "  [29] Disk Optimization (Defrag/TRIM)       - Toi Uu O Dia                  " -ForegroundColor White
-    Write-Host "  [30] Analyze Disk Space                    - Phan Tich Dung Luong          " -ForegroundColor White
-    Write-Host "  [31] Clean Windows.old Folder              - Xoa Thu Muc Windows.old       " -ForegroundColor White
-    Write-Host "  [32] Compact OS (Compress System)          - Nen He Thong                  " -ForegroundColor White
-    
-    Write-Host "`n -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
-    Write-Host "  CATEGORY 5: PERFORMANCE [33-44] - TOI UU HIEU SUAT                         " -ForegroundColor Yellow
-    Write-Host " -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
-    Write-Host "  [33-44] Performance optimization functions... (Type number to see details)  " -ForegroundColor Gray
-    
-    Write-Host "`n -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
-    Write-Host "  CATEGORY 6-9: MAINTENANCE, REGISTRY, TOOLS, UTILITIES [45-76]              " -ForegroundColor Yellow
-    Write-Host " -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
-    Write-Host "  [45-76] System maintenance and utilities... (Type number for details)       " -ForegroundColor Gray
-    
-    Write-Host "`n -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
-    Write-Host "  CATEGORY 10: BACKUP AND RECOVERY [77-82] - SAO LUU VA KHOI PHUC (NEW!)     " -ForegroundColor Yellow
-    Write-Host " -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
-    Write-Host "  [77] Backup WiFi Passwords                 - Sao Luu Mat Khau Wifi         " -ForegroundColor Green
-    Write-Host "  [78] Backup Drivers                        - Sao Luu Driver                " -ForegroundColor Green
-    Write-Host "  [79] Backup User Data                      - Sao Luu Du Lieu Nguoi Dung    " -ForegroundColor Green
-    Write-Host "  [80] Backup Zalo Data                      - Sao Luu Du Lieu Zalo          " -ForegroundColor Green
-    Write-Host "  [81] Backup Product Keys                   - Sao Luu Ban Quyen             " -ForegroundColor Green
-    Write-Host "  [82] Data Recovery Tools                   - Cong Cu Khoi Phuc Du Lieu     " -ForegroundColor Green
+    Write-Host "  [77] Backup WiFi Passwords         - Export all WiFi credentials           " -ForegroundColor Green
+    Write-Host "  [78] Backup Drivers                - Export third-party drivers            " -ForegroundColor Green
+    Write-Host "  [79] Backup User Data              - Backup Desktop, Documents, etc.       " -ForegroundColor Green
+    Write-Host "  [80] Backup Zalo Data              - Complete Zalo backup                  " -ForegroundColor Green
+    Write-Host "  [81] Backup Product Keys           - Save Windows/Office keys              " -ForegroundColor Green
     
     Write-Host "`n ================================================================================" -ForegroundColor Cyan
-    Write-Host "  QUICK ACTIONS - THAO TAC NHANH                                             " -ForegroundColor Yellow
+    Write-Host "  QUICK ACTIONS                                                              " -ForegroundColor Yellow
     Write-Host " ================================================================================" -ForegroundColor Cyan
-    Write-Host "  [88] RUN ALL CLEANUP TASKS                 - CHAY TAT CA DON DEP           " -ForegroundColor Magenta
-    Write-Host "  [99] FULL SYSTEM OPTIMIZATION              - TOI UU TOAN BO HE THONG       " -ForegroundColor Magenta
+    Write-Host "  [88] RUN ALL CLEANUP TASKS         - Execute all cleanup operations        " -ForegroundColor Magenta
     Write-Host " -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
-    Write-Host "  [0]  EXIT - THOAT                          [``]  Language / Ngon ngu        " -ForegroundColor White
+    Write-Host "  [0]  EXIT                          [``]  Switch to Vietnamese               " -ForegroundColor White
     Write-Host " ================================================================================" -ForegroundColor Cyan
     Write-Host ""
 }
 
+# Main Menu - Vietnamese
+function Show-MainMenuVI {
+    Clear-Host
+    Write-Host "`n ================================================================================" -ForegroundColor Cyan
+    Write-Host "                                                                                " -ForegroundColor White
+    Write-Host "               CONG CU TOI UU HE THONG WINDOWS v5.0 - CHUYEN NGHIEP            " -ForegroundColor White
+    Write-Host "               PowerShell Nang Cao - 10 Chuc Nang Chinh                        " -ForegroundColor Gray
+    Write-Host "                      Nhan `` de chuyen sang tieng Anh                          " -ForegroundColor Green
+    Write-Host "                                                                                " -ForegroundColor White
+    Write-Host " ================================================================================" -ForegroundColor Cyan
+    
+    Write-Host "`n -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
+    Write-Host "  DANH MUC 1: DON DEP HE THONG [1-2]                                         " -ForegroundColor Yellow
+    Write-Host " -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
+    Write-Host "  [1]  Don Dep Nhanh He Thong        - Don dep nhanh thiet yeu               " -ForegroundColor White
+    Write-Host "  [2]  Don Dep Sau He Thong          - Don dep toan dien va sau              " -ForegroundColor White
+    
+    Write-Host "`n -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
+    Write-Host "  DANH MUC 10: SAO LUU VA KHOI PHUC [77-82]                                  " -ForegroundColor Yellow
+    Write-Host " -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
+    Write-Host "  [77] Sao Luu Mat Khau Wifi         - Xuat tat ca thong tin WiFi            " -ForegroundColor Green
+    Write-Host "  [78] Sao Luu Driver                - Xuat driver ben thu ba                " -ForegroundColor Green
+    Write-Host "  [79] Sao Luu Du Lieu Nguoi Dung    - Sao luu Desktop, Documents, v.v.      " -ForegroundColor Green
+    Write-Host "  [80] Sao Luu Du Lieu Zalo          - Sao luu day du Zalo                   " -ForegroundColor Green
+    Write-Host "  [81] Sao Luu Ban Quyen             - Luu key Windows/Office                " -ForegroundColor Green
+    
+    Write-Host "`n ================================================================================" -ForegroundColor Cyan
+    Write-Host "  THAO TAC NHANH                                                             " -ForegroundColor Yellow
+    Write-Host " ================================================================================" -ForegroundColor Cyan
+    Write-Host "  [88] CHAY TAT CA DON DEP           - Thuc hien tat ca don dep              " -ForegroundColor Magenta
+    Write-Host " -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
+    Write-Host "  [0]  THOAT                         [``]  Chuyen sang tieng Anh              " -ForegroundColor White
+    Write-Host " ================================================================================" -ForegroundColor Cyan
+    Write-Host ""
+}
+
+# Language Toggle Function
+function Switch-Language {
+    if ($global:LANG -eq "EN") {
+        $global:LANG = "VI"
+    } else {
+        $global:LANG = "EN"
+    }
+}
+
 # Quick Cleanup Function
 function Invoke-QuickCleanup {
-    Write-Host "`n[1] Quick System Cleanup - Don Dep Nhanh He Thong" -ForegroundColor Green
+    if ($global:LANG -eq "VI") {
+        Write-Host "`n[1] Don Dep Nhanh He Thong" -ForegroundColor Green
+        Write-Host "================================================================`n" -ForegroundColor DarkCyan
+        
+        Write-Host "[*] Xoa file Temp..." -ForegroundColor Yellow
+        Remove-Item -Path "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
+        Remove-Item -Path "C:\Windows\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
+        
+        Write-Host "[*] Xoa thung rac..." -ForegroundColor Yellow
+        Clear-RecycleBin -Force -ErrorAction SilentlyContinue
+        
+        Write-Host "[*] Xoa cache DNS..." -ForegroundColor Yellow
+        Clear-DnsClientCache -ErrorAction SilentlyContinue
+        
+        Write-Host "[*] Xoa prefetch..." -ForegroundColor Yellow
+        Remove-Item -Path "C:\Windows\Prefetch\*" -Force -ErrorAction SilentlyContinue
+        
+        Write-Host "`n[THANH CONG] Hoan thanh don dep nhanh!" -ForegroundColor Green
+        Read-Host "`nNhan Enter de tiep tuc"
+    } else {
+        Write-Host "`n[1] Quick System Cleanup" -ForegroundColor Green
     Write-Host "================================================================`n" -ForegroundColor DarkCyan
     
     Write-Host "[*] Cleaning Temp files / Xoa file Temp..." -ForegroundColor Yellow
@@ -160,15 +179,22 @@ function Invoke-QuickCleanup {
     Write-Host "[*] Cleaning Prefetch / Xoa prefetch..." -ForegroundColor Yellow
     Remove-Item -Path "C:\Windows\Prefetch\*" -Force -ErrorAction SilentlyContinue
     
-    Write-Host "`n[SUCCESS] Quick Cleanup Completed! / Hoan thanh don dep nhanh!" -ForegroundColor Green
-    Read-Host "`nPress Enter to continue / Nhan Enter de tiep tuc"
+        Write-Host "`n[SUCCESS] Quick Cleanup Completed!" -ForegroundColor Green
+        Read-Host "`nPress Enter to continue"
+    }
 }
 
 # Deep Cleanup Function
 function Invoke-DeepCleanup {
-    Write-Host "`n[2] Deep System Cleanup - Don Dep Sau He Thong" -ForegroundColor Green
-    Write-Host "================================================================`n" -ForegroundColor DarkCyan
-    Write-Host "This will take several minutes / Qua trinh nay mat vai phut...`n" -ForegroundColor Yellow
+    if ($global:LANG -eq "VI") {
+        Write-Host "`n[2] Don Dep Sau He Thong" -ForegroundColor Green
+        Write-Host "================================================================`n" -ForegroundColor DarkCyan
+        Write-Host "Qua trinh nay mat vai phut...`n" -ForegroundColor Yellow
+    } else {
+        Write-Host "`n[2] Deep System Cleanup" -ForegroundColor Green
+        Write-Host "================================================================`n" -ForegroundColor DarkCyan
+        Write-Host "This will take several minutes...`n" -ForegroundColor Yellow
+    }
     
     Write-Host "[*] Cleaning all Temp folders..." -ForegroundColor Yellow
     Get-ChildItem -Path "$env:TEMP" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
@@ -481,14 +507,21 @@ Start-Sleep -Seconds 1
 while ($true) {
     Show-MainMenu
     
-    $choice = Read-Host "  SELECT FUNCTION / CHON CHUC NANG (0-99 or ``)"
+    if ($global:LANG -eq "VI") {
+        $choice = Read-Host "  CHON CHUC NANG (0-99 hoac ``)"
+    } else {
+        $choice = Read-Host "  SELECT FUNCTION (0-99 or ``)"
+    }
     
     switch ($choice) {
         "0" { 
             Clear-Host
             Write-Host "`n================================================================================" -ForegroundColor Cyan
-            Write-Host " Thank you for using Ultimate Windows System Tool!" -ForegroundColor White
-            Write-Host " Cam on ban da su dung Ultimate Windows System Tool!" -ForegroundColor White
+            if ($global:LANG -eq "VI") {
+                Write-Host " Cam on ban da su dung Ultimate Windows System Tool!" -ForegroundColor White
+            } else {
+                Write-Host " Thank you for using Ultimate Windows System Tool!" -ForegroundColor White
+            }
             Write-Host "================================================================================`n" -ForegroundColor Cyan
             Start-Sleep -Seconds 2
             Exit 
@@ -502,14 +535,16 @@ while ($true) {
         "81" { Backup-ProductKeys }
         "88" { Invoke-AllCleanup }
         "``" { 
-            Write-Host "`n[INFO] Language switch feature - Use CMD version for full language support" -ForegroundColor Yellow
-            Write-Host "[INFO] Tinh nang doi ngon ngu - Dung ban CMD de ho tro day du`n" -ForegroundColor Yellow
-            Start-Sleep -Seconds 2
+            Switch-Language
         }
         default {
-            Write-Host "`n[!] Function $choice is available in CMD version" -ForegroundColor Yellow
-            Write-Host "[!] Please use UltimateSystemTool.cmd for all 82 functions" -ForegroundColor Yellow
-            Write-Host "[!] Ban PowerShell nay chi demo mot so chuc nang chinh`n" -ForegroundColor Gray
+            if ($global:LANG -eq "VI") {
+                Write-Host "`n[!] Chuc nang $choice co san trong ban CMD" -ForegroundColor Yellow
+                Write-Host "[!] Vui long su dung UltimateSystemTool.cmd cho tat ca 82 chuc nang`n" -ForegroundColor Yellow
+            } else {
+                Write-Host "`n[!] Function $choice is available in CMD version" -ForegroundColor Yellow
+                Write-Host "[!] Please use UltimateSystemTool.cmd for all 82 functions`n" -ForegroundColor Yellow
+            }
             Start-Sleep -Seconds 2
         }
     }

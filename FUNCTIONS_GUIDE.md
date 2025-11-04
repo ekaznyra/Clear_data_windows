@@ -1733,8 +1733,11 @@ LANGUAGE TOGGLE / CHUYEN DOI NGON NGU:
 - Nhan phim ` de chuyen giua tieng Anh va tieng Viet
 
 TOOL VERSIONS / PHIEN BAN CONG CU:
-- CMD Version: 82 functions (UltimateSystemTool.cmd)
-- PowerShell Version: 10 core functions (UltimateSystemTool.ps1)
+- CMD Version: 82 functions with language toggle (UltimateSystemTool.cmd)
+- PowerShell Version: 10 core functions with language toggle (UltimateSystemTool.ps1)
+
+BOTH VERSIONS NOW SUPPORT LANGUAGE TOGGLE!
+CA HAI PHIEN BAN GIO HO TRO CHUYEN DOI NGON NGU!
 
 REQUIREMENTS / YEU CAU:
 - Administrator rights / Quyen Administrator
