@@ -75,132 +75,41 @@ timeout /t 1 /nobreak >nul
 :MAIN_MENU
 cls
 color 0B
-echo(
-echo  ================================================================================
-echo                                                                                
-echo             ULTIMATE WINDOWS SYSTEM TOOL v5.0 - COMPLETE EDITION              
-echo              96 Functions - Full Optimization + Installation Suite            
-echo                                                                                
-echo  ================================================================================
-echo(
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 1: SYSTEM CLEANUP [1-12]
-echo  -------------------------------------------------------------------------------
-echo   [1]  Quick System Cleanup           [2]  Deep System Cleanup
-echo   [3]  Browser Cache Cleanup          [4]  Application Cache Cleanup
-echo   [5]  Windows Update Cleanup         [6]  Thumbnail Cache Cleanup
-echo   [7]  Icon Cache Cleanup             [8]  Font Cache Cleanup
-echo   [9]  Windows Installer Cleanup      [10] Old Windows Installation Cleanup
-echo   [11] Recycle Bin Cleanup            [12] Memory Dump Files Cleanup
-echo  -------------------------------------------------------------------------------
-echo(
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 2: PRIVACY PROTECTION [13-20]
-echo  -------------------------------------------------------------------------------
-echo   [13] Clear Recent Documents         [14] Clear Run History
-echo   [15] Clear Search History           [16] Clear Clipboard History
-echo   [17] Clear Windows Error Reports    [18] Disable Telemetry
-echo   [19] Clear Event Logs               [20] Clear DNS Cache
-echo  -------------------------------------------------------------------------------
-echo(
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 3: NETWORK OPTIMIZATION [21-26]
-echo  -------------------------------------------------------------------------------
-echo   [21] Reset Network Settings         [22] Optimize Network Performance
-echo   [23] Clear ARP Cache                [24] Reset Winsock
-echo   [25] Renew IP Address               [26] Fix Network Adapter
-echo  -------------------------------------------------------------------------------
-echo(
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 4: DISK MANAGEMENT [27-32]
-echo  -------------------------------------------------------------------------------
-echo   [27] Disk Cleanup                   [28] Disk Error Check
-echo   [29] Disk Optimization              [30] Analyze Disk Space
-echo   [31] Clean Windows.old Folder       [32] Compact OS
-echo  -------------------------------------------------------------------------------
-echo(
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 5: PERFORMANCE OPTIMIZATION [33-44]
-echo  -------------------------------------------------------------------------------
-echo   [33] Disable Startup Programs       [34] Optimize Services
-echo   [35] Clear Prefetch Files           [36] Clear SuperFetch Cache
-echo   [37] Disable Visual Effects         [38] Optimize Power Plan
-echo   [39] Disable Hibernation            [40] Clear Memory Cache
-echo   [41] Optimize Search Index          [42] Disable Windows Animations
-echo   [43] Optimize SSD Settings          [44] Reduce Menu Show Delay
-echo  -------------------------------------------------------------------------------
-echo(
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 6: SYSTEM MAINTENANCE [45-50]
-echo  -------------------------------------------------------------------------------
-echo   [45] System File Checker (SFC)      [46] DISM System Repair
-echo   [47] Windows Component Cleanup      [48] Update Windows Drivers
-echo   [49] Rebuild Icon Cache             [50] Rebuild Search Index
-echo  -------------------------------------------------------------------------------
-echo(
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 7: REGISTRY OPTIMIZATION [51-55]
-echo  -------------------------------------------------------------------------------
-echo   [51] Clean Registry (Safe)          [52] Optimize Registry
-echo   [53] Backup Registry                [54] Disable Cortana
-echo   [55] Disable Windows Tips
-echo  -------------------------------------------------------------------------------
-echo(
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 8: ADVANCED TOOLS [56-70]
-echo  -------------------------------------------------------------------------------
-echo   [56] Create Restore Point           [57] View System Information
-echo   [58] Export Programs List           [59] Check Disk Health (SMART)
-echo   [60] Clear Windows Store Cache      [61] Reset Windows Update
-echo   [62] Optimize Boot Time             [63] Clean All Temp Files
-echo   [64] Generate System Report         [65] Clean Software Cache
-echo   [66] Clean Delivery Optimization    [67] Clean Update Backup (LCU)
-echo   [68] Optimize Memory (RAM)          [69] Show Disk Space Report
-echo   [70] Refresh Icon Cache
-echo  -------------------------------------------------------------------------------
-echo(
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 9: SYSTEM UTILITIES [71-76]
-echo  -------------------------------------------------------------------------------
-echo   [71] Check System Information       [72] Windows Settings Center
-echo   [73] Office Repair and Reset        [74] Remove Bloatware (Safe)
-echo   [75] Bitlocker Management           [76] Check Activation Status
-echo  -------------------------------------------------------------------------------
-echo(
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 10: BACKUP AND RECOVERY [77-82]
-echo  -------------------------------------------------------------------------------
-echo   [77] Backup WiFi Passwords          [78] Backup Drivers
-echo   [79] Backup User Data               [80] Backup Zalo Data
-echo   [81] Backup Product Keys            [82] Data Recovery Tools
-echo  -------------------------------------------------------------------------------
-echo(
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 11: INSTALLATION [83-87] 
-echo  -------------------------------------------------------------------------------
-echo   [83] Install Software (Chocolatey)  [84] Install Office Suite
-echo   [85] Create WinPE Boot USB          [86] Store for Win LTSC
-echo   [87] Install Win via Win To HDD
-echo  -------------------------------------------------------------------------------
-echo(
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 12: UTILITIES [88-96] 
-echo  -------------------------------------------------------------------------------
-echo   [88] Clean Junk Files (Advanced)    [89] Show/Hide Files
-echo   [90] Enable/Disable Update          [91] Fix Printer Issues
-echo   [92] Check and Test Tools           [93] Windows Defender Manage
-echo   [94] Windows ISO Repository         [95] Intel RST Drivers
-echo   [96] Product Key Management
-echo  -------------------------------------------------------------------------------
-echo(
-echo  -------------------------------------------------------------------------------
-echo   QUICK ACTIONS
-echo  -------------------------------------------------------------------------------
-echo   [97] RUN ALL CLEANUP                [98] RUN ALL UTILITIES
-echo   [99] FULL SYSTEM OPTIMIZATION       [0]  EXIT
-echo  -------------------------------------------------------------------------------
-echo(
-
+echo.
+echo  +========================================================================+
+echo  ^|          ULTIMATE WINDOWS SYSTEM TOOL v5.0                            ^|
+echo  ^|          by Nguyen Ngoc Anh Tu ^| facebook.com/NguyenNgocAnhTu.VN      ^|
+echo  ^|          System: %WIN_NAME% (Build %BUILD%)                           ^|
+echo  +========================================================================+
+echo.
+echo  +------------------------------------------------------------------------+
+echo  ^| CLEANUP [1-12] ^| PRIVACY [13-20] ^| NETWORK [21-26] ^| DISK [27-32]     ^|
+echo  +------------------------------------------------------------------------+
+echo    [1] Quick Cleanup    [13] Recent Docs     [21] Network Reset
+echo    [2] Deep Cleanup     [14] Run History     [22] Net Optimize
+echo    [3] Browser Cache    [15] Search History  [23] ARP Cache
+echo    [4] App Cache        [16] Clipboard       [24] Winsock
+echo    [5] Update Cache     [17] Error Reports   [25] Renew IP
+echo    [6] Thumbnail        [18] Telemetry       [26] Fix Adapter
+echo.
+echo  +------------------------------------------------------------------------+
+echo  ^| PERFORMANCE [33-44] ^| MAINTENANCE [45-50] ^| REGISTRY [51-55]          ^|
+echo  +------------------------------------------------------------------------+
+echo    [33-44] Startup, Services, Visual Effects, Power, SSD...
+echo    [45-50] SFC, DISM, Drivers, Icon/Search Rebuild
+echo    [51-55] Registry Clean/Optimize/Backup, Cortana, Tips
+echo.
+echo  +------------------------------------------------------------------------+
+echo  ^| ADVANCED [56-82] ^| INSTALL [83-87] ^| UTILS [88-96] ^| ALL [97-99]     ^|
+echo  +------------------------------------------------------------------------+
+echo    [56-70] Restore Point, System Info, Tools, Reports...
+echo    [77-82] Backup WiFi/Drivers/Data/Keys, Recovery
+echo    [97] All Cleanup  [98] All Utils  [99] Full Optimize
+echo.
+echo  +========================================================================+
+echo    [0] Exit  ^|  [T] Language  ^|  Current: %WIN_NAME% Build %BUILD%
+echo  +========================================================================+
+echo.
 set /p choice="  SELECT FUNCTION [0-99]: "
 
 if "%choice%"=="0" goto EXIT
@@ -340,9 +249,9 @@ echo(
 
 echo [*] Cleaning Temp files / Xoa file Temp...
 del /f /s /q "%TEMP%\*" >nul 2>&1
-del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
+del /f /s /q "%WINDIR%\Temp\*" >nul 2>&1
 for /d %%x in ("%TEMP%\*") do @rd /s /q "%%x" >nul 2>&1
-for /d %%x in ("C:\Windows\Temp\*") do @rd /s /q "%%x" >nul 2>&1
+for /d %%x in ("%WINDIR%\Temp\*") do @rd /s /q "%%x" >nul 2>&1
 
 echo [*] Cleaning Recycle Bin / Xoa thung rac...
 rd /s /q C:\$Recycle.Bin >nul 2>&1
@@ -351,7 +260,7 @@ echo [*] Flushing DNS Cache / Xoa cache DNS...
 ipconfig /flushdns >nul 2>&1
 
 echo [*] Cleaning Windows prefetch / Xoa prefetch...
-del /f /s /q C:\Windows\Prefetch\* >nul 2>&1
+del /f /s /q %WINDIR%\Prefetch\* >nul 2>&1
 
 echo(
 echo [SUCCESS] Quick Cleanup Completed! / Hoan thanh don dep nhanh!
@@ -370,17 +279,17 @@ echo(
 
 echo [*] Cleaning all Temp folders / Xoa tat ca thu muc Temp...
 del /f /s /q "%TEMP%\*" >nul 2>&1
-del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
+del /f /s /q "%WINDIR%\Temp\*" >nul 2>&1
 for /d %%u in ("C:\Users\*") do del /f /s /q "%%u\AppData\Local\Temp\*" >nul 2>&1
 
 echo [*] Cleaning Windows logs / Xoa log Windows...
-del /f /s /q C:\Windows\Logs\* >nul 2>&1
+del /f /s /q %WINDIR%\Logs\* >nul 2>&1
 del /f /s /q C:\Windows\Panther\* >nul 2>&1
 
 echo [*] Cleaning Windows Update cache / Xoa cache Windows Update...
 net stop wuauserv >nul 2>&1
 net stop bits >nul 2>&1
-del /f /s /q C:\Windows\SoftwareDistribution\Download\* >nul 2>&1
+del /f /s /q %WINDIR%\SoftwareDistribution\Download\* >nul 2>&1
 net start wuauserv >nul 2>&1
 net start bits >nul 2>&1
 
@@ -494,8 +403,8 @@ net stop bits >nul 2>&1
 net stop dosvc >nul 2>&1
 
 echo [*] Deleting update cache / Xoa cache update...
-del /f /s /q C:\Windows\SoftwareDistribution\Download\* >nul 2>&1
-del /f /s /q C:\Windows\SoftwareDistribution\DataStore\* >nul 2>&1
+del /f /s /q %WINDIR%\SoftwareDistribution\Download\* >nul 2>&1
+del /f /s /q %WINDIR%\SoftwareDistribution\DataStore\* >nul 2>&1
 
 echo [*] Restarting services / Khoi dong lai dich vu...
 net start wuauserv >nul 2>&1
@@ -1305,7 +1214,7 @@ echo Clearing prefetch files / Xoa file prefetch...
 echo(
 
 echo [*] Deleting prefetch files / Xoa file prefetch...
-del /f /s /q C:\Windows\Prefetch\* >nul 2>&1
+del /f /s /q %WINDIR%\Prefetch\* >nul 2>&1
 
 echo(
 echo [SUCCESS] Prefetch files cleared! / Da xoa file prefetch!
@@ -1326,7 +1235,7 @@ echo [*] Stopping SuperFetch service / Dung dich vu SuperFetch...
 sc stop SysMain >nul 2>&1
 
 echo [*] Clearing cache / Xoa cache...
-del /f /s /q C:\Windows\Prefetch\* >nul 2>&1
+del /f /s /q %WINDIR%\Prefetch\* >nul 2>&1
 
 echo [*] Starting SuperFetch service / Khoi dong dich vu SuperFetch...
 sc start SysMain >nul 2>&1
@@ -1877,7 +1786,7 @@ net stop bits >nul 2>&1
 net stop msiserver >nul 2>&1
 
 echo [*] Renaming folders / Doi ten thu muc...
-ren C:\Windows\SoftwareDistribution SoftwareDistribution.old >nul 2>&1
+ren %WINDIR%\SoftwareDistribution SoftwareDistribution.old >nul 2>&1
 ren C:\Windows\System32\catroot2 catroot2.old >nul 2>&1
 
 echo [*] Starting update services / Khoi dong dich vu update...
@@ -1930,14 +1839,14 @@ del /f /s /q "%TEMP%\*" >nul 2>&1
 for /d %%x in ("%TEMP%\*") do @rd /s /q "%%x" >nul 2>&1
 
 echo [*] Windows temp / Temp Windows...
-del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
-for /d %%x in ("C:\Windows\Temp\*") do @rd /s /q "%%x" >nul 2>&1
+del /f /s /q "%WINDIR%\Temp\*" >nul 2>&1
+for /d %%x in ("%WINDIR%\Temp\*") do @rd /s /q "%%x" >nul 2>&1
 
 echo [*] All users temp / Temp tat ca nguoi dung...
 for /d %%u in ("C:\Users\*") do del /f /s /q "%%u\AppData\Local\Temp\*" >nul 2>&1
 
 echo [*] Prefetch...
-del /f /s /q "C:\Windows\Prefetch\*" >nul 2>&1
+del /f /s /q "%WINDIR%\Prefetch\*" >nul 2>&1
 
 echo [*] Recent items / Muc gan day...
 del /f /s /q "%AppData%\Microsoft\Windows\Recent\*" >nul 2>&1
@@ -1988,10 +1897,10 @@ echo(
 
 echo [1/11] Quick Cleanup...
 del /f /s /q "%TEMP%\*" >nul 2>&1
-del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
+del /f /s /q "%WINDIR%\Temp\*" >nul 2>&1
 rd /s /q C:\$Recycle.Bin >nul 2>&1
 ipconfig /flushdns >nul 2>&1
-del /f /s /q C:\Windows\Prefetch\* >nul 2>&1
+del /f /s /q %WINDIR%\Prefetch\* >nul 2>&1
 
 echo [2/11] Browser Cache...
 taskkill /F /IM chrome.exe >nul 2>&1
@@ -2011,7 +1920,7 @@ del /f /s /q "%AppData%\Discord\Cache\*" >nul 2>&1
 echo [4/11] Windows Update Cache...
 net stop wuauserv >nul 2>&1
 net stop bits >nul 2>&1
-del /f /s /q C:\Windows\SoftwareDistribution\Download\* >nul 2>&1
+del /f /s /q %WINDIR%\SoftwareDistribution\Download\* >nul 2>&1
 net start wuauserv >nul 2>&1
 net start bits >nul 2>&1
 
@@ -2036,11 +1945,11 @@ echo [9/11] DNS Cache...
 ipconfig /flushdns >nul 2>&1
 
 echo [10/11] Prefetch...
-del /f /s /q C:\Windows\Prefetch\* >nul 2>&1
+del /f /s /q %WINDIR%\Prefetch\* >nul 2>&1
 
 echo [11/11] All Temp Files...
 for /d %%x in ("%TEMP%\*") do @rd /s /q "%%x" >nul 2>&1
-for /d %%x in ("C:\Windows\Temp\*") do @rd /s /q "%%x" >nul 2>&1
+for /d %%x in ("%WINDIR%\Temp\*") do @rd /s /q "%%x" >nul 2>&1
 
 echo [BONUS] Software cache...
 del /f /s /q "%userprofile%\AppData\Roaming\Adobe\Common\Media Cache Files\*" >nul 2>&1
@@ -2080,7 +1989,7 @@ echo ===========================================================================
 echo(
 echo [1.1] Temp files...
 del /f /s /q "%TEMP%\*" >nul 2>&1
-del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
+del /f /s /q "%WINDIR%\Temp\*" >nul 2>&1
 
 echo [1.2] Browser cache...
 taskkill /F /IM chrome.exe >nul 2>&1
@@ -2092,7 +2001,7 @@ del /f /s /q "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache\*" >nul 2>&1
 
 echo [1.3] Windows Update cache...
 net stop wuauserv >nul 2>&1
-del /f /s /q C:\Windows\SoftwareDistribution\Download\* >nul 2>&1
+del /f /s /q %WINDIR%\SoftwareDistribution\Download\* >nul 2>&1
 net start wuauserv >nul 2>&1
 
 echo [1.4] Icon and thumbnail cache...
@@ -2105,7 +2014,7 @@ echo [1.5] DNS cache...
 ipconfig /flushdns >nul 2>&1
 
 echo [1.6] Prefetch...
-del /f /s /q C:\Windows\Prefetch\* >nul 2>&1
+del /f /s /q %WINDIR%\Prefetch\* >nul 2>&1
 
 echo(
 echo ================================================================================
@@ -3978,15 +3887,15 @@ if /i not "%confirm%"=="Y" goto MAIN_MENU
 echo(
 echo  [1/10] Dang xoa Temp files...
 del /f /s /q "%TEMP%\*" >nul 2>&1
-del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
+del /f /s /q "%WINDIR%\Temp\*" >nul 2>&1
 
 echo  [2/10] Dang xoa Windows Update cache...
 net stop wuauserv >nul 2>&1
-del /f /s /q "C:\Windows\SoftwareDistribution\Download\*" >nul 2>&1
+del /f /s /q "%WINDIR%\SoftwareDistribution\Download\*" >nul 2>&1
 net start wuauserv >nul 2>&1
 
 echo  [3/10] Dang xoa Prefetch files...
-del /f /s /q "C:\Windows\Prefetch\*" >nul 2>&1
+del /f /s /q "%WINDIR%\Prefetch\*" >nul 2>&1
 
 echo  [4/10] Dang xoa Thumbnail cache...
 del /f /s /q "%LOCALAPPDATA%\Microsoft\Windows\Explorer\thumbcache_*.db" >nul 2>&1
@@ -4003,7 +3912,7 @@ echo  [6/10] Dang xoa Windows Error Reports...
 del /f /s /q "C:\ProgramData\Microsoft\Windows\WER\*" >nul 2>&1
 
 echo  [7/10] Dang xoa Log files...
-del /f /s /q "C:\Windows\Logs\*" >nul 2>&1
+del /f /s /q "%WINDIR%\Logs\*" >nul 2>&1
 
 echo  [8/10] Dang xoa Recycle Bin...
 PowerShell.exe -NoProfile -Command Clear-RecycleBin -Force -ErrorAction SilentlyContinue
@@ -4258,6 +4167,10 @@ if "%test%"=="10" (
     echo  [4/5] Network Reset...
     ipconfig /flushdns >nul 2>&1
     netsh winsock reset >nul 2>&1
+echo.
+pause
+goto MAIN_MENU
+
     echo  [5/5] Event Log...
     wevtutil el
     echo  [+] HOAN THANH!
@@ -4531,6 +4444,10 @@ if "%sku%"=="6" (
     
     if "!change!"=="1" (
         set /p newkey="  Nhap key Windows moi: "
+echo.
+pause
+goto MAIN_MENU
+
         slmgr /ipk !newkey!
         slmgr /ato
     )
@@ -4585,7 +4502,7 @@ echo(
 
 echo  [1/7] Xoa file rac...
 del /f /s /q "%TEMP%\*" >nul 2>&1
-del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
+del /f /s /q "%WINDIR%\Temp\*" >nul 2>&1
 
 echo  [2/7] Hien file an...
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v Hidden /t REG_DWORD /d 1 /f >nul
@@ -4631,7 +4548,7 @@ echo(
 echo  [STEP 1/8] CLEANUP
 echo  ==================
 del /f /s /q "%TEMP%\*" >nul 2>&1
-del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
+del /f /s /q "%WINDIR%\Temp\*" >nul 2>&1
 cleanmgr /sagerun:1 >nul 2>&1
 
 echo(
