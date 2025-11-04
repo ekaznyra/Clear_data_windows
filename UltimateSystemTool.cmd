@@ -1,7 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
 :: ============================================================================
-:: ULTIMATE WINDOWS SYSTEM TOOT v5.0 - COMPLETE EDITION
+:: ULTIMATE WINDOWS SYSTEM TOOL v5.0 - COMPLETE EDITION
 :: Full System Optimization + Installation Suite - Bilingual
 :: ============================================================================
 :: Author: Nguyen Ngoc Anh Tu
@@ -11,7 +11,7 @@ setlocal enabledelayedexpansion
 :: All commands are SAFE and tested
 :: ============================================================================
 
-title Ultimate Windows System Toot v5.0 - Complete Edition
+title Ultimate Windows System Tool v5.0 - Complete Edition
 color 0B
 
 :: Detect Windows Version
@@ -34,7 +34,7 @@ if %errorLevel% neq 0 (
     echo                                                                          
     echo   ========================================================================
     echo(
-    echo   This toot requires Administrator privileges.
+    echo   This tool requires Administrator privileges.
     echo   Cong cu nay can quyen Administrator.
     echo(
     echo   Auto-elevating... / Tu dong xin quyen...
@@ -62,7 +62,7 @@ color 0B
 echo(
 echo  ================================================================================
 echo                                                                                
-echo             ULTIMATE WINDOWS SYSTEM TOOT v5.0 - COMPLETE EDITION              
+echo             ULTIMATE WINDOWS SYSTEM TOOL v5.0 - COMPLETE EDITION              
 echo              96 Functions - Full Optimization + Installation Suite            
 echo                                                                                
 echo  ================================================================================
@@ -131,7 +131,7 @@ echo   [55] Disable Windows Tips
 echo  -------------------------------------------------------------------------------
 echo(
 echo  -------------------------------------------------------------------------------
-echo   CATEGORY 8: ADVANCED TOOTS [56-70]
+echo   CATEGORY 8: ADVANCED TOOLS [56-70]
 echo  -------------------------------------------------------------------------------
 echo   [56] Create Restore Point           [57] View System Information
 echo   [58] Export Programs List           [59] Check Disk Health (SMART)
@@ -156,7 +156,7 @@ echo   CATEGORY 10: BACKUP AND RECOVERY [77-82]
 echo  -------------------------------------------------------------------------------
 echo   [77] Backup WiFi Passwords          [78] Backup Drivers
 echo   [79] Backup User Data               [80] Backup Zalo Data
-echo   [81] Backup Product Keys            [82] Data Recovery Toots
+echo   [81] Backup Product Keys            [82] Data Recovery Tools
 echo  -------------------------------------------------------------------------------
 echo(
 echo  -------------------------------------------------------------------------------
@@ -172,7 +172,7 @@ echo   CATEGORY 12: UTILITIES [88-96] ** NEW **
 echo  -------------------------------------------------------------------------------
 echo   [88] Clean Junk Files (Advanced)    [89] Show/Hide Files
 echo   [90] Enable/Disable Update          [91] Fix Printer Issues
-echo   [92] Check and Test Toots           [93] Windows Defender Manage
+echo   [92] Check and Test Tools           [93] Windows Defender Manage
 echo   [94] Windows ISO Repository         [95] Intel RST Drivers
 echo   [96] Product Key Management
 echo  -------------------------------------------------------------------------------
@@ -1604,7 +1604,7 @@ pause
 goto MAIN_MENU
 
 :: ============================================================================
-:: ADVANCED TOOTS FUNCTIONS - CHUC NANG CONG CU NANG CAO
+:: ADVANCED TOOLS FUNCTIONS - CHUC NANG CONG CU NANG CAO
 :: ============================================================================
 
 :RESTORE_POINT
@@ -1616,7 +1616,7 @@ echo(
 echo Creating system restore point / Tao diem khoi phuc he thong...
 echo(
 echo [*] Creating restore point / Tao diem khoi phuc...
-powershell -Command "Checkpoint-Computer -Description 'Ultimate System Toot Backup' -RestorePointType 'MODIFY_SETTINGS'"
+powershell -Command "Checkpoint-Computer -Description 'Ultimate System Tool Backup' -RestorePointType 'MODIFY_SETTINGS'"
 
 echo(
 echo [SUCCESS] Restore point created! / Da tao diem khoi phuc!
@@ -2592,7 +2592,7 @@ echo [INFO] To activate Windows or Office legally / De kich hoat hop phap:
 echo  - Purchase license from Microsoft: https://www.microsoft.com
 echo  - Mua giay phep tu Microsoft: https://www.microsoft.com
 echo(
-echo [WARNING] This toot does NOT provide activation services
+echo [WARNING] This tool does NOT provide activation services
 echo [CANH BAO] Cong cu nay KHONG cung cap dich vu kich hoat
 echo(
 echo For activation, please use official Microsoft methods.
@@ -2901,7 +2901,7 @@ goto MAIN_MENU
 :DATA_RECOVERY
 cls
 echo ================================================================================
-echo  [82] Data Recovery Toots - Cong Cu Khoi Phuc Du Lieu
+echo  [82] Data Recovery Tools - Cong Cu Khoi Phuc Du Lieu
 echo ================================================================================
 echo(
 echo Data recovery and file restoration / Khoi phuc du lieu va phuc hoi file...
@@ -3330,14 +3330,14 @@ if %errorLevel% equ 0 (
         start https://www.office.com/
     )
     if "!off2!"=="2" (
-        echo  [*] Mo trang tai Office Toot...
+        echo  [*] Mo trang tai Office Tool...
         start https://otp.landian.vip/
     )
     if "!off2!"=="3" (
         echo(
         echo  HUONG DAN CAI DAT OFFICE:
         echo  -------------------------
-        echo  1. Tai Office Toot Plus: https://otp.landian.vip/
+        echo  1. Tai Office Tool Plus: https://otp.landian.vip/
         echo  2. Chon phien ban Office muon cai
         echo  3. Chon cac ung dung (Word, Excel, PowerPoint...)
         echo  4. Click "Start Install"
@@ -3420,12 +3420,12 @@ if "%winpe%"=="3" (
     echo(
     echo  [*] Kiem tra Windows ADK...
     
-    if exist "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Toots" (
+    if exist "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools" (
         echo  [+] Windows ADK da duoc cai dat!
         echo(
         echo  [*] Bat dau tao WinPE...
         echo(
-        call "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Toots\DandISetEnv.bat"
+        call "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\DandISetEnv.bat"
         
         echo  [1] Tao WinPE workspace...
         copype amd64 C:\WinPE_amd64
@@ -3433,8 +3433,8 @@ if "%winpe%"=="3" (
         echo  [2] Mount WinPE image...
         Dism /Mount-Image /ImageFile:"C:\WinPE_amd64\media\sources\boot.wim" /index:1 /MountDir:"C:\WinPE_amd64\mount"
         
-        echo  [3] Them drivers va toots...
-        echo  [!] Ban co the them drivers/toots vao C:\WinPE_amd64\mount
+        echo  [3] Them drivers va tools...
+        echo  [!] Ban co the them drivers/tools vao C:\WinPE_amd64\mount
         pause
         
         echo  [4] Unmount image...
@@ -3458,7 +3458,7 @@ if "%winpe%"=="4" (
     echo  ====================
     echo  1. Tai va cai Windows ADK
     echo  2. Tai va cai WinPE Add-on
-    echo  3. Mo Deployment and Imaging Toots Environment (Admin)
+    echo  3. Mo Deployment and Imaging Tools Environment (Admin)
     echo  4. Chay lenh: copype amd64 C:\WinPE_amd64
     echo  5. Tao USB boot: MakeWinPEMedia /UFD C:\WinPE_amd64 E:
     echo     (Thay E: bang drive USB cua ban)
@@ -3771,7 +3771,7 @@ cls
 color 0B
 echo(
 echo  ================================================================================
-echo   [10] CHECK - TEST - SYSTEM TEST TOOTS
+echo   [10] CHECK - TEST - SYSTEM TEST TOOLS
 echo  ================================================================================
 echo(
 echo  [1]  Kiem tra RAM (Windows Memory Diagnostic)
@@ -3808,7 +3808,7 @@ if "%test%"=="4" (
     wmic diskdrive get model,serialnumber,size,status
 )
 if "%test%"=="5" (
-    echo  [*] Chay DirectX Diagnostic Toot...
+    echo  [*] Chay DirectX Diagnostic Tool...
     dxdiag
 )
 if "%test%"=="6" (
@@ -3934,7 +3934,7 @@ echo  [2] Tai Windows 10 (Official)
 echo  [3] Tai Windows 8.1
 echo  [4] Tai Windows 7
 echo  [5] Tai Windows Server
-echo  [6] Tai Media Creation Toot
+echo  [6] Tai Media Creation Tool
 echo  [7] Tai Rufus (Tao USB boot)
 echo  [8] Kiem tra toan ven ISO
 echo  [0] Quay lai / Back
@@ -3962,7 +3962,7 @@ if "%iso%"=="5" (
     start https://www.microsoft.com/evalcenter/evaluate-windows-server
 )
 if "%iso%"=="6" (
-    echo  [*] Tai Media Creation Toot...
+    echo  [*] Tai Media Creation Tool...
     start https://go.microsoft.com/fwlink/?LinkId=691209
 )
 if "%iso%"=="7" (
@@ -4278,12 +4278,12 @@ color 0B
 echo(
 echo  ================================================================================
 echo(
-echo                Thank you for using Ultimate System Toots v5.0!
-echo                 Cam on ban da su dung Ultimate System Toots!
+echo                Thank you for using Ultimate System Tools v5.0!
+echo                 Cam on ban da su dung Ultimate System Tools!
 echo(
 echo                        Created by: Nguyen Ngoc Anh Tu
 echo                         Version 5.0 - Complete Edition
-echo                         96 Functions - All-in-One Toot
+echo                         96 Functions - All-in-One Tool
 echo(
 echo  ================================================================================
 echo(
