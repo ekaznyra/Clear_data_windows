@@ -344,7 +344,12 @@ for /d %%x in ("%TEMP%\*") do @rd /s /q "%%x" >nul 2>&1
 for /d %%x in ("C:\Windows\Temp\*") do @rd /s /q "%%x" >nul 2>&1
 
 echo [*] Cleaning Recycle Bin / Xoa thung rac...
-rd /s /q C:\$Recycle.Bin >nul 2>&1
+if exist "C:\$Recycle.Bin" (
+    rd /s /q "C:\$Recycle.Bin" >nul 2>&1
+    if %errorlevel%==0 (echo [+] Recycle Bin cleared) else (echo [!] Could not clear Recycle Bin)
+) else (
+    echo [i] Recycle Bin already empty
+)
 
 echo [*] Flushing DNS Cache / Xoa cache DNS...
 ipconfig /flushdns >nul 2>&1
