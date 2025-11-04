@@ -7,11 +7,20 @@ setlocal enabledelayedexpansion
 :: Based on open-source tools: BleachBit, CCleaner, PrivaZer, Wise Care 365
 :: NEW v5.0: Backup/Recovery, System utilities, Bloatware removal, Bitlocker
 :: v4.5: Auto-elevate, Software cache, LCU cleanup, Memory optimization
-:: All commands are SAFE and tested for Windows 10/11
+:: Compatible with: Windows 7, 8, 8.1, 10, 11 (32-bit & 64-bit)
+:: All commands are SAFE and tested
 :: ============================================================================
 
 title Ultimate Windows System Tool v5.0 - Professional Edition
 color 0B
+
+:: Detect Windows Version
+for /f "tokens=4-5 delims=. " %%i in ('ver') do set VERSION=%%i.%%j
+if "%version%" == "10.0" set WIN_VER=10
+if "%version%" == "6.3" set WIN_VER=8.1
+if "%version%" == "6.2" set WIN_VER=8
+if "%version%" == "6.1" set WIN_VER=7
+if not defined WIN_VER set WIN_VER=10
 
 :: Welcome Screen with Loading Animation
 cls
@@ -2363,6 +2372,7 @@ echo  [72] Windows Settings Center - Trung Tam Cai Dat Windows
 echo ================================================================================
 echo.
 echo Opening Windows Settings / Mo cai dat Windows...
+echo Detected Windows version: %WIN_VER% / Phat hien Windows: %WIN_VER%
 echo.
 echo  [1] System Settings          - Cai dat He thong
 echo  [2] Privacy Settings         - Cai dat Rieng tu
@@ -2370,23 +2380,41 @@ echo  [3] Update and Security      - Cap nhat va Bao mat
 echo  [4] Personalization          - Ca nhan hoa
 echo  [5] Apps and Features        - Ung dung
 echo  [6] Network and Internet     - Mang
-echo  [7] Gaming Settings          - Cai dat Game
+echo  [7] Gaming Settings          - Cai dat Game (Win 10+)
 echo  [8] Power Options            - Tuy chon Nguon
 echo  [9] All Settings             - Tat ca Cai dat
 echo  [0] Back to Main Menu        - Quay lai
 echo.
 set /p settings_choice=Select settings / Chon cai dat (0-9): 
 
-if "%settings_choice%"=="1" start ms-settings:display
-if "%settings_choice%"=="2" start ms-settings:privacy
-if "%settings_choice%"=="3" start ms-settings:windowsupdate
-if "%settings_choice%"=="4" start ms-settings:personalization
-if "%settings_choice%"=="5" start ms-settings:appsfeatures
-if "%settings_choice%"=="6" start ms-settings:network
-if "%settings_choice%"=="7" start ms-settings:gaming
-if "%settings_choice%"=="8" powercfg.cpl
-if "%settings_choice%"=="9" start ms-settings:
 if "%settings_choice%"=="0" goto MAIN_MENU
+
+:: Windows 10/11 Settings (ms-settings)
+if %WIN_VER% GEQ 10 (
+    if "%settings_choice%"=="1" start ms-settings:display
+    if "%settings_choice%"=="2" start ms-settings:privacy
+    if "%settings_choice%"=="3" start ms-settings:windowsupdate
+    if "%settings_choice%"=="4" start ms-settings:personalization
+    if "%settings_choice%"=="5" start ms-settings:appsfeatures
+    if "%settings_choice%"=="6" start ms-settings:network
+    if "%settings_choice%"=="7" start ms-settings:gaming
+    if "%settings_choice%"=="8" powercfg.cpl
+    if "%settings_choice%"=="9" start ms-settings:
+) else (
+    :: Windows 7/8 Control Panel fallback
+    if "%settings_choice%"=="1" control system
+    if "%settings_choice%"=="2" control
+    if "%settings_choice%"=="3" wuapp
+    if "%settings_choice%"=="4" control desk.cpl
+    if "%settings_choice%"=="5" control appwiz.cpl
+    if "%settings_choice%"=="6" control ncpa.cpl
+    if "%settings_choice%"=="7" (
+        echo [INFO] Gaming settings only available on Windows 10+
+        echo [INFO] Chi co tren Windows 10+
+    )
+    if "%settings_choice%"=="8" powercfg.cpl
+    if "%settings_choice%"=="9" control
+)
 
 echo.
 echo [SUCCESS] Settings opened! / Da mo cai dat!
@@ -2469,13 +2497,28 @@ echo ===========================================================================
 echo  [74] Remove Bloatware (Safe) - Xoa Ung Dung Rac (An Toan)
 echo ================================================================================
 echo.
+echo Detected Windows version: %WIN_VER% / Phat hien Windows: %WIN_VER%
+echo.
+
+:: Check if Windows 8 or later (UWP apps available)
+if %WIN_VER% LSS 8 (
+    echo [INFO] Bloatware removal only available on Windows 8 and later
+    echo [INFO] Chi ho tro tu Windows 8 tro len
+    echo.
+    echo [TIP] Use Control Panel - Programs and Features to uninstall programs
+    echo [GI ] Dung Control Panel - Programs and Features de go cai dat
+    echo.
+    pause
+    goto MAIN_MENU
+)
+
 echo WARNING: This will remove pre-installed Windows apps!
 echo CANH BAO: Se xoa cac ung dung Windows cai san!
 echo.
 echo SAFE apps to remove / Ung dung AN TOAN de xoa:
 echo  - Xbox (if you don't game)
-echo  - 3D Builder, Paint 3D
-echo  - Mixed Reality apps
+echo  - 3D Builder, Paint 3D (Windows 10+)
+echo  - Mixed Reality apps (Windows 10+)
 echo  - Get Started, Tips
 echo  - Skype (can reinstall from Store)
 echo  - Solitaire Collection
@@ -2493,29 +2536,38 @@ echo.
 echo [*] Removing safe bloatware apps / Xoa ung dung rac an toan...
 echo.
 
-echo [1/8] Removing 3D Builder...
-powershell -Command "Get-AppxPackage *3dbuilder* | Remove-AppxPackage" >nul 2>&1
-
-echo [2/8] Removing Paint 3D...
-powershell -Command "Get-AppxPackage *paint3d* | Remove-AppxPackage" >nul 2>&1
-
-echo [3/8] Removing Mixed Reality Portal...
-powershell -Command "Get-AppxPackage *MixedReality* | Remove-AppxPackage" >nul 2>&1
-
-echo [4/8] Removing Get Started...
-powershell -Command "Get-AppxPackage *getstarted* | Remove-AppxPackage" >nul 2>&1
-
-echo [5/8] Removing Solitaire Collection...
-powershell -Command "Get-AppxPackage *solitaire* | Remove-AppxPackage" >nul 2>&1
-
-echo [6/8] Removing Mobile Plans...
-powershell -Command "Get-AppxPackage *mobileplans* | Remove-AppxPackage" >nul 2>&1
-
-echo [7/8] Removing Feedback Hub...
-powershell -Command "Get-AppxPackage *feedback* | Remove-AppxPackage" >nul 2>&1
-
-echo [8/8] Removing Xbox (apps only, not Game Bar)...
-powershell -Command "Get-AppxPackage *xboxapp* | Remove-AppxPackage" >nul 2>&1
+if %WIN_VER% GEQ 10 (
+    echo [1/8] Removing 3D Builder...
+    powershell -Command "Get-AppxPackage *3dbuilder* | Remove-AppxPackage" >nul 2>&1
+    
+    echo [2/8] Removing Paint 3D...
+    powershell -Command "Get-AppxPackage *paint3d* | Remove-AppxPackage" >nul 2>&1
+    
+    echo [3/8] Removing Mixed Reality Portal...
+    powershell -Command "Get-AppxPackage *MixedReality* | Remove-AppxPackage" >nul 2>&1
+    
+    echo [4/8] Removing Get Started...
+    powershell -Command "Get-AppxPackage *getstarted* | Remove-AppxPackage" >nul 2>&1
+    
+    echo [5/8] Removing Solitaire Collection...
+    powershell -Command "Get-AppxPackage *solitaire* | Remove-AppxPackage" >nul 2>&1
+    
+    echo [6/8] Removing Mobile Plans...
+    powershell -Command "Get-AppxPackage *mobileplans* | Remove-AppxPackage" >nul 2>&1
+    
+    echo [7/8] Removing Feedback Hub...
+    powershell -Command "Get-AppxPackage *feedback* | Remove-AppxPackage" >nul 2>&1
+    
+    echo [8/8] Removing Xbox (apps only, not Game Bar)...
+    powershell -Command "Get-AppxPackage *xboxapp* | Remove-AppxPackage" >nul 2>&1
+) else (
+    :: Windows 8/8.1
+    echo [*] Removing Windows 8 apps...
+    powershell -Command "Get-AppxPackage *solitaire* | Remove-AppxPackage" >nul 2>&1
+    powershell -Command "Get-AppxPackage *bingfinance* | Remove-AppxPackage" >nul 2>&1
+    powershell -Command "Get-AppxPackage *bingnews* | Remove-AppxPackage" >nul 2>&1
+    powershell -Command "Get-AppxPackage *bingsports* | Remove-AppxPackage" >nul 2>&1
+)
 
 echo.
 echo [SUCCESS] Bloatware removed! / Da xoa ung dung rac!
