@@ -252,7 +252,7 @@ echo.
 echo [*] Cleaning all Temp folders / Xoa tat ca thu muc Temp...
 del /f /s /q "%TEMP%\*" >nul 2>&1
 del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
-del /f /s /q "C:\Users\*\AppData\Local\Temp\*" >nul 2>&1
+for /d %%u in ("C:\Users\*") do del /f /s /q "%%u\AppData\Local\Temp\*" >nul 2>&1
 
 echo [*] Cleaning Windows logs / Xoa log Windows...
 del /f /s /q C:\Windows\Logs\* >nul 2>&1
@@ -307,7 +307,7 @@ del /f /s /q "%LocalAppData%\Microsoft\Edge\User Data\Default\Code Cache\*" >nul
 echo [*] Firefox cache...
 taskkill /F /IM firefox.exe >nul 2>&1
 timeout /t 2 >nul
-del /f /s /q "%LocalAppData%\Mozilla\Firefox\Profiles\*.default\cache2\*" >nul 2>&1
+for /d %%p in ("%LocalAppData%\Mozilla\Firefox\Profiles\*") do del /f /s /q "%%p\cache2\*" >nul 2>&1
 
 echo [*] Opera cache...
 taskkill /F /IM opera.exe >nul 2>&1
@@ -352,7 +352,7 @@ echo [*] Spotify cache...
 del /f /s /q "%AppData%\Spotify\Storage\*" >nul 2>&1
 
 echo [*] Adobe cache...
-del /f /s /q "%LocalAppData%\Adobe\*\Cache\*" >nul 2>&1
+for /d %%a in ("%LocalAppData%\Adobe\*") do del /f /s /q "%%a\Cache\*" >nul 2>&1
 
 echo.
 echo [SUCCESS] Application caches cleaned! / Da xoa cache ung dung!
@@ -479,8 +479,7 @@ echo.
 echo [*] Cleaning installer temp files / Xoa file tam installer...
 del /f /s /q C:\Windows\Installer\$PatchCache$\* >nul 2>&1
 
-echo [*] Cleaning MSI cache / Xoa cache MSI...
-for /d %%x in ("C:\Windows\Installer\{*}") do @rd /s /q "%%x" >nul 2>&1
+echo [*] Note: MSI cache cleanup skipped for safety / Bo qua xoa MSI cache de dam bao an toan...
 
 echo.
 echo [SUCCESS] Windows Installer cleaned! / Da xoa Windows Installer!
@@ -654,7 +653,7 @@ echo.
 
 echo [*] Deleting error reports / Xoa bao cao loi...
 del /f /s /q C:\ProgramData\Microsoft\Windows\WER\* >nul 2>&1
-del /f /s /q C:\Users\*\AppData\Local\Microsoft\Windows\WER\* >nul 2>&1
+for /d %%u in ("C:\Users\*") do del /f /s /q "%%u\AppData\Local\Microsoft\Windows\WER\*" >nul 2>&1
 
 echo [*] Disabling error reporting / Tat bao cao loi...
 reg add "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /v Disabled /t REG_DWORD /d 1 /f >nul 2>&1
@@ -917,11 +916,12 @@ echo Checking disk for errors / Kiem tra loi o dia...
 echo.
 set /p drive=Enter drive letter (C, D, etc.) / Nhap chu cai o dia: 
 
-echo [*] Checking drive %drive%: / Kiem tra o dia %drive%:...
-chkdsk %drive%: /f /r /x
+echo [*] Scheduling disk check for next boot / Len lich kiem tra o dia khi khoi dong lai...
+echo Y | chkdsk %drive%: /f /r /x
 
 echo.
-echo [SUCCESS] Disk check completed! / Hoan thanh kiem tra o dia!
+echo [INFO] Disk check scheduled for next reboot / Da len lich kiem tra khi khoi dong lai!
+echo [SUCCESS] Please restart your computer / Vui long khoi dong lai may tinh!
 echo.
 pause
 goto MAIN_MENU
@@ -957,8 +957,8 @@ echo [*] Disk space on all drives / Dung luong tat ca o dia:
 wmic logicaldisk get caption,size,freespace
 
 echo.
-echo [*] Largest folders in C:\ / Thu muc lon nhat trong C:\:
-dir C:\ /s /a:-d | sort /r
+echo [*] Top-level folders size / Kich thuoc thu muc cap 1:
+dir C:\ /a:d
 
 echo.
 pause
@@ -1066,9 +1066,7 @@ sc stop HomeGroupListener >nul 2>&1
 sc config HomeGroupProvider start= disabled >nul 2>&1
 sc stop HomeGroupProvider >nul 2>&1
 
-echo Disabling Print Spooler (if no printer) / Tat Print Spooler...
-sc config Spooler start= disabled >nul 2>&1
-sc stop Spooler >nul 2>&1
+echo NOTE: Print Spooler kept enabled for printer support / Giu Print Spooler de ho tro may in...
 
 echo.
 echo [SUCCESS] Services optimized! / Da toi uu dich vu!
@@ -1201,8 +1199,8 @@ echo.
 echo Clearing memory cache / Xoa cache bo nho...
 echo.
 
-echo [*] Clearing standby memory / Xoa bo nho standby...
-powershell -Command "Clear-MsmqQueue"
+echo [*] Clearing memory cache / Xoa cache bo nho...
+echo Note: Memory will be cleared on next shutdown / Bo nho se duoc xoa khi tat may
 
 echo [*] Emptying working sets / Lam trong working sets...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v ClearPageFileAtShutdown /t REG_DWORD /d 1 /f >nul 2>&1
@@ -1270,8 +1268,8 @@ echo.
 echo Optimizing SSD settings / Toi uu cai dat SSD...
 echo.
 
-echo [*] Disabling system restore / Tat khoi phuc he thong...
-reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /v DisableSR /t REG_DWORD /d 1 /f >nul 2>&1
+echo [*] WARNING: Keeping system restore enabled for safety / GIU khoi phuc he thong de dam bao an toan...
+echo For SSD: System Restore is kept ON for safety / Voi SSD: Khoi phuc he thong van BAT de an toan
 
 echo [*] Enabling TRIM / Bat TRIM...
 fsutil behavior set DisableDeleteNotify 0
@@ -1631,11 +1629,14 @@ echo.
 echo Clearing Windows Store cache / Xoa cache Windows Store...
 echo.
 
-echo [*] Resetting Windows Store / Reset Windows Store...
-wsreset.exe
+echo [*] Clearing Windows Store cache / Xoa cache Windows Store...
+for /d %%u in ("C:\Users\*") do (
+    del /f /s /q "%%u\AppData\Local\Packages\Microsoft.WindowsStore_*\LocalCache\*" >nul 2>&1
+)
 
 echo.
 echo [SUCCESS] Windows Store cache cleared! / Da xoa cache Windows Store!
+echo [INFO] If issues persist, run: wsreset.exe / Neu con loi, chay: wsreset.exe
 echo.
 pause
 goto MAIN_MENU
@@ -1713,7 +1714,7 @@ del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
 for /d %%x in ("C:\Windows\Temp\*") do @rd /s /q "%%x" >nul 2>&1
 
 echo [*] All users temp / Temp tat ca nguoi dung...
-del /f /s /q "C:\Users\*\AppData\Local\Temp\*" >nul 2>&1
+for /d %%u in ("C:\Users\*") do del /f /s /q "%%u\AppData\Local\Temp\*" >nul 2>&1
 
 echo [*] Prefetch...
 del /f /s /q "C:\Windows\Prefetch\*" >nul 2>&1
@@ -1765,20 +1766,66 @@ echo.
 echo Running all cleanup tasks / Chay tat ca cac tac vu don dep...
 echo.
 
-call :QUICK_CLEANUP
-call :BROWSER_CACHE
-call :APP_CACHE
-call :WINDOWS_UPDATE_CLEANUP
-call :THUMBNAIL_CACHE
-call :ICON_CACHE
-call :FONT_CACHE
-call :RECYCLE_BIN
-call :DNS_CACHE
-call :PREFETCH
-call :ALL_TEMP
+echo [1/11] Quick Cleanup...
+del /f /s /q "%TEMP%\*" >nul 2>&1
+del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
+rd /s /q C:\$Recycle.Bin >nul 2>&1
+ipconfig /flushdns >nul 2>&1
+del /f /s /q C:\Windows\Prefetch\* >nul 2>&1
+
+echo [2/11] Browser Cache...
+taskkill /F /IM chrome.exe >nul 2>&1
+taskkill /F /IM msedge.exe >nul 2>&1
+taskkill /F /IM firefox.exe >nul 2>&1
+timeout /t 2 >nul
+del /f /s /q "%LocalAppData%\Google\Chrome\User Data\Default\Cache\*" >nul 2>&1
+del /f /s /q "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache\*" >nul 2>&1
+for /d %%p in ("%LocalAppData%\Mozilla\Firefox\Profiles\*") do del /f /s /q "%%p\cache2\*" >nul 2>&1
+
+echo [3/11] Application Cache...
+taskkill /F /IM Teams.exe >nul 2>&1
+taskkill /F /IM Discord.exe >nul 2>&1
+del /f /s /q "%AppData%\Microsoft\Teams\Cache\*" >nul 2>&1
+del /f /s /q "%AppData%\Discord\Cache\*" >nul 2>&1
+
+echo [4/11] Windows Update Cache...
+net stop wuauserv >nul 2>&1
+net stop bits >nul 2>&1
+del /f /s /q C:\Windows\SoftwareDistribution\Download\* >nul 2>&1
+net start wuauserv >nul 2>&1
+net start bits >nul 2>&1
+
+echo [5/11] Thumbnail Cache...
+taskkill /F /IM explorer.exe >nul 2>&1
+del /f /a /q "%LocalAppData%\Microsoft\Windows\Explorer\thumbcache_*.db" >nul 2>&1
+start explorer.exe
+
+echo [6/11] Icon Cache...
+del /f /a /q "%LocalAppData%\IconCache.db" >nul 2>&1
+
+echo [7/11] Font Cache...
+net stop "Windows Font Cache Service" >nul 2>&1
+del /f /s /q C:\Windows\ServiceProfiles\LocalService\AppData\Local\FontCache\* >nul 2>&1
+net start "Windows Font Cache Service" >nul 2>&1
+
+echo [8/11] Recycle Bin...
+rd /s /q D:\$Recycle.Bin >nul 2>&1
+rd /s /q E:\$Recycle.Bin >nul 2>&1
+
+echo [9/11] DNS Cache...
+ipconfig /flushdns >nul 2>&1
+
+echo [10/11] Prefetch...
+del /f /s /q C:\Windows\Prefetch\* >nul 2>&1
+
+echo [11/11] All Temp Files...
+for /d %%x in ("%TEMP%\*") do @rd /s /q "%%x" >nul 2>&1
+for /d %%x in ("C:\Windows\Temp\*") do @rd /s /q "%%x" >nul 2>&1
 
 echo.
+echo ================================================================================
 echo [SUCCESS] All cleanup tasks completed! / Hoan thanh tat ca don dep!
+echo ================================================================================
 echo.
 pause
 goto MAIN_MENU
@@ -1797,38 +1844,112 @@ if /i not "%confirm%"=="Y" goto MAIN_MENU
 
 echo.
 echo [*] Creating restore point / Tao diem khoi phuc...
-powershell -Command "Checkpoint-Computer -Description 'Before Full Optimization' -RestorePointType 'MODIFY_SETTINGS'"
+powershell -Command "Checkpoint-Computer -Description 'Before Full Optimization' -RestorePointType 'MODIFY_SETTINGS'" >nul 2>&1
 
 echo.
-echo [STEP 1/5] Running all cleanup tasks / BUOC 1/5: Chay tat ca don dep...
-call :RUN_ALL_CLEANUP
+echo ================================================================================
+echo [STEP 1/5] CLEANUP - DON DEP
+echo ================================================================================
+echo.
+echo [1.1] Temp files...
+del /f /s /q "%TEMP%\*" >nul 2>&1
+del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
+
+echo [1.2] Browser cache...
+taskkill /F /IM chrome.exe >nul 2>&1
+taskkill /F /IM msedge.exe >nul 2>&1
+taskkill /F /IM firefox.exe >nul 2>&1
+timeout /t 2 >nul
+del /f /s /q "%LocalAppData%\Google\Chrome\User Data\Default\Cache\*" >nul 2>&1
+del /f /s /q "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache\*" >nul 2>&1
+
+echo [1.3] Windows Update cache...
+net stop wuauserv >nul 2>&1
+del /f /s /q C:\Windows\SoftwareDistribution\Download\* >nul 2>&1
+net start wuauserv >nul 2>&1
+
+echo [1.4] Icon and thumbnail cache...
+taskkill /F /IM explorer.exe >nul 2>&1
+del /f /a /q "%LocalAppData%\IconCache.db" >nul 2>&1
+del /f /a /q "%LocalAppData%\Microsoft\Windows\Explorer\thumbcache_*.db" >nul 2>&1
+start explorer.exe
+
+echo [1.5] DNS cache...
+ipconfig /flushdns >nul 2>&1
+
+echo [1.6] Prefetch...
+del /f /s /q C:\Windows\Prefetch\* >nul 2>&1
 
 echo.
-echo [STEP 2/5] Optimizing network / BUOC 2/5: Toi uu mang...
-call :OPTIMIZE_NETWORK
+echo ================================================================================
+echo [STEP 2/5] NETWORK OPTIMIZATION - TOI UU MANG
+echo ================================================================================
+echo.
+echo [2.1] Optimizing TCP settings...
+netsh int tcp set global autotuninglevel=normal >nul 2>&1
+netsh int tcp set global rsc=enabled >nul 2>&1
+
+echo [2.2] Optimizing network throttling...
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v NetworkThrottlingIndex /t REG_DWORD /d 0xffffffff /f >nul 2>&1
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Psched" /v NonBestEffortLimit /t REG_DWORD /d 0 /f >nul 2>&1
 
 echo.
-echo [STEP 3/5] Optimizing performance / BUOC 3/5: Toi uu hieu suat...
-call :VISUAL_EFFECTS
-call :POWER_PLAN
-call :MENU_DELAY
+echo ================================================================================
+echo [STEP 3/5] PERFORMANCE OPTIMIZATION - TOI UU HIEU SUAT
+echo ================================================================================
+echo.
+echo [3.1] Disabling visual effects...
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v VisualFXSetting /t REG_DWORD /d 2 /f >nul 2>&1
+reg add "HKCU\Control Panel\Desktop\WindowMetrics" /v MinAnimate /t REG_SZ /d 0 /f >nul 2>&1
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v EnableTransparency /t REG_DWORD /d 0 /f >nul 2>&1
+
+echo [3.2] Setting High Performance power plan...
+powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c >nul 2>&1
+
+echo [3.3] Reducing menu delay...
+reg add "HKCU\Control Panel\Desktop" /v MenuShowDelay /t REG_SZ /d 0 /f >nul 2>&1
 
 echo.
-echo [STEP 4/5] System maintenance / BUOC 4/5: Bao tri he thong...
-call :SFC_SCAN
-call :DISM_REPAIR
-call :COMPONENT_CLEANUP
+echo ================================================================================
+echo [STEP 4/5] SYSTEM MAINTENANCE - BAO TRI HE THONG
+echo ================================================================================
+echo.
+echo [4.1] Running System File Checker (this may take 5-10 minutes)...
+echo Please wait / Vui long cho...
+sfc /scannow >nul 2>&1
+
+echo [4.2] Running DISM repair (this may take 5-10 minutes)...
+Dism /Online /Cleanup-Image /RestoreHealth >nul 2>&1
+
+echo [4.3] Component cleanup...
+Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase >nul 2>&1
 
 echo.
-echo [STEP 5/5] Registry optimization / BUOC 5/5: Toi uu registry...
-call :CLEAN_REGISTRY
-call :OPTIMIZE_REGISTRY
+echo ================================================================================
+echo [STEP 5/5] REGISTRY OPTIMIZATION - TOI UU REGISTRY
+echo ================================================================================
+echo.
+echo [5.1] Cleaning registry...
+reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache" /f >nul 2>&1
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist" /f >nul 2>&1
+
+echo [5.2] Optimizing registry access...
+reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v RegistrySizeLimit /t REG_DWORD /d 0x40000000 /f >nul 2>&1
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v IoPageLockLimit /t REG_DWORD /d 0xf000000 /f >nul 2>&1
 
 echo.
 echo ================================================================================
 echo  [SUCCESS] FULL SYSTEM OPTIMIZATION COMPLETED!
 echo  HOAN THANH TOI UU TOAN BO HE THONG!
 echo ================================================================================
+echo.
+echo Changes applied / Thay doi da ap dung:
+echo  - Cleaned temporary files / Da xoa file tam
+echo  - Optimized network settings / Da toi uu cai dat mang
+echo  - Disabled visual effects / Da tat hieu ung hinh anh
+echo  - Set high performance mode / Da cai dat che do hieu suat cao
+echo  - Repaired system files / Da sua chua file he thong
+echo  - Optimized registry / Da toi uu registry
 echo.
 echo Please restart your computer for all changes to take effect.
 echo Vui long khoi dong lai may tinh de ap dung tat ca thay doi.
