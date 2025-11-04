@@ -1114,12 +1114,12 @@ function Invoke-Function88 {
     Write-Host "`n[*] Running comprehensive cleanup...`n" -ForegroundColor Yellow
     
     $tasks = @(
-        @{N="Temp files";A={Remove-Item "$env:TEMP\*","C:\Windows\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue}}
-        @{N="Recycle Bin";A={Clear-RecycleBin -Force -ErrorAction SilentlyContinue}}
-        @{N="Browser cache";A={Stop-Process chrome,msedge,firefox -Force -ErrorAction SilentlyContinue; Start-Sleep 2; Remove-Item "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cache\*","$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue}}
-        @{N="Windows Update";A={Stop-Service wuauserv -Force -ErrorAction SilentlyContinue; Remove-Item "C:\Windows\SoftwareDistribution\Download\*" -Recurse -Force -ErrorAction SilentlyContinue; Start-Service wuauserv -ErrorAction SilentlyContinue}}
-        @{N="Thumbnail cache";A={Stop-Process explorer -Force -ErrorAction SilentlyContinue; Remove-Item "$env:LOCALAPPDATA\Microsoft\Windows\Explorer\thumbcache_*.db" -Force -ErrorAction SilentlyContinue; Start-Process explorer}}
-        @{N="DNS cache";A={Clear-DnsClientCache -ErrorAction SilentlyContinue}}
+        @{N="Temp files";A={Remove-Item "$env:TEMP\*","C:\Windows\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue}},
+        @{N="Recycle Bin";A={Clear-RecycleBin -Force -ErrorAction SilentlyContinue}},
+        @{N="Browser cache";A={Stop-Process chrome,msedge,firefox -Force -ErrorAction SilentlyContinue; Start-Sleep 2; Remove-Item "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cache\*","$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue}},
+        @{N="Windows Update";A={Stop-Service wuauserv -Force -ErrorAction SilentlyContinue; Remove-Item "C:\Windows\SoftwareDistribution\Download\*" -Recurse -Force -ErrorAction SilentlyContinue; Start-Service wuauserv -ErrorAction SilentlyContinue}},
+        @{N="Thumbnail cache";A={Stop-Process explorer -Force -ErrorAction SilentlyContinue; Remove-Item "$env:LOCALAPPDATA\Microsoft\Windows\Explorer\thumbcache_*.db" -Force -ErrorAction SilentlyContinue; Start-Process explorer}},
+        @{N="DNS cache";A={Clear-DnsClientCache -ErrorAction SilentlyContinue}},
         @{N="Prefetch";A={Remove-Item "C:\Windows\Prefetch\*" -Force -ErrorAction SilentlyContinue}}
     )
     
