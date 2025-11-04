@@ -2648,7 +2648,7 @@ echo Backing up all WiFi passwords / Sao luu tat ca mat khau WiFi...
 echo.
 
 echo [*] Creating backup directory / Tao thu muc sao luu...
-set "BackupDir=%USERPROFILE%\Desktop\WiFi_Backup_%date:~-4,4%%date:~-7,2%%date:~-10,2%"
+set "BackupDir=%USERPROFILE%\Documents\WiFi_Backup_%date:~-4,4%%date:~-7,2%%date:~-10,2%"
 if not exist "%BackupDir%" mkdir "%BackupDir%"
 
 echo [*] Exporting WiFi profiles / Xuat cau hinh WiFi...
@@ -2680,7 +2680,8 @@ for /f "tokens=2 delims=:" %%i in ('netsh wlan show profiles ^| findstr "All Use
 
 echo.
 echo [SUCCESS] WiFi passwords backed up! / Da sao luu mat khau WiFi!
-echo [INFO] Location / Vi tri: %BackupDir%
+echo [INFO] Location / Vi tri: Documents\WiFi_Backup_[DATE]
+echo [INFO] Full path / Duong dan: %BackupDir%
 echo.
 echo [TIP] You can restore by importing .xml profiles or manually entering passwords
 echo [GI ] Ban co the khoi phuc bang cach import .xml hoac nhap lai mat khau
@@ -2698,7 +2699,7 @@ echo Backing up installed drivers / Sao luu driver da cai dat...
 echo.
 
 echo [*] Creating backup directory / Tao thu muc sao luu...
-set "DriverBackup=%USERPROFILE%\Desktop\Driver_Backup_%date:~-4,4%%date:~-7,2%%date:~-10,2%"
+set "DriverBackup=%USERPROFILE%\Documents\Driver_Backup_%date:~-4,4%%date:~-7,2%%date:~-10,2%"
 if not exist "%DriverBackup%" mkdir "%DriverBackup%"
 
 echo [*] Exporting third-party drivers / Xuat driver ben thu 3...
@@ -2715,7 +2716,8 @@ powershell -Command "Get-WmiObject Win32_PnPSignedDriver | Select-Object DeviceN
 
 echo.
 echo [SUCCESS] Drivers backed up! / Da sao luu driver!
-echo [INFO] Location / Vi tri: %DriverBackup%
+echo [INFO] Location / Vi tri: Documents\Driver_Backup_[DATE]
+echo [INFO] Full path / Duong dan: %DriverBackup%
 echo.
 echo [TIP] Use Device Manager to restore drivers from this folder
 echo [GI ] Dung Device Manager de khoi phuc driver tu thu muc nay
@@ -2733,7 +2735,7 @@ echo Backing up important user data / Sao luu du lieu nguoi dung quan trong...
 echo.
 
 echo [*] Creating backup directory / Tao thu muc sao luu...
-set "DataBackup=%USERPROFILE%\Desktop\UserData_Backup_%date:~-4,4%%date:~-7,2%%date:~-10,2%"
+set "DataBackup=%USERPROFILE%\Documents\UserData_Backup_%date:~-4,4%%date:~-7,2%%date:~-10,2%"
 if not exist "%DataBackup%" mkdir "%DataBackup%"
 
 echo.
@@ -2781,7 +2783,8 @@ if "%backup_choice%"=="3" (
 
 echo.
 echo [SUCCESS] User data backed up! / Da sao luu du lieu nguoi dung!
-echo [INFO] Location / Vi tri: %DataBackup%
+echo [INFO] Location / Vi tri: Documents\UserData_Backup_[DATE]
+echo [INFO] Full path / Duong dan: %DataBackup%
 echo.
 pause
 goto MAIN_MENU
@@ -2798,7 +2801,7 @@ echo.
 echo [*] Searching for Zalo installation / Tim cai dat Zalo...
 set "ZaloPC=%APPDATA%\ZaloPC"
 set "ZaloData=%USERPROFILE%\Documents\ZaloData"
-set "ZaloBackup=%USERPROFILE%\Desktop\Zalo_Backup_%date:~-4,4%%date:~-7,2%%date:~-10,2%"
+set "ZaloBackup=%USERPROFILE%\Documents\Zalo_Backup_%date:~-4,4%%date:~-7,2%%date:~-10,2%"
 
 if not exist "%ZaloPC%" (
     if not exist "%ZaloData%" (
@@ -2841,7 +2844,8 @@ if exist "%LOCALAPPDATA%\ZaloPC" (
 
 echo.
 echo [SUCCESS] Zalo data backed up! / Da sao luu du lieu Zalo!
-echo [INFO] Location / Vi tri: %ZaloBackup%
+echo [INFO] Location / Vi tri: Documents\Zalo_Backup_[DATE]
+echo [INFO] Full path / Duong dan: %ZaloBackup%
 echo.
 echo [TIP] To restore: Copy files back to original locations
 echo [GI ] De khoi phuc: Sao chep file ve vi tri cu
@@ -2859,7 +2863,7 @@ echo Backing up product keys / Sao luu khoa ban quyen...
 echo.
 
 echo [*] Creating backup directory / Tao thu muc sao luu...
-set "KeyBackup=%USERPROFILE%\Desktop\ProductKeys_Backup_%date:~-4,4%%date:~-7,2%%date:~-10,2%"
+set "KeyBackup=%USERPROFILE%\Documents\ProductKeys_Backup_%date:~-4,4%%date:~-7,2%%date:~-10,2%"
 if not exist "%KeyBackup%" mkdir "%KeyBackup%"
 
 echo.
@@ -2907,7 +2911,8 @@ echo QUAN TRONG: Giu cac file nay an toan va bao mat! >> "%KeyBackup%\Product_Ke
 
 echo.
 echo [SUCCESS] Product keys backed up! / Da sao luu ban quyen!
-echo [INFO] Location / Vi tri: %KeyBackup%
+echo [INFO] Location / Vi tri: Documents\ProductKeys_Backup_[DATE]
+echo [INFO] Full path / Duong dan: %KeyBackup%
 echo.
 echo [WARNING] Keep backup files secure! / Giu file sao luu an toan!
 echo.
