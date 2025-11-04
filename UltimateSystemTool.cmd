@@ -1,19 +1,20 @@
 @echo off
 setlocal enabledelayedexpansion
-:: ============================================================================
-:: ULTIMATE WINDOWS SYSTEM TOOL v6.0 - ULTIMATE EDITION
-:: Complete System Optimization + Customization + Security Suite - Bilingual
-:: ============================================================================
+chcp 65001 >nul 2>&1
+:: ═══════════════════════════════════════════════════════════════════════════
+:: █████╗ ULTIMATE WINDOWS SYSTEM TOOL v6.0 - ULTIMATE EDITION █████╗
+:: ═══════════════════════════════════════════════════════════════════════════
 :: Author: Nguyen Ngoc Anh Tu
-:: Based on: Chris Titus Tech, Sophia Script, BleachBit, CCleaner, O&O ShutUp10++
-:: NEW v6.0: 151 Functions (96 Original + 51 Advanced from Open-Source Projects)
-:: Features: Appearance, Gaming, Security, Monitoring, Power, Network, Recovery, Apps
-:: Compatible: Windows 7, 8, 8.1, 10, 11 (32-bit & 64-bit)
-:: All commands are SAFE and tested from top open-source projects
-:: ============================================================================
+:: Source: Chris Titus Tech • Sophia Script • O&O ShutUp10++ • BleachBit
+:: Functions: 151 (96 Core + 51 Advanced) | Categories: 20 | Size: 244KB
+:: Features: Optimization • Customization • Security • Gaming • Recovery
+:: Platform: Windows 7/8/8.1/10/11 (32/64-bit) | Language: EN/VI
+:: Quality: FAST • CLEAN • SAFE • TESTED • PRODUCTION-READY
+:: ═══════════════════════════════════════════════════════════════════════════
 
-title Ultimate Windows System Tool v6.0 - Ultimate Edition
+title ⚡ Ultimate Windows System Tool v6.0 - 151 Functions
 color 0B
+mode con: cols=100 lines=45
 
 :: Detect Windows Version
 for /f "tokens=4-5 delims=. " %%i in ('ver') do set VERSION=%%i.%%j
@@ -27,7 +28,7 @@ if not defined WIN_VER set WIN_VER=10
 net session >nul 2>&1
 if %errorLevel% neq 0 (
     cls
-    color 0E
+    color 0C
     echo.
     echo   ========================================================================
     echo                                                                          
@@ -47,7 +48,7 @@ if %errorLevel% neq 0 (
 
 :: Admin confirmed
 cls
-color 0A
+color 0B
 echo.
 echo   ========================================================================
 echo                                                                          
@@ -68,72 +69,72 @@ echo              96 Functions - Full Optimization + Installation Suite
 echo                                                                                
 echo  ================================================================================
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 1: SYSTEM CLEANUP [1-12]
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   🧹 CATEGORY 1: SYSTEM CLEANUP [1-12]
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [1]  Quick System Cleanup           [2]  Deep System Cleanup
 echo   [3]  Browser Cache Cleanup          [4]  Application Cache Cleanup
 echo   [5]  Windows Update Cleanup         [6]  Thumbnail Cache Cleanup
 echo   [7]  Icon Cache Cleanup             [8]  Font Cache Cleanup
 echo   [9]  Windows Installer Cleanup      [10] Old Windows Installation Cleanup
 echo   [11] Recycle Bin Cleanup            [12] Memory Dump Files Cleanup
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 2: PRIVACY PROTECTION [13-20]
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   🔒 CATEGORY 2: PRIVACY PROTECTION [13-20]
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [13] Clear Recent Documents         [14] Clear Run History
 echo   [15] Clear Search History           [16] Clear Clipboard History
 echo   [17] Clear Windows Error Reports    [18] Disable Telemetry
 echo   [19] Clear Event Logs               [20] Clear DNS Cache
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 3: NETWORK OPTIMIZATION [21-26]
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   🌐 CATEGORY 3: NETWORK OPTIMIZATION [21-26]
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [21] Reset Network Settings         [22] Optimize Network Performance
 echo   [23] Clear ARP Cache                [24] Reset Winsock
 echo   [25] Renew IP Address               [26] Fix Network Adapter
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 4: DISK MANAGEMENT [27-32]
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   💾 CATEGORY 4: DISK MANAGEMENT [27-32]
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [27] Disk Cleanup                   [28] Disk Error Check
 echo   [29] Disk Optimization              [30] Analyze Disk Space
 echo   [31] Clean Windows.old Folder       [32] Compact OS
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 5: PERFORMANCE OPTIMIZATION [33-44]
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   ⚡ CATEGORY 5: PERFORMANCE OPTIMIZATION [33-44]
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [33] Disable Startup Programs       [34] Optimize Services
 echo   [35] Clear Prefetch Files           [36] Clear SuperFetch Cache
 echo   [37] Disable Visual Effects         [38] Optimize Power Plan
 echo   [39] Disable Hibernation            [40] Clear Memory Cache
 echo   [41] Optimize Search Index          [42] Disable Windows Animations
 echo   [43] Optimize SSD Settings          [44] Reduce Menu Show Delay
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 6: SYSTEM MAINTENANCE [45-50]
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   🔧 CATEGORY 6: SYSTEM MAINTENANCE [45-50]
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [45] System File Checker (SFC)      [46] DISM System Repair
 echo   [47] Windows Component Cleanup      [48] Update Windows Drivers
 echo   [49] Rebuild Icon Cache             [50] Rebuild Search Index
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 7: REGISTRY OPTIMIZATION [51-55]
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   📋 CATEGORY 7: REGISTRY OPTIMIZATION [51-55]
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [51] Clean Registry (Safe)          [52] Optimize Registry
 echo   [53] Backup Registry                [54] Disable Cortana
 echo   [55] Disable Windows Tips
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 8: ADVANCED TOOLS [56-70]
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   🛠️ CATEGORY 8: ADVANCED TOOLS [56-70]
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [56] Create Restore Point           [57] View System Information
 echo   [58] Export Programs List           [59] Check Disk Health (SMART)
 echo   [60] Clear Windows Store Cache      [61] Reset Windows Update
@@ -142,116 +143,116 @@ echo   [64] Generate System Report         [65] Clean Software Cache
 echo   [66] Clean Delivery Optimization    [67] Clean Update Backup (LCU)
 echo   [68] Optimize Memory (RAM)          [69] Show Disk Space Report
 echo   [70] Refresh Icon Cache
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 9: SYSTEM UTILITIES [71-76]
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   ⚙️ CATEGORY 9: SYSTEM UTILITIES [71-76]
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [71] Check System Information       [72] Windows Settings Center
 echo   [73] Office Repair and Reset        [74] Remove Bloatware (Safe)
 echo   [75] Bitlocker Management           [76] Check Activation Status
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 10: BACKUP AND RECOVERY [77-82]
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   💾 CATEGORY 10: BACKUP AND RECOVERY [77-82]
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [77] Backup WiFi Passwords          [78] Backup Drivers
 echo   [79] Backup User Data               [80] Backup Zalo Data
 echo   [81] Backup Product Keys            [82] Data Recovery Tools
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 11: INSTALLATION [83-87] ** NEW **
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   📦 CATEGORY 11: INSTALLATION [83-87] ** NEW **
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [83] Install Software (Chocolatey)  [84] Install Office Suite
 echo   [85] Create WinPE Boot USB          [86] Store for Win LTSC
 echo   [87] Install Win via Win To HDD
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 12: UTILITIES [88-96] ** NEW **
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   ✨ CATEGORY 12: UTILITIES [88-96] ** NEW **
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [88] Clean Junk Files (Advanced)    [89] Show/Hide Files
 echo   [90] Enable/Disable Update          [91] Fix Printer Issues
 echo   [92] Check and Test Tools           [93] Windows Defender Manage
 echo   [94] Windows ISO Repository         [95] Intel RST Drivers
 echo   [96] Product Key Management
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 13: APPEARANCE CUSTOMIZATION [100-107] ** v6.0 NEW **
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   🎨 CATEGORY 13: APPEARANCE CUSTOMIZATION CUSTOMIZATION [100-107] ** v6.0 NEW **
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [100] Dark Mode Toggle              [101] Taskbar Customization
 echo   [102] File Explorer Tweaks          [103] Context Menu Editor
 echo   [104] Transparency Effects          [105] Mouse and Cursor Tweaks
 echo   [106] Keyboard Shortcuts Manager    [107] System Sounds Manager
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 14: GAMING OPTIMIZATION [108-112] ** v6.0 NEW **
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   🎮 CATEGORY 14: GAMING OPTIMIZATION OPTIMIZATION [108-112] ** v6.0 NEW **
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [108] Game Mode Optimization        [109] GPU Performance Boost
 echo   [110] Xbox Services Control         [111] Gaming Network Tweaks
 echo   [112] DirectX and Runtime Manager
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 15: ADVANCED SECURITY [113-120] ** v6.0 NEW **
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   🔐 CATEGORY 15: ADVANCED SECURITY [113-120] ** v6.0 NEW **
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [113] Firewall Manager              [114] UAC Settings Control
 echo   [115] Windows Sandbox Enable        [116] Ransomware Protection
 echo   [117] App and Browser Control       [118] Encryption Manager
 echo   [119] Secure DNS Configuration      [120] Security Hardening
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 16: MONITORING DIAGNOSTICS [121-128] ** v6.0 NEW **
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   📊 CATEGORY 16: MONITORING & DIAGNOSTICS DIAGNOSTICS [121-128] ** v6.0 NEW **
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [121] Performance Monitor Live      [122] Temperature Monitor
 echo   [123] Network Bandwidth Monitor     [124] Disk Health Monitor
 echo   [125] Battery Report Generator      [126] Process Explorer
 echo   [127] Startup Impact Analyzer       [128] Stability Report
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 17: POWER TWEAKS [129-133] ** v6.0 NEW **
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   ⚡ CATEGORY 17: POWER TWEAKS [129-133] ** v6.0 NEW **
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [129] Ultimate Performance Plan     [130] CPU Parking Control
 echo   [131] USB Selective Suspend         [132] Sleep Settings Manager
 echo   [133] Fast Startup Control
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 18: NETWORK ADVANCED [134-140] ** v6.0 NEW **
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   🌐 CATEGORY 18: NETWORK ADVANCED [134-140] ** v6.0 NEW **
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [134] VPN Manager                   [135] Hosts File Editor
 echo   [136] MAC Address Changer           [137] Network Adapter Priority
 echo   [138] Network Reset Advanced        [139] Proxy Settings Manager
 echo   [140] Network Sharing Manager
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 19: SYSTEM RECOVERY [141-145] ** v6.0 NEW **
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   🛠️ CATEGORY 19: SYSTEM RECOVERY [141-145] ** v6.0 NEW **
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [141] System Image Backup           [142] Recovery Drive Creator
 echo   [143] Boot Repair Tools             [144] System Restore Manager
 echo   [145] Activate Safe Mode Options
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 20: MODERN APPS MANAGER [146-150] ** v6.0 NEW **
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   📱 CATEGORY 20: MODERN APPS MANAGER MANAGER [146-150] ** v6.0 NEW **
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [146] Windows Store Reset           [147] App Permissions Manager
 echo   [148] Default Apps Manager          [149] Winget Package Manager
 echo   [150] Microsoft Edge Manager
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   QUICK ACTIONS
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
+echo   ⚡ QUICK ACTIONS
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   [97] RUN ALL CLEANUP                [98] RUN ALL UTILITIES
 echo   [99] FULL SYSTEM OPTIMIZATION       [0]  EXIT
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
 
 set /p choice="  SELECT FUNCTION [0-150]: "
@@ -440,7 +441,6 @@ if "%choice%"=="150" goto EDGE_MANAGER
 echo  [!] Invalid choice / Lua chon khong hop le!
 timeout /t 2 /nobreak >nul
 goto MAIN_MENU
-
 
 :: ============================================================================
 :: FUNCTION IMPLEMENTATIONS [1-82] - OPTIMIZATION
@@ -1988,7 +1988,7 @@ pause
 goto MAIN_MENU
 
 :: ============================================================================
-:: QUICK ACTIONS - THAO TAC NHANH
+:: ⚡ QUICK ACTIONS - THAO TAC NHANH
 :: ============================================================================
 
 :RUN_ALL_CLEANUP
@@ -3226,72 +3226,72 @@ echo                     Press L to switch language
 echo                                                                                
 echo  ================================================================================
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 1: SYSTEM CLEANUP [1-12]
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   🧹 CATEGORY 1: SYSTEM CLEANUP [1-12]
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [1]  Quick System Cleanup            [2]  Deep System Cleanup
 echo   [3]  Browser Cache Cleanup           [4]  Application Cache Cleanup
 echo   [5]  Windows Update Cleanup          [6]  Thumbnail Cache Cleanup
 echo   [7]  Icon Cache Cleanup              [8]  Font Cache Cleanup
 echo   [9]  Windows Installer Cleanup       [10] Old Windows Installation Cleanup
 echo   [11] Recycle Bin Cleanup             [12] Memory Dump Files Cleanup
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 2: PRIVACY PROTECTION [13-20]
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   🔒 CATEGORY 2: PRIVACY PROTECTION [13-20]
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [13] Clear Recent Documents          [14] Clear Run History
 echo   [15] Clear Search History            [16] Clear Clipboard History
 echo   [17] Clear Windows Error Reports     [18] Disable Telemetry and Tracking
 echo   [19] Clear Event Logs                [20] Clear DNS Cache
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 3: NETWORK OPTIMIZATION [21-26]
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   🌐 CATEGORY 3: NETWORK OPTIMIZATION [21-26]
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [21] Reset Network Settings          [22] Optimize Network Performance
 echo   [23] Clear ARP Cache                 [24] Reset Winsock
 echo   [25] Renew IP Address                [26] Fix Network Adapter
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 4: DISK MANAGEMENT [27-32]
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   💾 CATEGORY 4: DISK MANAGEMENT [27-32]
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [27] Disk Cleanup (Built-in)         [28] Disk Error Check
 echo   [29] Disk Optimization (Defrag/TRIM) [30] Analyze Disk Space
 echo   [31] Clean Windows.old Folder        [32] Compact OS (Compress System)
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 5: PERFORMANCE OPTIMIZATION [33-44]
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   ⚡ CATEGORY 5: PERFORMANCE OPTIMIZATION [33-44]
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [33] Disable Startup Programs        [34] Optimize Services
 echo   [35] Clear Prefetch Files            [36] Clear SuperFetch Cache
 echo   [37] Disable Visual Effects          [38] Optimize Power Plan (High Perf)
 echo   [39] Disable Hibernation             [40] Clear Memory Cache
 echo   [41] Optimize Search Index           [42] Disable Windows Animations
 echo   [43] Optimize SSD Settings           [44] Reduce Menu Show Delay
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 6: SYSTEM MAINTENANCE [45-50]
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   🔧 CATEGORY 6: SYSTEM MAINTENANCE [45-50]
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [45] System File Checker (SFC)       [46] DISM System Repair
 echo   [47] Windows Component Cleanup       [48] Update Windows Drivers
 echo   [49] Rebuild Icon Cache              [50] Rebuild Windows Search Index
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 7: REGISTRY OPTIMIZATION [51-55]
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   📋 CATEGORY 7: REGISTRY OPTIMIZATION [51-55]
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [51] Clean Registry (Safe)           [52] Optimize Registry
 echo   [53] Backup Registry                 [54] Disable Cortana
 echo   [55] Disable Windows Tips
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 8: ADVANCED TOOLS [56-70]
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   🛠️ CATEGORY 8: ADVANCED TOOLS [56-70]
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [56] Create System Restore Point     [57] View System Information
 echo   [58] Export Programs List            [59] Check Disk Health (SMART)
 echo   [60] Clear Windows Store Cache       [61] Reset Windows Update Components
@@ -3300,29 +3300,29 @@ echo   [64] Generate System Report          [65] Clean Software Cache
 echo   [66] Clean Delivery Optimization     [67] Clean Update Backup (LCU)
 echo   [68] Optimize Memory (RAM)           [69] Show Disk Space Report
 echo   [70] Refresh Icon Cache
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 9: SYSTEM UTILITIES [71-76]
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   ⚙️ CATEGORY 9: SYSTEM UTILITIES [71-76]
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [71] Check System Information        [72] Windows Settings Center
 echo   [73] Office Repair and Reset         [74] Remove Bloatware (Safe)
 echo   [75] Bitlocker Management            [76] Check Activation Status
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
-echo   CATEGORY 10: BACKUP AND RECOVERY [77-82] (NEW!)
-echo  -------------------------------------------------------------------------------
+echo  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   💾 CATEGORY 10: BACKUP AND RECOVERY [77-82] (NEW!)
+echo  ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo   [77] Backup WiFi Passwords           [78] Backup Drivers
 echo   [79] Backup User Data                [80] Backup Zalo Data
 echo   [81] Backup Product Keys             [82] Data Recovery Tools
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
 echo  ================================================================================
-echo   QUICK ACTIONS
+echo   ⚡ QUICK ACTIONS
 echo  ================================================================================
 echo   [88] RUN ALL CLEANUP TASKS           [99] FULL SYSTEM OPTIMIZATION
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   [0]  EXIT                             [L]  Switch to Vietnamese
 echo  ================================================================================
 echo.
@@ -3432,72 +3432,72 @@ echo                     Nhan L de chuyen doi ngon ngu
 echo                                                                                
 echo  ================================================================================
 echo.
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   DANH MUC 1: DON DEP HE THONG [1-12]
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   [1]  Don Dep Nhanh He Thong          [2]  Don Dep Sau He Thong
 echo   [3]  Don Dep Cache Trinh Duyet       [4]  Don Dep Cache Ung Dung
 echo   [5]  Don Dep Windows Update          [6]  Don Dep Thumbnail Cache
 echo   [7]  Don Dep Icon Cache              [8]  Don Dep Font Cache
 echo   [9]  Don Dep Windows Installer       [10] Don Dep Windows Cu
 echo   [11] Don Dep Thung Rac               [12] Don Dep File Dump Bo Nho
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   DANH MUC 2: BAO VE RIENG TU [13-20]
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   [13] Xoa Tai Lieu Gan Day            [14] Xoa Lich Su Run
 echo   [15] Xoa Lich Su Tim Kiem            [16] Xoa Lich Su Clipboard
 echo   [17] Xoa Bao Cao Loi Windows         [18] Tat Thu Thap Du Lieu
 echo   [19] Xoa Nhat Ky Su Kien             [20] Xoa Cache DNS
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   DANH MUC 3: TOI UU MANG [21-26]
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   [21] Reset Cai Dat Mang              [22] Toi Uu Hieu Suat Mang
 echo   [23] Xoa Cache ARP                   [24] Reset Winsock
 echo   [25] Lam Moi Dia Chi IP              [26] Sua Card Mang
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   DANH MUC 4: QUAN LY O DIA [27-32]
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   [27] Don Dep O Dia (Tich Hop)        [28] Kiem Tra Loi O Dia
 echo   [29] Toi Uu O Dia                    [30] Phan Tich Dung Luong
 echo   [31] Xoa Thu Muc Windows.old         [32] Nen He Thong
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   DANH MUC 5: TOI UU HIEU SUAT [33-44]
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   [33] Tat Chuong Trinh Khoi Dong      [34] Toi Uu Dich Vu
 echo   [35] Xoa File Prefetch               [36] Xoa Cache SuperFetch
 echo   [37] Tat Hieu Ung Hinh Anh           [38] Toi Uu Che Do Nguon
 echo   [39] Tat Che Do Ngu Dong             [40] Xoa Cache Bo Nho
 echo   [41] Toi Uu Tim Kiem                 [42] Tat Hoat Anh Windows
 echo   [43] Toi Uu SSD                      [44] Giam Tre Hien Thi Menu
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   DANH MUC 6: BAO TRI HE THONG [45-50]
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   [45] Kiem Tra File He Thong (SFC)    [46] Sua Chua He Thong DISM
 echo   [47] Don Dep Thanh Phan Windows      [48] Cap Nhat Driver Windows
 echo   [49] Xay Dung Lai Icon Cache         [50] Xay Dung Lai Tim Kiem
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   DANH MUC 7: TOI UU REGISTRY [51-55]
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   [51] Don Dep Registry (An Toan)      [52] Toi Uu Registry
 echo   [53] Sao Luu Registry                [54] Tat Cortana
 echo   [55] Tat Goi Y Windows
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   DANH MUC 8: CONG CU NANG CAO [56-70]
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   [56] Tao Diem Khoi Phuc He Thong     [57] Xem Thong Tin He Thong
 echo   [58] Xuat Danh Sach Chuong Trinh     [59] Kiem Tra Suc Khoe O Dia
 echo   [60] Xoa Cache Windows Store         [61] Reset Thanh Phan Update
@@ -3506,29 +3506,29 @@ echo   [64] Tao Bao Cao He Thong            [65] Xoa Cache Phan Mem
 echo   [66] Xoa Delivery Optimization       [67] Xoa Sao Luu Cap Nhat
 echo   [68] Toi Uu Bo Nho RAM               [69] Xem Bao Cao Dung Luong
 echo   [70] Lam Moi Icon Cache
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   DANH MUC 9: TIEN ICH HE THONG [71-76]
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   [71] Kiem Tra Thong Tin May          [72] Trung Tam Cai Dat Windows
 echo   [73] Sua Chua va Reset Office        [74] Xoa Ung Dung Rac (An Toan)
 echo   [75] Quan Ly Bitlocker               [76] Kiem Tra Trang Thai Kich Hoat
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   DANH MUC 10: SAO LUU VA KHOI PHUC [77-82] (MOI!)
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   [77] Sao Luu Mat Khau Wifi           [78] Sao Luu Driver
 echo   [79] Sao Luu Du Lieu Nguoi Dung      [80] Sao Luu Du Lieu Zalo
 echo   [81] Sao Luu Ban Quyen               [82] Cong Cu Khoi Phuc Du Lieu
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
 echo  ================================================================================
 echo   THAO TAC NHANH
 echo  ================================================================================
 echo   [88] CHAY TAT CA DON DEP             [99] TOI UU TOAN BO HE THONG
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   [0]  THOAT                            [L]  Chuyen sang tieng Anh
 echo  ================================================================================
 echo.
@@ -3626,15 +3626,13 @@ echo Lua chon khong hop le!
 timeout /t 2 >nul
 goto MAIN_MENU_VI
 
-
-
 :: ============================================================================
 :: FUNCTION IMPLEMENTATIONS [83-96] - INSTALLATION & UTILITIES
 :: ============================================================================
 
 :INSTALL_SOFTWARE
 cls
-color 0E
+color 0C
 echo.
 echo  ================================================================================
 echo   [1] CAI DAT PHAN MEM - INSTALL SOFTWARE
@@ -3661,9 +3659,9 @@ if %errorLevel% neq 0 (
 )
 
 echo.
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo   CHON PHAN MEM CAN CAI / SELECT SOFTWARE TO INSTALL
-echo  -------------------------------------------------------------------------------
+echo  ═══════════════════════════════════════════════════════════════════════════════════════
 echo.
 echo   [1]  Google Chrome          [2]  Firefox
 echo   [3]  7-Zip                  [4]  WinRAR
@@ -3711,7 +3709,7 @@ goto MAIN_MENU
 
 :INSTALL_OFFICE
 cls
-color 0E
+color 0C
 echo.
 echo  ================================================================================
 echo   [2] CAI DAT OFFICE - INSTALL OFFICE SUITE
@@ -3818,7 +3816,7 @@ goto MAIN_MENU
 
 :CREATE_WINPE
 cls
-color 0E
+color 0C
 echo.
 echo  ================================================================================
 echo   [3] TAO WINPE BOOT - CREATE WINPE BOOTABLE USB
@@ -3899,7 +3897,7 @@ goto MAIN_MENU
 
 :LTSC_STORE
 cls
-color 0E
+color 0C
 echo.
 echo  ================================================================================
 echo   [4] STORE CHO WIN LTSC - MICROSOFT STORE FOR LTSC
@@ -3936,7 +3934,7 @@ goto MAIN_MENU
 
 :WIN_TO_HDD
 cls
-color 0E
+color 0C
 echo.
 echo  ================================================================================
 echo   [5] CAI WIN BANG WIN TO HDD - INSTALL WINDOWS VIA WIN TO HDD
@@ -3983,7 +3981,7 @@ goto MAIN_MENU
 
 :CLEAN_JUNK
 cls
-color 0A
+color 0B
 echo.
 echo  ================================================================================
 echo   [6] XOA FILE RAC - CLEAN JUNK FILES (ADVANCED)
@@ -4043,7 +4041,7 @@ goto MAIN_MENU
 
 :SHOW_HIDDEN
 cls
-color 0A
+color 0B
 echo.
 echo  ================================================================================
 echo   [7] HIEN FILE AN - SHOW HIDDEN FILES
@@ -4088,7 +4086,7 @@ goto MAIN_MENU
 
 :UPDATE_TOGGLE
 cls
-color 0E
+color 0C
 echo.
 echo  ================================================================================
 echo   [8] DAT/TAT UPDATE - ENABLE/DISABLE WINDOWS UPDATE
@@ -4143,7 +4141,7 @@ goto MAIN_MENU
 
 :FIX_PRINTER
 cls
-color 0A
+color 0B
 echo.
 echo  ================================================================================
 echo   [9] FIX LOI MAY IN - FIX PRINTER ISSUES
@@ -4473,7 +4471,7 @@ goto MAIN_MENU
 
 :SKU_MANAGE
 cls
-color 0E
+color 0C
 echo.
 echo  ================================================================================
 echo   [14] SKUS WIN/OFFICE - PRODUCT KEY MANAGEMENT
@@ -4585,12 +4583,12 @@ pause
 goto MAIN_MENU
 
 :: ============================================================================
-:: QUICK ACTIONS [88, 99]
+:: ⚡ QUICK ACTIONS [88, 99]
 :: ============================================================================
 
 :RUN_ALL
 cls
-color 0A
+color 0B
 echo.
 echo  ================================================================================
 echo   [88] CHAY TAT CA TIEN ICH - RUN ALL UTILITIES
@@ -4635,7 +4633,7 @@ goto MAIN_MENU
 
 :OPTIMIZE_ALL
 cls
-color 0A
+color 0B
 echo.
 echo  ================================================================================
 echo   [99] TOI UU TOAN BO - FULL SYSTEM OPTIMIZATION
@@ -4704,8 +4702,6 @@ echo.
 pause
 goto MAIN_MENU
 
-
-
 :EXIT
 cls
 color 0B
@@ -4735,7 +4731,7 @@ exit
 
 :DARK_MODE_TOGGLE
 cls
-color 0E
+color 0C
 echo.
 echo  [100] Dark Mode Toggle - Chuyen Doi Che Do Toi
 echo  ================================================================
@@ -4781,7 +4777,7 @@ goto MAIN_MENU
 
 :TASKBAR_CUSTOM
 cls
-color 0E
+color 0C
 echo.
 echo  [101] Taskbar Customization - Tuy Chinh Taskbar
 echo  ================================================================
@@ -4842,7 +4838,7 @@ goto MAIN_MENU
 
 :EXPLORER_TWEAKS
 cls
-color 0E
+color 0C
 echo.
 echo  [102] File Explorer Tweaks - Tuy Chinh File Explorer
 echo  ================================================================
@@ -4911,7 +4907,7 @@ goto MAIN_MENU
 
 :CONTEXT_MENU
 cls
-color 0E
+color 0C
 echo.
 echo  [103] Context Menu Editor - Sua Menu Chuot Phai
 echo  ================================================================
@@ -4964,7 +4960,7 @@ goto MAIN_MENU
 
 :TRANSPARENCY
 cls
-color 0E
+color 0C
 echo.
 echo  [104] Transparency Effects - Hieu Ung Trong Suot
 echo  ================================================================
@@ -4995,7 +4991,7 @@ goto MAIN_MENU
 
 :MOUSE_TWEAKS
 cls
-color 0E
+color 0C
 echo.
 echo  [105] Mouse and Cursor Tweaks - Tuy Chinh Chuot
 echo  ================================================================
@@ -5034,7 +5030,7 @@ goto MAIN_MENU
 
 :KEYBOARD_SHORTCUTS
 cls
-color 0E
+color 0C
 echo.
 echo  [106] Keyboard Shortcuts Manager - Quan Ly Phim Tat
 echo  ================================================================
@@ -5069,7 +5065,7 @@ goto MAIN_MENU
 
 :SYSTEM_SOUNDS
 cls
-color 0E
+color 0C
 echo.
 echo  [107] System Sounds Manager - Quan Ly Am Thanh He Thong
 echo  ================================================================
@@ -5114,14 +5110,13 @@ echo.
 pause
 goto MAIN_MENU
 
-
 :: ============================================================================
 :: CATEGORY 14: GAMING OPTIMIZATION [108-112]
 :: ============================================================================
 
 :GAME_MODE
 cls
-color 0E
+color 0C
 echo.
 echo  [108] Game Mode Optimization - Toi Uu Game Mode
 echo  ================================================================
@@ -5178,7 +5173,7 @@ goto MAIN_MENU
 
 :GPU_PERFORMANCE
 cls
-color 0E
+color 0C
 echo.
 echo  [109] GPU Performance Boost - Tang Cuong GPU
 echo  ================================================================
@@ -5223,7 +5218,7 @@ goto MAIN_MENU
 
 :XBOX_CONTROL
 cls
-color 0E
+color 0C
 echo.
 echo  [110] Xbox Services Control - Quan Ly Dich Vu Xbox
 echo  ================================================================
@@ -5274,7 +5269,7 @@ goto MAIN_MENU
 
 :GAMING_NETWORK
 cls
-color 0E
+color 0C
 echo.
 echo  [111] Gaming Network Tweaks - Toi Uu Mang Cho Game
 echo  ================================================================
@@ -5316,7 +5311,7 @@ goto MAIN_MENU
 
 :DIRECTX_MANAGER
 cls
-color 0E
+color 0C
 echo.
 echo  [112] DirectX and Runtime Manager - Quan Ly DirectX
 echo  ================================================================
@@ -5359,7 +5354,7 @@ goto MAIN_MENU
 
 :FIREWALL_MANAGER
 cls
-color 0E
+color 0C
 echo.
 echo  [113] Firewall Manager - Quan Ly Tuong Lua
 echo  ================================================================
@@ -5415,7 +5410,7 @@ goto MAIN_MENU
 
 :UAC_SETTINGS
 cls
-color 0E
+color 0C
 echo.
 echo  [114] UAC Settings Control - Cai Dat UAC
 echo  ================================================================
@@ -5470,7 +5465,7 @@ goto MAIN_MENU
 
 :WINDOWS_SANDBOX
 cls
-color 0E
+color 0C
 echo.
 echo  [115] Windows Sandbox Enable - Bat Windows Sandbox
 echo  ================================================================
@@ -5511,7 +5506,7 @@ goto MAIN_MENU
 
 :RANSOMWARE_PROTECT
 cls
-color 0E
+color 0C
 echo.
 echo  [116] Ransomware Protection - Bao Ve Khoi Ransomware
 echo  ================================================================
@@ -5558,7 +5553,7 @@ goto MAIN_MENU
 
 :APP_BROWSER_CONTROL
 cls
-color 0E
+color 0C
 echo.
 echo  [117] App and Browser Control - Kiem Soat Ung Dung
 echo  ================================================================
@@ -5606,7 +5601,7 @@ goto MAIN_MENU
 
 :ENCRYPTION_MANAGER
 cls
-color 0E
+color 0C
 echo.
 echo  [118] Encryption Manager - Quan Ly Ma Hoa
 echo  ================================================================
@@ -5654,7 +5649,7 @@ goto MAIN_MENU
 
 :SECURE_DNS
 cls
-color 0E
+color 0C
 echo.
 echo  [119] Secure DNS Configuration - Cau Hinh DNS Bao Mat
 echo  ================================================================
@@ -5715,7 +5710,7 @@ goto MAIN_MENU
 
 :SECURITY_HARDENING
 cls
-color 0E
+color 0C
 echo.
 echo  [120] Security Hardening - Tang Cuong Bao Mat
 echo  ================================================================
@@ -5784,14 +5779,13 @@ echo.
 pause
 goto MAIN_MENU
 
-
 :: ============================================================================
 :: CATEGORY 16: MONITORING & DIAGNOSTICS [121-128]
 :: ============================================================================
 
 :PERFORMANCE_MONITOR
 cls
-color 0E
+color 0C
 echo.
 echo  [121] Performance Monitor Live - Giam Sat Hieu Nang Truc Tiep
 echo  ================================================================
@@ -5838,7 +5832,7 @@ goto MAIN_MENU
 
 :TEMPERATURE_MONITOR
 cls
-color 0E
+color 0C
 echo.
 echo  [122] Temperature Monitor - Giam Sat Nhiet Do
 echo  ================================================================
@@ -5882,7 +5876,7 @@ goto MAIN_MENU
 
 :BANDWIDTH_MONITOR
 cls
-color 0E
+color 0C
 echo.
 echo  [123] Network Bandwidth Monitor - Giam Sat Bang Thong Mang
 echo  ================================================================
@@ -5928,7 +5922,7 @@ goto MAIN_MENU
 
 :DISK_HEALTH_MONITOR
 cls
-color 0E
+color 0C
 echo.
 echo  [124] Disk Health Monitor - Giam Sat Suc Khoe O Dia
 echo  ================================================================
@@ -5974,7 +5968,7 @@ goto MAIN_MENU
 
 :BATTERY_REPORT
 cls
-color 0E
+color 0C
 echo.
 echo  [125] Battery Report Generator - Tao Bao Cao Pin
 echo  ================================================================
@@ -6031,7 +6025,7 @@ goto MAIN_MENU
 
 :PROCESS_EXPLORER
 cls
-color 0E
+color 0C
 echo.
 echo  [126] Process Explorer - Trinh Quan Ly Tien Trinh
 echo  ================================================================
@@ -6082,7 +6076,7 @@ goto MAIN_MENU
 
 :STARTUP_ANALYZER
 cls
-color 0E
+color 0C
 echo.
 echo  [127] Startup Impact Analyzer - Phan Tich Tac Dong Khoi Dong
 echo  ================================================================
@@ -6135,7 +6129,7 @@ goto MAIN_MENU
 
 :STABILITY_REPORT
 cls
-color 0E
+color 0C
 echo.
 echo  [128] System Stability Report - Bao Cao On Dinh He Thong
 echo  ================================================================
@@ -6191,7 +6185,7 @@ goto MAIN_MENU
 
 :ULTIMATE_PERFORMANCE
 cls
-color 0E
+color 0C
 echo.
 echo  [129] Ultimate Performance Plan - Ke Hoach Hieu Nang Toi Da
 echo  ================================================================
@@ -6245,7 +6239,7 @@ goto MAIN_MENU
 
 :CPU_PARKING
 cls
-color 0E
+color 0C
 echo.
 echo  [130] CPU Parking Control - Kiem Soat CPU Parking
 echo  ================================================================
@@ -6287,7 +6281,7 @@ goto MAIN_MENU
 
 :USB_SUSPEND
 cls
-color 0E
+color 0C
 echo.
 echo  [131] USB Selective Suspend - Tam Dung USB Chon Loc
 echo  ================================================================
@@ -6324,7 +6318,7 @@ goto MAIN_MENU
 
 :SLEEP_MANAGER
 cls
-color 0E
+color 0C
 echo.
 echo  [132] Sleep Settings Manager - Quan Ly Cai Dat Ngu
 echo  ================================================================
@@ -6377,7 +6371,7 @@ goto MAIN_MENU
 
 :FAST_STARTUP
 cls
-color 0E
+color 0C
 echo.
 echo  [133] Fast Startup Control - Kiem Soat Khoi Dong Nhanh
 echo  ================================================================
@@ -6419,7 +6413,7 @@ goto MAIN_MENU
 
 :VPN_MANAGER
 cls
-color 0E
+color 0C
 echo.
 echo  [133] VPN Manager - Quan Ly VPN
 echo  ================================================================
@@ -6464,7 +6458,7 @@ goto MAIN_MENU
 
 :HOSTS_EDITOR
 cls
-color 0E
+color 0C
 echo.
 echo  [135] Hosts File Editor - Sua File Hosts
 echo  ================================================================
@@ -6517,7 +6511,7 @@ goto MAIN_MENU
 
 :MAC_CHANGER
 cls
-color 0E
+color 0C
 echo.
 echo  [136] MAC Address Changer - Thay Doi Dia Chi MAC
 echo  ================================================================
@@ -6565,7 +6559,7 @@ goto MAIN_MENU
 
 :ADAPTER_PRIORITY
 cls
-color 0E
+color 0C
 echo.
 echo  [137] Network Adapter Priority - Uu Tien Bo Dieu Hop Mang
 echo  ================================================================
@@ -6616,7 +6610,7 @@ goto MAIN_MENU
 
 :NETWORK_RESET_ADV
 cls
-color 0E
+color 0C
 echo.
 echo  [138] Network Reset Advanced - Dat Lai Mang Nang Cao
 echo  ================================================================
@@ -6684,7 +6678,7 @@ goto MAIN_MENU
 
 :PROXY_MANAGER
 cls
-color 0E
+color 0C
 echo.
 echo  [139] Proxy Settings Manager - Quan Ly Cai Dat Proxy
 echo  ================================================================
@@ -6725,7 +6719,7 @@ goto MAIN_MENU
 
 :NETWORK_SHARING
 cls
-color 0E
+color 0C
 echo.
 echo  [140] Network Sharing Manager - Quan Ly Chia Se Mang
 echo  ================================================================
@@ -6776,14 +6770,13 @@ echo.
 pause
 goto MAIN_MENU
 
-
 :: ============================================================================
 :: CATEGORY 19: SYSTEM RECOVERY [141-145]
 :: ============================================================================
 
 :SYSTEM_IMAGE_BACKUP
 cls
-color 0E
+color 0C
 echo.
 echo  [141] System Image Backup - Sao Luu Hinh Anh He Thong
 echo  ================================================================
@@ -6832,7 +6825,7 @@ goto MAIN_MENU
 
 :RECOVERY_DRIVE
 cls
-color 0E
+color 0C
 echo.
 echo  [142] Recovery Drive Creator - Tao O Phuc Hoi
 echo  ================================================================
@@ -6883,7 +6876,7 @@ goto MAIN_MENU
 
 :BOOT_REPAIR
 cls
-color 0E
+color 0C
 echo.
 echo  [143] Boot Repair Tools - Cong Cu Sua Loi Khoi Dong
 echo  ================================================================
@@ -6946,7 +6939,7 @@ goto MAIN_MENU
 
 :RESTORE_MANAGER
 cls
-color 0E
+color 0C
 echo.
 echo  [144] System Restore Manager - Quan Ly Khoi Phuc He Thong
 echo  ================================================================
@@ -7010,7 +7003,7 @@ goto MAIN_MENU
 
 :SAFE_MODE_ACTIVATE
 cls
-color 0E
+color 0C
 echo.
 echo  [145] Activate Safe Mode Options - Kich Hoat Safe Mode
 echo  ================================================================
@@ -7072,7 +7065,7 @@ goto MAIN_MENU
 
 :STORE_RESET
 cls
-color 0E
+color 0C
 echo.
 echo  [146] Windows Store Reset - Dat Lai Windows Store
 echo  ================================================================
@@ -7120,7 +7113,7 @@ goto MAIN_MENU
 
 :APP_PERMISSIONS
 cls
-color 0E
+color 0C
 echo.
 echo  [147] App Permissions Manager - Quan Ly Quyen Ung Dung
 echo  ================================================================
@@ -7183,7 +7176,7 @@ goto MAIN_MENU
 
 :DEFAULT_APPS
 cls
-color 0E
+color 0C
 echo.
 echo  [148] Default Apps Manager - Quan Ly Ung Dung Mac Dinh
 echo  ================================================================
@@ -7242,7 +7235,7 @@ goto MAIN_MENU
 
 :WINGET_MANAGER
 cls
-color 0E
+color 0C
 echo.
 echo  [149] Winget Package Manager - Trinh Quan Ly Goi Winget
 echo  ================================================================
@@ -7304,7 +7297,7 @@ goto MAIN_MENU
 
 :EDGE_MANAGER
 cls
-color 0E
+color 0C
 echo.
 echo  [150] Microsoft Edge Manager - Quan Ly Microsoft Edge
 echo  ================================================================
