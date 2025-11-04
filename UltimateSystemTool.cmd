@@ -2277,7 +2277,7 @@ dir C:\ /a:d
 
 echo.
 echo [TIP] Use Function [88] or [99] to clean up and free space
-echo [GI ] Dng chc nng [88] hoc [99]  dn dp v gii phng dung lng
+echo [GI Y] Dung chuc nang [88] hoac [99] de don dep va giai phong dung luong
 echo.
 pause
 goto MAIN_MENU
@@ -3108,7 +3108,7 @@ echo  ==========================================================================
 echo                                                                                
 echo               ULTIMATE WINDOWS SYSTEM TOOL v5.0 - PROFESSIONAL                
 echo               Comprehensive Optimization Suite - 82 Functions                 
-echo                     Press ` to switch language                                
+echo                     Press L to switch language                                
 echo                                                                                
 echo  ================================================================================
 echo.
