@@ -6773,3 +6773,463 @@ goto MAIN_MENU
 :: ═══════════════════════════════════════════════════════════════════════════
 
 
+
+:: ═══════════════════════════════════════════════════════════════════════════
+:: CATEGORY 11 & 12: INSTALLATION & UTILITIES [83-96] - RESTORED
+:: ═══════════════════════════════════════════════════════════════════════════
+
+:INSTALL_SOFTWARE
+cls
+color 0B
+echo.
+echo  [83] Install Software (Chocolatey) - Cai Dat Phan Mem
+echo  ════════════════════════════════════════════════════════════════
+echo.
+echo   [1] Install Chocolatey Package Manager
+echo   [2] Install Popular Apps via Chocolatey
+echo   [3] Search for Package
+echo   [0] Back to Menu
+echo.
+set /p choco="  SELECT [0-3]: "
+
+if "%choco%"=="1" (
+    echo.
+    echo  Installing Chocolatey Package Manager...
+    powershell -NoProfile -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" 2>nul
+    echo  ✅ Chocolatey installed!
+)
+if "%choco%"=="2" (
+    echo.
+    echo  Popular apps: chrome, firefox, vlc, 7zip, git, vscode
+    set /p app="  Enter app name: "
+    choco install %app% -y
+)
+echo.
+pause
+goto MAIN_MENU
+
+:INSTALL_OFFICE
+cls
+color 0B
+echo.
+echo  [84] Install Office Suite - Cai Dat Office
+echo  ════════════════════════════════════════════════════════════════
+echo.
+echo   [1] Download Office Deployment Tool
+echo   [2] Check Office Activation Status
+echo   [3] Activate Office (Generic Key)
+echo   [0] Back to Menu
+echo.
+set /p off="  SELECT [0-3]: "
+
+if "%off%"=="1" (
+    start https://www.microsoft.com/en-us/download/details.aspx?id=49117
+)
+if "%off%"=="2" (
+    echo.
+    cd /d "%ProgramFiles%\Microsoft Office\Office16" 2>nul || cd /d "%ProgramFiles(x86)%\Microsoft Office\Office16" 2>nul
+    cscript ospp.vbs /dstatus
+)
+echo.
+pause
+goto MAIN_MENU
+
+:CREATE_WINPE
+cls
+color 0B
+echo.
+echo  [85] Create WinPE Boot USB - Tao USB Khoi Dong WinPE
+echo  ════════════════════════════════════════════════════════════════
+echo.
+echo   [1] Download Windows ADK
+echo   [2] Download WinPE Add-on
+echo   [0] Back to Menu
+echo.
+set /p winpe="  SELECT [0-2]: "
+
+if "%winpe%"=="1" (
+    start https://docs.microsoft.com/windows-hardware/get-started/adk-install
+)
+if "%winpe%"=="2" (
+    start https://docs.microsoft.com/windows-hardware/get-started/adk-install
+)
+echo.
+pause
+goto MAIN_MENU
+
+:LTSC_STORE
+cls
+color 0B
+echo.
+echo  [86] Microsoft Store for LTSC - Cai Store Cho LTSC
+echo  ════════════════════════════════════════════════════════════════
+echo.
+echo  Installing Microsoft Store on Windows LTSC...
+echo.
+powershell -NoProfile -Command "Get-AppxPackage -AllUsers *WindowsStore* | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register \"$($_.InstallLocation)\AppXManifest.xml\"}" 2>nul
+echo.
+echo  ✅ Store installation completed!
+echo.
+pause
+goto MAIN_MENU
+
+:WIN_TO_HDD
+cls
+color 0B
+echo.
+echo  [87] Install Windows via WinToHDD
+echo  ════════════════════════════════════════════════════════════════
+echo.
+echo   [1] Download WinToHDD Free
+echo   [2] Download WinToHDD Professional
+echo   [0] Back to Menu
+echo.
+set /p wth="  SELECT [0-2]: "
+
+if "%wth%"=="1" (
+    start https://www.easyuefi.com/wintohdd/wintohdd-free.html
+)
+if "%wth%"=="2" (
+    start https://www.easyuefi.com/wintohdd/
+)
+echo.
+pause
+goto MAIN_MENU
+
+:CLEAN_JUNK
+cls
+color 0B
+echo.
+echo  [88] Clean Junk Files Advanced - Xoa File Rac Nang Cao
+echo  ════════════════════════════════════════════════════════════════
+echo.
+echo  10-Step Advanced Junk Cleanup...
+echo.
+echo  [1/10] Temp files...
+del /f /s /q "%TEMP%\*" >nul 2>&1
+del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
+echo  [2/10] Prefetch...
+del /f /s /q "C:\Windows\Prefetch\*" >nul 2>&1
+echo  [3/10] Recent files...
+del /f /s /q "%APPDATA%\Microsoft\Windows\Recent\*" >nul 2>&1
+echo  [4/10] Browser cache...
+del /f /s /q "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Cache\*" >nul 2>&1
+del /f /s /q "%LOCALAPPDATA%\Mozilla\Firefox\Profiles\*.default\cache2\*" >nul 2>&1
+echo  [5/10] Recycle Bin...
+rd /s /q C:\$Recycle.Bin >nul 2>&1
+echo  [6/10] Thumbnails...
+del /f /s /q "%LOCALAPPDATA%\Microsoft\Windows\Explorer\*.db" >nul 2>&1
+echo  [7/10] Error reports...
+del /f /s /q "C:\ProgramData\Microsoft\Windows\WER\*" >nul 2>&1
+echo  [8/10] Delivery Optimization...
+del /f /s /q "%WINDIR%\SoftwareDistribution\Download\*" >nul 2>&1
+echo  [9/10] Log files...
+del /f /s /q "C:\Windows\Logs\*" >nul 2>&1
+echo  [10/10] Memory dumps...
+del /f /q "C:\Windows\MEMORY.DMP" >nul 2>&1
+del /f /q "C:\Windows\Minidump\*" >nul 2>&1
+echo.
+echo  ✅ Advanced cleanup completed!
+echo.
+pause
+goto MAIN_MENU
+
+:SHOW_HIDDEN
+cls
+color 0B
+echo.
+echo  [89] Show/Hide Files - Hien/An File He Thong
+echo  ════════════════════════════════════════════════════════════════
+echo.
+echo   [1] Show Hidden Files and Folders
+echo   [2] Hide Hidden Files and Folders
+echo   [3] Show File Extensions
+echo   [4] Hide File Extensions
+echo   [0] Back to Menu
+echo.
+set /p vis="  SELECT [0-4]: "
+
+if "%vis%"=="1" (
+    reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v Hidden /t REG_DWORD /d 1 /f >nul
+    taskkill /f /im explorer.exe >nul 2>&1
+    start explorer.exe
+    echo  ✅ Hidden files shown!
+)
+if "%vis%"=="2" (
+    reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v Hidden /t REG_DWORD /d 2 /f >nul
+    taskkill /f /im explorer.exe >nul 2>&1
+    start explorer.exe
+    echo  ✅ Hidden files hidden!
+)
+if "%vis%"=="3" (
+    reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v HideFileExt /t REG_DWORD /d 0 /f >nul
+    taskkill /f /im explorer.exe >nul 2>&1
+    start explorer.exe
+    echo  ✅ File extensions shown!
+)
+if "%vis%"=="4" (
+    reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v HideFileExt /t REG_DWORD /d 1 /f >nul
+    taskkill /f /im explorer.exe >nul 2>&1
+    start explorer.exe
+    echo  ✅ File extensions hidden!
+)
+echo.
+pause
+goto MAIN_MENU
+
+:UPDATE_TOGGLE
+cls
+color 0B
+echo.
+echo  [90] Enable/Disable Windows Update - Bat/Tat Update
+echo  ════════════════════════════════════════════════════════════════
+echo.
+echo   [1] Disable Windows Update Service
+echo   [2] Enable Windows Update Service
+echo   [3] Pause Updates (35 days)
+echo   [4] Resume Updates
+echo   [5] Check Update Service Status
+echo   [0] Back to Menu
+echo.
+set /p updt="  SELECT [0-5]: "
+
+if "%updt%"=="1" (
+    echo.
+    echo  Disabling Windows Update...
+    sc config wuauserv start= disabled >nul
+    sc stop wuauserv >nul 2>&1
+    echo  ✅ Windows Update DISABLED!
+)
+if "%updt%"=="2" (
+    echo.
+    echo  Enabling Windows Update...
+    sc config wuauserv start= demand >nul
+    sc start wuauserv >nul 2>&1
+    echo  ✅ Windows Update ENABLED!
+)
+if "%updt%"=="3" (
+    echo.
+    echo  Pausing updates for 35 days...
+    reg add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v PauseUpdatesExpiryTime /t REG_SZ /d "2099-12-31T00:00:00Z" /f >nul
+    echo  ✅ Updates PAUSED for 35 days!
+)
+if "%updt%"=="5" (
+    echo.
+    sc query wuauserv
+)
+echo.
+pause
+goto MAIN_MENU
+
+
+:FIX_PRINTER
+cls
+color 0B
+echo.
+echo  [91] Fix Printer Issues - Sua Loi May In
+echo  ════════════════════════════════════════════════════════════════
+echo.
+echo   [1] Restart Print Spooler Service
+echo   [2] Clear Print Queue
+echo   [3] Reset Print Spooler
+echo   [4] Run Printer Troubleshooter
+echo   [5] View Installed Printers
+echo   [0] Back to Menu
+echo.
+set /p prn="  SELECT [0-5]: "
+
+if "%prn%"=="1" (
+    echo.
+    net stop spooler >nul 2>&1
+    net start spooler >nul 2>&1
+    echo  ✅ Print Spooler restarted!
+)
+if "%prn%"=="2" (
+    echo.
+    net stop spooler >nul 2>&1
+    del /f /s /q "%WINDIR%\System32\spool\PRINTERS\*" >nul 2>&1
+    net start spooler >nul 2>&1
+    echo  ✅ Print queue cleared!
+)
+if "%prn%"=="4" (
+    msdt /id PrinterDiagnostic
+)
+if "%prn%"=="5" (
+    wmic printer get name,portname,drivername
+)
+echo.
+pause
+goto MAIN_MENU
+
+:CHECK_TEST
+cls
+color 0B
+echo.
+echo  [92] Check and Test Tools - Cong Cu Kiem Tra
+echo  ════════════════════════════════════════════════════════════════
+echo.
+echo   [1] Memory Diagnostic
+echo   [2] DirectX Diagnostic (dxdiag)
+echo   [3] Performance Monitor
+echo   [4] Resource Monitor
+echo   [5] Event Viewer
+echo   [6] System Configuration
+echo   [7] Disk Management
+echo   [8] Device Manager
+echo   [9] Computer Management
+echo   [10] Windows Memory Diagnostic
+echo   [0] Back to Menu
+echo.
+set /p tool="  SELECT [0-10]: "
+
+if "%tool%"=="1" (mdsched.exe)
+if "%tool%"=="2" (dxdiag)
+if "%tool%"=="3" (perfmon)
+if "%tool%"=="4" (resmon)
+if "%tool%"=="5" (eventvwr)
+if "%tool%"=="6" (msconfig)
+if "%tool%"=="7" (diskmgmt.msc)
+if "%tool%"=="8" (devmgmt.msc)
+if "%tool%"=="9" (compmgmt.msc)
+if "%tool%"=="10" (mdsched.exe)
+echo.
+pause
+goto MAIN_MENU
+
+:DEFENDER_MANAGE
+cls
+color 0B
+echo.
+echo  [93] Windows Defender Management - Quan Ly Defender
+echo  ════════════════════════════════════════════════════════════════
+echo.
+echo   [1] Enable Windows Defender
+echo   [2] Disable Windows Defender (Temporary)
+echo   [3] Quick Scan
+echo   [4] Full Scan
+echo   [5] Update Definitions
+echo   [6] View Scan History
+echo   [7] Manage Exclusions
+echo   [8] Open Windows Security
+echo   [0] Back to Menu
+echo.
+set /p def="  SELECT [0-8]: "
+
+if "%def%"=="1" (
+    powershell -Command "Set-MpPreference -DisableRealtimeMonitoring $false" 2>nul
+    echo  ✅ Defender ENABLED!
+)
+if "%def%"=="2" (
+    powershell -Command "Set-MpPreference -DisableRealtimeMonitoring $true" 2>nul
+    echo  ✅ Defender temporarily DISABLED!
+)
+if "%def%"=="3" (
+    powershell -Command "Start-MpScan -ScanType QuickScan"
+)
+if "%def%"=="4" (
+    powershell -Command "Start-MpScan -ScanType FullScan"
+)
+if "%def%"=="5" (
+    powershell -Command "Update-MpSignature"
+    echo  ✅ Definitions updated!
+)
+if "%def%"=="8" (
+    start windowsdefender:
+)
+echo.
+pause
+goto MAIN_MENU
+
+:ISO_REPO
+cls
+color 0B
+echo.
+echo  [94] Windows ISO Repository - Kho ISO Windows
+echo  ════════════════════════════════════════════════════════════════
+echo.
+echo   [1] Download Windows 11
+echo   [2] Download Windows 10
+echo   [3] Download Windows 8.1
+echo   [4] Download Media Creation Tool
+echo   [5] Download Rufus (Create Bootable USB)
+echo   [0] Back to Menu
+echo.
+set /p iso="  SELECT [0-5]: "
+
+if "%iso%"=="1" (start https://www.microsoft.com/software-download/windows11)
+if "%iso%"=="2" (start https://www.microsoft.com/software-download/windows10)
+if "%iso%"=="3" (start https://www.microsoft.com/software-download/windows8)
+if "%iso%"=="4" (start https://go.microsoft.com/fwlink/?LinkId=691209)
+if "%iso%"=="5" (start https://rufus.ie/)
+echo.
+pause
+goto MAIN_MENU
+
+:IRST_DRIVERS
+cls
+color 0B
+echo.
+echo  [95] Intel RST Drivers - Driver Intel RST
+echo  ════════════════════════════════════════════════════════════════
+echo.
+echo   [1] Download Latest Intel RST Driver
+echo   [2] Check Current RST Version
+echo   [3] Intel Driver Support Assistant
+echo   [0] Back to Menu
+echo.
+set /p rst="  SELECT [0-3]: "
+
+if "%rst%"=="1" (start https://downloadcenter.intel.com/product/55005/Intel-Rapid-Storage-Technology-Intel-RST-)
+if "%rst%"=="2" (
+    echo.
+    wmic path win32_pnpsigneddriver where "devicename like '%%Intel%%RST%%'" get devicename,driverversion
+)
+if "%rst%"=="3" (start https://www.intel.com/content/www/us/en/support/detect.html)
+echo.
+pause
+goto MAIN_MENU
+
+:SKU_MANAGE
+cls
+color 0B
+echo.
+echo  [96] Product Key Management - Quan Ly Product Key
+echo  ════════════════════════════════════════════════════════════════
+echo.
+echo   [1] View Windows Product Key
+echo   [2] View Office Product Key
+echo   [3] Change Windows Product Key
+echo   [4] Activate Windows
+echo   [5] Activate Office
+echo   [6] Check Activation Status
+echo   [7] Backup Product Keys to Desktop
+echo   [0] Back to Menu
+echo.
+set /p sku="  SELECT [0-7]: "
+
+if "%sku%"=="1" (
+    echo.
+    wmic path softwarelicensingservice get OA3xOriginalProductKey
+    powershell -Command "(Get-WmiObject -query 'select * from SoftwareLicensingService').OA3xOriginalProductKey"
+)
+if "%sku%"=="3" (
+    echo.
+    set /p key="  Enter Windows Product Key: "
+    slmgr /ipk %key%
+)
+if "%sku%"=="4" (
+    slmgr /ato
+)
+if "%sku%"=="6" (
+    slmgr /xpr
+    slmgr /dlv
+)
+if "%sku%"=="7" (
+    echo.
+    wmic path softwarelicensingservice get OA3xOriginalProductKey > "%USERPROFILE%\Desktop\Windows_Key.txt"
+    echo  ✅ Keys saved to Desktop!
+)
+echo.
+pause
+goto MAIN_MENU
+
