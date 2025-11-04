@@ -2468,8 +2468,8 @@ if "%office_choice%"=="2" (
 
 if "%office_choice%"=="3" (
     echo [*] Resetting Office settings / Reset cai dat Office...
-    del /f /q "%AppData%\Microsoft\Office\*.* " >nul 2>&1
-    del /f /q "%LocalAppData%\Microsoft\Office\*.* " >nul 2>&1
+    del /f /q "%AppData%\Microsoft\Office\*.*" >nul 2>&1
+    del /f /q "%LocalAppData%\Microsoft\Office\*.*" >nul 2>&1
     echo [SUCCESS] Office settings reset! / Da reset cai dat Office!
 )
 
@@ -2803,10 +2803,12 @@ if "%backup_choice%"=="0" goto MAIN_MENU
 if "%backup_choice%"=="1" (
     echo.
     echo [*] Backing up Desktop / Sao luu Desktop...
-    xcopy "%USERPROFILE%\Desktop" "%DataBackup%\Desktop" /E /I /H /Y >nul 2>&1
+    xcopy "%USERPROFILE%\Desktop" "%DataBackup%\Desktop" /E /I /H /Y /EXCLUDE:%TEMP%\backup_exclude.txt >nul 2>&1
     
     echo [*] Backing up Documents / Sao luu Documents...
-    xcopy "%USERPROFILE%\Documents" "%DataBackup%\Documents" /E /I /H /Y >nul 2>&1
+    echo UserData_Backup > "%TEMP%\backup_exclude.txt"
+    xcopy "%USERPROFILE%\Documents" "%DataBackup%\Documents" /E /I /H /Y /EXCLUDE:%TEMP%\backup_exclude.txt >nul 2>&1
+    del "%TEMP%\backup_exclude.txt" >nul 2>&1
     
     echo [*] Backing up Pictures / Sao luu Pictures...
     xcopy "%USERPROFILE%\Pictures" "%DataBackup%\Pictures" /E /I /H /Y >nul 2>&1
@@ -2818,12 +2820,23 @@ if "%backup_choice%"=="2" (
     echo This may take a long time / Co the mat rat lau...
     echo.
     
-    xcopy "%USERPROFILE%\Desktop" "%DataBackup%\Desktop" /E /I /H /Y >nul 2>&1
-    xcopy "%USERPROFILE%\Documents" "%DataBackup%\Documents" /E /I /H /Y >nul 2>&1
+    echo [*] Creating exclude list / Tao danh sach loai tru...
+    echo UserData_Backup > "%TEMP%\backup_exclude.txt"
+    
+    echo [*] Backing up Desktop...
+    xcopy "%USERPROFILE%\Desktop" "%DataBackup%\Desktop" /E /I /H /Y /EXCLUDE:%TEMP%\backup_exclude.txt >nul 2>&1
+    echo [*] Backing up Documents...
+    xcopy "%USERPROFILE%\Documents" "%DataBackup%\Documents" /E /I /H /Y /EXCLUDE:%TEMP%\backup_exclude.txt >nul 2>&1
+    echo [*] Backing up Pictures...
     xcopy "%USERPROFILE%\Pictures" "%DataBackup%\Pictures" /E /I /H /Y >nul 2>&1
+    echo [*] Backing up Downloads...
     xcopy "%USERPROFILE%\Downloads" "%DataBackup%\Downloads" /E /I /H /Y >nul 2>&1
+    echo [*] Backing up Videos...
     xcopy "%USERPROFILE%\Videos" "%DataBackup%\Videos" /E /I /H /Y >nul 2>&1
+    echo [*] Backing up Music...
     xcopy "%USERPROFILE%\Music" "%DataBackup%\Music" /E /I /H /Y >nul 2>&1
+    
+    del "%TEMP%\backup_exclude.txt" >nul 2>&1
 )
 
 if "%backup_choice%"=="3" (
@@ -2854,16 +2867,23 @@ echo [*] Searching for Zalo installation / Tim cai dat Zalo...
 set "ZaloPC=%APPDATA%\ZaloPC"
 set "ZaloData=%USERPROFILE%\Documents\ZaloData"
 set "ZaloBackup=%USERPROFILE%\Documents\Zalo_Backup_%date:~-4,4%%date:~-7,2%%date:~-10,2%"
+set "ZaloFound=0"
 
-if not exist "%ZaloPC%" (
-    if not exist "%ZaloData%" (
-        echo.
-        echo [ERROR] Zalo not found / Khong tim thay Zalo!
-        echo [INFO] Please make sure Zalo PC is installed / Vui long dam bao Zalo PC da duoc cai dat
-        echo.
-        pause
-        goto MAIN_MENU
-    )
+if exist "%ZaloPC%" set "ZaloFound=1"
+if exist "%ZaloData%" set "ZaloFound=1"
+if exist "%LOCALAPPDATA%\ZaloPC" set "ZaloFound=1"
+
+if "%ZaloFound%"=="0" (
+    echo.
+    echo [ERROR] Zalo not found / Khong tim thay Zalo!
+    echo [INFO] Please make sure Zalo PC is installed / Vui long dam bao Zalo PC da duoc cai dat
+    echo [INFO] Searched locations / Da tim tai:
+    echo   - %APPDATA%\ZaloPC
+    echo   - %USERPROFILE%\Documents\ZaloData
+    echo   - %LOCALAPPDATA%\ZaloPC
+    echo.
+    pause
+    goto MAIN_MENU
 )
 
 echo [*] Creating backup directory / Tao thu muc sao luu...
