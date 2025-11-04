@@ -70,10 +70,10 @@ function Show-Header {
     Write-Host "═══════════════════════════════════════════════════════════════════════════`n" -ForegroundColor Cyan
 }
 
-function Show-Success { param([string]$Message); Write-Host "`n[✓ SUCCESS] $Message" -ForegroundColor Green }
-function Show-Error { param([string]$Message); Write-Host "`n[✗ ERROR] $Message" -ForegroundColor Red }
-function Show-Info { param([string]$Message); Write-Host "`n[ℹ INFO] $Message" -ForegroundColor Cyan }
-function Show-Warning { param([string]$Message); Write-Host "`n[⚠ WARNING] $Message" -ForegroundColor Yellow }
+function Show-Success { param([string]$Message); Write-Host "`n[+ SUCCESS] $Message" -ForegroundColor Green }
+function Show-Error { param([string]$Message); Write-Host "`n[- ERROR] $Message" -ForegroundColor Red }
+function Show-Info { param([string]$Message); Write-Host "`n[i INFO] $Message" -ForegroundColor Cyan }
+function Show-Warning { param([string]$Message); Write-Host "`n[! WARNING] $Message" -ForegroundColor Yellow }
 
 # Language Toggle
 function Switch-Language {
@@ -146,7 +146,7 @@ function Show-MainMenuEN {
     Write-Host "  [71] Check System Information         [72] Windows Settings Center            " -ForegroundColor White
     Write-Host "  [73] Office Repair and Reset          [74] Remove Bloatware (Safe)            " -ForegroundColor White
     Write-Host "  [75] Bitlocker Management             [76] Check Activation Status            " -ForegroundColor White
-    Write-Host "`n CATEGORY 10: BACKUP AND RECOVERY [77-82] ★ NEW! ★" -ForegroundColor Yellow
+    Write-Host "`n CATEGORY 10: BACKUP AND RECOVERY [77-82] -- NEW! --" -ForegroundColor Yellow
     Write-Host "  [77] Backup WiFi Passwords            [78] Backup Drivers                      " -ForegroundColor Green
     Write-Host "  [79] Backup User Data                 [80] Backup Zalo Data                    " -ForegroundColor Green
     Write-Host "  [81] Backup Product Keys              [82] Data Recovery Tools                 " -ForegroundColor Green
@@ -217,7 +217,7 @@ function Show-MainMenuVI {
     Write-Host "  [71] Kiem Tra Thong Tin May           [72] Trung Tam Cai Dat Windows           " -ForegroundColor White
     Write-Host "  [73] Sua Chua va Reset Office         [74] Xoa Ung Dung Rac (An Toan)          " -ForegroundColor White
     Write-Host "  [75] Quan Ly Bitlocker                [76] Kiem Tra Trang Thai Kich Hoat       " -ForegroundColor White
-    Write-Host "`n DANH MUC 10: SAO LUU VA KHOI PHUC [77-82] ★ MOI! ★" -ForegroundColor Yellow
+    Write-Host "`n DANH MUC 10: SAO LUU VA KHOI PHUC [77-82] -- MOI! --" -ForegroundColor Yellow
     Write-Host "  [77] Sao Luu Mat Khau Wifi            [78] Sao Luu Driver                      " -ForegroundColor Green
     Write-Host "  [79] Sao Luu Du Lieu Nguoi Dung       [80] Sao Luu Du Lieu Zalo                " -ForegroundColor Green
     Write-Host "  [81] Sao Luu Ban Quyen                [82] Cong Cu Khoi Phuc Du Lieu           " -ForegroundColor Green
@@ -488,7 +488,7 @@ function Invoke-Function27 {
 
 function Invoke-Function28 {
     Show-Header "Disk Error Check" "28"
-    $drive = Read-Host "Enter drive letter (C,D,etc)"
+    $drive = Read-Host "Enter drive letter (C/D/E/etc)"
     echo Y | chkdsk ${drive}: /f /r /x
     Show-Info "Disk check scheduled for next reboot"
     Read-Host "`nPress Enter"
@@ -970,8 +970,8 @@ function Invoke-Function79 {
     $DataBackup = "$env:USERPROFILE\Documents\UserData_Backup_$(Get-Date -Format 'yyyyMMdd_HHmmss')"
     New-Item -Path $DataBackup -ItemType Directory -Force | Out-Null
     
-    Write-Host " [1] Quick Backup (Desktop, Documents, Pictures)" -ForegroundColor White
-    Write-Host " [2] Full Backup (Include Downloads, Videos, Music)" -ForegroundColor White
+    Write-Host " [1] Quick Backup - Desktop Documents Pictures" -ForegroundColor White
+    Write-Host " [2] Full Backup - Include Downloads Videos Music" -ForegroundColor White
     Write-Host " [0] Back`n" -ForegroundColor White
     
     $choice = Read-Host "Select backup type / Chon loai sao luu (0-2)"
@@ -1291,9 +1291,9 @@ while ($true) {
     Show-MainMenu
     
     if ($global:LANG -eq "EN") {
-        $choice = Read-Host "`n  SELECT FUNCTION (0-99 or L)"
+        $choice = Read-Host "`n  SELECT FUNCTION [0-99 OR L]"
     } else {
-        $choice = Read-Host "`n  CHON CHUC NANG (0-99 hoac L)"
+        $choice = Read-Host "`n  CHON CHUC NANG [0-99 HOAC L]"
     }
     
     # Handle language toggle
