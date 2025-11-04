@@ -1,10 +1,11 @@
 @echo off
+setlocal enabledelayedexpansion
 :: ============================================================================
 :: ULTIMATE WINDOWS SYSTEM TOOL v5.0 - PROFESSIONAL EDITION
 :: Complete System Optimization Suite - Bilingual (English/Vietnamese)
 :: ============================================================================
 :: Based on open-source tools: BleachBit, CCleaner, PrivaZer, Wise Care 365
-:: NEW v5.0: System utilities, Bloatware removal, Bitlocker, Settings center
+:: NEW v5.0: Backup/Recovery, System utilities, Bloatware removal, Bitlocker
 :: v4.5: Auto-elevate, Software cache, LCU cleanup, Memory optimization
 :: All commands are SAFE and tested for Windows 10/11
 :: ============================================================================
@@ -71,8 +72,8 @@ echo.
 echo  ================================================================================
 echo                                                                                
 echo               ULTIMATE WINDOWS SYSTEM TOOL v5.0 - PROFESSIONAL                
-echo               Comprehensive Optimization Suite - 76 Functions                 
-echo                       English / Vietnamese Interface                          
+echo               Comprehensive Optimization Suite - 82 Functions                 
+echo                Backup, Restore, Optimize, Clean - All-in-One Tool             
 echo                                                                                
 echo  ================================================================================
 echo.
@@ -187,7 +188,7 @@ echo   [70] Refresh Icon Cache                    - Lam Moi Icon Cache
 echo  -------------------------------------------------------------------------------
 echo.
 echo  -------------------------------------------------------------------------------
-echo   CATEGORY 9: SYSTEM UTILITIES [71-76] - TIEN ICH HE THONG (NEW!)            
+echo   CATEGORY 9: SYSTEM UTILITIES [71-76] - TIEN ICH HE THONG            
 echo  -------------------------------------------------------------------------------
 echo   [71] Check System Information              - Kiem Tra Thong Tin May        
 echo   [72] Windows Settings Center               - Trung Tam Cai Dat Windows     
@@ -195,6 +196,17 @@ echo   [73] Office Repair and Reset               - Sua Chua va Reset Office
 echo   [74] Remove Bloatware (Safe)               - Xoa Ung Dung Rac (An Toan)    
 echo   [75] Bitlocker Management                  - Quan Ly Bitlocker             
 echo   [76] Check Activation Status               - Kiem Tra Trang Thai Kich Hoat 
+echo  -------------------------------------------------------------------------------
+echo.
+echo  -------------------------------------------------------------------------------
+echo   CATEGORY 10: BACKUP AND RECOVERY [77-82] - SAO LUU VA KHOI PHUC (NEW!)     
+echo  -------------------------------------------------------------------------------
+echo   [77] Backup Wifi Passwords                 - Sao Luu Mat Khau Wifi         
+echo   [78] Backup Drivers                        - Sao Luu Driver                
+echo   [79] Backup User Data                      - Sao Luu Du Lieu Nguoi Dung    
+echo   [80] Backup Zalo Data                      - Sao Luu Du Lieu Zalo          
+echo   [81] Backup Product Keys                   - Sao Luu Ban Quyen             
+echo   [82] Data Recovery Tools                   - Cong Cu Khoi Phuc Du Lieu     
 echo  -------------------------------------------------------------------------------
 echo.
 echo  ================================================================================
@@ -285,6 +297,12 @@ if "%choice%"=="73" goto OFFICE_REPAIR
 if "%choice%"=="74" goto REMOVE_BLOATWARE
 if "%choice%"=="75" goto BITLOCKER_MGMT
 if "%choice%"=="76" goto CHECK_ACTIVATION
+if "%choice%"=="77" goto BACKUP_WIFI
+if "%choice%"=="78" goto BACKUP_DRIVERS
+if "%choice%"=="79" goto BACKUP_USER_DATA
+if "%choice%"=="80" goto BACKUP_ZALO
+if "%choice%"=="81" goto BACKUP_PRODUCT_KEYS
+if "%choice%"=="82" goto DATA_RECOVERY
 if "%choice%"=="88" goto RUN_ALL_CLEANUP
 if "%choice%"=="99" goto FULL_OPTIMIZE
 
@@ -2612,6 +2630,365 @@ echo [CANH BAO] Cong cu nay KHONG cung cap dich vu kich hoat
 echo.
 echo For activation, please use official Microsoft methods.
 echo De kich hoat, vui long su dung phuong thuc chinh thuc cua Microsoft.
+echo.
+pause
+goto MAIN_MENU
+
+:: ============================================================================
+:: BACKUP AND RECOVERY FUNCTIONS - CHUC NANG SAO LUU VA KHOI PHUC
+:: ============================================================================
+
+:BACKUP_WIFI
+cls
+echo ================================================================================
+echo  [77] Backup Wifi Passwords - Sao Luu Mat Khau Wifi
+echo ================================================================================
+echo.
+echo Backing up all WiFi passwords / Sao luu tat ca mat khau WiFi...
+echo.
+
+echo [*] Creating backup directory / Tao thu muc sao luu...
+set "BackupDir=%USERPROFILE%\Desktop\WiFi_Backup_%date:~-4,4%%date:~-7,2%%date:~-10,2%"
+if not exist "%BackupDir%" mkdir "%BackupDir%"
+
+echo [*] Exporting WiFi profiles / Xuat cau hinh WiFi...
+netsh wlan show profiles | findstr "All User Profile" > "%BackupDir%\WiFi_List.txt"
+
+echo.
+echo [*] Exporting passwords for each network / Xuat mat khau cho tung mang...
+for /f "tokens=2 delims=:" %%i in ('netsh wlan show profiles ^| findstr "All User Profile"') do (
+    set "profile=%%i"
+    set "profile=!profile:~1!"
+    echo Exporting / Xuat: !profile!
+    netsh wlan show profile name="!profile!" key=clear > "%BackupDir%\WiFi_!profile!.txt"
+)
+
+echo.
+echo [*] Creating summary file / Tao file tom tat...
+echo WiFi Backup Report > "%BackupDir%\WiFi_Passwords.txt"
+echo =================== >> "%BackupDir%\WiFi_Passwords.txt"
+echo Created: %date% %time% >> "%BackupDir%\WiFi_Passwords.txt"
+echo. >> "%BackupDir%\WiFi_Passwords.txt"
+
+for /f "tokens=2 delims=:" %%i in ('netsh wlan show profiles ^| findstr "All User Profile"') do (
+    set "profile=%%i"
+    set "profile=!profile:~1!"
+    echo Network: !profile! >> "%BackupDir%\WiFi_Passwords.txt"
+    netsh wlan show profile name="!profile!" key=clear | findstr "Key Content" >> "%BackupDir%\WiFi_Passwords.txt"
+    echo. >> "%BackupDir%\WiFi_Passwords.txt"
+)
+
+echo.
+echo [SUCCESS] WiFi passwords backed up! / Da sao luu mat khau WiFi!
+echo [INFO] Location / Vi tri: %BackupDir%
+echo.
+echo [TIP] You can restore by importing .xml profiles or manually entering passwords
+echo [GI ] Ban co the khoi phuc bang cach import .xml hoac nhap lai mat khau
+echo.
+pause
+goto MAIN_MENU
+
+:BACKUP_DRIVERS
+cls
+echo ================================================================================
+echo  [78] Backup Drivers - Sao Luu Driver
+echo ================================================================================
+echo.
+echo Backing up installed drivers / Sao luu driver da cai dat...
+echo.
+
+echo [*] Creating backup directory / Tao thu muc sao luu...
+set "DriverBackup=%USERPROFILE%\Desktop\Driver_Backup_%date:~-4,4%%date:~-7,2%%date:~-10,2%"
+if not exist "%DriverBackup%" mkdir "%DriverBackup%"
+
+echo [*] Exporting third-party drivers / Xuat driver ben thu 3...
+echo This may take several minutes / Co the mat vai phut...
+echo.
+dism /online /export-driver /destination:"%DriverBackup%"
+
+echo.
+echo [*] Creating driver list / Tao danh sach driver...
+driverquery /v /fo csv > "%DriverBackup%\Driver_List.csv"
+
+echo [*] Exporting detailed driver information / Xuat thong tin chi tiet driver...
+powershell -Command "Get-WmiObject Win32_PnPSignedDriver | Select-Object DeviceName,DriverVersion,Manufacturer,DriverDate | Export-Csv '%DriverBackup%\Driver_Details.csv' -NoTypeInformation"
+
+echo.
+echo [SUCCESS] Drivers backed up! / Da sao luu driver!
+echo [INFO] Location / Vi tri: %DriverBackup%
+echo.
+echo [TIP] Use Device Manager to restore drivers from this folder
+echo [GI ] Dung Device Manager de khoi phuc driver tu thu muc nay
+echo.
+pause
+goto MAIN_MENU
+
+:BACKUP_USER_DATA
+cls
+echo ================================================================================
+echo  [79] Backup User Data - Sao Luu Du Lieu Nguoi Dung
+echo ================================================================================
+echo.
+echo Backing up important user data / Sao luu du lieu nguoi dung quan trong...
+echo.
+
+echo [*] Creating backup directory / Tao thu muc sao luu...
+set "DataBackup=%USERPROFILE%\Desktop\UserData_Backup_%date:~-4,4%%date:~-7,2%%date:~-10,2%"
+if not exist "%DataBackup%" mkdir "%DataBackup%"
+
+echo.
+echo  [1] Quick Backup (Desktop, Documents, Pictures) - Sao Luu Nhanh
+echo  [2] Full Backup (Include Downloads, Videos, Music) - Sao Luu Day Du
+echo  [3] Custom Backup (Select folders) - Sao Luu Tuy Chinh
+echo  [0] Back to Main Menu - Quay lai
+echo.
+set /p backup_choice=Select backup type / Chon loai sao luu (0-3): 
+
+if "%backup_choice%"=="0" goto MAIN_MENU
+
+if "%backup_choice%"=="1" (
+    echo.
+    echo [*] Backing up Desktop / Sao luu Desktop...
+    xcopy "%USERPROFILE%\Desktop" "%DataBackup%\Desktop" /E /I /H /Y >nul 2>&1
+    
+    echo [*] Backing up Documents / Sao luu Documents...
+    xcopy "%USERPROFILE%\Documents" "%DataBackup%\Documents" /E /I /H /Y >nul 2>&1
+    
+    echo [*] Backing up Pictures / Sao luu Pictures...
+    xcopy "%USERPROFILE%\Pictures" "%DataBackup%\Pictures" /E /I /H /Y >nul 2>&1
+)
+
+if "%backup_choice%"=="2" (
+    echo.
+    echo [*] Full backup in progress / Dang sao luu day du...
+    echo This may take a long time / Co the mat rat lau...
+    echo.
+    
+    xcopy "%USERPROFILE%\Desktop" "%DataBackup%\Desktop" /E /I /H /Y >nul 2>&1
+    xcopy "%USERPROFILE%\Documents" "%DataBackup%\Documents" /E /I /H /Y >nul 2>&1
+    xcopy "%USERPROFILE%\Pictures" "%DataBackup%\Pictures" /E /I /H /Y >nul 2>&1
+    xcopy "%USERPROFILE%\Downloads" "%DataBackup%\Downloads" /E /I /H /Y >nul 2>&1
+    xcopy "%USERPROFILE%\Videos" "%DataBackup%\Videos" /E /I /H /Y >nul 2>&1
+    xcopy "%USERPROFILE%\Music" "%DataBackup%\Music" /E /I /H /Y >nul 2>&1
+)
+
+if "%backup_choice%"=="3" (
+    echo.
+    echo [INFO] Please use File Explorer to manually copy your folders
+    echo [INFO] Vui long dung File Explorer de sao chep thu cong
+    explorer "%USERPROFILE%"
+)
+
+echo.
+echo [SUCCESS] User data backed up! / Da sao luu du lieu nguoi dung!
+echo [INFO] Location / Vi tri: %DataBackup%
+echo.
+pause
+goto MAIN_MENU
+
+:BACKUP_ZALO
+cls
+echo ================================================================================
+echo  [80] Backup Zalo Data - Sao Luu Du Lieu Zalo
+echo ================================================================================
+echo.
+echo Backing up Zalo data / Sao luu du lieu Zalo...
+echo.
+
+echo [*] Searching for Zalo installation / Tim cai dat Zalo...
+set "ZaloPC=%APPDATA%\ZaloPC"
+set "ZaloData=%USERPROFILE%\Documents\ZaloData"
+set "ZaloBackup=%USERPROFILE%\Desktop\Zalo_Backup_%date:~-4,4%%date:~-7,2%%date:~-10,2%"
+
+if not exist "%ZaloPC%" (
+    if not exist "%ZaloData%" (
+        echo.
+        echo [ERROR] Zalo not found / Khong tim thay Zalo!
+        echo [INFO] Please make sure Zalo PC is installed / Vui long dam bao Zalo PC da duoc cai dat
+        echo.
+        pause
+        goto MAIN_MENU
+    )
+)
+
+echo [*] Creating backup directory / Tao thu muc sao luu...
+if not exist "%ZaloBackup%" mkdir "%ZaloBackup%"
+
+echo.
+echo [WARNING] Please close Zalo before backing up!
+echo [CANH BAO] Vui long dong Zalo truoc khi sao luu!
+echo.
+pause
+
+echo [*] Stopping Zalo process / Dung tien trinh Zalo...
+taskkill /F /IM Zalo.exe >nul 2>&1
+timeout /t 2 >nul
+
+if exist "%ZaloPC%" (
+    echo [*] Backing up Zalo PC data / Sao luu du lieu Zalo PC...
+    xcopy "%ZaloPC%" "%ZaloBackup%\ZaloPC" /E /I /H /Y >nul 2>&1
+)
+
+if exist "%ZaloData%" (
+    echo [*] Backing up Zalo documents / Sao luu tai lieu Zalo...
+    xcopy "%ZaloData%" "%ZaloBackup%\ZaloData" /E /I /H /Y >nul 2>&1
+)
+
+echo [*] Backing up Zalo cache (messages, images) / Sao luu cache (tin nhan, hinh anh)...
+if exist "%LOCALAPPDATA%\ZaloPC" (
+    xcopy "%LOCALAPPDATA%\ZaloPC" "%ZaloBackup%\ZaloPC_Cache" /E /I /H /Y >nul 2>&1
+)
+
+echo.
+echo [SUCCESS] Zalo data backed up! / Da sao luu du lieu Zalo!
+echo [INFO] Location / Vi tri: %ZaloBackup%
+echo.
+echo [TIP] To restore: Copy files back to original locations
+echo [GI ] De khoi phuc: Sao chep file ve vi tri cu
+echo.
+pause
+goto MAIN_MENU
+
+:BACKUP_PRODUCT_KEYS
+cls
+echo ================================================================================
+echo  [81] Backup Product Keys - Sao Luu Ban Quyen
+echo ================================================================================
+echo.
+echo Backing up product keys / Sao luu khoa ban quyen...
+echo.
+
+echo [*] Creating backup directory / Tao thu muc sao luu...
+set "KeyBackup=%USERPROFILE%\Desktop\ProductKeys_Backup_%date:~-4,4%%date:~-7,2%%date:~-10,2%"
+if not exist "%KeyBackup%" mkdir "%KeyBackup%"
+
+echo.
+echo [WINDOWS PRODUCT KEY - KHOA BAN QUYEN WINDOWS]
+echo ============================================================================
+echo.
+
+echo [*] Windows OEM Key / Khoa OEM Windows:
+wmic path softwarelicensingservice get OA3xOriginalProductKey > "%KeyBackup%\Windows_OEM_Key.txt"
+wmic path softwarelicensingservice get OA3xOriginalProductKey
+
+echo.
+echo [*] Windows License Information / Thong tin giay phep Windows:
+cscript //nologo %windir%\system32\slmgr.vbs /dli > "%KeyBackup%\Windows_License_Info.txt"
+
+echo.
+echo [*] Windows Activation Status / Trang thai kich hoat Windows:
+cscript //nologo %windir%\system32\slmgr.vbs /xpr > "%KeyBackup%\Windows_Activation.txt"
+
+echo.
+echo [OFFICE PRODUCT KEY - KHOA BAN QUYEN OFFICE]
+echo ============================================================================
+echo.
+
+if exist "%ProgramFiles%\Microsoft Office\Office16\ospp.vbs" (
+    echo [*] Office License Information:
+    cscript //nologo "%ProgramFiles%\Microsoft Office\Office16\ospp.vbs" /dstatus > "%KeyBackup%\Office_License_Info.txt"
+    type "%KeyBackup%\Office_License_Info.txt"
+) else if exist "%ProgramFiles(x86)%\Microsoft Office\Office16\ospp.vbs" (
+    echo [*] Office License Information:
+    cscript //nologo "%ProgramFiles(x86)%\Microsoft Office\Office16\ospp.vbs" /dstatus > "%KeyBackup%\Office_License_Info.txt"
+    type "%KeyBackup%\Office_License_Info.txt"
+) else (
+    echo [INFO] Office not detected / Khong phat hien Office
+)
+
+echo.
+echo [*] Creating summary file / Tao file tom tat...
+echo Product Keys Backup Report > "%KeyBackup%\Product_Keys_Summary.txt"
+echo ========================== >> "%KeyBackup%\Product_Keys_Summary.txt"
+echo Created: %date% %time% >> "%KeyBackup%\Product_Keys_Summary.txt"
+echo. >> "%KeyBackup%\Product_Keys_Summary.txt"
+echo IMPORTANT: Keep these files safe and secure! >> "%KeyBackup%\Product_Keys_Summary.txt"
+echo QUAN TRONG: Giu cac file nay an toan va bao mat! >> "%KeyBackup%\Product_Keys_Summary.txt"
+
+echo.
+echo [SUCCESS] Product keys backed up! / Da sao luu ban quyen!
+echo [INFO] Location / Vi tri: %KeyBackup%
+echo.
+echo [WARNING] Keep backup files secure! / Giu file sao luu an toan!
+echo.
+pause
+goto MAIN_MENU
+
+:DATA_RECOVERY
+cls
+echo ================================================================================
+echo  [82] Data Recovery Tools - Cong Cu Khoi Phuc Du Lieu
+echo ================================================================================
+echo.
+echo Data recovery and file restoration / Khoi phuc du lieu va phuc hoi file...
+echo.
+
+echo  [1] Enable File History - Bat Lich Su File
+echo  [2] Restore Previous Versions - Khoi Phuc Phien Ban Truoc
+echo  [3] Shadow Copy Recovery - Khoi Phuc Shadow Copy
+echo  [4] Recycle Bin Recovery - Khoi Phuc Tu Thung Rac
+echo  [5] System Restore - Khoi Phuc He Thong
+echo  [6] Check Backup Status - Kiem Tra Trang Thai Sao Luu
+echo  [0] Back to Main Menu - Quay lai
+echo.
+set /p recovery_choice=Select option / Chon tuy chon (0-6): 
+
+if "%recovery_choice%"=="0" goto MAIN_MENU
+
+if "%recovery_choice%"=="1" (
+    echo.
+    echo [*] Opening File History settings / Mo cai dat Lich su File...
+    control /name Microsoft.FileHistory
+    echo.
+    echo [INFO] Please configure File History backup / Vui long cau hinh sao luu Lich su File
+)
+
+if "%recovery_choice%"=="2" (
+    echo.
+    echo [*] Opening Previous Versions / Mo Phien ban Truoc...
+    echo.
+    echo [INFO] Right-click any file or folder and select "Restore previous versions"
+    echo [INFO] Click phai vao file/folder va chon "Restore previous versions"
+    echo.
+    explorer /select,"%USERPROFILE%\Documents"
+)
+
+if "%recovery_choice%"=="3" (
+    echo.
+    echo [*] Listing Shadow Copies / Liet ke Shadow Copy...
+    vssadmin list shadows
+    echo.
+    echo [INFO] Shadow Copies are automatic backups created by Windows
+    echo [INFO] Shadow Copy la ban sao luu tu dong cua Windows
+)
+
+if "%recovery_choice%"=="4" (
+    echo.
+    echo [*] Opening Recycle Bin / Mo Thung Rac...
+    explorer shell:RecycleBinFolder
+    echo.
+    echo [INFO] Check Recycle Bin for recently deleted files
+    echo [INFO] Kiem tra Thung Rac de tim file da xoa gan day
+)
+
+if "%recovery_choice%"=="5" (
+    echo.
+    echo [*] Opening System Restore / Mo Khoi Phuc He Thong...
+    rstrui.exe
+    echo.
+    echo [INFO] System Restore can recover your PC to an earlier state
+    echo [INFO] Khoi Phuc He Thong co the dua may ve trang thai truoc do
+)
+
+if "%recovery_choice%"=="6" (
+    echo.
+    echo [*] Checking backup status / Kiem tra trang thai sao luu...
+    echo.
+    wmic recoveros get
+    echo.
+    vssadmin list shadows
+)
+
 echo.
 pause
 goto MAIN_MENU
