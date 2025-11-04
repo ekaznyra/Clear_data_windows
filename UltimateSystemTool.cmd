@@ -22,8 +22,8 @@ if "%version%" == "6.2" set WIN_VER=8
 if "%version%" == "6.1" set WIN_VER=7
 if not defined WIN_VER set WIN_VER=10
 
-:: Set default language (BOTH = Bilingual, EN = English, VI = Vietnamese)
-if not defined LANG set LANG=BOTH
+:: Set default language (EN = English, VI = Vietnamese)
+if not defined LANG set LANG=EN
 
 :: Welcome Screen with Loading Animation
 cls
@@ -78,6 +78,14 @@ echo.
 timeout /t 1 /nobreak >nul
 
 :MAIN_MENU
+:: Redirect to language-specific menu
+if "%LANG%"=="EN" goto MAIN_MENU_EN
+if "%LANG%"=="VI" goto MAIN_MENU_VI
+:: Default to English if not set
+set LANG=EN
+goto MAIN_MENU_EN
+
+:MAIN_MENU_BILINGUAL
 cls
 color 0B
 echo.
@@ -3079,46 +3087,18 @@ goto MAIN_MENU
 :: ============================================================================
 
 :SWITCH_LANGUAGE
-cls
-color 0E
-echo.
-echo  ================================================================================
-echo                        LANGUAGE SELECTION / CHON NGON NGU                       
-echo  ================================================================================
-echo.
-echo   Current / Hien tai: %LANG%
-echo.
-echo   [1] BOTH - Bilingual (English + Vietnamese) - Song ngu
-echo   [2] EN   - English Only - Chi tieng Anh
-echo   [3] VI   - Vietnamese Only - Chi tieng Viet
-echo.
-set /p lang_choice=Select language / Chon ngon ngu (1-3): 
-
-if "%lang_choice%"=="1" (
-    set LANG=BOTH
-    echo.
-    echo [*] Language set to: Bilingual / Ngon ngu: Song ngu
-    timeout /t 1 >nul
-    goto MAIN_MENU
-)
-
-if "%lang_choice%"=="2" (
-    set LANG=EN
-    echo.
-    echo [*] Language set to: English Only
-    timeout /t 1 >nul
-    goto MAIN_MENU_EN
-)
-
-if "%lang_choice%"=="3" (
+:: Simple toggle between EN and VI
+if "%LANG%"=="EN" (
     set LANG=VI
-    echo.
-    echo [*] Ngon ngu: Chi tieng Viet
-    timeout /t 1 >nul
     goto MAIN_MENU_VI
 )
-
-goto MAIN_MENU
+if "%LANG%"=="VI" (
+    set LANG=EN
+    goto MAIN_MENU_EN
+)
+:: Default to English
+set LANG=EN
+goto MAIN_MENU_EN
 
 :MAIN_MENU_EN
 cls

@@ -7,7 +7,8 @@
 
 ### CMD VERSION (UltimateSystemTool.cmd)
 - **82 Functions** - Complete feature set
-- **Language Toggle** - Press ` to switch EN/VI/Both
+- **Language Toggle** - Press `` ` `` to instantly switch EN ? VI
+- **Clean Interface** - Shows only one language at a time
 - **Maximum Compatibility** - Windows 7/8/8.1/10/11
 - **Best for:** Full system maintenance
 
@@ -24,8 +25,9 @@
 ### CMD VERSION (Full 82 Functions):
 1. **Right-click** on `UltimateSystemTool.cmd`
 2. Select **"Run as Administrator"**
-3. Press `` ` `` to switch language (EN/VI/Both)
-4. Choose your desired function from the menu
+3. **Default:** Starts in English
+4. **Toggle:** Press `` ` `` anytime to switch EN ? VI instantly
+5. Choose your desired function from the menu
 
 ### POWERSHELL VERSION (10 Core Functions - Beautiful UI):
 1. **Right-click** on `UltimateSystemTool.ps1`
