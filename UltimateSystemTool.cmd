@@ -40,39 +40,30 @@ if "%version%" == "6.1" (set WIN_VER=7 & set WIN_NAME=Windows 7)
 if not defined WIN_VER (set WIN_VER=10 & set WIN_NAME=Windows 10+)
 
 :: Check Administrator and AUTO-ELEVATE
+:: Check Administrator
 net session >nul 2>&1
 if %errorLevel% neq 0 (
-    cls
-    color 0E
-    echo(
-    echo   ========================================================================
-    echo                                                                          
-    echo          ADMINISTRATOR RIGHTS REQUIRED / CAN QUYEN ADMINISTRATOR        
-    echo                                                                          
-    echo   ========================================================================
-    echo(
-    echo   This tool requires Administrator privileges.
-    echo   Cong cu nay can quyen Administrator.
-    echo(
+    echo.
+    echo  =====================================================================
+    echo   ADMINISTRATOR RIGHTS REQUIRED - Quyen Administrator Can Thiet
+    echo  =====================================================================
+    echo.
     echo   Auto-elevating... / Tu dong xin quyen...
-    echo(
+    echo.
     timeout /t 2 /nobreak >nul
-    powershell -Command "Start-Process cmd -ArgumentList '/c \"%~0\"' -Verb RunAs" 2>nul
+    powershell -Command "Start-Process cmd -ArgumentList \"/c \"%~0\"\" -Verb RunAs" 2>nul
     exit
 )
 
 :: Admin confirmed
 cls
-color 0A
-echo(
-echo   ========================================================================
-echo                                                                          
-echo        ADMINISTRATOR RIGHTS CONFIRMED / XAC NHAN QUYEN ADMINISTRATOR    
-echo        Detected: %WIN_NAME% (Build %BUILD%)                             
-echo                                                                          
-echo   ========================================================================
-echo(
+echo.
+echo  =====================================================================
+echo   ADMINISTRATOR CONFIRMED - Da Xac Nhan Quyen Administrator
+echo  =====================================================================
+echo.
 timeout /t 1 /nobreak >nul
+
 
 :MAIN_MENU
 cls
