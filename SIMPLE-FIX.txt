@@ -1,0 +1,91 @@
+================================================================================
+  GIAI PHAP CHO LOI "TU THOAT" / FIX FOR AUTO-EXIT ISSUE
+================================================================================
+
+VAN DE / PROBLEM:
+-----------------
+Script tu thoat sau khi nhan R vi:
+1. Script co Auto-elevate (tu dong xin Admin)
+2. Sau khi xin Admin, no chay lai va gap Security Warning LAN 2
+3. Chu trinh lap lai mai mai
+
+GIAI PHAP / SOLUTION:
+---------------------
+
+** CACH 1: DUNG SCRIPT TU DONG (KHUYẾN NGHỊ) **
+
+1. Right-click file:  UNBLOCK-AND-RUN.ps1
+2. Chon "Run with PowerShell"
+3. Nhan R (hoac Y) khi hoi Admin
+4. Script se tu dong:
+   - Unblock file
+   - Set Execution Policy
+   - Chay UltimateSystemTool.ps1
+
+=> XONG! Khong con Security Warning!
+
+
+** CACH 2: UNBLOCK BANG TAY **
+
+1. Right-click file: UltimateSystemTool.ps1
+2. Chon Properties
+3. O duoi cung, tick vao "Unblock"
+4. Click OK
+5. Run file binh thuong
+
+=> Khong con Security Warning!
+
+
+** CACH 3: DUNG POWERSHELL **
+
+Copy paste vao PowerShell (Run as Admin):
+
+Unblock-File -Path "C:\Users\nguye\Downloads\UltimateSystemTool.ps1"
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+cd "C:\Users\nguye\Downloads"
+.\UltimateSystemTool.ps1
+
+
+** CACH 4: TAT AUTO-ELEVATE TRONG SCRIPT **
+
+Neu ban khong muon script tu dong xin Admin:
+1. Mo file UltimateSystemTool.ps1 bang Notepad
+2. Tim dong: if (-NOT ([Security.Principal...
+3. Comment (them # o dau dong) tu dong 13 den 20
+4. Luu lai
+5. Right-click PowerShell → Run as Administrator
+6. Chay script
+
+
+================================================================================
+
+TAI SAO BI TREO / WHY IT KEEPS ASKING:
+---------------------------------------
+
+Script flow:
+1. Ban nhan R → Script chay
+2. Script thay khong co Admin → Tu dong Exit va chay lai voi Admin
+3. Windows thay file "dangerous" → Hoi lai Security Warning
+4. Ban phai nhan R lai...
+5. Lap lai tu buoc 2!
+
+FIX: PHAI UNBLOCK FILE TRUOC KHI CHAY!
+
+================================================================================
+
+FILE DA TAO / FILES CREATED:
+-----------------------------
+
+1. UNBLOCK-AND-RUN.ps1     - Script tu dong unblock va chay
+2. Run-WithErrorCapture.ps1 - Script de bat loi
+3. SIMPLE-FIX.txt           - File nay (huong dan)
+
+================================================================================
+
+✅ DUNG UNBLOCK-AND-RUN.ps1 LA NHANH NHAT!
+
+Right-click UNBLOCK-AND-RUN.ps1 → Run with PowerShell → Nhan R
+
+=> Script se tu dong fix tat ca!
+
+================================================================================

@@ -1,0 +1,97 @@
+================================================================================
+                      ⚡ ĐỌC ĐI NÀY - GIẢI PHÁP ĐƠN GIẢN! ⚡
+                           READ THIS - SIMPLE SOLUTION!
+================================================================================
+
+❌ VẤN ĐỀ BẠN GẶP PHẢI:
+────────────────────────────────────────────────────────────────────────────
+Nhấn R → Script chạy rồi tự thoát ngay → Không thấy gì cả!
+
+================================================================================
+
+🔍 TẠI SAO LẠI VẬY?
+────────────────────────────────────────────────────────────────────────────
+Script có tính năng AUTO-ELEVATE (tự động xin quyền Admin):
+
+  Bạn nhấn R 
+    ↓
+  Script chạy → Không có Admin
+    ↓
+  Script tự EXIT và mở lại với Admin
+    ↓
+  Windows hỏi Security Warning LẦN 2
+    ↓
+  Bạn phải nhấn R lại...
+    ↓
+  Lặp lại mãi! 🔄
+
+================================================================================
+
+✅ GIẢI PHÁP 3 GIÂY (KHUYẾN NGHỊ):
+────────────────────────────────────────────────────────────────────────────
+
+BƯỚC 1: Tải file UNBLOCK-AND-RUN.ps1 (cùng folder với file chính)
+
+BƯỚC 2: Right-click UNBLOCK-AND-RUN.ps1 → Chọn "Run with PowerShell"
+
+BƯỚC 3: Nhấn R khi hỏi
+
+XONG! 🎉
+
+Script sẽ TỰ ĐỘNG:
+  ✅ Unblock file UltimateSystemTool.ps1
+  ✅ Set Execution Policy
+  ✅ Chạy script chính
+  ✅ Không còn Security Warning!
+
+================================================================================
+
+🔧 HOẶC FIX BẰNG TAY (NẾU KHÔNG MUỐN DÙNG UNBLOCK-AND-RUN.ps1):
+────────────────────────────────────────────────────────────────────────────
+
+CÁCH A: Dùng Properties (Đơn giản nhất)
+────────────────────────────────────────
+1. Right-click file UltimateSystemTool.ps1
+2. Chọn Properties
+3. Ở dưới cùng tab "General", tìm chữ "Security:"
+4. Tick vào ô "Unblock" bên cạnh
+5. Click OK
+6. Chạy lại file bình thường
+
+CÁCH B: Dùng PowerShell Command
+─────────────────────────────────
+Mở PowerShell as Administrator, paste lệnh này:
+
+Unblock-File -Path "C:\Users\nguye\Downloads\UltimateSystemTool.ps1"
+
+Sau đó chạy:
+
+cd "C:\Users\nguye\Downloads"
+.\UltimateSystemTool.ps1
+
+================================================================================
+
+📖 CHI TIẾT THÊM:
+────────────────────────────────────────────────────────────────────────────
+- SIMPLE-FIX.txt     : Giải thích chi tiết vấn đề
+- QUICK_START.txt    : Lệnh copy-paste nhanh
+- HOW_TO_RUN.md      : Hướng dẫn đầy đủ
+
+================================================================================
+
+🎯 TÓM LẠI:
+────────────────────────────────────────────────────────────────────────────
+
+VẤN ĐỀ:   Nhấn R → Tự thoát
+NGUYÊN NHÂN: File chưa Unblock → Hỏi Security Warning mãi
+GIẢI PHÁP: Dùng UNBLOCK-AND-RUN.ps1 HOẶC Unblock bằng Properties
+
+⚡ NHANH NHẤT: Right-click UNBLOCK-AND-RUN.ps1 → Run with PowerShell → Nhấn R
+
+================================================================================
+
+Tác giả: Nguyen Ngoc Anh Tu
+Version: 5.0 Professional Edition
+Status: ✅ Script OK - Chỉ cần Unblock!
+
+================================================================================
