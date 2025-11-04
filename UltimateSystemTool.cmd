@@ -76,39 +76,61 @@ timeout /t 1 /nobreak >nul
 cls
 color 0B
 echo.
-echo  +========================================================================+
-echo  ^|          ULTIMATE WINDOWS SYSTEM TOOL v5.0                            ^|
-echo  ^|          by Nguyen Ngoc Anh Tu ^| facebook.com/NguyenNgocAnhTu.VN      ^|
-echo  ^|          System: %WIN_NAME% (Build %BUILD%)                           ^|
-echo  +========================================================================+
+echo  ================================================================================
+echo                                                                                
+echo             ULTIMATE WINDOWS SYSTEM TOOL v5.0 - COMPLETE EDITION              
+echo              by Nguyen Ngoc Anh Tu - facebook.com/NguyenNgocAnhTu.VN          
+echo              Detected: %WIN_NAME% (Build %BUILD%)                             
+echo                                                                                
+echo  ================================================================================
 echo.
-echo  +------------------------------------------------------------------------+
-echo  ^| CLEANUP [1-12] ^| PRIVACY [13-20] ^| NETWORK [21-26] ^| DISK [27-32]     ^|
-echo  +------------------------------------------------------------------------+
-echo    [1] Quick Cleanup    [13] Recent Docs     [21] Network Reset
-echo    [2] Deep Cleanup     [14] Run History     [22] Net Optimize
-echo    [3] Browser Cache    [15] Search History  [23] ARP Cache
-echo    [4] App Cache        [16] Clipboard       [24] Winsock
-echo    [5] Update Cache     [17] Error Reports   [25] Renew IP
-echo    [6] Thumbnail        [18] Telemetry       [26] Fix Adapter
+echo  --------------------------------------------------------------------------------
+echo   CLEANUP AND OPTIMIZATION [1-12]
+echo  --------------------------------------------------------------------------------
+echo   [1]  Quick Cleanup         [2]  Deep Cleanup          [3]  Browser Cache
+echo   [4]  App Cache             [5]  Update Cleanup        [6]  Thumbnail Cache
+echo   [7]  Icon Cache            [8]  Font Cache            [9]  Installer Cleanup
+echo   [10] Windows.old           [11] Recycle Bin           [12] Memory Dumps
+echo  --------------------------------------------------------------------------------
 echo.
-echo  +------------------------------------------------------------------------+
-echo  ^| PERFORMANCE [33-44] ^| MAINTENANCE [45-50] ^| REGISTRY [51-55]          ^|
-echo  +------------------------------------------------------------------------+
-echo    [33-44] Startup, Services, Visual Effects, Power, SSD...
-echo    [45-50] SFC, DISM, Drivers, Icon/Search Rebuild
-echo    [51-55] Registry Clean/Optimize/Backup, Cortana, Tips
+echo  --------------------------------------------------------------------------------
+echo   PRIVACY AND SECURITY [13-20]
+echo  --------------------------------------------------------------------------------
+echo   [13] Recent Documents      [14] Run History           [15] Search History
+echo   [16] Clipboard             [17] Error Reports         [18] Disable Telemetry
+echo   [19] Event Logs            [20] DNS Cache
+echo  --------------------------------------------------------------------------------
 echo.
-echo  +------------------------------------------------------------------------+
-echo  ^| ADVANCED [56-82] ^| INSTALL [83-87] ^| UTILS [88-96] ^| ALL [97-99]     ^|
-echo  +------------------------------------------------------------------------+
-echo    [56-70] Restore Point, System Info, Tools, Reports...
-echo    [77-82] Backup WiFi/Drivers/Data/Keys, Recovery
-echo    [97] All Cleanup  [98] All Utils  [99] Full Optimize
+echo  --------------------------------------------------------------------------------
+echo   NETWORK TOOLS [21-26]
+echo  --------------------------------------------------------------------------------
+echo   [21] Network Reset         [22] Network Optimize      [23] ARP Cache
+echo   [24] Winsock Reset         [25] Renew IP Address      [26] Fix Network Adapter
+echo  --------------------------------------------------------------------------------
 echo.
-echo  +========================================================================+
-echo    [0] Exit  ^|  [T] Language  ^|  Current: %WIN_NAME% Build %BUILD%
-echo  +========================================================================+
+echo  --------------------------------------------------------------------------------
+echo   DISK AND PERFORMANCE [27-44]
+echo  --------------------------------------------------------------------------------
+echo   [27-32] Disk Management    [33-44] Performance Optimization
+echo  --------------------------------------------------------------------------------
+echo.
+echo  --------------------------------------------------------------------------------
+echo   SYSTEM TOOLS [45-82]
+echo  --------------------------------------------------------------------------------
+echo   [45-50] Maintenance        [51-55] Registry           [56-70] Advanced
+echo   [71-76] Utilities          [77-82] Backup and Recovery
+echo  --------------------------------------------------------------------------------
+echo.
+echo  --------------------------------------------------------------------------------
+echo   SPECIAL FUNCTIONS [83-99]
+echo  --------------------------------------------------------------------------------
+echo   [83-87] Installation       [88-96] Extra Utilities
+echo   [97] Run All Cleanup       [98] Run All Utils         [99] Full Optimization
+echo  --------------------------------------------------------------------------------
+echo.
+echo  ================================================================================
+echo   [0] Exit Program           [T] Toggle Language        [?] Help
+echo  ================================================================================
 echo.
 set /p choice="  SELECT FUNCTION [0-99]: "
 
