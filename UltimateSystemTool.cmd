@@ -4,6 +4,7 @@ setlocal enabledelayedexpansion
 :: ULTIMATE WINDOWS SYSTEM TOOL v5.0 - PROFESSIONAL EDITION
 :: Complete System Optimization Suite - Bilingual (English/Vietnamese)
 :: ============================================================================
+:: Author: Nguyen Ngoc Anh Tu
 :: Based on open-source tools: BleachBit, CCleaner, PrivaZer, Wise Care 365
 :: NEW v5.0: Backup/Recovery, System utilities, Bloatware removal, Bitlocker
 :: v4.5: Auto-elevate, Software cache, LCU cleanup, Memory optimization
@@ -78,12 +79,8 @@ echo.
 timeout /t 1 /nobreak >nul
 
 :MAIN_MENU
-:: Redirect to language-specific menu
-if "%LANG%"=="EN" goto MAIN_MENU_EN
-if "%LANG%"=="VI" goto MAIN_MENU_VI
-:: Default to English if not set
-set LANG=EN
-goto MAIN_MENU_EN
+:: Use bilingual menu (beautiful side-by-side layout)
+goto MAIN_MENU_BILINGUAL
 
 :MAIN_MENU_BILINGUAL
 cls

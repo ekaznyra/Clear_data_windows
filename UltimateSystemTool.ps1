@@ -1358,3 +1358,148 @@ function Invoke-Function99 {
     Read-Host "`nPress Enter to continue"
 }
 
+# ============================================================================
+# MAIN PROGRAM LOOP
+# ============================================================================
+
+# Main Function Dispatcher
+function Invoke-SelectedFunction {
+    param([string]$FunctionNumber)
+    
+    switch ($FunctionNumber) {
+        "1" { Invoke-Function1 }
+        "2" { Invoke-Function2 }
+        "3" { Invoke-Function3 }
+        "4" { Invoke-Function4 }
+        "5" { Invoke-Function5 }
+        "6" { Invoke-Function6 }
+        "7" { Invoke-Function7 }
+        "8" { Invoke-Function8 }
+        "9" { Invoke-Function9 }
+        "10" { Invoke-Function10 }
+        "11" { Invoke-Function11 }
+        "12" { Invoke-Function12 }
+        "13" { Invoke-Function13 }
+        "14" { Invoke-Function14 }
+        "15" { Invoke-Function15 }
+        "16" { Invoke-Function16 }
+        "17" { Invoke-Function17 }
+        "18" { Invoke-Function18 }
+        "19" { Invoke-Function19 }
+        "20" { Invoke-Function20 }
+        "21" { Invoke-Function21 }
+        "22" { Invoke-Function22 }
+        "23" { Invoke-Function23 }
+        "24" { Invoke-Function24 }
+        "25" { Invoke-Function25 }
+        "26" { Invoke-Function26 }
+        "27" { Invoke-Function27 }
+        "28" { Invoke-Function28 }
+        "29" { Invoke-Function29 }
+        "30" { Invoke-Function30 }
+        "31" { Invoke-Function31 }
+        "32" { Invoke-Function32 }
+        "33" { Invoke-Function33 }
+        "34" { Invoke-Function34 }
+        "35" { Invoke-Function35 }
+        "36" { Invoke-Function36 }
+        "37" { Invoke-Function37 }
+        "38" { Invoke-Function38 }
+        "39" { Invoke-Function39 }
+        "40" { Invoke-Function40 }
+        "41" { Invoke-Function41 }
+        "42" { Invoke-Function42 }
+        "43" { Invoke-Function43 }
+        "44" { Invoke-Function44 }
+        "45" { Invoke-Function45 }
+        "46" { Invoke-Function46 }
+        "47" { Invoke-Function47 }
+        "48" { Invoke-Function48 }
+        "49" { Invoke-Function49 }
+        "50" { Invoke-Function50 }
+        "51" { Invoke-Function51 }
+        "52" { Invoke-Function52 }
+        "53" { Invoke-Function53 }
+        "54" { Invoke-Function54 }
+        "55" { Invoke-Function55 }
+        "56" { Invoke-Function56 }
+        "57" { Invoke-Function57 }
+        "58" { Invoke-Function58 }
+        "59" { Invoke-Function59 }
+        "60" { Invoke-Function60 }
+        "61" { Invoke-Function61 }
+        "62" { Invoke-Function62 }
+        "63" { Invoke-Function63 }
+        "64" { Invoke-Function64 }
+        "65" { Invoke-Function65 }
+        "66" { Invoke-Function66 }
+        "67" { Invoke-Function67 }
+        "68" { Invoke-Function68 }
+        "69" { Invoke-Function69 }
+        "70" { Invoke-Function70 }
+        "71" { Invoke-Function71 }
+        "72" { Invoke-Function72 }
+        "73" { Invoke-Function73 }
+        "74" { Invoke-Function74 }
+        "75" { Invoke-Function75 }
+        "76" { Invoke-Function76 }
+        "77" { Invoke-Function77 }
+        "78" { Invoke-Function78 }
+        "79" { Invoke-Function79 }
+        "80" { Invoke-Function80 }
+        "81" { Invoke-Function81 }
+        "82" { Invoke-Function82 }
+        "88" { Invoke-Function88 }
+        "99" { Invoke-Function99 }
+        default {
+            Show-Warning "Invalid choice / Lua chon khong hop le!"
+            Start-Sleep -Seconds 2
+        }
+    }
+}
+
+# Start Program
+Show-Welcome
+
+Write-Host "`n[✓ SUCCESS] Administrator rights confirmed!" -ForegroundColor Green
+Write-Host "[✓ SUCCESS] Xac nhan quyen Administrator!`n" -ForegroundColor Green
+Start-Sleep -Seconds 1
+
+# Main Loop
+while ($true) {
+    Show-MainMenu
+    
+    if ($global:LANG -eq "VI") {
+        $choice = Read-Host "  CHON CHUC NANG (0-99 hoac L)"
+    } else {
+        $choice = Read-Host "  SELECT FUNCTION (0-99 or L)"
+    }
+    
+    # Handle special cases
+    if ($choice -match "^[Ll]$") {
+        Switch-Language
+        continue
+    }
+    
+    if ($choice -eq "0") {
+        Clear-Host
+        Write-Host "`n═══════════════════════════════════════════════════════════════════════════" -ForegroundColor Cyan
+        if ($global:LANG -eq "VI") {
+            Write-Host " Cam on ban da su dung Ultimate Windows System Tool!" -ForegroundColor White
+            Write-Host " Tac gia: Nguyen Ngoc Anh Tu" -ForegroundColor Magenta
+        } else {
+            Write-Host " Thank you for using Ultimate Windows System Tool!" -ForegroundColor White
+            Write-Host " Created by: Nguyen Ngoc Anh Tu" -ForegroundColor Magenta
+        }
+        Write-Host "═══════════════════════════════════════════════════════════════════════════`n" -ForegroundColor Cyan
+        Start-Sleep -Seconds 2
+        Exit
+    }
+    
+    # Invoke selected function
+    Invoke-SelectedFunction -FunctionNumber $choice
+}
+
+# ============================================================================
+# END OF SCRIPT
+# ============================================================================
