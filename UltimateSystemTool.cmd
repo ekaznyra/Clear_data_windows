@@ -235,12 +235,12 @@ echo  ==========================================================================
 echo   [88] RUN ALL CLEANUP TASKS                 - CHAY TAT CA DON DEP           
 echo   [99] FULL SYSTEM OPTIMIZATION              - TOI UU TOAN BO HE THONG       
 echo  -------------------------------------------------------------------------------
-echo   [0]  EXIT - THOAT                                                           
+echo   [0]  EXIT - THOAT                          [L]  Language / Ngon ngu          
 echo  ================================================================================
 echo.
-set /p choice=   SELECT FUNCTION / CHON CHUC NANG (0-99 or ` for language): 
+set /p choice=   SELECT FUNCTION / CHON CHUC NANG (0-99 or L): 
 
-if "%choice%"=="`" goto SWITCH_LANGUAGE
+if /i "%choice%"=="L" goto SWITCH_LANGUAGE
 if "%choice%"=="0" goto EXIT
 if "%choice%"=="1" goto QUICK_CLEANUP
 if "%choice%"=="2" goto DEEP_CLEANUP
@@ -3209,12 +3209,12 @@ echo   QUICK ACTIONS
 echo  ================================================================================
 echo   [88] RUN ALL CLEANUP TASKS           [99] FULL SYSTEM OPTIMIZATION
 echo  -------------------------------------------------------------------------------
-echo   [0]  EXIT                             [`]  Switch to Vietnamese
+echo   [0]  EXIT                             [L]  Switch to Vietnamese
 echo  ================================================================================
 echo.
-set /p choice=   SELECT FUNCTION (0-99 or `): 
+set /p choice=   SELECT FUNCTION (0-99 or L): 
 
-if "%choice%"=="`" goto SWITCH_LANGUAGE
+if /i "%choice%"=="L" goto SWITCH_LANGUAGE
 if "%choice%"=="0" goto EXIT
 if "%choice%"=="1" goto QUICK_CLEANUP
 if "%choice%"=="2" goto DEEP_CLEANUP
@@ -3314,7 +3314,7 @@ echo  ==========================================================================
 echo                                                                                
 echo               CONG CU TOI UU HE THONG WINDOWS v5.0 - CHUYEN NGHIEP            
 echo                   Bo Cong Cu Toi Uu Toan Dien - 82 Chuc Nang                  
-echo                     Nhan ` de chuyen doi ngon ngu                              
+echo                     Nhan L de chuyen doi ngon ngu                              
 echo                                                                                
 echo  ================================================================================
 echo.
@@ -3415,12 +3415,12 @@ echo   THAO TAC NHANH
 echo  ================================================================================
 echo   [88] CHAY TAT CA DON DEP             [99] TOI UU TOAN BO HE THONG
 echo  -------------------------------------------------------------------------------
-echo   [0]  THOAT                            [`]  Chuyen sang tieng Anh
+echo   [0]  THOAT                            [L]  Chuyen sang tieng Anh
 echo  ================================================================================
 echo.
-set /p choice=   CHON CHUC NANG (0-99 hoac `): 
+set /p choice=   CHON CHUC NANG (0-99 hoac L): 
 
-if "%choice%"=="`" goto SWITCH_LANGUAGE
+if /i "%choice%"=="L" goto SWITCH_LANGUAGE
 if "%choice%"=="0" goto EXIT
 if "%choice%"=="1" goto QUICK_CLEANUP
 if "%choice%"=="2" goto DEEP_CLEANUP

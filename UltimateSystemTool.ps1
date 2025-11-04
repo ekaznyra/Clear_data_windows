@@ -67,7 +67,7 @@ function Show-MainMenuEN {
     Write-Host "                                                                                " -ForegroundColor White
     Write-Host "               ULTIMATE WINDOWS SYSTEM TOOL v5.0 - PROFESSIONAL                " -ForegroundColor White
     Write-Host "               PowerShell Enhanced Edition - 10 Core Functions                 " -ForegroundColor Gray
-    Write-Host "                      Press `` to switch to Vietnamese                          " -ForegroundColor Green
+    Write-Host "                      Press L to switch to Vietnamese                           " -ForegroundColor Green
     Write-Host "                                                                                " -ForegroundColor White
     Write-Host " ================================================================================" -ForegroundColor Cyan
     
@@ -91,7 +91,7 @@ function Show-MainMenuEN {
     Write-Host " ================================================================================" -ForegroundColor Cyan
     Write-Host "  [88] RUN ALL CLEANUP TASKS         - Execute all cleanup operations        " -ForegroundColor Magenta
     Write-Host " -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
-    Write-Host "  [0]  EXIT                          [``]  Switch to Vietnamese               " -ForegroundColor White
+    Write-Host "  [0]  EXIT                          [L]  Switch to Vietnamese                " -ForegroundColor White
     Write-Host " ================================================================================" -ForegroundColor Cyan
     Write-Host ""
 }
@@ -103,7 +103,7 @@ function Show-MainMenuVI {
     Write-Host "                                                                                " -ForegroundColor White
     Write-Host "               CONG CU TOI UU HE THONG WINDOWS v5.0 - CHUYEN NGHIEP            " -ForegroundColor White
     Write-Host "               PowerShell Nang Cao - 10 Chuc Nang Chinh                        " -ForegroundColor Gray
-    Write-Host "                      Nhan `` de chuyen sang tieng Anh                          " -ForegroundColor Green
+    Write-Host "                      Nhan L de chuyen sang tieng Anh                           " -ForegroundColor Green
     Write-Host "                                                                                " -ForegroundColor White
     Write-Host " ================================================================================" -ForegroundColor Cyan
     
@@ -127,7 +127,7 @@ function Show-MainMenuVI {
     Write-Host " ================================================================================" -ForegroundColor Cyan
     Write-Host "  [88] CHAY TAT CA DON DEP           - Thuc hien tat ca don dep              " -ForegroundColor Magenta
     Write-Host " -------------------------------------------------------------------------------" -ForegroundColor DarkCyan
-    Write-Host "  [0]  THOAT                         [``]  Chuyen sang tieng Anh              " -ForegroundColor White
+    Write-Host "  [0]  THOAT                         [L]  Chuyen sang tieng Anh               " -ForegroundColor White
     Write-Host " ================================================================================" -ForegroundColor Cyan
     Write-Host ""
 }
@@ -508,13 +508,13 @@ while ($true) {
     Show-MainMenu
     
     if ($global:LANG -eq "VI") {
-        $choice = Read-Host "  CHON CHUC NANG (0-99 hoac ``)"
+        $choice = Read-Host "  CHON CHUC NANG (0-99 hoac L)"
     } else {
-        $choice = Read-Host "  SELECT FUNCTION (0-99 or ``)"
+        $choice = Read-Host "  SELECT FUNCTION (0-99 or L)"
     }
     
-    switch ($choice) {
-        "0" { 
+    switch -Regex ($choice) {
+        "^0$" { 
             Clear-Host
             Write-Host "`n================================================================================" -ForegroundColor Cyan
             if ($global:LANG -eq "VI") {
@@ -526,15 +526,15 @@ while ($true) {
             Start-Sleep -Seconds 2
             Exit 
         }
-        "1" { Invoke-QuickCleanup }
-        "2" { Invoke-DeepCleanup }
-        "77" { Backup-WiFiPasswords }
-        "78" { Backup-Drivers }
-        "79" { Backup-UserData }
-        "80" { Backup-ZaloData }
-        "81" { Backup-ProductKeys }
-        "88" { Invoke-AllCleanup }
-        "``" { 
+        "^1$" { Invoke-QuickCleanup }
+        "^2$" { Invoke-DeepCleanup }
+        "^77$" { Backup-WiFiPasswords }
+        "^78$" { Backup-Drivers }
+        "^79$" { Backup-UserData }
+        "^80$" { Backup-ZaloData }
+        "^81$" { Backup-ProductKeys }
+        "^88$" { Invoke-AllCleanup }
+        "^[Ll]$" { 
             Switch-Language
         }
         default {
