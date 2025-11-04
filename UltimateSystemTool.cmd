@@ -14,13 +14,27 @@ setlocal enabledelayedexpansion
 title Ultimate Windows System Tool v5.0 - Complete Edition
 color 0B
 
-:: Detect Windows Version
+:: ============================================================================
+:: ENHANCED WINDOWS VERSION DETECTION
+:: ============================================================================
 for /f "tokens=4-5 delims=. " %%i in ('ver') do set VERSION=%%i.%%j
-if "%version%" == "10.0" set WIN_VER=10
-if "%version%" == "6.3" set WIN_VER=8.1
-if "%version%" == "6.2" set WIN_VER=8
-if "%version%" == "6.1" set WIN_VER=7
-if not defined WIN_VER set WIN_VER=10
+set WIN_VER=Unknown
+set WIN_NAME=Unknown Windows
+
+:: Detect Windows Version precisely
+if "%version%" == "10.0" (
+    set WIN_VER=10
+    for /f "tokens=3" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild 2^>nul ^| find "CurrentBuild"') do set BUILD=%%a
+    if !BUILD! GEQ 22000 (
+        set WIN_NAME=Windows 11
+    ) else (
+        set WIN_NAME=Windows 10
+    )
+)
+if "%version%" == "6.3" (set WIN_VER=8.1 & set WIN_NAME=Windows 8.1)
+if "%version%" == "6.2" (set WIN_VER=8 & set WIN_NAME=Windows 8)
+if "%version%" == "6.1" (set WIN_VER=7 & set WIN_NAME=Windows 7)
+if not defined WIN_VER (set WIN_VER=10 & set WIN_NAME=Windows 10+)
 
 :: Check Administrator and AUTO-ELEVATE
 net session >nul 2>&1
@@ -51,6 +65,7 @@ echo(
 echo   ========================================================================
 echo                                                                          
 echo        ADMINISTRATOR RIGHTS CONFIRMED / XAC NHAN QUYEN ADMINISTRATOR    
+echo        Detected: %WIN_NAME% (Build %BUILD%)                             
 echo                                                                          
 echo   ========================================================================
 echo(
@@ -745,6 +760,41 @@ echo(
 pause
 goto MAIN_MENU
 
+
+:HISTORY_CLEANUP_ALL
+cls
+color 0E
+echo(
+echo  [MERGED] All History Cleanup - Xoa Tat Ca Lich Su
+echo  ════════════════════════════════════════════════════════════════
+echo(
+echo  [1/4] Clearing Recent Documents...
+del /f /q "%APPDATA%\Microsoft\Windows\Recent\*" >nul 2>&1
+del /f /q "%APPDATA%\Microsoft\Windows\Recent\AutomaticDestinations\*" >nul 2>&1
+del /f /q "%APPDATA%\Microsoft\Windows\Recent\CustomDestinations\*" >nul 2>&1
+echo  [+] Recent Documents cleared!
+echo(
+echo  [2/4] Clearing Run History...
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /f >nul 2>&1
+echo  [+] Run History cleared!
+echo(
+echo  [3/4] Clearing Search History...
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\WordWheelQuery" /f >nul 2>&1
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\TypedPaths" /f >nul 2>&1
+echo  [+] Search History cleared!
+echo(
+echo  [4/4] Clearing Clipboard History...
+echo off | clip >nul 2>&1
+reg delete "HKCU\Software\Microsoft\Clipboard" /f >nul 2>&1
+echo  [+] Clipboard History cleared!
+echo(
+echo  ════════════════════════════════════════════════════════════════
+echo  [SUCCESS] All History Cleanup Complete!
+echo  ════════════════════════════════════════════════════════════════
+echo(
+pause
+goto MAIN_MENU
+
 :ERROR_REPORTS
 cls
 echo ================================================================================
@@ -826,7 +876,7 @@ echo Clearing DNS cache / Xoa cache DNS...
 echo(
 
 echo [*] Flushing DNS resolver cache / Xoa DNS resolver cache...
-ipconfig /flushdns
+ipconfig /flushdns >nul 2>&1
 
 echo(
 echo [SUCCESS] DNS cache cleared! / Da xoa cache DNS!
@@ -848,19 +898,19 @@ echo Resetting network settings / Reset cai dat mang...
 echo(
 
 echo [*] Resetting IP stack / Reset IP stack...
-netsh int ip reset
+netsh int ip reset >nul 2>&1
 
 echo [*] Resetting Winsock / Reset Winsock...
-netsh winsock reset
+netsh winsock reset >nul 2>&1
 
 echo [*] Flushing DNS / Xoa DNS...
-ipconfig /flushdns
+ipconfig /flushdns >nul 2>&1
 
 echo [*] Releasing IP / Giai phong IP...
-ipconfig /release
+ipconfig /release >nul 2>&1
 
 echo [*] Renewing IP / Lam moi IP...
-ipconfig /renew
+ipconfig /renew >nul 2>&1
 
 echo(
 echo [SUCCESS] Network settings reset! / Da reset cai dat mang!
@@ -879,10 +929,10 @@ echo Optimizing network performance / Toi uu hieu suat mang...
 echo(
 
 echo [*] Disabling TCP auto-tuning / Tat tu dong dieu chinh TCP...
-netsh int tcp set global autotuninglevel=normal
+netsh int tcp set global autotuninglevel=normal >nul 2>&1
 
 echo [*] Enabling receive window auto-tuning / Bat tu dong dieu chinh receive window...
-netsh int tcp set global rsc=enabled
+netsh int tcp set global rsc=enabled >nul 2>&1
 
 echo [*] Optimizing network throttling / Toi uu network throttling...
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v NetworkThrottlingIndex /t REG_DWORD /d 0xffffffff /f >nul 2>&1
@@ -906,7 +956,7 @@ echo Clearing ARP cache / Xoa cache ARP...
 echo(
 
 echo [*] Deleting ARP cache / Xoa ARP cache...
-netsh interface ip delete arpcache
+netsh interface ip delete arpcache >nul 2>&1
 
 echo(
 echo [SUCCESS] ARP cache cleared! / Da xoa cache ARP!
@@ -924,10 +974,10 @@ echo Resetting Winsock catalog / Reset Winsock catalog...
 echo(
 
 echo [*] Resetting Winsock / Reset Winsock...
-netsh winsock reset
+netsh winsock reset >nul 2>&1
 
 echo [*] Resetting IP configuration / Reset cau hinh IP...
-netsh int ip reset
+netsh int ip reset >nul 2>&1
 
 echo(
 echo [SUCCESS] Winsock reset! / Da reset Winsock!
@@ -946,19 +996,85 @@ echo Renewing IP address / Lam moi dia chi IP...
 echo(
 
 echo [*] Releasing current IP / Giai phong IP hien tai...
-ipconfig /release
+ipconfig /release >nul 2>&1
 
 echo [*] Renewing IP address / Lam moi dia chi IP...
-ipconfig /renew
+ipconfig /renew >nul 2>&1
 
 echo [*] Flushing DNS / Xoa DNS...
-ipconfig /flushdns
+ipconfig /flushdns >nul 2>&1
 
 echo(
 echo [SUCCESS] IP address renewed! / Da lam moi dia chi IP!
 echo(
 pause
 goto MAIN_MENU
+
+
+:NETWORK_TOOLS_ALL
+cls
+color 0E
+echo(
+echo  [MERGED] Network Tools - Cong Cu Mang Toan Dien
+echo  ════════════════════════════════════════════════════════════════
+echo(
+echo   [1] Clear DNS Cache           [2] Reset Network Settings
+echo   [3] Renew IP Address          [4] Reset Winsock
+echo   [5] Clear ARP Cache           [6] Optimize Network
+echo   [0] Back to Menu
+echo(
+set /p net_choice="  SELECT [0-6]: "
+
+if "%net_choice%"=="1" (
+    echo(
+    echo  [*] Clearing DNS Cache...
+    ipconfig /flushdns >nul 2>&1
+    echo  [+] DNS Cache cleared!
+)
+if "%net_choice%"=="2" (
+    echo(
+    echo  [*] Resetting Network Settings...
+    netsh winsock reset >nul 2>&1
+    netsh int ip reset >nul 2>&1
+    ipconfig /release >nul 2>&1
+    ipconfig /renew >nul 2>&1
+    ipconfig /flushdns >nul 2>&1
+    echo  [+] Network Settings reset! Restart required.
+)
+if "%net_choice%"=="3" (
+    echo(
+    echo  [*] Renewing IP Address...
+    ipconfig /release >nul 2>&1
+    ipconfig /renew >nul 2>&1
+    echo  [+] IP Address renewed!
+)
+if "%net_choice%"=="4" (
+    echo(
+    echo  [*] Resetting Winsock...
+    netsh winsock reset >nul 2>&1
+    echo  [+] Winsock reset! Restart required.
+)
+if "%net_choice%"=="5" (
+    echo(
+    echo  [*] Clearing ARP Cache...
+    netsh interface ip delete arpcache >nul 2>&1
+    arp -d * >nul 2>&1
+    echo  [+] ARP Cache cleared!
+)
+if "%net_choice%"=="6" (
+    echo(
+    echo  [*] Optimizing Network...
+    netsh int tcp set global autotuninglevel=normal >nul 2>&1
+    netsh int tcp set global chimney=enabled >nul 2>&1
+    netsh int tcp set global dca=enabled >nul 2>&1
+    netsh int tcp set global netdma=enabled >nul 2>&1
+    echo  [+] Network optimized!
+)
+if "%net_choice%"=="0" goto MAIN_MENU
+
+echo(
+pause
+goto NETWORK_TOOLS_ALL
 
 :FIX_ADAPTER
 cls
@@ -977,10 +1093,10 @@ netsh interface set interface "Ethernet" admin=enable >nul 2>&1
 netsh interface set interface "Wi-Fi" admin=enable >nul 2>&1
 
 echo [*] Resetting TCP/IP stack / Reset TCP/IP stack...
-netsh int ip reset
+netsh int ip reset >nul 2>&1
 
 echo [*] Resetting Winsock / Reset Winsock...
-netsh winsock reset
+netsh winsock reset >nul 2>&1
 
 echo(
 echo [SUCCESS] Network adapter fixed! / Da sua card mang!
@@ -1057,7 +1173,7 @@ echo Analyzing disk space usage / Phan tich dung luong o dia...
 echo(
 
 echo [*] Disk space on all drives / Dung luong tat ca o dia:
-wmic logicaldisk get caption,size,freespace
+wmic logicaldisk get caption,size,freespace >nul 2>&1
 
 echo(
 echo [*] Top-level folders size / Kich thuoc thu muc cap 1:
@@ -1284,7 +1400,7 @@ echo [*] Disabling hibernation / Tat che do ngu dong...
 powercfg -h off
 
 echo [*] Deleting hiberfil.sys / Xoa hiberfil.sys...
-del C:\hiberfil.sys /f /q >nul 2>&1
+del "%SystemDrive%\hiberfil.sys" /f /q >nul 2>&1
 
 echo(
 echo [SUCCESS] Hibernation disabled! / Da tat che do ngu dong!
@@ -1666,7 +1782,7 @@ echo Creating system restore point / Tao diem khoi phuc he thong...
 echo(
 
 echo [*] Creating restore point / Tao diem khoi phuc...
-powershell -Command "Checkpoint-Computer -Description 'Ultimate System Tool Backup' -RestorePointType 'MODIFY_SETTINGS'"
+powershell -Command "Checkpoint-Computer -Description 'Ultimate System Tool Backup' -RestorePointType 'MODIFY_SETTINGS'" >nul 2>&1
 
 echo(
 echo [SUCCESS] Restore point created! / Da tao diem khoi phuc!
@@ -1699,7 +1815,7 @@ echo Exporting installed programs / Xuat danh sach chuong trinh...
 echo(
 
 echo [*] Creating list / Tao danh sach...
-wmic product get name,version /format:csv > "%USERPROFILE%\Desktop\InstalledPrograms.csv"
+wmic product get name,version /format:csv > "%USERPROFILE%\Desktop\InstalledPrograms.csv" >nul 2>&1
 
 echo(
 echo [SUCCESS] List saved to Desktop\InstalledPrograms.csv / Da luu vao Desktop\InstalledPrograms.csv
@@ -1717,7 +1833,7 @@ echo Checking disk health / Kiem tra suc khoe o dia...
 echo(
 
 echo [*] Checking SMART status / Kiem tra trang thai SMART...
-wmic diskdrive get status,model,size
+wmic diskdrive get status,model,size >nul 2>&1
 
 echo(
 pause
@@ -2239,11 +2355,11 @@ echo(
 
 echo [*] All drives / Tat ca o dia:
 echo(
-wmic logicaldisk get caption,size,freespace,filesystem
+wmic logicaldisk get caption,size,freespace,filesystem >nul 2>&1
 
 echo(
 echo [*] Free space in MB / Dung luong trong (MB):
-for /f "tokens=2" %%a in ('powershell -Command "(Get-PSDrive C).Free/1MB"') do (
+for /f "tokens=2" %%a in ('powershell -Command "(Get-PSDrive C).Free/1MB"') do ( >nul 2>&1
     set "free_space=%%a"
     echo     C: Drive - %%a MB free / %%a MB trong
 )
@@ -2305,27 +2421,27 @@ echo ===========================================================================
 echo(
 
 echo [*] Computer System / He thong may tinh:
-wmic computersystem get manufacturer,model,totalphysicalmemory
+wmic computersystem get manufacturer,model,totalphysicalmemory >nul 2>&1
 
 echo(
 echo [*] CPU Information / Thong tin CPU:
-wmic cpu get name,numberofcores,numberoflogicalprocessors,maxclockspeed
+wmic cpu get name,numberofcores,numberoflogicalprocessors,maxclockspeed >nul 2>&1
 
 echo(
 echo [*] Memory / Bo nho RAM:
-wmic memorychip get capacity,speed,manufacturer
+wmic memorychip get capacity,speed,manufacturer >nul 2>&1
 
 echo(
 echo [*] Disk Drives / O dia:
-wmic diskdrive get model,size,interfacetype,status
+wmic diskdrive get model,size,interfacetype,status >nul 2>&1
 
 echo(
 echo [*] Graphics Card / Card man hinh:
-wmic path win32_VideoController get name,adapterram,driverversion
+wmic path win32_VideoController get name,adapterram,driverversion >nul 2>&1
 
 echo(
 echo [*] Network Adapters / Card mang:
-wmic nic where "NetEnabled=true" get name,macaddress,speed
+wmic nic where "NetEnabled=true" get name,macaddress,speed >nul 2>&1
 
 echo(
 echo [SOFTWARE INFORMATION - THONG TIN PHAN MEM]
@@ -2333,7 +2449,7 @@ echo ===========================================================================
 echo(
 
 echo [*] Operating System / He dieu hanh:
-wmic os get caption,version,buildnumber,osarchitecture
+wmic os get caption,version,buildnumber,osarchitecture >nul 2>&1
 
 echo(
 echo [*] Windows Activation Status / Trang thai kich hoat:
@@ -2341,7 +2457,7 @@ cscript //nologo %windir%\system32\slmgr.vbs /xpr
 
 echo(
 echo [*] BIOS Information / Thong tin BIOS:
-wmic bios get manufacturer,smbiosbiosversion,releasedate
+wmic bios get manufacturer,smbiosbiosversion,releasedate >nul 2>&1
 
 echo(
 echo [*] Opening detailed system info / Mo thong tin chi tiet...
@@ -2644,7 +2760,7 @@ cscript //nologo %windir%\system32\slmgr.vbs /xpr
 
 echo(
 echo [*] Windows Product Key / Khoa san pham Windows:
-wmic path softwarelicensingservice get OA3xOriginalProductKey
+wmic path softwarelicensingservice get OA3xOriginalProductKey >nul 2>&1
 
 echo(
 echo [OFFICE ACTIVATION - KICH HOAT OFFICE]
@@ -2693,15 +2809,15 @@ set "BackupDir=%USERPROFILE%\Documents\WiFi_Backup_%date:~-4,4%%date:~-7,2%%date
 if not exist "%BackupDir%" mkdir "%BackupDir%"
 
 echo [*] Exporting WiFi profiles / Xuat cau hinh WiFi...
-netsh wlan show profiles | findstr "All User Profile" > "%BackupDir%\WiFi_List.txt"
+netsh wlan show profiles | findstr "All User Profile" > "%BackupDir%\WiFi_List.txt" >nul 2>&1
 
 echo(
 echo [*] Exporting passwords for each network / Xuat mat khau cho tung mang...
-for /f "tokens=2 delims=:" %%i in ('netsh wlan show profiles ^| findstr "All User Profile"') do (
+for /f "tokens=2 delims=:" %%i in ('netsh wlan show profiles ^| findstr "All User Profile"') do ( >nul 2>&1
     set "profile=%%i"
     set "profile=!profile:~1!"
     echo Exporting / Xuat: !profile!
-    netsh wlan show profile name="!profile!" key=clear > "%BackupDir%\WiFi_!profile!.txt"
+    netsh wlan show profile name="!profile!" key=clear > "%BackupDir%\WiFi_!profile!.txt" >nul 2>&1
 )
 
 echo(
@@ -2711,11 +2827,11 @@ echo =================== >> "%BackupDir%\WiFi_Passwords.txt"
 echo Created: %date% %time% >> "%BackupDir%\WiFi_Passwords.txt"
 echo. >> "%BackupDir%\WiFi_Passwords.txt"
 
-for /f "tokens=2 delims=:" %%i in ('netsh wlan show profiles ^| findstr "All User Profile"') do (
+for /f "tokens=2 delims=:" %%i in ('netsh wlan show profiles ^| findstr "All User Profile"') do ( >nul 2>&1
     set "profile=%%i"
     set "profile=!profile:~1!"
     echo Network: !profile! >> "%BackupDir%\WiFi_Passwords.txt"
-    netsh wlan show profile name="!profile!" key=clear | findstr "Key Content" >> "%BackupDir%\WiFi_Passwords.txt"
+    netsh wlan show profile name="!profile!" key=clear | findstr "Key Content" >> "%BackupDir%\WiFi_Passwords.txt" >nul 2>&1
     echo. >> "%BackupDir%\WiFi_Passwords.txt"
 )
 
@@ -2753,7 +2869,7 @@ echo [*] Creating driver list / Tao danh sach driver...
 driverquery /v /fo csv > "%DriverBackup%\Driver_List.csv"
 
 echo [*] Exporting detailed driver information / Xuat thong tin chi tiet driver...
-powershell -Command "Get-WmiObject Win32_PnPSignedDriver | Select-Object DeviceName,DriverVersion,Manufacturer,DriverDate | Export-Csv '%DriverBackup%\Driver_Details.csv' -NoTypeInformation"
+powershell -Command "Get-WmiObject Win32_PnPSignedDriver | Select-Object DeviceName,DriverVersion,Manufacturer,DriverDate | Export-Csv '%DriverBackup%\Driver_Details.csv' -NoTypeInformation" >nul 2>&1
 
 echo(
 echo [SUCCESS] Drivers backed up! / Da sao luu driver!
@@ -2933,8 +3049,8 @@ echo ===========================================================================
 echo(
 
 echo [*] Windows OEM Key / Khoa OEM Windows:
-wmic path softwarelicensingservice get OA3xOriginalProductKey > "%KeyBackup%\Windows_OEM_Key.txt"
-wmic path softwarelicensingservice get OA3xOriginalProductKey
+wmic path softwarelicensingservice get OA3xOriginalProductKey > "%KeyBackup%\Windows_OEM_Key.txt" >nul 2>&1
+wmic path softwarelicensingservice get OA3xOriginalProductKey >nul 2>&1
 
 echo(
 echo [*] Windows License Information / Thong tin giay phep Windows:
@@ -3050,7 +3166,7 @@ if "%recovery_choice%"=="6" (
     echo(
     echo [*] Checking backup status / Kiem tra trang thai sao luu...
     echo(
-    wmic recoveros get
+    wmic recoveros get >nul 2>&1
     echo(
     vssadmin list shadows
 )
@@ -3781,7 +3897,7 @@ echo  [1] Dang tai Microsoft Store package...
 echo(
 
 :: Download and install Microsoft Store
-powershell -NoProfile -ExecutionPolicy Bypass -Command "& {Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.WindowsStore_8wekyb3d8bbwe}"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "& {Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.WindowsStore_8wekyb3d8bbwe}" >nul 2>&1
 
 if %errorLevel% equ 0 (
     echo  [+] Microsoft Store da duoc cai dat!
@@ -3790,7 +3906,7 @@ if %errorLevel% equ 0 (
     echo  [!] Loi khi cai dat Store
     echo(
     echo  [*] Thu phuong phap khac...
-    powershell -NoProfile -ExecutionPolicy Bypass -Command "& {Get-AppxPackage -allusers Microsoft.WindowsStore | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register `"$($_.InstallLocation)\AppXManifest.xml`"}}"
+    powershell -NoProfile -ExecutionPolicy Bypass -Command "& {Get-AppxPackage -allusers Microsoft.WindowsStore | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register `"$($_.InstallLocation)\AppXManifest.xml`"}}" >nul 2>&1
 )
 
 echo(
@@ -4098,9 +4214,9 @@ if "%test%"=="3" (
 )
 if "%test%"=="4" (
     echo  [*] Kiem tra SMART disk health...
-    wmic diskdrive get status
+    wmic diskdrive get status >nul 2>&1
     echo(
-    wmic diskdrive get model,serialnumber,size,status
+    wmic diskdrive get model,serialnumber,size,status >nul 2>&1
 )
 if "%test%"=="5" (
     echo  [*] Chay DirectX Diagnostic Tool...
@@ -4128,7 +4244,7 @@ if "%test%"=="9" (
     tracert -d -h 10 8.8.8.8
     echo(
     echo  Network Configuration:
-    ipconfig /all
+    ipconfig /all >nul 2>&1
 )
 if "%test%"=="10" (
     echo  [*] Chay tat ca test...
@@ -4139,8 +4255,8 @@ if "%test%"=="10" (
     echo  [3/5] DISM Repair...
     Dism /Online /Cleanup-Image /RestoreHealth
     echo  [4/5] Network Reset...
-    ipconfig /flushdns
-    netsh winsock reset
+    ipconfig /flushdns >nul 2>&1
+    netsh winsock reset >nul 2>&1
     echo  [5/5] Event Log...
     wevtutil el
     echo  [+] HOAN THANH!
@@ -4172,40 +4288,40 @@ set /p def="  Chon (0-8): "
 
 if "%def%"=="1" (
     echo  [*] Dang BAT Windows Defender...
-    powershell -Command "Set-MpPreference -DisableRealtimeMonitoring $false"
-    sc config WinDefend start= auto
+    powershell -Command "Set-MpPreference -DisableRealtimeMonitoring $false" >nul 2>&1
+    sc config WinDefend start= auto >nul 2>&1
     net start WinDefend
     echo  [+] Windows Defender da duoc BAT!
 )
 if "%def%"=="2" (
     echo  [*] Dang TAT Windows Defender...
-    powershell -Command "Set-MpPreference -DisableRealtimeMonitoring $true"
+    powershell -Command "Set-MpPreference -DisableRealtimeMonitoring $true" >nul 2>&1
     echo  [+] Windows Defender da duoc TAT tam thoi!
     echo  [!] Se tu dong BAT lai sau khi restart
 )
 if "%def%"=="3" (
     echo  [*] Chay Quick Scan...
-    powershell -Command "Start-MpScan -ScanType QuickScan"
+    powershell -Command "Start-MpScan -ScanType QuickScan" >nul 2>&1
     echo  [+] Scan hoan thanh!
 )
 if "%def%"=="4" (
     echo  [*] Chay Full Scan...
     echo  [!] Co the mat vai phut...
-    powershell -Command "Start-MpScan -ScanType FullScan"
+    powershell -Command "Start-MpScan -ScanType FullScan" >nul 2>&1
     echo  [+] Scan hoan thanh!
 )
 if "%def%"=="5" (
     echo  [*] Cap nhat Defender definitions...
-    powershell -Command "Update-MpSignature"
+    powershell -Command "Update-MpSignature" >nul 2>&1
     echo  [+] Cap nhat hoan thanh!
 )
 if "%def%"=="6" (
     echo  [*] Lich su quet:
-    powershell -Command "Get-MpThreatDetection"
+    powershell -Command "Get-MpThreatDetection" >nul 2>&1
 )
 if "%def%"=="7" (
     echo  [*] Quan ly exclusions...
-    powershell -Command "Get-MpPreference | Select-Object -Property ExclusionPath,ExclusionExtension,ExclusionProcess"
+    powershell -Command "Get-MpPreference | Select-Object -Property ExclusionPath,ExclusionExtension,ExclusionProcess" >nul 2>&1
 )
 if "%def%"=="8" (
     echo  [*] Mo Windows Security...
@@ -4304,7 +4420,7 @@ if "%irst%"=="1" (
     reg query "HKLM\SOFTWARE\Intel\IntelRST" 2>nul
     if %errorLevel% equ 0 (
         echo  [+] IRST da duoc cai dat!
-        wmic path win32_systemdriver where "name='iaStorA'" get displayname,state,status
+        wmic path win32_systemdriver where "name='iaStorA'" get displayname,state,status >nul 2>&1
     ) else (
         echo  [!] IRST chua duoc cai dat
     )
@@ -4357,7 +4473,7 @@ if "%sku%"=="1" (
     echo  [*] Product Key Windows:
     wmic path softwarelicensingservice get OA3xOriginalProductKey 2>nul
     echo(
-    powershell -Command "(Get-WmiObject -query 'select * from SoftwareLicensingService').OA3xOriginalProductKey"
+    powershell -Command "(Get-WmiObject -query 'select * from SoftwareLicensingService').OA3xOriginalProductKey" >nul 2>&1
 )
 if "%sku%"=="2" (
     echo  [*] Product Key Office:
