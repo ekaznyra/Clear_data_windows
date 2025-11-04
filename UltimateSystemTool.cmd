@@ -1,14 +1,15 @@
 @echo off
 :: ============================================================================
-:: ULTIMATE WINDOWS SYSTEM TOOL v4.5 - PROFESSIONAL EDITION
+:: ULTIMATE WINDOWS SYSTEM TOOL v5.0 - PROFESSIONAL EDITION
 :: Complete System Optimization Suite - Bilingual (English/Vietnamese)
 :: ============================================================================
 :: Based on open-source tools: BleachBit, CCleaner, PrivaZer, Wise Care 365
-:: NEW: Auto-elevate, Software cache, LCU cleanup, Memory optimization
+:: NEW v5.0: System utilities, Bloatware removal, Bitlocker, Settings center
+:: v4.5: Auto-elevate, Software cache, LCU cleanup, Memory optimization
 :: All commands are SAFE and tested for Windows 10/11
 :: ============================================================================
 
-title Ultimate Windows System Tool v4.5 - Professional Edition
+title Ultimate Windows System Tool v5.0 - Professional Edition
 chcp 65001 >nul 2>&1
 color 0B
 
@@ -191,11 +192,21 @@ echo  [68]  Optimize Memory (RAM)               - Toi Uu Bo Nho RAM
 echo  [69]  Show Disk Space Report              - Xem Bao Cao Dung Luong
 echo  [70]  Refresh Icon Cache                  - Lam Moi Icon Cache
 echo.
-echo  ????????????????????????????????????????????????????????????????????????????????
-echo  ?  ? QUICK ACTIONS - THAO TAC NHANH                                           ?
-echo  ????????????????????????????????????????????????????????????????????????????????
-echo  [88]  ?? RUN ALL CLEANUP TASKS            - CHAY TAT CA DON DEP
-echo  [99]  ? FULL SYSTEM OPTIMIZATION         - TOI UU TOAN BO HE THONG
+echo  ================================================================================
+echo  [SYSTEM UTILITIES - TIEN ICH HE THONG]
+echo  ================================================================================
+echo  [71]  Check System Information           - Kiem Tra Thong Tin May
+echo  [72]  Windows Settings Center             - Trung Tam Cai Dat Windows
+echo  [73]  Office Repair and Reset             - Sua Chua va Reset Office
+echo  [74]  Remove Bloatware (Safe)             - Xoa Ung Dung Rac (An Toan)
+echo  [75]  Bitlocker Management                - Quan Ly Bitlocker
+echo  [76]  Check Activation Status             - Kiem Tra Trang Thai Kich Hoat
+echo.
+echo  ================================================================================
+echo  [QUICK ACTIONS - THAO TAC NHANH]
+echo  ================================================================================
+echo  [88]  RUN ALL CLEANUP TASKS               - CHAY TAT CA DON DEP
+echo  [99]  FULL SYSTEM OPTIMIZATION            - TOI UU TOAN BO HE THONG
 echo.
 echo  [0]   ? EXIT - THOAT
 echo  ????????????????????????????????????????????????????????????????????????????????
@@ -273,6 +284,12 @@ if "%choice%"=="67" goto LCU_BACKUP
 if "%choice%"=="68" goto OPTIMIZE_MEMORY
 if "%choice%"=="69" goto DISK_SPACE_REPORT
 if "%choice%"=="70" goto REFRESH_ICON_CACHE
+if "%choice%"=="71" goto SYSTEM_INFO_FULL
+if "%choice%"=="72" goto WINDOWS_SETTINGS
+if "%choice%"=="73" goto OFFICE_REPAIR
+if "%choice%"=="74" goto REMOVE_BLOATWARE
+if "%choice%"=="75" goto BITLOCKER_MGMT
+if "%choice%"=="76" goto CHECK_ACTIVATION
 if "%choice%"=="88" goto RUN_ALL_CLEANUP
 if "%choice%"=="99" goto FULL_OPTIMIZE
 
@@ -2255,6 +2272,351 @@ timeout /t 2 >nul
 echo.
 echo [SUCCESS] Icon cache refreshed! / Da lam moi icon cache!
 echo [INFO] Icons should display correctly now / Icon se hien thi dung!
+echo.
+pause
+goto MAIN_MENU
+
+:: ============================================================================
+:: SYSTEM UTILITIES FUNCTIONS - CHUC NANG TIEN ICH HE THONG
+:: ============================================================================
+
+:SYSTEM_INFO_FULL
+cls
+echo ================================================================================
+echo  [71] Check System Information - Kiem Tra Thong Tin May
+echo ================================================================================
+echo.
+echo Gathering comprehensive system information / Thu thap thong tin toan dien...
+echo.
+
+echo [HARDWARE INFORMATION - THONG TIN PHAN CUNG]
+echo ============================================================================
+echo.
+
+echo [*] Computer System / He thong may tinh:
+wmic computersystem get manufacturer,model,totalphysicalmemory
+
+echo.
+echo [*] CPU Information / Thong tin CPU:
+wmic cpu get name,numberofcores,numberoflogicalprocessors,maxclockspeed
+
+echo.
+echo [*] Memory / Bo nho RAM:
+wmic memorychip get capacity,speed,manufacturer
+
+echo.
+echo [*] Disk Drives / O dia:
+wmic diskdrive get model,size,interfacetype,status
+
+echo.
+echo [*] Graphics Card / Card man hinh:
+wmic path win32_VideoController get name,adapterram,driverversion
+
+echo.
+echo [*] Network Adapters / Card mang:
+wmic nic where "NetEnabled=true" get name,macaddress,speed
+
+echo.
+echo [SOFTWARE INFORMATION - THONG TIN PHAN MEM]
+echo ============================================================================
+echo.
+
+echo [*] Operating System / He dieu hanh:
+wmic os get caption,version,buildnumber,osarchitecture
+
+echo.
+echo [*] Windows Activation Status / Trang thai kich hoat:
+cscript //nologo %windir%\system32\slmgr.vbs /xpr
+
+echo.
+echo [*] BIOS Information / Thong tin BIOS:
+wmic bios get manufacturer,smbiosbiosversion,releasedate
+
+echo.
+echo [*] Opening detailed system info / Mo thong tin chi tiet...
+msinfo32
+
+echo.
+echo [SUCCESS] System information displayed! / Da hien thi thong tin he thong!
+echo [INFO] Detailed report opened in MSInfo32 / Bao cao chi tiet da mo trong MSInfo32
+echo.
+pause
+goto MAIN_MENU
+
+:WINDOWS_SETTINGS
+cls
+echo ================================================================================
+echo  [72] Windows Settings Center - Trung Tam Cai Dat Windows
+echo ================================================================================
+echo.
+echo Opening Windows Settings / Mo cai dat Windows...
+echo.
+echo  [1] System Settings          - Cai dat He thong
+echo  [2] Privacy Settings         - Cai dat Rieng tu
+echo  [3] Update and Security      - Cap nhat va Bao mat
+echo  [4] Personalization          - Ca nhan hoa
+echo  [5] Apps and Features        - Ung dung
+echo  [6] Network and Internet     - Mang
+echo  [7] Gaming Settings          - Cai dat Game
+echo  [8] Power Options            - Tuy chon Nguon
+echo  [9] All Settings             - Tat ca Cai dat
+echo  [0] Back to Main Menu        - Quay lai
+echo.
+set /p settings_choice=Select settings / Chon cai dat (0-9): 
+
+if "%settings_choice%"=="1" start ms-settings:display
+if "%settings_choice%"=="2" start ms-settings:privacy
+if "%settings_choice%"=="3" start ms-settings:windowsupdate
+if "%settings_choice%"=="4" start ms-settings:personalization
+if "%settings_choice%"=="5" start ms-settings:appsfeatures
+if "%settings_choice%"=="6" start ms-settings:network
+if "%settings_choice%"=="7" start ms-settings:gaming
+if "%settings_choice%"=="8" powercfg.cpl
+if "%settings_choice%"=="9" start ms-settings:
+if "%settings_choice%"=="0" goto MAIN_MENU
+
+echo.
+echo [SUCCESS] Settings opened! / Da mo cai dat!
+echo.
+timeout /t 2
+goto MAIN_MENU
+
+:OFFICE_REPAIR
+cls
+echo ================================================================================
+echo  [73] Office Repair and Reset - Sua Chua va Reset Office
+echo ================================================================================
+echo.
+echo Office repair and configuration / Sua chua va cau hinh Office...
+echo.
+
+echo [*] Checking Office installation / Kiem tra cai dat Office...
+
+if exist "%ProgramFiles%\Microsoft Office" (
+    echo [*] Office detected in Program Files / Phat hien Office
+) else if exist "%ProgramFiles(x86)%\Microsoft Office" (
+    echo [*] Office detected in Program Files x86 / Phat hien Office
+) else (
+    echo [!] Office not detected / Khong phat hien Office
+    echo [INFO] Please install Office first / Vui long cai dat Office truoc
+    pause
+    goto MAIN_MENU
+)
+
+echo.
+echo  [1] Quick Office Repair      - Sua chua Nhanh
+echo  [2] Online Office Repair     - Sua chua Truc tuyen  
+echo  [3] Reset Office Settings    - Reset Cai dat Office
+echo  [4] Clear Office Cache       - Xoa Cache Office
+echo  [5] Open Office Diagnostics  - Mo Cong cu Chan doan
+echo  [0] Back to Main Menu        - Quay lai
+echo.
+set /p office_choice=Select option / Chon tuy chon (0-5): 
+
+if "%office_choice%"=="1" (
+    echo [*] Starting Quick Repair / Bat dau sua chua nhanh...
+    echo [INFO] Please use Office installation to repair / Vui long dung trinh cai dat Office de sua chua
+    control appwiz.cpl
+)
+
+if "%office_choice%"=="2" (
+    echo [*] Starting Online Repair / Bat dau sua chua truc tuyen...
+    echo [INFO] Please use Office installation to repair / Vui long dung trinh cai dat Office de sua chua
+    control appwiz.cpl
+)
+
+if "%office_choice%"=="3" (
+    echo [*] Resetting Office settings / Reset cai dat Office...
+    del /f /q "%AppData%\Microsoft\Office\*.* " >nul 2>&1
+    del /f /q "%LocalAppData%\Microsoft\Office\*.* " >nul 2>&1
+    echo [SUCCESS] Office settings reset! / Da reset cai dat Office!
+)
+
+if "%office_choice%"=="4" (
+    echo [*] Clearing Office cache / Xoa cache Office...
+    del /f /s /q "%LocalAppData%\Microsoft\Office\16.0\OfficeFileCache\*" >nul 2>&1
+    del /f /s /q "%LocalAppData%\Microsoft\Office\15.0\OfficeFileCache\*" >nul 2>&1
+    echo [SUCCESS] Office cache cleared! / Da xoa cache Office!
+)
+
+if "%office_choice%"=="5" (
+    echo [*] Opening Office Diagnostics / Mo cong cu chan doan...
+    start https://aka.ms/SaRA-HomeOffice
+)
+
+if "%office_choice%"=="0" goto MAIN_MENU
+
+echo.
+pause
+goto MAIN_MENU
+
+:REMOVE_BLOATWARE
+cls
+echo ================================================================================
+echo  [74] Remove Bloatware (Safe) - Xoa Ung Dung Rac (An Toan)
+echo ================================================================================
+echo.
+echo WARNING: This will remove pre-installed Windows apps!
+echo CANH BAO: Se xoa cac ung dung Windows cai san!
+echo.
+echo SAFE apps to remove / Ung dung AN TOAN de xoa:
+echo  - Xbox (if you don't game)
+echo  - 3D Builder, Paint 3D
+echo  - Mixed Reality apps
+echo  - Get Started, Tips
+echo  - Skype (can reinstall from Store)
+echo  - Solitaire Collection
+echo.
+echo WILL NOT REMOVE / SE KHONG XOA:
+echo  - Microsoft Store (important!)
+echo  - Photos, Calculator, Notepad
+echo  - Microsoft Edge
+echo  - Windows Security
+echo.
+set /p bloat_confirm=Continue? / Tiep tuc? (Y/N): 
+if /i not "%bloat_confirm%"=="Y" goto MAIN_MENU
+
+echo.
+echo [*] Removing safe bloatware apps / Xoa ung dung rac an toan...
+echo.
+
+echo [1/8] Removing 3D Builder...
+powershell -Command "Get-AppxPackage *3dbuilder* | Remove-AppxPackage" >nul 2>&1
+
+echo [2/8] Removing Paint 3D...
+powershell -Command "Get-AppxPackage *paint3d* | Remove-AppxPackage" >nul 2>&1
+
+echo [3/8] Removing Mixed Reality Portal...
+powershell -Command "Get-AppxPackage *MixedReality* | Remove-AppxPackage" >nul 2>&1
+
+echo [4/8] Removing Get Started...
+powershell -Command "Get-AppxPackage *getstarted* | Remove-AppxPackage" >nul 2>&1
+
+echo [5/8] Removing Solitaire Collection...
+powershell -Command "Get-AppxPackage *solitaire* | Remove-AppxPackage" >nul 2>&1
+
+echo [6/8] Removing Mobile Plans...
+powershell -Command "Get-AppxPackage *mobileplans* | Remove-AppxPackage" >nul 2>&1
+
+echo [7/8] Removing Feedback Hub...
+powershell -Command "Get-AppxPackage *feedback* | Remove-AppxPackage" >nul 2>&1
+
+echo [8/8] Removing Xbox (apps only, not Game Bar)...
+powershell -Command "Get-AppxPackage *xboxapp* | Remove-AppxPackage" >nul 2>&1
+
+echo.
+echo [SUCCESS] Bloatware removed! / Da xoa ung dung rac!
+echo [INFO] You can reinstall from Microsoft Store if needed / Co the cai lai tu Microsoft Store
+echo.
+pause
+goto MAIN_MENU
+
+:BITLOCKER_MGMT
+cls
+echo ================================================================================
+echo  [75] Bitlocker Management - Quan Ly Bitlocker
+echo ================================================================================
+echo.
+echo Checking Bitlocker status / Kiem tra trang thai Bitlocker...
+echo.
+
+echo [*] Bitlocker status on all drives / Trang thai Bitlocker tren tat ca o dia:
+echo.
+manage-bde -status
+
+echo.
+echo  [1] Disable Bitlocker on C:  - Tat Bitlocker tren C:
+echo  [2] Enable Bitlocker on C:   - Bat Bitlocker tren C:
+echo  [3] View Recovery Key        - Xem Khoa Khoi phuc
+echo  [4] Backup Recovery Key      - Sao luu Khoa Khoi phuc
+echo  [0] Back to Main Menu        - Quay lai
+echo.
+set /p bitlocker_choice=Select option / Chon tuy chon (0-4): 
+
+if "%bitlocker_choice%"=="1" (
+    echo.
+    echo WARNING: Disabling Bitlocker will decrypt your drive!
+    echo CANH BAO: Tat Bitlocker se giai ma o dia cua ban!
+    echo.
+    set /p confirm_disable=Are you sure? / Ban chac chan? (Y/N): 
+    if /i "!confirm_disable!"=="Y" (
+        echo [*] Disabling Bitlocker / Tat Bitlocker...
+        manage-bde -off C:
+        echo [SUCCESS] Bitlocker disabled! / Da tat Bitlocker!
+    )
+)
+
+if "%bitlocker_choice%"=="2" (
+    echo [*] Opening Bitlocker Control Panel / Mo Bang dieu khien Bitlocker...
+    control /name Microsoft.BitLockerDriveEncryption
+)
+
+if "%bitlocker_choice%"=="3" (
+    echo [*] Recovery key information / Thong tin khoa khoi phuc:
+    manage-bde -protectors C: -get
+)
+
+if "%bitlocker_choice%"=="4" (
+    echo [*] Backing up recovery key / Sao luu khoa khoi phuc...
+    echo [INFO] Save to USB or print / Luu vao USB hoac in
+    manage-bde -protectors C: -get
+)
+
+if "%bitlocker_choice%"=="0" goto MAIN_MENU
+
+echo.
+pause
+goto MAIN_MENU
+
+:CHECK_ACTIVATION
+cls
+echo ================================================================================
+echo  [76] Check Activation Status - Kiem Tra Trang Thai Kich Hoat
+echo ================================================================================
+echo.
+echo Checking Windows and Office activation / Kiem tra kich hoat Windows va Office...
+echo.
+
+echo [WINDOWS ACTIVATION - KICH HOAT WINDOWS]
+echo ============================================================================
+echo.
+
+echo [*] Windows License Status / Trang thai giay phep Windows:
+cscript //nologo %windir%\system32\slmgr.vbs /dli
+
+echo.
+echo [*] Windows Activation Expiration / Thoi han kich hoat:
+cscript //nologo %windir%\system32\slmgr.vbs /xpr
+
+echo.
+echo [*] Windows Product Key / Khoa san pham Windows:
+wmic path softwarelicensingservice get OA3xOriginalProductKey
+
+echo.
+echo [OFFICE ACTIVATION - KICH HOAT OFFICE]
+echo ============================================================================
+echo.
+
+if exist "%ProgramFiles%\Microsoft Office\Office16\ospp.vbs" (
+    echo [*] Office 2016/2019/365 License Status:
+    cscript //nologo "%ProgramFiles%\Microsoft Office\Office16\ospp.vbs" /dstatus
+) else if exist "%ProgramFiles(x86)%\Microsoft Office\Office16\ospp.vbs" (
+    echo [*] Office 2016/2019/365 License Status:
+    cscript //nologo "%ProgramFiles(x86)%\Microsoft Office\Office16\ospp.vbs" /dstatus
+) else (
+    echo [INFO] Office not detected or not installed / Khong phat hien Office
+)
+
+echo.
+echo [INFO] To activate Windows or Office legally / De kich hoat hop phap:
+echo  - Purchase license from Microsoft: https://www.microsoft.com
+echo  - Mua giay phep tu Microsoft: https://www.microsoft.com
+echo.
+echo [WARNING] This tool does NOT provide activation services
+echo [CANH BAO] Cong cu nay KHONG cung cap dich vu kich hoat
+echo.
+echo For activation, please use official Microsoft methods.
+echo De kich hoat, vui long su dung phuong thuc chinh thuc cua Microsoft.
 echo.
 pause
 goto MAIN_MENU
