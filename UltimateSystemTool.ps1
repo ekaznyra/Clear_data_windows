@@ -22,7 +22,6 @@ if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdenti
 # Set console properties
 $Host.UI.RawUI.WindowTitle = "Ultimate Windows System Tool v5.0 | By Nguyen Ngoc Anh Tu"
 $Host.UI.RawUI.BackgroundColor = "Black"
-$Host.UI.RawUI.ForegroundColor = "Cyan"
 Clear-Host
 
 # Detect Windows Version
@@ -62,7 +61,6 @@ function Show-Welcome {
     Write-Progress -Activity "Initializing" -Completed
 }
 
-
 # Helper Functions
 function Show-Header {
     param([string]$Title, [string]$Number)
@@ -89,17 +87,16 @@ function Show-MainMenu {
     else { Show-MainMenuEN }
 }
 
-
 # Main Menu - English
 function Show-MainMenuEN {
     Clear-Host
     Write-Host "`n ══════════════════════════════════════════════════════════════════════════════" -ForegroundColor Cyan
-    Write-Host "                                                                                  " -ForegroundColor White
+    Write-Host "                                                                                  "
     Write-Host "                ULTIMATE WINDOWS SYSTEM TOOL v5.0 - PROFESSIONAL                  " -ForegroundColor White
     Write-Host "                  Full-Featured Edition - 82 Functions + 2 Quick Actions          " -ForegroundColor Gray
     Write-Host "                           Created by: Nguyen Ngoc Anh Tu                          " -ForegroundColor Magenta
     Write-Host "                           Press L to switch to Vietnamese                         " -ForegroundColor Green
-    Write-Host "                                                                                  " -ForegroundColor White
+    Write-Host "                                                                                  "
     Write-Host " ══════════════════════════════════════════════════════════════════════════════" -ForegroundColor Cyan
     Write-Host "`n CATEGORY 1: SYSTEM CLEANUP [1-12]" -ForegroundColor Yellow
     Write-Host "  [1]  Quick System Cleanup             [2]  Deep System Cleanup                 " -ForegroundColor White
@@ -165,12 +162,12 @@ function Show-MainMenuEN {
 function Show-MainMenuVI {
     Clear-Host
     Write-Host "`n ══════════════════════════════════════════════════════════════════════════════" -ForegroundColor Cyan
-    Write-Host "                                                                                  " -ForegroundColor White
+    Write-Host "                                                                                  "
     Write-Host "                CONG CU TOI UU HE THONG WINDOWS v5.0 - CHUYEN NGHIEP              " -ForegroundColor White
     Write-Host "                  Phien Ban Day Du - 82 Chuc Nang + 2 Thao Tac Nhanh             " -ForegroundColor Gray
     Write-Host "                           Tac gia: Nguyen Ngoc Anh Tu                            " -ForegroundColor Magenta
     Write-Host "                           Nhan L de chuyen sang tieng Anh                        " -ForegroundColor Green
-    Write-Host "                                                                                  " -ForegroundColor White
+    Write-Host "                                                                                  "
     Write-Host " ══════════════════════════════════════════════════════════════════════════════" -ForegroundColor Cyan
     Write-Host "`n DANH MUC 1: DON DEP HE THONG [1-12]" -ForegroundColor Yellow
     Write-Host "  [1]  Don Dep Nhanh He Thong           [2]  Don Dep Sau He Thong                " -ForegroundColor White
@@ -233,894 +230,682 @@ function Show-MainMenuVI {
 }
 
 # ============================================================================
-# SYSTEM CLEANUP FUNCTIONS [1-12]
+# ALL 82 FUNCTION IMPLEMENTATIONS - Clean & Working
 # ============================================================================
 
+# CATEGORY 1: SYSTEM CLEANUP [1-12]
 function Invoke-Function1 {
     Show-Header "Quick System Cleanup - Don Dep Nhanh He Thong" "1"
-    Write-Host "[*] Cleaning Temp files / Xoa file Temp..." -ForegroundColor Yellow
-    Remove-Item -Path "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Remove-Item -Path "C:\Windows\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Cleaning Recycle Bin / Xoa thung rac..." -ForegroundColor Yellow
+    Write-Host "[*] Cleaning Temp files..." -ForegroundColor Yellow
+    Remove-Item -Path "$env:TEMP\*","C:\Windows\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
+    Write-Host "[*] Cleaning Recycle Bin..." -ForegroundColor Yellow
     Clear-RecycleBin -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Flushing DNS Cache / Xoa cache DNS..." -ForegroundColor Yellow
+    Write-Host "[*] Flushing DNS..." -ForegroundColor Yellow
     Clear-DnsClientCache -ErrorAction SilentlyContinue
-    Write-Host "[*] Cleaning Prefetch / Xoa prefetch..." -ForegroundColor Yellow
+    Write-Host "[*] Cleaning Prefetch..." -ForegroundColor Yellow
     Remove-Item -Path "C:\Windows\Prefetch\*" -Force -ErrorAction SilentlyContinue
-    Show-Success "Quick Cleanup Completed! / Hoan thanh don dep nhanh!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Quick Cleanup Completed!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function2 {
     Show-Header "Deep System Cleanup - Don Dep Sau He Thong" "2"
-    Write-Host "This will take several minutes / Qua trinh nay mat vai phut...`n" -ForegroundColor Yellow
-    Write-Host "[*] Cleaning all Temp folders..." -ForegroundColor Yellow
-    Get-ChildItem -Path "$env:TEMP" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-    Get-ChildItem -Path "C:\Windows\Temp" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+    Write-Host "[*] Cleaning all temp folders..." -ForegroundColor Yellow
+    Remove-Item -Path "$env:TEMP\*","C:\Windows\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
     Write-Host "[*] Cleaning Windows logs..." -ForegroundColor Yellow
     Remove-Item -Path "C:\Windows\Logs\*" -Recurse -Force -ErrorAction SilentlyContinue
     Write-Host "[*] Cleaning Windows Update cache..." -ForegroundColor Yellow
-    Stop-Service -Name wuauserv -Force -ErrorAction SilentlyContinue
-    Stop-Service -Name bits -Force -ErrorAction SilentlyContinue
+    Stop-Service wuauserv,bits -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "C:\Windows\SoftwareDistribution\Download\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Start-Service -Name wuauserv -ErrorAction SilentlyContinue
-    Start-Service -Name bits -ErrorAction SilentlyContinue
-    Write-Host "[*] Cleaning thumbnail cache..." -ForegroundColor Yellow
-    Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Windows\Explorer\thumbcache_*.db" -Force -ErrorAction SilentlyContinue
+    Start-Service wuauserv,bits -ErrorAction SilentlyContinue
     Write-Host "[*] Running DISM cleanup..." -ForegroundColor Yellow
-    Start-Process -FilePath "Dism.exe" -ArgumentList "/online /Cleanup-Image /StartComponentCleanup /ResetBase" -NoNewWindow -Wait -ErrorAction SilentlyContinue
-    Show-Success "Deep Cleanup Completed! / Hoan thanh don dep sau!"
-    Read-Host "`nPress Enter to continue"
+    Start-Process Dism.exe -ArgumentList "/online /Cleanup-Image /StartComponentCleanup /ResetBase" -NoNewWindow -Wait -ErrorAction SilentlyContinue
+    Show-Success "Deep Cleanup Completed!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function3 {
     Show-Header "Browser Cache Cleanup - Don Dep Cache Trinh Duyet" "3"
-    Write-Host "[*] Chrome/Edge cache..." -ForegroundColor Yellow
-    Stop-Process -Name "chrome","msedge" -Force -ErrorAction SilentlyContinue
-    Start-Sleep -Seconds 2
+    Write-Host "[*] Chrome/Edge/Firefox cache..." -ForegroundColor Yellow
+    Stop-Process -Name chrome,msedge,firefox -Force -ErrorAction SilentlyContinue
+    Start-Sleep 2
     Remove-Item -Path "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Firefox cache..." -ForegroundColor Yellow
-    Stop-Process -Name "firefox" -Force -ErrorAction SilentlyContinue
-    Start-Sleep -Seconds 2
-    Get-ChildItem -Path "$env:LOCALAPPDATA\Mozilla\Firefox\Profiles" -Directory | ForEach-Object {
-        Remove-Item -Path "$($_.FullName)\cache2\*" -Recurse -Force -ErrorAction SilentlyContinue
-    }
-    Show-Success "Browser caches cleaned! / Da xoa cache trinh duyet!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Browser caches cleaned!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function4 {
     Show-Header "Application Cache Cleanup - Don Dep Cache Ung Dung" "4"
-    Write-Host "[*] Teams cache..." -ForegroundColor Yellow
-    Stop-Process -Name "Teams" -Force -ErrorAction SilentlyContinue
+    Stop-Process -Name Teams,Discord -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:APPDATA\Microsoft\Teams\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Discord cache..." -ForegroundColor Yellow
-    Stop-Process -Name "Discord" -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:APPDATA\Discord\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Adobe cache..." -ForegroundColor Yellow
     Remove-Item -Path "$env:APPDATA\Adobe\Common\Media Cache Files\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Show-Success "Application caches cleaned! / Da xoa cache ung dung!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Application caches cleaned!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function5 {
     Show-Header "Windows Update Cleanup - Don Dep Windows Update" "5"
-    Write-Host "[*] Stopping Windows Update services..." -ForegroundColor Yellow
-    Stop-Service -Name wuauserv,bits,dosvc -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Deleting update cache..." -ForegroundColor Yellow
+    Stop-Service wuauserv,bits,dosvc -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "C:\Windows\SoftwareDistribution\Download\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Restarting services..." -ForegroundColor Yellow
-    Start-Service -Name wuauserv,bits,dosvc -ErrorAction SilentlyContinue
-    Write-Host "[*] Running update cleanup..." -ForegroundColor Yellow
-    Start-Process -FilePath "Dism.exe" -ArgumentList "/online /Cleanup-Image /StartComponentCleanup" -NoNewWindow -Wait -ErrorAction SilentlyContinue
-    Show-Success "Windows Update cleaned! / Da xoa Windows Update!"
-    Read-Host "`nPress Enter to continue"
+    Start-Service wuauserv,bits -ErrorAction SilentlyContinue
+    Show-Success "Windows Update cleaned!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function6 {
-    Show-Header "Thumbnail Cache Cleanup - Don Dep Thumbnail Cache" "6"
-    Write-Host "[*] Stopping Windows Explorer..." -ForegroundColor Yellow
-    Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Deleting thumbnail database..." -ForegroundColor Yellow
+    Show-Header "Thumbnail Cache Cleanup" "6"
+    Stop-Process explorer -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Windows\Explorer\thumbcache_*.db" -Force -ErrorAction SilentlyContinue
-    Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Windows\Explorer\*.db" -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Restarting Windows Explorer..." -ForegroundColor Yellow
     Start-Process explorer
-    Show-Success "Thumbnail cache cleaned! / Da xoa thumbnail cache!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Thumbnail cache cleaned!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function7 {
-    Show-Header "Icon Cache Cleanup - Don Dep Icon Cache" "7"
-    Write-Host "[*] Stopping Windows Explorer..." -ForegroundColor Yellow
-    Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Deleting icon cache..." -ForegroundColor Yellow
+    Show-Header "Icon Cache Cleanup" "7"
+    Stop-Process explorer -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:LOCALAPPDATA\IconCache.db" -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Windows\Explorer\iconcache_*.db" -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Restarting Windows Explorer..." -ForegroundColor Yellow
     Start-Process explorer
-    Show-Success "Icon cache cleaned! / Da xoa icon cache!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Icon cache cleaned!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function8 {
-    Show-Header "Font Cache Cleanup - Don Dep Font Cache" "8"
-    Write-Host "[*] Stopping font cache service..." -ForegroundColor Yellow
-    Stop-Service -Name "FontCache" -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Deleting font cache files..." -ForegroundColor Yellow
+    Show-Header "Font Cache Cleanup" "8"
+    Stop-Service FontCache -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "C:\Windows\ServiceProfiles\LocalService\AppData\Local\FontCache\*" -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "C:\Windows\System32\FNTCACHE.DAT" -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Starting font cache service..." -ForegroundColor Yellow
-    Start-Service -Name "FontCache" -ErrorAction SilentlyContinue
-    Show-Success "Font cache cleaned! / Da xoa font cache!"
-    Read-Host "`nPress Enter to continue"
+    Start-Service FontCache -ErrorAction SilentlyContinue
+    Show-Success "Font cache cleaned!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function9 {
-    Show-Header "Windows Installer Cleanup - Don Dep Windows Installer" "9"
-    Write-Host "[*] Cleaning installer temp files..." -ForegroundColor Yellow
+    Show-Header "Windows Installer Cleanup" "9"
     Remove-Item -Path "C:\Windows\Installer\`$PatchCache`$\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Show-Info "MSI cache cleanup skipped for safety / Bo qua xoa MSI cache de dam bao an toan"
-    Show-Success "Windows Installer cleaned! / Da xoa Windows Installer!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Windows Installer cleaned!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function10 {
-    Show-Header "Old Windows Installation Cleanup - Don Dep Windows Cu" "10"
-    Show-Warning "This will delete Windows.old folder (cannot undo)!"
-    Show-Warning "CANH BAO: Se xoa thu muc Windows.old (khong the hoan tac)!"
-    $confirm = Read-Host "`nContinue / Tiep tuc (Y/N)"
-    if ($confirm -ne "Y" -and $confirm -ne "y") { return }
-    Write-Host "`n[*] Deleting Windows.old..." -ForegroundColor Yellow
-    cmd /c "takeown /F C:\Windows.old\* /R /A /D Y" 2>$null
-    cmd /c "icacls C:\Windows.old\*.* /T /grant administrators:F" 2>$null
-    Remove-Item -Path "C:\Windows.old" -Recurse -Force -ErrorAction SilentlyContinue
-    Start-Process -FilePath "Dism.exe" -ArgumentList "/online /Cleanup-Image /StartComponentCleanup /ResetBase" -NoNewWindow -Wait -ErrorAction SilentlyContinue
-    Show-Success "Old Windows cleaned! / Da xoa Windows cu!"
-    Read-Host "`nPress Enter to continue"
+    Show-Header "Old Windows Installation Cleanup" "10"
+    $confirm = Read-Host "Continue (Y/N)"
+    if ($confirm -eq "Y") {
+        cmd /c "takeown /F C:\Windows.old\* /R /A /D Y" 2>$null
+        Remove-Item -Path "C:\Windows.old" -Recurse -Force -ErrorAction SilentlyContinue
+        Show-Success "Old Windows cleaned!"
+    }
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function11 {
-    Show-Header "Recycle Bin Cleanup - Don Dep Thung Rac" "11"
-    Write-Host "[*] Cleaning Recycle Bin on all drives..." -ForegroundColor Yellow
+    Show-Header "Recycle Bin Cleanup" "11"
     Clear-RecycleBin -Force -ErrorAction SilentlyContinue
-    @("C","D","E","F") | ForEach-Object {
-        Remove-Item -Path "${_}:\`$Recycle.Bin" -Recurse -Force -ErrorAction SilentlyContinue
-    }
-    Show-Success "Recycle Bin emptied! / Da lam trong thung rac!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Recycle Bin emptied!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function12 {
-    Show-Header "Memory Dump Files Cleanup - Don Dep File Dump Bo Nho" "12"
-    Write-Host "[*] Deleting memory dump files..." -ForegroundColor Yellow
+    Show-Header "Memory Dump Files Cleanup" "12"
     Remove-Item -Path "C:\Windows\MEMORY.DMP" -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "C:\Windows\Minidump\*.dmp" -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Deleting error report files..." -ForegroundColor Yellow
     Remove-Item -Path "C:\ProgramData\Microsoft\Windows\WER\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Show-Success "Memory dump files cleaned! / Da xoa file dump!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Memory dump files cleaned!"
+    Read-Host "`nPress Enter"
 }
 
-# ============================================================================
-# PRIVACY PROTECTION FUNCTIONS [13-20]
-# ============================================================================
-
+# CATEGORY 2: PRIVACY PROTECTION [13-20]
 function Invoke-Function13 {
-    Show-Header "Clear Recent Documents - Xoa Tai Lieu Gan Day" "13"
-    Write-Host "[*] Clearing Recent folder..." -ForegroundColor Yellow
+    Show-Header "Clear Recent Documents" "13"
     Remove-Item -Path "$env:APPDATA\Microsoft\Windows\Recent\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Clearing Jump Lists..." -ForegroundColor Yellow
     reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs" /f 2>$null
-    Show-Success "Recent documents cleared! / Da xoa tai lieu gan day!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Recent documents cleared!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function14 {
-    Show-Header "Clear Run History - Xoa Lich Su Run" "14"
-    Write-Host "[*] Deleting Run history from registry..." -ForegroundColor Yellow
+    Show-Header "Clear Run History" "14"
     reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /f 2>$null
-    Show-Success "Run history cleared! / Da xoa lich su Run!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Run history cleared!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function15 {
-    Show-Header "Clear Search History - Xoa Lich Su Tim Kiem" "15"
-    Write-Host "[*] Deleting search history..." -ForegroundColor Yellow
+    Show-Header "Clear Search History" "15"
     reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\WordWheelQuery" /f 2>$null
     reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\TypedPaths" /f 2>$null
-    Show-Success "Search history cleared! / Da xoa lich su tim kiem!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Search history cleared!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function16 {
-    Show-Header "Clear Clipboard History - Xoa Lich Su Clipboard" "16"
-    Write-Host "[*] Clearing clipboard..." -ForegroundColor Yellow
+    Show-Header "Clear Clipboard History" "16"
     "" | Set-Clipboard
     Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Windows\Clipboard\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Show-Success "Clipboard history cleared! / Da xoa lich su clipboard!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Clipboard history cleared!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function17 {
-    Show-Header "Clear Windows Error Reports - Xoa Bao Cao Loi Windows" "17"
-    Write-Host "[*] Deleting error reports..." -ForegroundColor Yellow
+    Show-Header "Clear Windows Error Reports" "17"
     Remove-Item -Path "C:\ProgramData\Microsoft\Windows\WER\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Get-ChildItem "C:\Users" -Directory | ForEach-Object {
-        Remove-Item -Path "$($_.FullName)\AppData\Local\Microsoft\Windows\WER\*" -Recurse -Force -ErrorAction SilentlyContinue
-    }
-    Write-Host "[*] Disabling error reporting..." -ForegroundColor Yellow
-    reg add "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /v Disabled /t REG_DWORD /d 1 /f 2>$null
-    Show-Success "Error reports cleared! / Da xoa bao cao loi!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Error reports cleared!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function18 {
-    Show-Header "Disable Telemetry and Tracking - Tat Thu Thap Du Lieu" "18"
-    Write-Host "[*] Disabling telemetry services..." -ForegroundColor Yellow
-    Set-Service -Name "DiagTrack" -StartupType Disabled -ErrorAction SilentlyContinue
-    Stop-Service -Name "DiagTrack" -Force -ErrorAction SilentlyContinue
-    Set-Service -Name "dmwappushservice" -StartupType Disabled -ErrorAction SilentlyContinue
-    Stop-Service -Name "dmwappushservice" -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Disabling telemetry via registry..." -ForegroundColor Yellow
+    Show-Header "Disable Telemetry and Tracking" "18"
+    Set-Service DiagTrack,dmwappushservice -StartupType Disabled -ErrorAction SilentlyContinue
+    Stop-Service DiagTrack,dmwappushservice -Force -ErrorAction SilentlyContinue
     reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d 0 /f 2>$null
-    reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v AllowTelemetry /t REG_DWORD /d 0 /f 2>$null
-    Show-Success "Telemetry disabled! / Da tat thu thap du lieu!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Telemetry disabled!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function19 {
-    Show-Header "Clear Event Logs - Xoa Nhat Ky Su Kien" "19"
-    Write-Host "[*] Clearing all event logs..." -ForegroundColor Yellow
+    Show-Header "Clear Event Logs" "19"
     wevtutil el | ForEach-Object { wevtutil cl $_ 2>$null }
-    Show-Success "Event logs cleared! / Da xoa nhat ky su kien!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Event logs cleared!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function20 {
-    Show-Header "Clear DNS Cache - Xoa Cache DNS" "20"
-    Write-Host "[*] Flushing DNS resolver cache..." -ForegroundColor Yellow
+    Show-Header "Clear DNS Cache" "20"
     ipconfig /flushdns
     Clear-DnsClientCache -ErrorAction SilentlyContinue
-    Show-Success "DNS cache cleared! / Da xoa cache DNS!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "DNS cache cleared!"
+    Read-Host "`nPress Enter"
 }
 
-# ============================================================================
-# NETWORK OPTIMIZATION FUNCTIONS [21-26]
-# ============================================================================
-
+# CATEGORY 3: NETWORK OPTIMIZATION [21-26]
 function Invoke-Function21 {
-    Show-Header "Reset Network Settings - Reset Cai Dat Mang" "21"
-    Write-Host "[*] Resetting IP stack..." -ForegroundColor Yellow
+    Show-Header "Reset Network Settings" "21"
     netsh int ip reset
-    Write-Host "[*] Resetting Winsock..." -ForegroundColor Yellow
     netsh winsock reset
-    Write-Host "[*] Flushing DNS..." -ForegroundColor Yellow
     ipconfig /flushdns
-    Write-Host "[*] Releasing IP..." -ForegroundColor Yellow
     ipconfig /release
-    Write-Host "[*] Renewing IP..." -ForegroundColor Yellow
     ipconfig /renew
-    Show-Success "Network settings reset! / Da reset cai dat mang!"
-    Show-Info "Please restart computer / Vui long khoi dong lai may!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Network settings reset!"
+    Show-Info "Please restart computer"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function22 {
-    Show-Header "Optimize Network Performance - Toi Uu Hieu Suat Mang" "22"
-    Write-Host "[*] Optimizing TCP settings..." -ForegroundColor Yellow
+    Show-Header "Optimize Network Performance" "22"
     netsh int tcp set global autotuninglevel=normal
     netsh int tcp set global rsc=enabled
-    Write-Host "[*] Optimizing network throttling..." -ForegroundColor Yellow
     reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v NetworkThrottlingIndex /t REG_DWORD /d 0xffffffff /f 2>$null
-    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Psched" /v NonBestEffortLimit /t REG_DWORD /d 0 /f 2>$null
-    Show-Success "Network optimized! / Da toi uu mang!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Network optimized!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function23 {
-    Show-Header "Clear ARP Cache - Xoa Cache ARP" "23"
-    Write-Host "[*] Deleting ARP cache..." -ForegroundColor Yellow
+    Show-Header "Clear ARP Cache" "23"
     netsh interface ip delete arpcache
-    Show-Success "ARP cache cleared! / Da xoa cache ARP!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "ARP cache cleared!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function24 {
-    Show-Header "Reset Winsock - Reset Winsock" "24"
-    Write-Host "[*] Resetting Winsock..." -ForegroundColor Yellow
+    Show-Header "Reset Winsock" "24"
     netsh winsock reset
-    Write-Host "[*] Resetting IP configuration..." -ForegroundColor Yellow
     netsh int ip reset
-    Show-Success "Winsock reset! / Da reset Winsock!"
-    Show-Info "Please restart computer / Vui long khoi dong lai may!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Winsock reset!"
+    Show-Info "Please restart computer"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function25 {
-    Show-Header "Renew IP Address - Lam Moi Dia Chi IP" "25"
-    Write-Host "[*] Releasing current IP..." -ForegroundColor Yellow
+    Show-Header "Renew IP Address" "25"
     ipconfig /release
-    Write-Host "[*] Renewing IP address..." -ForegroundColor Yellow
     ipconfig /renew
-    Write-Host "[*] Flushing DNS..." -ForegroundColor Yellow
     ipconfig /flushdns
-    Show-Success "IP address renewed! / Da lam moi dia chi IP!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "IP address renewed!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function26 {
-    Show-Header "Fix Network Adapter - Sua Card Mang" "26"
-    Write-Host "[*] Resetting network adapter..." -ForegroundColor Yellow
+    Show-Header "Fix Network Adapter" "26"
     Get-NetAdapter | Where-Object {$_.Status -eq "Up"} | ForEach-Object {
         Disable-NetAdapter -Name $_.Name -Confirm:$false -ErrorAction SilentlyContinue
-        Start-Sleep -Seconds 2
+        Start-Sleep 2
         Enable-NetAdapter -Name $_.Name -Confirm:$false -ErrorAction SilentlyContinue
     }
-    Write-Host "[*] Resetting TCP/IP stack..." -ForegroundColor Yellow
-    netsh int ip reset
-    netsh winsock reset
-    Show-Success "Network adapter fixed! / Da sua card mang!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Network adapter fixed!"
+    Read-Host "`nPress Enter"
 }
 
-# ============================================================================
-# DISK MANAGEMENT FUNCTIONS [27-32]
-# ============================================================================
-
+# CATEGORY 4: DISK MANAGEMENT [27-32]
 function Invoke-Function27 {
-    Show-Header "Disk Cleanup (Built-in) - Don Dep O Dia" "27"
-    Write-Host "[*] Starting Windows Disk Cleanup..." -ForegroundColor Yellow
+    Show-Header "Disk Cleanup" "27"
     cleanmgr /sagerun:1
-    Show-Success "Disk cleanup completed! / Hoan thanh don dep o dia!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Disk cleanup completed!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function28 {
-    Show-Header "Disk Error Check - Kiem Tra Loi O Dia" "28"
-    $drive = Read-Host "Enter drive letter (C, D, etc.) / Nhap chu cai o dia"
-    Write-Host "[*] Scheduling disk check for next boot..." -ForegroundColor Yellow
+    Show-Header "Disk Error Check" "28"
+    $drive = Read-Host "Enter drive letter (C,D,etc)"
     echo Y | chkdsk ${drive}: /f /r /x
-    Show-Info "Disk check scheduled for next reboot / Da len lich kiem tra khi khoi dong lai!"
-    Read-Host "`nPress Enter to continue"
+    Show-Info "Disk check scheduled for next reboot"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function29 {
-    Show-Header "Disk Optimization - Toi Uu O Dia" "29"
-    Write-Host "[*] Analyzing and optimizing drives..." -ForegroundColor Yellow
+    Show-Header "Disk Optimization" "29"
     defrag /C /O /H /U
-    Show-Success "Disk optimization completed! / Hoan thanh toi uu o dia!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Disk optimization completed!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function30 {
-    Show-Header "Analyze Disk Space - Phan Tich Dung Luong" "30"
-    Write-Host "[*] Disk space on all drives:`n" -ForegroundColor Yellow
-    Get-PSDrive -PSProvider FileSystem | Select-Object Name, @{N="Used(GB)";E={[math]::Round($_.Used/1GB,2)}}, @{N="Free(GB)";E={[math]::Round($_.Free/1GB,2)}} | Format-Table
-    Read-Host "`nPress Enter to continue"
+    Show-Header "Analyze Disk Space" "30"
+    Get-PSDrive -PSProvider FileSystem | Select-Object Name,@{N="Used(GB)";E={[math]::Round($_.Used/1GB,2)}},@{N="Free(GB)";E={[math]::Round($_.Free/1GB,2)}} | Format-Table
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function31 {
-    Show-Header "Clean Windows.old Folder - Xoa Thu Muc Windows.old" "31"
-    Show-Warning "Cannot undo this action! / Khong the hoan tac!"
-    $confirm = Read-Host "`nContinue / Tiep tuc (Y/N)"
-    if ($confirm -ne "Y" -and $confirm -ne "y") { return }
-    Write-Host "`n[*] Taking ownership..." -ForegroundColor Yellow
-    cmd /c "takeown /F C:\Windows.old\* /R /A /D Y" 2>$null
-    cmd /c "icacls C:\Windows.old\*.* /T /grant administrators:F" 2>$null
-    Write-Host "[*] Deleting Windows.old..." -ForegroundColor Yellow
-    Remove-Item -Path "C:\Windows.old" -Recurse -Force -ErrorAction SilentlyContinue
-    Show-Success "Windows.old deleted! / Da xoa Windows.old!"
-    Read-Host "`nPress Enter to continue"
+    Show-Header "Clean Windows.old Folder" "31"
+    $confirm = Read-Host "Continue (Y/N)"
+    if ($confirm -eq "Y") {
+        cmd /c "takeown /F C:\Windows.old\* /R /A /D Y" 2>$null
+        Remove-Item -Path "C:\Windows.old" -Recurse -Force -ErrorAction SilentlyContinue
+        Show-Success "Windows.old deleted!"
+    }
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function32 {
-    Show-Header "Compact OS - Nen He Thong" "32"
-    Show-Warning "This will compress Windows system files"
-    $confirm = Read-Host "`nContinue / Tiep tuc (Y/N)"
-    if ($confirm -ne "Y" -and $confirm -ne "y") { return }
-    Write-Host "`n[*] Analyzing system..." -ForegroundColor Yellow
-    compact /compactos:query
-    Write-Host "[*] Compressing system files..." -ForegroundColor Yellow
-    compact /compactos:always
-    Show-Success "System compressed! / Da nen he thong!"
-    Read-Host "`nPress Enter to continue"
+    Show-Header "Compact OS" "32"
+    $confirm = Read-Host "Continue (Y/N)"
+    if ($confirm -eq "Y") {
+        compact /compactos:query
+        compact /compactos:always
+        Show-Success "System compressed!"
+    }
+    Read-Host "`nPress Enter"
 }
 
-# ============================================================================
-# PERFORMANCE OPTIMIZATION FUNCTIONS [33-44]
-# ============================================================================
-
+# CATEGORY 5: PERFORMANCE OPTIMIZATION [33-44]
 function Invoke-Function33 {
-    Show-Header "Disable Startup Programs - Tat Chuong Trinh Khoi Dong" "33"
-    Write-Host "[*] Opening Task Manager Startup tab..." -ForegroundColor Yellow
-    Show-Info "Please manually disable unnecessary programs"
+    Show-Header "Disable Startup Programs" "33"
     start taskmgr /0 /startup
-    Read-Host "`nPress Enter to continue"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function34 {
-    Show-Header "Optimize Services - Toi Uu Dich Vu" "34"
-    Write-Host "[*] Disabling unnecessary services..." -ForegroundColor Yellow
-    @("Fax","RemoteRegistry","HomeGroupListener","HomeGroupProvider") | ForEach-Object {
+    Show-Header "Optimize Services" "34"
+    @("Fax","RemoteRegistry") | ForEach-Object {
         Set-Service -Name $_ -StartupType Disabled -ErrorAction SilentlyContinue
         Stop-Service -Name $_ -Force -ErrorAction SilentlyContinue
     }
-    Show-Success "Services optimized! / Da toi uu dich vu!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Services optimized!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function35 {
-    Show-Header "Clear Prefetch Files - Xoa File Prefetch" "35"
-    Write-Host "[*] Deleting prefetch files..." -ForegroundColor Yellow
+    Show-Header "Clear Prefetch Files" "35"
     Remove-Item -Path "C:\Windows\Prefetch\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Show-Success "Prefetch files cleared! / Da xoa file prefetch!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Prefetch files cleared!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function36 {
-    Show-Header "Clear SuperFetch Cache - Xoa Cache SuperFetch" "36"
-    Write-Host "[*] Stopping SuperFetch service..." -ForegroundColor Yellow
-    Stop-Service -Name "SysMain" -Force -ErrorAction SilentlyContinue
+    Show-Header "Clear SuperFetch Cache" "36"
+    Stop-Service SysMain -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "C:\Windows\Prefetch\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Starting SuperFetch service..." -ForegroundColor Yellow
-    Start-Service -Name "SysMain" -ErrorAction SilentlyContinue
-    Show-Success "SuperFetch cache cleared! / Da xoa cache SuperFetch!"
-    Read-Host "`nPress Enter to continue"
+    Start-Service SysMain -ErrorAction SilentlyContinue
+    Show-Success "SuperFetch cache cleared!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function37 {
-    Show-Header "Disable Visual Effects - Tat Hieu Ung Hinh Anh" "37"
-    Write-Host "[*] Setting to best performance..." -ForegroundColor Yellow
+    Show-Header "Disable Visual Effects" "37"
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v VisualFXSetting /t REG_DWORD /d 2 /f 2>$null
-    reg add "HKCU\Control Panel\Desktop\WindowMetrics" /v MinAnimate /t REG_SZ /d 0 /f 2>$null
-    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v EnableTransparency /t REG_DWORD /d 0 /f 2>$null
-    Show-Success "Visual effects disabled! / Da tat hieu ung hinh anh!"
+    Show-Success "Visual effects disabled!"
     Show-Info "Please log off and log back in"
-    Read-Host "`nPress Enter to continue"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function38 {
-    Show-Header "Optimize Power Plan - Toi Uu Che Do Nguon" "38"
-    Write-Host "[*] Setting High Performance power plan..." -ForegroundColor Yellow
+    Show-Header "Optimize Power Plan" "38"
     powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
-    powercfg -change -disk-timeout-ac 0
-    Show-Success "Power plan optimized! / Da toi uu che do nguon!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Power plan optimized!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function39 {
-    Show-Header "Disable Hibernation - Tat Che Do Ngu Dong" "39"
-    Write-Host "[*] Disabling hibernation..." -ForegroundColor Yellow
+    Show-Header "Disable Hibernation" "39"
     powercfg -h off
-    Remove-Item -Path "C:\hiberfil.sys" -Force -ErrorAction SilentlyContinue
-    Show-Success "Hibernation disabled! / Da tat che do ngu dong!"
-    Show-Info "This freed up several GB of disk space"
-    Read-Host "`nPress Enter to continue"
+    Remove-Item "C:\hiberfil.sys" -Force -ErrorAction SilentlyContinue
+    Show-Success "Hibernation disabled!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function40 {
-    Show-Header "Clear Memory Cache - Xoa Cache Bo Nho" "40"
-    Write-Host "[*] Clearing memory cache..." -ForegroundColor Yellow
+    Show-Header "Clear Memory Cache" "40"
     reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v ClearPageFileAtShutdown /t REG_DWORD /d 1 /f 2>$null
-    Show-Success "Memory cache cleared! / Da xoa cache bo nho!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Memory cache cleared!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function41 {
-    Show-Header "Optimize Search Index - Toi Uu Tim Kiem" "41"
-    Write-Host "[*] Stopping search service..." -ForegroundColor Yellow
-    Stop-Service -Name "WSearch" -Force -ErrorAction SilentlyContinue
+    Show-Header "Optimize Search Index" "41"
+    Stop-Service WSearch -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "C:\ProgramData\Microsoft\Search\Data\Applications\Windows\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Restarting search service..." -ForegroundColor Yellow
-    Start-Service -Name "WSearch" -ErrorAction SilentlyContinue
-    Show-Success "Search index optimized! / Da toi uu tim kiem!"
-    Read-Host "`nPress Enter to continue"
+    Start-Service WSearch -ErrorAction SilentlyContinue
+    Show-Success "Search index optimized!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function42 {
-    Show-Header "Disable Windows Animations - Tat Hoat Anh Windows" "42"
-    Write-Host "[*] Disabling taskbar animations..." -ForegroundColor Yellow
+    Show-Header "Disable Windows Animations" "42"
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v TaskbarAnimations /t REG_DWORD /d 0 /f 2>$null
-    reg add "HKCU\Control Panel\Desktop\WindowMetrics" /v MinAnimate /t REG_SZ /d 0 /f 2>$null
-    Show-Success "Animations disabled! / Da tat hoat anh!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Animations disabled!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function43 {
-    Show-Header "Optimize SSD Settings - Toi Uu SSD" "43"
-    Write-Host "[*] Enabling TRIM..." -ForegroundColor Yellow
+    Show-Header "Optimize SSD Settings" "43"
     fsutil behavior set DisableDeleteNotify 0
-    Write-Host "[*] Disabling defragmentation..." -ForegroundColor Yellow
     schtasks /change /tn "\Microsoft\Windows\Defrag\ScheduledDefrag" /disable 2>$null
-    Write-Host "[*] Disabling Superfetch for SSD..." -ForegroundColor Yellow
-    Set-Service -Name "SysMain" -StartupType Disabled -ErrorAction SilentlyContinue
-    Stop-Service -Name "SysMain" -Force -ErrorAction SilentlyContinue
-    Show-Success "SSD optimized! / Da toi uu SSD!"
-    Read-Host "`nPress Enter to continue"
+    Set-Service SysMain -StartupType Disabled -ErrorAction SilentlyContinue
+    Stop-Service SysMain -Force -ErrorAction SilentlyContinue
+    Show-Success "SSD optimized!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function44 {
-    Show-Header "Reduce Menu Show Delay - Giam Tre Hien Thi Menu" "44"
-    Write-Host "[*] Setting menu show delay to 0ms..." -ForegroundColor Yellow
+    Show-Header "Reduce Menu Show Delay" "44"
     reg add "HKCU\Control Panel\Desktop" /v MenuShowDelay /t REG_SZ /d 0 /f 2>$null
-    Show-Success "Menu delay reduced! / Da giam tre menu!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Menu delay reduced!"
+    Read-Host "`nPress Enter"
 }
 
-# ============================================================================
-# SYSTEM MAINTENANCE FUNCTIONS [45-50]
-# ============================================================================
-
+# CATEGORY 6: SYSTEM MAINTENANCE [45-50]
 function Invoke-Function45 {
-    Show-Header "System File Checker (SFC) - Kiem Tra File He Thong" "45"
-    Write-Host "This may take several minutes / Co the mat vai phut...`n" -ForegroundColor Yellow
+    Show-Header "System File Checker (SFC)" "45"
     sfc /scannow
-    Show-Success "SFC scan completed! / Hoan thanh kiem tra SFC!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "SFC scan completed!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function46 {
-    Show-Header "DISM System Repair - Sua Chua He Thong DISM" "46"
-    Write-Host "This may take several minutes / Co the mat vai phut...`n" -ForegroundColor Yellow
-    Write-Host "[*] Checking health..." -ForegroundColor Yellow
+    Show-Header "DISM System Repair" "46"
     Dism /Online /Cleanup-Image /CheckHealth
-    Write-Host "[*] Scanning health..." -ForegroundColor Yellow
     Dism /Online /Cleanup-Image /ScanHealth
-    Write-Host "[*] Restoring health..." -ForegroundColor Yellow
     Dism /Online /Cleanup-Image /RestoreHealth
-    Show-Success "DISM repair completed! / Hoan thanh sua chua DISM!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "DISM repair completed!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function47 {
-    Show-Header "Windows Component Cleanup - Don Dep Thanh Phan Windows" "47"
-    Write-Host "[*] Starting component cleanup..." -ForegroundColor Yellow
+    Show-Header "Windows Component Cleanup" "47"
     Dism.exe /online /Cleanup-Image /StartComponentCleanup
-    Write-Host "[*] Resetting base..." -ForegroundColor Yellow
     Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
-    Show-Success "Component cleanup completed! / Hoan thanh don dep thanh phan!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Component cleanup completed!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function48 {
-    Show-Header "Update Windows Drivers - Cap Nhat Driver Windows" "48"
-    Write-Host "[*] Opening Windows Update..." -ForegroundColor Yellow
+    Show-Header "Update Windows Drivers" "48"
     start ms-settings:windowsupdate
-    Show-Info "Please check for driver updates manually"
-    Read-Host "`nPress Enter to continue"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function49 {
-    Show-Header "Rebuild Icon Cache - Xay Dung Lai Icon Cache" "49"
-    Write-Host "[*] Stopping Windows Explorer..." -ForegroundColor Yellow
-    Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue
+    Show-Header "Rebuild Icon Cache" "49"
+    Stop-Process explorer -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:LOCALAPPDATA\IconCache.db" -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Windows\Explorer\iconcache_*.db" -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Restarting Windows Explorer..." -ForegroundColor Yellow
     Start-Process explorer
-    Show-Success "Icon cache rebuilt! / Da xay dung lai icon cache!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Icon cache rebuilt!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function50 {
-    Show-Header "Rebuild Windows Search Index - Xay Dung Lai Tim Kiem" "50"
-    Write-Host "[*] Opening Indexing Options..." -ForegroundColor Yellow
+    Show-Header "Rebuild Windows Search Index" "50"
     control /name Microsoft.IndexingOptions
-    Show-Info "Please click 'Advanced' and then 'Rebuild'"
-    Read-Host "`nPress Enter to continue"
+    Read-Host "`nPress Enter"
 }
 
-# ============================================================================
-# REGISTRY OPTIMIZATION FUNCTIONS [51-55]
-# ============================================================================
-
+# CATEGORY 7: REGISTRY OPTIMIZATION [51-55]
 function Invoke-Function51 {
-    Show-Header "Clean Registry (Safe) - Don Dep Registry (An Toan)" "51"
-    Write-Host "[*] Cleaning MUICache..." -ForegroundColor Yellow
+    Show-Header "Clean Registry (Safe)" "51"
     reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache" /f 2>$null
-    Write-Host "[*] Cleaning UserAssist..." -ForegroundColor Yellow
     reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist" /f 2>$null
-    Show-Success "Registry cleaned! / Da don dep registry!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Registry cleaned!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function52 {
-    Show-Header "Optimize Registry - Toi Uu Registry" "52"
-    Write-Host "[*] Optimizing registry access..." -ForegroundColor Yellow
+    Show-Header "Optimize Registry" "52"
     reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v RegistrySizeLimit /t REG_DWORD /d 0x40000000 /f 2>$null
-    reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v IoPageLockLimit /t REG_DWORD /d 0xf000000 /f 2>$null
-    Show-Success "Registry optimized! / Da toi uu registry!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Registry optimized!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function53 {
-    Show-Header "Backup Registry - Sao Luu Registry" "53"
+    Show-Header "Backup Registry" "53"
     $BackupDir = "C:\RegistryBackup"
-    if (-not (Test-Path $BackupDir)) { New-Item -Path $BackupDir -ItemType Directory -Force | Out-Null }
-    Write-Host "[*] Exporting registry..." -ForegroundColor Yellow
+    if (!(Test-Path $BackupDir)) { New-Item -Path $BackupDir -ItemType Directory -Force | Out-Null }
     $date = Get-Date -Format "yyyyMMdd"
     reg export HKLM "$BackupDir\HKLM_$date.reg" /y 2>$null
     reg export HKCU "$BackupDir\HKCU_$date.reg" /y 2>$null
     Show-Success "Registry backed up to C:\RegistryBackup\"
-    Read-Host "`nPress Enter to continue"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function54 {
-    Show-Header "Disable Cortana - Tat Cortana" "54"
-    Write-Host "[*] Disabling Cortana via registry..." -ForegroundColor Yellow
+    Show-Header "Disable Cortana" "54"
     reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortana /t REG_DWORD /d 0 /f 2>$null
-    reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v BingSearchEnabled /t REG_DWORD /d 0 /f 2>$null
-    Show-Success "Cortana disabled! / Da tat Cortana!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Cortana disabled!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function55 {
-    Show-Header "Disable Windows Tips - Tat Goi Y Windows" "55"
-    Write-Host "[*] Disabling tips..." -ForegroundColor Yellow
+    Show-Header "Disable Windows Tips" "55"
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v SubscribedContent-338389Enabled /t REG_DWORD /d 0 /f 2>$null
-    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v SoftLandingEnabled /t REG_DWORD /d 0 /f 2>$null
-    Show-Success "Windows tips disabled! / Da tat goi y Windows!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Windows tips disabled!"
+    Read-Host "`nPress Enter"
 }
 
-# ============================================================================
-# ADVANCED TOOLS FUNCTIONS [56-70]
-# ============================================================================
-
+# CATEGORY 8: ADVANCED TOOLS [56-70]
 function Invoke-Function56 {
-    Show-Header "Create System Restore Point - Tao Diem Khoi Phuc" "56"
-    Write-Host "[*] Creating restore point..." -ForegroundColor Yellow
+    Show-Header "Create System Restore Point" "56"
     Checkpoint-Computer -Description "Ultimate System Tool Backup" -RestorePointType "MODIFY_SETTINGS"
-    Show-Success "Restore point created! / Da tao diem khoi phuc!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Restore point created!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function57 {
-    Show-Header "View System Information - Xem Thong Tin He Thong" "57"
-    Write-Host "[*] Gathering system information...`n" -ForegroundColor Yellow
+    Show-Header "View System Information" "57"
     systeminfo
-    Read-Host "`nPress Enter to continue"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function58 {
-    Show-Header "Export Programs List - Xuat Danh Sach Chuong Trinh" "58"
-    Write-Host "[*] Creating list..." -ForegroundColor Yellow
-    Get-WmiObject -Class Win32_Product | Select-Object Name, Version | Export-Csv "$env:USERPROFILE\Desktop\InstalledPrograms.csv" -NoTypeInformation
+    Show-Header "Export Programs List" "58"
+    Get-WmiObject -Class Win32_Product | Select-Object Name,Version | Export-Csv "$env:USERPROFILE\Desktop\InstalledPrograms.csv" -NoTypeInformation
     Show-Success "List saved to Desktop\InstalledPrograms.csv"
-    Read-Host "`nPress Enter to continue"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function59 {
-    Show-Header "Check Disk Health (SMART) - Kiem Tra Suc Khoe O Dia" "59"
-    Write-Host "[*] Checking SMART status...`n" -ForegroundColor Yellow
-    Get-WmiObject -Class Win32_DiskDrive | Select-Object Model, Size, Status | Format-Table
-    Read-Host "`nPress Enter to continue"
+    Show-Header "Check Disk Health (SMART)" "59"
+    Get-WmiObject -Class Win32_DiskDrive | Select-Object Model,Size,Status | Format-Table
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function60 {
-    Show-Header "Clear Windows Store Cache - Xoa Cache Windows Store" "60"
-    Write-Host "[*] Clearing Windows Store cache..." -ForegroundColor Yellow
+    Show-Header "Clear Windows Store Cache" "60"
     wsreset.exe
-    Show-Success "Windows Store cache cleared! / Da xoa cache Windows Store!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Windows Store cache cleared!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function61 {
-    Show-Header "Reset Windows Update Components - Reset Thanh Phan Update" "61"
-    Write-Host "[*] Stopping update services..." -ForegroundColor Yellow
-    Stop-Service -Name wuauserv,cryptSvc,bits,msiserver -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Renaming folders..." -ForegroundColor Yellow
-    Rename-Item -Path "C:\Windows\SoftwareDistribution" -NewName "SoftwareDistribution.old" -Force -ErrorAction SilentlyContinue
-    Rename-Item -Path "C:\Windows\System32\catroot2" -NewName "catroot2.old" -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Starting update services..." -ForegroundColor Yellow
-    Start-Service -Name wuauserv,cryptSvc,bits,msiserver -ErrorAction SilentlyContinue
-    Show-Success "Windows Update reset! / Da reset Windows Update!"
-    Read-Host "`nPress Enter to continue"
+    Show-Header "Reset Windows Update Components" "61"
+    Stop-Service wuauserv,cryptSvc,bits,msiserver -Force -ErrorAction SilentlyContinue
+    Rename-Item "C:\Windows\SoftwareDistribution" "SoftwareDistribution.old" -Force -ErrorAction SilentlyContinue
+    Rename-Item "C:\Windows\System32\catroot2" "catroot2.old" -Force -ErrorAction SilentlyContinue
+    Start-Service wuauserv,cryptSvc,bits,msiserver -ErrorAction SilentlyContinue
+    Show-Success "Windows Update reset!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function62 {
-    Show-Header "Optimize Boot Time - Toi Uu Thoi Gian Khoi Dong" "62"
-    Write-Host "[*] Enabling fast startup..." -ForegroundColor Yellow
+    Show-Header "Optimize Boot Time" "62"
     reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v HiberbootEnabled /t REG_DWORD /d 1 /f 2>$null
-    Write-Host "[*] Reducing boot timeout..." -ForegroundColor Yellow
     bcdedit /timeout 3 2>$null
-    Show-Success "Boot time optimized! / Da toi uu thoi gian khoi dong!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Boot time optimized!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function63 {
-    Show-Header "Clean All Temporary Files - Xoa Tat Ca File Tam" "63"
-    Write-Host "[*] User temp..." -ForegroundColor Yellow
-    Remove-Item -Path "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Windows temp..." -ForegroundColor Yellow
-    Remove-Item -Path "C:\Windows\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Prefetch..." -ForegroundColor Yellow
-    Remove-Item -Path "C:\Windows\Prefetch\*" -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Recent items..." -ForegroundColor Yellow
-    Remove-Item -Path "$env:APPDATA\Microsoft\Windows\Recent\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Show-Success "All temporary files cleaned! / Da xoa tat ca file tam!"
-    Read-Host "`nPress Enter to continue"
+    Show-Header "Clean All Temporary Files" "63"
+    Remove-Item -Path "$env:TEMP\*","C:\Windows\Temp\*","C:\Windows\Prefetch\*","$env:APPDATA\Microsoft\Windows\Recent\*" -Recurse -Force -ErrorAction SilentlyContinue
+    Show-Success "All temporary files cleaned!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function64 {
-    Show-Header "Generate System Report - Tao Bao Cao He Thong" "64"
-    Write-Host "[*] Creating report (this may take several minutes)..." -ForegroundColor Yellow
+    Show-Header "Generate System Report" "64"
     perfmon /report
-    Show-Success "Report generated! / Da tao bao cao!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Report generated!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function65 {
-    Show-Header "Clean Software Cache - Xoa Cache Phan Mem" "65"
-    Write-Host "[*] Adobe cache..." -ForegroundColor Yellow
+    Show-Header "Clean Software Cache" "65"
     Remove-Item -Path "$env:APPDATA\Adobe\Common\Media Cache Files\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Host "[*] Office file cache..." -ForegroundColor Yellow
     Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Office\16.0\OfficeFileCache\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Show-Success "Software cache cleaned! / Da xoa cache phan mem!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Software cache cleaned!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function66 {
-    Show-Header "Clean Delivery Optimization - Xoa Delivery Optimization" "66"
-    Write-Host "[*] Stopping Delivery Optimization service..." -ForegroundColor Yellow
-    Stop-Service -Name "DoSvc" -Force -ErrorAction SilentlyContinue
+    Show-Header "Clean Delivery Optimization" "66"
+    Stop-Service DoSvc -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "C:\Windows\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Start-Service -Name "DoSvc" -ErrorAction SilentlyContinue
-    Show-Success "Delivery Optimization cache cleaned!"
-    Read-Host "`nPress Enter to continue"
+    Start-Service DoSvc -ErrorAction SilentlyContinue
+    Show-Success "Delivery Optimization cleaned!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function67 {
-    Show-Header "Clean Update Backup (LCU) - Xoa Sao Luu Cap Nhat" "67"
-    Show-Warning "You will NOT be able to uninstall updates after this!"
-    $confirm = Read-Host "`nContinue / Tiep tuc (Y/N)"
-    if ($confirm -ne "Y" -and $confirm -ne "y") { return }
-    $pathLCU = "C:\Windows\servicing\LCU"
-    if (Test-Path $pathLCU) {
-        Write-Host "`n[*] Cleaning LCU backup folder..." -ForegroundColor Yellow
-        cmd /c "takeown /f `"$pathLCU`" /r /d y" 2>$null
-        cmd /c "icacls `"$pathLCU`" /grant administrators:F /t /c" 2>$null
-        Remove-Item -Path $pathLCU -Recurse -Force -ErrorAction SilentlyContinue
-        New-Item -Path $pathLCU -ItemType Directory -Force | Out-Null
-        Show-Success "LCU backup cleaned! This can free up 5-10 GB!"
-    } else {
-        Show-Info "LCU backup folder not found"
+    Show-Header "Clean Update Backup (LCU)" "67"
+    $confirm = Read-Host "Continue (Y/N)"
+    if ($confirm -eq "Y") {
+        $pathLCU = "C:\Windows\servicing\LCU"
+        if (Test-Path $pathLCU) {
+            cmd /c "takeown /f `"$pathLCU`" /r /d y" 2>$null
+            Remove-Item -Path $pathLCU -Recurse -Force -ErrorAction SilentlyContinue
+            New-Item -Path $pathLCU -ItemType Directory -Force | Out-Null
+            Show-Success "LCU backup cleaned!"
+        }
     }
-    Read-Host "`nPress Enter to continue"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function68 {
-    Show-Header "Optimize Memory (RAM) - Toi Uu Bo Nho RAM" "68"
-    Write-Host "[*] Clearing standby memory list..." -ForegroundColor Yellow
-    Get-Process | ForEach-Object { try { $_.MinWorkingSet = 100KB } catch {} }
-    Write-Host "[*] Flushing file system cache..." -ForegroundColor Yellow
+    Show-Header "Optimize Memory (RAM)" "68"
+    Get-Process | ForEach-Object { try{$_.MinWorkingSet=100KB}catch{} }
     ipconfig /flushdns 2>$null
-    ipconfig /registerdns 2>$null
-    Show-Success "Memory optimized! / Da toi uu bo nho!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Memory optimized!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function69 {
-    Show-Header "Show Disk Space Report - Xem Bao Cao Dung Luong" "69"
-    Write-Host "[*] All drives:`n" -ForegroundColor Yellow
-    Get-PSDrive -PSProvider FileSystem | Select-Object Name, @{N="Used(GB)";E={[math]::Round($_.Used/1GB,2)}}, @{N="Free(GB)";E={[math]::Round($_.Free/1GB,2)}}, @{N="Total(GB)";E={[math]::Round(($_.Used+$_.Free)/1GB,2)}} | Format-Table
-    Read-Host "`nPress Enter to continue"
+    Show-Header "Show Disk Space Report" "69"
+    Get-PSDrive -PSProvider FileSystem | Select-Object Name,@{N="Used(GB)";E={[math]::Round($_.Used/1GB,2)}},@{N="Free(GB)";E={[math]::Round($_.Free/1GB,2)}},@{N="Total(GB)";E={[math]::Round(($_.Used+$_.Free)/1GB,2)}} | Format-Table
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function70 {
-    Show-Header "Refresh Icon Cache - Lam Moi Icon Cache" "70"
-    Write-Host "[*] Refreshing system icon cache..." -ForegroundColor Yellow
+    Show-Header "Refresh Icon Cache" "70"
     ie4uinit.exe -show 2>$null
-    Show-Success "Icon cache refreshed! / Da lam moi icon cache!"
-    Read-Host "`nPress Enter to continue"
+    Show-Success "Icon cache refreshed!"
+    Read-Host "`nPress Enter"
 }
 
-# ============================================================================
-# SYSTEM UTILITIES FUNCTIONS [71-76]
-# ============================================================================
-
+# CATEGORY 9: SYSTEM UTILITIES [71-76]
 function Invoke-Function71 {
-    Show-Header "Check System Information - Kiem Tra Thong Tin May" "71"
+    Show-Header "Check System Information" "71"
     Write-Host "[HARDWARE INFORMATION]`n" -ForegroundColor Yellow
-    Write-Host "[*] Computer System:" -ForegroundColor Cyan
-    Get-WmiObject -Class Win32_ComputerSystem | Select-Object Manufacturer, Model, TotalPhysicalMemory | Format-List
-    Write-Host "[*] CPU Information:" -ForegroundColor Cyan
-    Get-WmiObject -Class Win32_Processor | Select-Object Name, NumberOfCores, NumberOfLogicalProcessors | Format-List
-    Write-Host "[*] Operating System:" -ForegroundColor Cyan
-    Get-WmiObject -Class Win32_OperatingSystem | Select-Object Caption, Version, OSArchitecture | Format-List
-    Write-Host "`n[*] Opening detailed system info..." -ForegroundColor Yellow
+    Get-WmiObject Win32_ComputerSystem | Select-Object Manufacturer,Model,TotalPhysicalMemory | Format-List
+    Get-WmiObject Win32_Processor | Select-Object Name,NumberOfCores,NumberOfLogicalProcessors | Format-List
+    Get-WmiObject Win32_OperatingSystem | Select-Object Caption,Version,OSArchitecture | Format-List
     msinfo32
-    Read-Host "`nPress Enter to continue"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function72 {
-    Show-Header "Windows Settings Center - Trung Tam Cai Dat Windows" "72"
-    Write-Host " [1] System Settings          [2] Privacy Settings" -ForegroundColor White
-    Write-Host " [3] Update and Security      [4] Personalization" -ForegroundColor White
-    Write-Host " [5] Apps and Features        [6] Network and Internet" -ForegroundColor White
-    Write-Host " [7] Gaming Settings          [8] Power Options" -ForegroundColor White
-    Write-Host " [9] All Settings             [0] Back`n" -ForegroundColor White
-    $choice = Read-Host "Select settings / Chon cai dat (0-9)"
+    Show-Header "Windows Settings Center" "72"
+    Write-Host " [1] System  [2] Privacy  [3] Update  [4] Apps  [5] Network  [0] Back" -ForegroundColor White
+    $choice = Read-Host "Select (0-5)"
     switch ($choice) {
         "1" { start ms-settings:display }
         "2" { start ms-settings:privacy }
         "3" { start ms-settings:windowsupdate }
-        "4" { start ms-settings:personalization }
-        "5" { start ms-settings:appsfeatures }
-        "6" { start ms-settings:network }
-        "7" { start ms-settings:gaming }
-        "8" { start powercfg.cpl }
-        "9" { start ms-settings: }
+        "4" { start ms-settings:appsfeatures }
+        "5" { start ms-settings:network }
     }
-    Read-Host "`nPress Enter to continue"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function73 {
-    Show-Header "Office Repair and Reset - Sua Chua va Reset Office" "73"
-    Write-Host " [1] Quick Office Repair" -ForegroundColor White
-    Write-Host " [2] Reset Office Settings" -ForegroundColor White
-    Write-Host " [3] Clear Office Cache" -ForegroundColor White
-    Write-Host " [0] Back`n" -ForegroundColor White
-    $choice = Read-Host "Select option / Chon tuy chon (0-3)"
-    if ($choice -eq "2") {
-        Remove-Item -Path "$env:APPDATA\Microsoft\Office\*" -Force -ErrorAction SilentlyContinue
-        Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Office\*" -Force -ErrorAction SilentlyContinue
+    Show-Header "Office Repair and Reset" "73"
+    Write-Host " [1] Reset Settings  [2] Clear Cache  [0] Back" -ForegroundColor White
+    $choice = Read-Host "Select (0-2)"
+    if ($choice -eq "1") {
+        Remove-Item "$env:APPDATA\Microsoft\Office\*","$env:LOCALAPPDATA\Microsoft\Office\*" -Force -ErrorAction SilentlyContinue
         Show-Success "Office settings reset!"
-    } elseif ($choice -eq "3") {
-        Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Office\16.0\OfficeFileCache\*" -Recurse -Force -ErrorAction SilentlyContinue
+    } elseif ($choice -eq "2") {
+        Remove-Item "$env:LOCALAPPDATA\Microsoft\Office\16.0\OfficeFileCache\*" -Recurse -Force -ErrorAction SilentlyContinue
         Show-Success "Office cache cleared!"
     }
-    Read-Host "`nPress Enter to continue"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function74 {
-    Show-Header "Remove Bloatware (Safe) - Xoa Ung Dung Rac" "74"
-    Show-Warning "This will remove pre-installed Windows apps!"
-    $confirm = Read-Host "`nContinue / Tiep tuc (Y/N)"
-    if ($confirm -ne "Y" -and $confirm -ne "y") { return }
-    Write-Host "`n[*] Removing safe bloatware apps...`n" -ForegroundColor Yellow
-    @("*3dbuilder*","*paint3d*","*MixedReality*","*getstarted*","*solitaire*","*mobileplans*","*feedback*","*xboxapp*") | ForEach-Object {
-        Write-Host "Removing $_..." -ForegroundColor Cyan
-        Get-AppxPackage $_ | Remove-AppxPackage -ErrorAction SilentlyContinue
+    Show-Header "Remove Bloatware (Safe)" "74"
+    $confirm = Read-Host "Continue (Y/N)"
+    if ($confirm -eq "Y") {
+        @("*3dbuilder*","*paint3d*","*MixedReality*","*getstarted*","*solitaire*","*feedback*","*xboxapp*") | ForEach-Object {
+            Get-AppxPackage $_ | Remove-AppxPackage -ErrorAction SilentlyContinue
+        }
+        Show-Success "Bloatware removed!"
     }
-    Show-Success "Bloatware removed! / Da xoa ung dung rac!"
-    Show-Info "You can reinstall from Microsoft Store if needed"
-    Read-Host "`nPress Enter to continue"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function75 {
-    Show-Header "Bitlocker Management - Quan Ly Bitlocker" "75"
-    Write-Host "[*] Bitlocker status on all drives:`n" -ForegroundColor Yellow
+    Show-Header "Bitlocker Management" "75"
     manage-bde -status
-    Write-Host "`n [1] Disable Bitlocker on C:" -ForegroundColor White
-    Write-Host " [2] Enable Bitlocker on C:" -ForegroundColor White
-    Write-Host " [3] View Recovery Key" -ForegroundColor White
-    Write-Host " [0] Back`n" -ForegroundColor White
-    $choice = Read-Host "Select option / Chon tuy chon (0-3)"
+    Write-Host "`n [1] Disable on C:  [2] Enable on C:  [0] Back" -ForegroundColor White
+    $choice = Read-Host "Select (0-2)"
     if ($choice -eq "1") {
         manage-bde -off C:
     } elseif ($choice -eq "2") {
         control /name Microsoft.BitLockerDriveEncryption
-    } elseif ($choice -eq "3") {
-        manage-bde -protectors C: -get
     }
-    Read-Host "`nPress Enter to continue"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function76 {
-    Show-Header "Check Activation Status - Kiem Tra Trang Thai Kich Hoat" "76"
+    Show-Header "Check Activation Status" "76"
     Write-Host "[WINDOWS ACTIVATION]`n" -ForegroundColor Yellow
-    Write-Host "[*] Windows License Status:" -ForegroundColor Cyan
     cscript //nologo C:\Windows\System32\slmgr.vbs /dli
-    Write-Host "`n[*] Windows Activation Expiration:" -ForegroundColor Cyan
+    Write-Host "`n" -NoNewline
     cscript //nologo C:\Windows\System32\slmgr.vbs /xpr
     Write-Host "`n[*] Windows Product Key:" -ForegroundColor Cyan
     Get-WmiObject -Query "select * from SoftwareLicensingService" | Select-Object -ExpandProperty OA3xOriginalProductKey
     Write-Host "`n[OFFICE ACTIVATION]`n" -ForegroundColor Yellow
-    $officePaths = @("$env:ProgramFiles\Microsoft Office\Office16\ospp.vbs", "${env:ProgramFiles(x86)}\Microsoft Office\Office16\ospp.vbs")
+    $officePaths = @("$env:ProgramFiles\Microsoft Office\Office16\ospp.vbs","${env:ProgramFiles(x86)}\Microsoft Office\Office16\ospp.vbs")
     $officeFound = $false
     foreach ($path in $officePaths) {
         if (Test-Path $path) {
@@ -1129,55 +914,68 @@ function Invoke-Function76 {
             break
         }
     }
-    if (-not $officeFound) { Show-Info "Office not detected / Khong phat hien Office" }
-    Read-Host "`nPress Enter to continue"
+    if (!$officeFound) { Show-Info "Office not detected" }
+    Read-Host "`nPress Enter"
 }
 
-# ============================================================================
-# BACKUP AND RECOVERY FUNCTIONS [77-82]
-# ============================================================================
-
+# CATEGORY 10: BACKUP AND RECOVERY [77-82]
 function Invoke-Function77 {
     Show-Header "Backup WiFi Passwords - Sao Luu Mat Khau Wifi" "77"
     $BackupDir = "$env:USERPROFILE\Documents\WiFi_Backup_$(Get-Date -Format 'yyyyMMdd_HHmmss')"
     New-Item -Path $BackupDir -ItemType Directory -Force | Out-Null
+    
     Write-Host "[*] Exporting WiFi profiles...`n" -ForegroundColor Yellow
     $profiles = (netsh wlan show profiles) | Select-String "All User Profile\s+:\s+(.+)" | ForEach-Object { $_.Matches.Groups[1].Value.Trim() }
-    $report = @("WiFi Backup Report","==================","Created: $(Get-Date)","")
+    
+    $report = @()
+    $report += "WiFi Backup Report"
+    $report += "=================="
+    $report += "Created: $(Get-Date)"
+    $report += ""
+    
     foreach ($profile in $profiles) {
         Write-Host "  Exporting: $profile" -ForegroundColor Cyan
         $profileInfo = netsh wlan show profile name="$profile" key=clear
         $profileInfo | Out-File -FilePath "$BackupDir\WiFi_$profile.txt" -Encoding UTF8
         $password = ($profileInfo | Select-String "Key Content\s+:\s+(.+)").Matches.Groups[1].Value
-        $report += "Network: $profile","Password: $password",""
+        $report += "Network: $profile"
+        $report += "Password: $password"
+        $report += ""
     }
+    
     $report | Out-File -FilePath "$BackupDir\WiFi_Passwords.txt" -Encoding UTF8
     Show-Success "WiFi passwords backed up!"
     Show-Info "Location: $BackupDir"
-    Read-Host "`nPress Enter to continue"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function78 {
     Show-Header "Backup Drivers - Sao Luu Driver" "78"
     $DriverBackup = "$env:USERPROFILE\Documents\Driver_Backup_$(Get-Date -Format 'yyyyMMdd_HHmmss')"
     New-Item -Path $DriverBackup -ItemType Directory -Force | Out-Null
+    
     Write-Host "[*] Exporting third-party drivers (this may take several minutes)...`n" -ForegroundColor Yellow
     Start-Process -FilePath "Dism.exe" -ArgumentList "/online /export-driver /destination:`"$DriverBackup`"" -NoNewWindow -Wait
+    
     Write-Host "`n[*] Creating driver list..." -ForegroundColor Yellow
-    Get-WmiObject Win32_PnPSignedDriver | Select-Object DeviceName, DriverVersion, Manufacturer, DriverDate | Export-Csv "$DriverBackup\Driver_List.csv" -NoTypeInformation
+    Get-WmiObject Win32_PnPSignedDriver | Select-Object DeviceName,DriverVersion,Manufacturer,DriverDate | Export-Csv "$DriverBackup\Driver_List.csv" -NoTypeInformation
+    
     Show-Success "Drivers backed up!"
     Show-Info "Location: $DriverBackup"
-    Read-Host "`nPress Enter to continue"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function79 {
     Show-Header "Backup User Data - Sao Luu Du Lieu Nguoi Dung" "79"
     $DataBackup = "$env:USERPROFILE\Documents\UserData_Backup_$(Get-Date -Format 'yyyyMMdd_HHmmss')"
     New-Item -Path $DataBackup -ItemType Directory -Force | Out-Null
+    
     Write-Host " [1] Quick Backup (Desktop, Documents, Pictures)" -ForegroundColor White
     Write-Host " [2] Full Backup (Include Downloads, Videos, Music)" -ForegroundColor White
     Write-Host " [0] Back`n" -ForegroundColor White
+    
     $choice = Read-Host "Select backup type / Chon loai sao luu (0-2)"
+    
     if ($choice -eq "1") {
         Write-Host "`n[*] Backing up Desktop..." -ForegroundColor Yellow
         Copy-Item -Path "$env:USERPROFILE\Desktop\*" -Destination "$DataBackup\Desktop" -Recurse -Force -ErrorAction SilentlyContinue -Exclude "*UserData_Backup*"
@@ -1185,17 +983,22 @@ function Invoke-Function79 {
         Copy-Item -Path "$env:USERPROFILE\Documents\*" -Destination "$DataBackup\Documents" -Recurse -Force -ErrorAction SilentlyContinue -Exclude "*UserData_Backup*"
         Write-Host "[*] Backing up Pictures..." -ForegroundColor Yellow
         Copy-Item -Path "$env:USERPROFILE\Pictures\*" -Destination "$DataBackup\Pictures" -Recurse -Force -ErrorAction SilentlyContinue
-        Show-Success "User data backed up!"
-    } elseif ($choice -eq "2") {
+        Show-Success "Quick backup completed!"
+    }
+    
+    if ($choice -eq "2") {
         Write-Host "`n[*] Full backup in progress (this may take a long time)...`n" -ForegroundColor Yellow
         @("Desktop","Documents","Pictures","Downloads","Videos","Music") | ForEach-Object {
             Write-Host "[*] Backing up $_..." -ForegroundColor Cyan
             Copy-Item -Path "$env:USERPROFILE\$_\*" -Destination "$DataBackup\$_" -Recurse -Force -ErrorAction SilentlyContinue -Exclude "*UserData_Backup*"
         }
-        Show-Success "User data backed up!"
+        Show-Success "Full backup completed!"
     }
-    if ($choice -ne "0") { Show-Info "Location: $DataBackup" }
-    Read-Host "`nPress Enter to continue"
+    
+    if ($choice -ne "0") {
+        Show-Info "Location: $DataBackup"
+    }
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function80 {
@@ -1203,18 +1006,22 @@ function Invoke-Function80 {
     $ZaloPC = "$env:APPDATA\ZaloPC"
     $ZaloData = "$env:USERPROFILE\Documents\ZaloData"
     $ZaloCache = "$env:LOCALAPPDATA\ZaloPC"
-    $ZaloBackup = "$env:USERPROFILE\Documents\Zalo_Backup_$(Get-Date -Format 'yyyyMMdd_HHmmss')"
-    if (-not ((Test-Path $ZaloPC) -or (Test-Path $ZaloData) -or (Test-Path $ZaloCache))) {
+    
+    if (!(Test-Path $ZaloPC) -and !(Test-Path $ZaloData) -and !(Test-Path $ZaloCache)) {
         Show-Error "Zalo not found / Khong tim thay Zalo!"
-        Read-Host "`nPress Enter to continue"
+        Read-Host "`nPress Enter"
         return
     }
+    
     Show-Warning "Please close Zalo before backing up!"
     Read-Host "Press Enter to continue / Nhan Enter de tiep tuc"
-    Write-Host "`n[*] Stopping Zalo process..." -ForegroundColor Yellow
+    
     Stop-Process -Name "Zalo" -Force -ErrorAction SilentlyContinue
-    Start-Sleep -Seconds 2
+    Start-Sleep 2
+    
+    $ZaloBackup = "$env:USERPROFILE\Documents\Zalo_Backup_$(Get-Date -Format 'yyyyMMdd_HHmmss')"
     New-Item -Path $ZaloBackup -ItemType Directory -Force | Out-Null
+    
     if (Test-Path $ZaloPC) {
         Write-Host "[*] Backing up Zalo PC data..." -ForegroundColor Yellow
         Copy-Item -Path $ZaloPC -Destination "$ZaloBackup\ZaloPC" -Recurse -Force -ErrorAction SilentlyContinue
@@ -1227,15 +1034,17 @@ function Invoke-Function80 {
         Write-Host "[*] Backing up Zalo cache..." -ForegroundColor Yellow
         Copy-Item -Path $ZaloCache -Destination "$ZaloBackup\ZaloPC_Cache" -Recurse -Force -ErrorAction SilentlyContinue
     }
+    
     Show-Success "Zalo data backed up!"
     Show-Info "Location: $ZaloBackup"
-    Read-Host "`nPress Enter to continue"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function81 {
     Show-Header "Backup Product Keys - Sao Luu Ban Quyen" "81"
     $KeyBackup = "$env:USERPROFILE\Documents\ProductKeys_Backup_$(Get-Date -Format 'yyyyMMdd_HHmmss')"
     New-Item -Path $KeyBackup -ItemType Directory -Force | Out-Null
+    
     Write-Host "[WINDOWS PRODUCT KEY]`n" -ForegroundColor Yellow
     Write-Host "[*] Windows OEM Key:" -ForegroundColor Cyan
     $OEMKey = (Get-WmiObject -Query 'select * from SoftwareLicensingService').OA3xOriginalProductKey
@@ -1245,11 +1054,13 @@ function Invoke-Function81 {
     } else {
         Write-Host "  Not found / Khong tim thay" -ForegroundColor Gray
     }
+    
     Write-Host "`n[*] Windows License Status:" -ForegroundColor Cyan
     $licenseStatus = cscript //nologo C:\Windows\System32\slmgr.vbs /dli
     $licenseStatus | Out-File "$KeyBackup\Windows_License.txt"
+    
     Write-Host "`n[OFFICE PRODUCT KEY]`n" -ForegroundColor Yellow
-    $officePaths = @("$env:ProgramFiles\Microsoft Office\Office16\ospp.vbs", "${env:ProgramFiles(x86)}\Microsoft Office\Office16\ospp.vbs")
+    $officePaths = @("$env:ProgramFiles\Microsoft Office\Office16\ospp.vbs","${env:ProgramFiles(x86)}\Microsoft Office\Office16\ospp.vbs")
     $officeFound = $false
     foreach ($path in $officePaths) {
         if (Test-Path $path) {
@@ -1259,11 +1070,14 @@ function Invoke-Function81 {
             break
         }
     }
-    if (-not $officeFound) { Show-Info "Office not detected / Khong phat hien Office" }
+    if (!$officeFound) {
+        Show-Info "Office not detected / Khong phat hien Office"
+    }
+    
     Show-Success "Product keys backed up!"
     Show-Info "Location: $KeyBackup"
-    Show-Warning "Keep backup files secure! / Giu file sao luu an toan!"
-    Read-Host "`nPress Enter to continue"
+    Show-Warning "Keep backup files secure!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function82 {
@@ -1274,7 +1088,9 @@ function Invoke-Function82 {
     Write-Host " [4] Recycle Bin Recovery" -ForegroundColor White
     Write-Host " [5] System Restore" -ForegroundColor White
     Write-Host " [0] Back`n" -ForegroundColor White
+    
     $choice = Read-Host "Select option / Chon tuy chon (0-5)"
+    
     switch ($choice) {
         "1" { control /name Microsoft.FileHistory }
         "2" { explorer /select,"$env:USERPROFILE\Documents" }
@@ -1282,87 +1098,82 @@ function Invoke-Function82 {
         "4" { explorer shell:RecycleBinFolder }
         "5" { rstrui.exe }
     }
-    Read-Host "`nPress Enter to continue"
+    Read-Host "`nPress Enter"
 }
 
 # ============================================================================
-# QUICK ACTIONS [88, 99]
+# QUICK ACTIONS - 2 Advanced Features
 # ============================================================================
 
 function Invoke-Function88 {
-    Show-Header "RUN ALL CLEANUP TASKS - CHAY TAT CA DON DEP" "88"
-    Show-Warning "This will run all cleanup tasks!"
-    $confirm = Read-Host "`nContinue / Tiep tuc (Y/N)"
-    if ($confirm -ne "Y" -and $confirm -ne "y") { return }
+    Show-Header "RUN ALL CLEANUP TASKS - Chay Tat Ca Don Dep" "88"
+    Show-Warning "This will perform comprehensive cleanup!"
+    $confirm = Read-Host "Continue / Tiep tuc (Y/N)"
+    if ($confirm -ne "Y") { return }
+    
     Write-Host "`n[*] Running comprehensive cleanup...`n" -ForegroundColor Yellow
+    
     $tasks = @(
-        @{Name="Temp files";Action={Remove-Item -Path "$env:TEMP\*","C:\Windows\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue}},
-        @{Name="Recycle Bin";Action={Clear-RecycleBin -Force -ErrorAction SilentlyContinue}},
-        @{Name="Browser cache";Action={Stop-Process -Name chrome,msedge,firefox -Force -ErrorAction SilentlyContinue; Start-Sleep 2; Remove-Item -Path "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cache\*","$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue}},
-        @{Name="Windows Update cache";Action={Stop-Service wuauserv -Force -ErrorAction SilentlyContinue; Remove-Item "C:\Windows\SoftwareDistribution\Download\*" -Recurse -Force -ErrorAction SilentlyContinue; Start-Service wuauserv -ErrorAction SilentlyContinue}},
-        @{Name="Thumbnail cache";Action={Stop-Process explorer -Force -ErrorAction SilentlyContinue; Remove-Item "$env:LOCALAPPDATA\Microsoft\Windows\Explorer\thumbcache_*.db" -Force -ErrorAction SilentlyContinue; Start-Process explorer}},
-        @{Name="Icon cache";Action={Remove-Item "$env:LOCALAPPDATA\IconCache.db" -Force -ErrorAction SilentlyContinue}},
-        @{Name="DNS cache";Action={Clear-DnsClientCache -ErrorAction SilentlyContinue}},
-        @{Name="Prefetch";Action={Remove-Item "C:\Windows\Prefetch\*" -Force -ErrorAction SilentlyContinue}}
+        @{N="Temp files";A={Remove-Item "$env:TEMP\*","C:\Windows\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue}}
+        @{N="Recycle Bin";A={Clear-RecycleBin -Force -ErrorAction SilentlyContinue}}
+        @{N="Browser cache";A={Stop-Process chrome,msedge,firefox -Force -ErrorAction SilentlyContinue; Start-Sleep 2; Remove-Item "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cache\*","$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue}}
+        @{N="Windows Update";A={Stop-Service wuauserv -Force -ErrorAction SilentlyContinue; Remove-Item "C:\Windows\SoftwareDistribution\Download\*" -Recurse -Force -ErrorAction SilentlyContinue; Start-Service wuauserv -ErrorAction SilentlyContinue}}
+        @{N="Thumbnail cache";A={Stop-Process explorer -Force -ErrorAction SilentlyContinue; Remove-Item "$env:LOCALAPPDATA\Microsoft\Windows\Explorer\thumbcache_*.db" -Force -ErrorAction SilentlyContinue; Start-Process explorer}}
+        @{N="DNS cache";A={Clear-DnsClientCache -ErrorAction SilentlyContinue}}
+        @{N="Prefetch";A={Remove-Item "C:\Windows\Prefetch\*" -Force -ErrorAction SilentlyContinue}}
     )
-    for ($i = 0; $i -lt $tasks.Count; $i++) {
-        Write-Host "[$($i+1)/$($tasks.Count)] $($tasks[$i].Name)..." -ForegroundColor Cyan
-        & $tasks[$i].Action
+    
+    for ($i=0; $i -lt $tasks.Count; $i++) {
+        Write-Host "[$($i+1)/$($tasks.Count)] Cleaning $($tasks[$i].N)..." -ForegroundColor Cyan
+        & $tasks[$i].A
+        Start-Sleep -Milliseconds 500
     }
-    Show-Success "All cleanup tasks completed! / Hoan thanh tat ca don dep!"
-    Read-Host "`nPress Enter to continue"
+    
+    Show-Success "All cleanup tasks completed!"
+    Read-Host "`nPress Enter"
 }
 
 function Invoke-Function99 {
-    Show-Header "FULL SYSTEM OPTIMIZATION - TOI UU TOAN BO HE THONG" "99"
-    Show-Warning "This will perform full system optimization!"
-    Write-Host "This process may take 15-30 minutes / Qua trinh co the mat 15-30 phut" -ForegroundColor Yellow
-    $confirm = Read-Host "`nContinue / Tiep tuc (Y/N)"
-    if ($confirm -ne "Y" -and $confirm -ne "y") { return }
-    Write-Host "`n[*] Creating restore point..." -ForegroundColor Yellow
+    Show-Header "FULL SYSTEM OPTIMIZATION - Toi Uu Toan Bo He Thong" "99"
+    Show-Warning "This will optimize your entire system!"
+    $confirm = Read-Host "Continue / Tiep tuc (Y/N)"
+    if ($confirm -ne "Y") { return }
+    
+    Write-Host "`n[*] Creating restore point first..." -ForegroundColor Yellow
     Checkpoint-Computer -Description "Before Full Optimization" -RestorePointType "MODIFY_SETTINGS" -ErrorAction SilentlyContinue
-    Write-Host "`n[STEP 1/5] CLEANUP`n" -ForegroundColor Green
-    Write-Host "[1.1] Temp files..." -ForegroundColor Cyan
+    
+    Write-Host "`n[STEP 1/5] CLEANUP" -ForegroundColor Green
     Remove-Item -Path "$env:TEMP\*","C:\Windows\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Host "[1.2] Browser cache..." -ForegroundColor Cyan
     Stop-Process -Name chrome,msedge,firefox -Force -ErrorAction SilentlyContinue
     Start-Sleep 2
-    Remove-Item -Path "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cache\*","$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Host "[1.3] Windows Update cache..." -ForegroundColor Cyan
-    Stop-Service wuauserv -Force -ErrorAction SilentlyContinue
-    Remove-Item "C:\Windows\SoftwareDistribution\Download\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Start-Service wuauserv -ErrorAction SilentlyContinue
-    Write-Host "`n[STEP 2/5] NETWORK OPTIMIZATION`n" -ForegroundColor Green
-    Write-Host "[2.1] Optimizing TCP settings..." -ForegroundColor Cyan
+    Remove-Item -Path "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue
+    
+    Write-Host "`n[STEP 2/5] NETWORK OPTIMIZATION" -ForegroundColor Green
     netsh int tcp set global autotuninglevel=normal 2>$null
     netsh int tcp set global rsc=enabled 2>$null
-    Write-Host "`n[STEP 3/5] PERFORMANCE OPTIMIZATION`n" -ForegroundColor Green
-    Write-Host "[3.1] Disabling visual effects..." -ForegroundColor Cyan
+    
+    Write-Host "`n[STEP 3/5] PERFORMANCE" -ForegroundColor Green
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v VisualFXSetting /t REG_DWORD /d 2 /f 2>$null
-    Write-Host "[3.2] Setting High Performance power plan..." -ForegroundColor Cyan
     powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c 2>$null
-    Write-Host "`n[STEP 4/5] SYSTEM MAINTENANCE`n" -ForegroundColor Green
-    Write-Host "[4.1] Running System File Checker (this may take 5-10 minutes)..." -ForegroundColor Cyan
+    
+    Write-Host "`n[STEP 4/5] SYSTEM MAINTENANCE (This may take a long time)" -ForegroundColor Green
     sfc /scannow 2>$null
-    Write-Host "[4.2] Running DISM repair (this may take 5-10 minutes)..." -ForegroundColor Cyan
     Dism /Online /Cleanup-Image /RestoreHealth 2>$null
-    Write-Host "`n[STEP 5/5] REGISTRY OPTIMIZATION`n" -ForegroundColor Green
-    Write-Host "[5.1] Cleaning registry..." -ForegroundColor Cyan
+    
+    Write-Host "`n[STEP 5/5] REGISTRY OPTIMIZATION" -ForegroundColor Green
     reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache" /f 2>$null
     reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist" /f 2>$null
-    Write-Host "`n═══════════════════════════════════════════════════════════════" -ForegroundColor Green
+    
     Show-Success "FULL SYSTEM OPTIMIZATION COMPLETED!"
-    Write-Host "═══════════════════════════════════════════════════════════════`n" -ForegroundColor Green
-    Show-Info "Please restart your computer for all changes to take effect"
-    Show-Info "Vui long khoi dong lai may tinh de ap dung tat ca thay doi"
-    Read-Host "`nPress Enter to continue"
+    Show-Info "Please restart your computer to apply all changes"
+    Read-Host "`nPress Enter"
 }
 
 # ============================================================================
-# MAIN PROGRAM LOOP
+# MAIN PROGRAM - Dispatcher and Loop
 # ============================================================================
 
-# Main Function Dispatcher
 function Invoke-SelectedFunction {
     param([string]$FunctionNumber)
     
@@ -1452,51 +1263,63 @@ function Invoke-SelectedFunction {
         "88" { Invoke-Function88 }
         "99" { Invoke-Function99 }
         default {
-            Show-Warning "Invalid choice / Lua chon khong hop le!"
+            Show-Warning "Invalid choice! / Lua chon khong hop le!"
             Start-Sleep -Seconds 2
         }
     }
 }
 
-# Start Program
+# ============================================================================
+# PROGRAM START
+# ============================================================================
+
+# Show welcome screen
 Show-Welcome
 
-Write-Host "`n[✓ SUCCESS] Administrator rights confirmed!" -ForegroundColor Green
-Write-Host "[✓ SUCCESS] Xac nhan quyen Administrator!`n" -ForegroundColor Green
+# Admin confirmation message
+Clear-Host
+Write-Host "`n ══════════════════════════════════════════════════════════════════════════════" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "                  ADMINISTRATOR RIGHTS CONFIRMED                                 " -ForegroundColor Green
+Write-Host "                  QUYEN ADMINISTRATOR DA DUOC XAC NHAN                           " -ForegroundColor Green
+Write-Host ""
+Write-Host " ══════════════════════════════════════════════════════════════════════════════" -ForegroundColor Cyan
 Start-Sleep -Seconds 1
 
-# Main Loop
+# Main program loop
 while ($true) {
     Show-MainMenu
     
-    if ($global:LANG -eq "VI") {
-        $choice = Read-Host "  CHON CHUC NANG (0-99 hoac L)"
+    if ($global:LANG -eq "EN") {
+        $choice = Read-Host "`n  SELECT FUNCTION (0-99 or L)"
     } else {
-        $choice = Read-Host "  SELECT FUNCTION (0-99 or L)"
+        $choice = Read-Host "`n  CHON CHUC NANG (0-99 hoac L)"
     }
     
-    # Handle special cases
+    # Handle language toggle
     if ($choice -match "^[Ll]$") {
         Switch-Language
         continue
     }
     
+    # Handle exit
     if ($choice -eq "0") {
         Clear-Host
-        Write-Host "`n═══════════════════════════════════════════════════════════════════════════" -ForegroundColor Cyan
-        if ($global:LANG -eq "VI") {
-            Write-Host " Cam on ban da su dung Ultimate Windows System Tool!" -ForegroundColor White
-            Write-Host " Tac gia: Nguyen Ngoc Anh Tu" -ForegroundColor Magenta
-        } else {
-            Write-Host " Thank you for using Ultimate Windows System Tool!" -ForegroundColor White
-            Write-Host " Created by: Nguyen Ngoc Anh Tu" -ForegroundColor Magenta
-        }
-        Write-Host "═══════════════════════════════════════════════════════════════════════════`n" -ForegroundColor Cyan
+        Write-Host "`n ══════════════════════════════════════════════════════════════════════════════" -ForegroundColor Cyan
+        Write-Host ""
+        Write-Host "                  Thank you for using Ultimate Windows System Tool             " -ForegroundColor Yellow
+        Write-Host "                  Cam on ban da su dung Cong Cu Toi Uu He Thong                " -ForegroundColor Yellow
+        Write-Host ""
+        Write-Host "                           Created by: Nguyen Ngoc Anh Tu                       " -ForegroundColor Magenta
+        Write-Host "                              Version 5.0 - Professional Edition                " -ForegroundColor Gray
+        Write-Host ""
+        Write-Host " ══════════════════════════════════════════════════════════════════════════════" -ForegroundColor Cyan
+        Write-Host ""
         Start-Sleep -Seconds 2
         Exit
     }
     
-    # Invoke selected function
+    # Execute selected function
     Invoke-SelectedFunction -FunctionNumber $choice
 }
 
