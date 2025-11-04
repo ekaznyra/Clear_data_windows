@@ -77,68 +77,37 @@ cls
 color 0B
 echo.
 echo.
-echo    ******************************************************************************
-echo    *                                                                            *
-echo    *         U L T I M A T E   W I N D O W S   S Y S T E M   T O O L          *
-echo    *                          Version 5.0 - Complete Edition                   *
-echo    *                                                                            *
-echo    *    Author: Nguyen Ngoc Anh Tu - facebook.com/NguyenNgocAnhTu.VN          *
-echo    *    System: %WIN_NAME% (Build %BUILD%)                                    *
-echo    *                                                                            *
-echo    ******************************************************************************
+echo  ==============================================================================
+echo                                                                              
+echo           U L T I M A T E   W I N D O W S   S Y S T E M   T O O L          
+echo                        Version 5.0 - Complete Edition                       
+echo                                                                              
+echo      Author: Nguyen Ngoc Anh Tu - facebook.com/NguyenNgocAnhTu.VN          
+echo      System: %WIN_NAME% ^(Build %BUILD%^)                                   
+echo                                                                              
+echo  ==============================================================================
 echo.
-echo    ==============================================================================
-echo                              SYSTEM OPTIMIZATION MENU
-echo    ==============================================================================
+echo   CLEANUP [1-12]     PRIVACY [13-20]      NETWORK [21-26]     DISK [27-32]
+echo  ------------------------------------------------------------------------------
+echo    1. Quick Cleanup           13. Recent Docs         21. Network Reset
+echo    2. Deep Cleanup            14. Run History         22. Net Optimize
+echo    3. Browser Cache           15. Search History      23. ARP Cache
+echo    4. App Cache               16. Clipboard           24. Winsock
+echo    5. Update Cache            17. Error Reports       25. Renew IP
+echo    6. Thumbnail               18. Telemetry           26. Fix Adapter
+echo    7. Icon Cache              19. Event Logs
+echo    8. Font Cache              20. DNS Cache          [PERFORMANCE 33-44]
+echo    9. Installer                                       [MAINTENANCE 45-50]
+echo   10. Windows.old            [DISK 27-32]             [REGISTRY 51-55]
+echo   11. Recycle Bin             27-32. Disk Tools       [ADVANCED 56-82]
+echo   12. Memory Dumps            33-44. Performance      [SPECIAL 83-99]
+echo  ------------------------------------------------------------------------------
 echo.
-echo     [CLEANUP AND OPTIMIZATION]              [PRIVACY AND SECURITY]
-echo     -------------------------------         -----------------------
-echo      1. Quick System Cleanup                13. Clear Recent Documents
-echo      2. Deep System Cleanup                 14. Clear Run History
-echo      3. Browser Cache Cleanup               15. Clear Search History
-echo      4. Application Cache                   16. Clear Clipboard
-echo      5. Windows Update Cache                17. Clear Error Reports
-echo      6. Thumbnail Cache                     18. Disable Telemetry
-echo      7. Icon Cache                          19. Clear Event Logs
-echo      8. Font Cache                          20. Clear DNS Cache
-echo      9. Windows Installer
-echo     10. Windows.old Folder
-echo     11. Recycle Bin                        [NETWORK TOOLS]
-echo     12. Memory Dump Files                  -----------------------
-echo                                             21. Reset Network Settings
-echo     [DISK AND PERFORMANCE]                  22. Optimize Network
-echo     -------------------------------         23. Clear ARP Cache
-echo     27. Disk Cleanup                        24. Reset Winsock
-echo     28. Check Disk Errors                   25. Renew IP Address
-echo     29. Optimize Disk                       26. Fix Network Adapter
-echo     30. Analyze Disk Space
-echo     31. Clean Windows.old
-echo     32. Compact OS                         [SYSTEM MAINTENANCE]
-echo     33. Disable Startup Programs           -----------------------
-echo     34. Optimize Services                  45. System File Checker (SFC)
-echo     35. Clear Prefetch                     46. DISM Repair
-echo     36. Clear SuperFetch                   47. Component Cleanup
-echo     37. Disable Visual Effects             48. Update Drivers
-echo     38. Optimize Power Plan                49. Rebuild Icon Cache
-echo     39. Disable Hibernation                50. Rebuild Search Index
-echo     40. Clear Memory Cache
-echo     41. Optimize Search Index              [REGISTRY AND ADVANCED]
-echo     42. Disable Animations                 -----------------------
-echo     43. Optimize SSD                       51-55. Registry Tools
-echo     44. Menu Show Delay                    56-70. Advanced Tools
-echo                                             71-76. System Utilities
-echo                                             77-82. Backup and Recovery
-echo    ==============================================================================
-echo                                 SPECIAL FUNCTIONS
-echo    ==============================================================================
+echo   [97] RUN ALL CLEANUP   [98] RUN ALL UTILITIES   [99] FULL OPTIMIZATION
 echo.
-echo       83-87: Installation Suite    88-96: Extra Utilities    97-99: Run All
-echo.
-echo       [97] RUN ALL CLEANUP    [98] RUN ALL UTILITIES    [99] FULL OPTIMIZATION
-echo.
-echo    ==============================================================================
-echo       [0] Exit Program    [T] Toggle Language    [?] Help and Information
-echo    ==============================================================================
+echo  ==============================================================================
+echo   [0] Exit  ^|  [T] Language  ^|  [?] Help
+echo  ==============================================================================
 echo.
 set /p choice="  SELECT FUNCTION [0-99]: "
 
