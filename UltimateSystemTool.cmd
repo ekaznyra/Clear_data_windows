@@ -78,14 +78,13 @@ color 0B
 echo.
 echo.
 echo    ===============================================================================
-echo    #                                                                             #
-echo    #           U L T I M A T E   W I N D O W S   S Y S T E M   T O O L         #
-echo    #                                                                             #
-echo    #                        VERSION 5.0 - COMPLETE EDITION                      #
-echo    #                                                                             #
-echo    #         Author: Nguyen Ngoc Anh Tu - facebook.com/NguyenNgocAnhTu.VN       #
-echo    #         System: %WIN_NAME% - Build %BUILD%                                 #
-echo    #                                                                             #
+echo                                                                                
+echo              U L T I M A T E   W I N D O W S   S Y S T E M   T O O L         
+echo                           VERSION 5.0 - COMPLETE EDITION                      
+echo                                                                                
+echo          Author: Nguyen Ngoc Anh Tu - facebook.com/NguyenNgocAnhTu.VN        
+echo          System: %WIN_NAME% - Build %BUILD%                                   
+echo                                                                                
 echo    ===============================================================================
 echo.
 echo    ===============================================================================
