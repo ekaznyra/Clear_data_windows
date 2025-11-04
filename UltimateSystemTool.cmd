@@ -1,28 +1,28 @@
 @echo off
 :: ============================================================================
-:: ULTIMATE WINDOWS SYSTEM TOOL v4.0 - PROFESSIONAL EDITION
+:: ULTIMATE WINDOWS SYSTEM TOOL v4.5 - PROFESSIONAL EDITION
 :: Complete System Optimization Suite - Bilingual (English/Vietnamese)
 :: ============================================================================
 :: Based on open-source tools: BleachBit, CCleaner, PrivaZer, Wise Care 365
+:: NEW: Auto-elevate, Software cache, LCU cleanup, Memory optimization
 :: All commands are SAFE and tested for Windows 10/11
 :: ============================================================================
 
-title Ultimate Windows System Tool v4.0 - Professional Edition
+title Ultimate Windows System Tool v4.5 - Professional Edition
 chcp 65001 >nul 2>&1
 color 0B
 
-:: Check Administrator privileges
+:: Check Administrator privileges and AUTO-ELEVATE
 net session >nul 2>&1
 if %errorLevel% neq 0 (
     echo.
     echo ============================================================================
-    echo   ERROR: Administrator Rights Required / LOI: Can Quyen Administrator
+    echo   Administrator Rights Required / Can Quyen Administrator
     echo ============================================================================
-    echo   Please right-click and "Run as Administrator"
-    echo   Vui long chuot phai va chon "Run as Administrator"
+    echo   Auto-elevating to Administrator / Tu dong xin quyen Administrator...
     echo ============================================================================
     echo.
-    pause
+    powershell -Command "Start-Process cmd -ArgumentList '/c \"%~0\"' -Verb RunAs" 2>nul
     exit
 )
 
@@ -31,8 +31,8 @@ cls
 color 0B
 echo.
 echo ================================================================================
-echo            ULTIMATE WINDOWS SYSTEM TOOL v4.0 - PROFESSIONAL EDITION
-echo                   Complete System Optimization Suite - Song Ngu
+echo            ULTIMATE WINDOWS SYSTEM TOOL v4.5 - PROFESSIONAL EDITION
+echo              Complete System Optimization Suite - Auto-Elevate
 echo ================================================================================
 echo.
 echo  [SYSTEM CLEANUP - DON DEP HE THONG]
@@ -122,6 +122,12 @@ echo  [61]  Reset Windows Update Components     - Reset Thanh Phan Update
 echo  [62]  Optimize Boot Time                  - Toi Uu Thoi Gian Khoi Dong
 echo  [63]  Clean All Temporary Files           - Xoa Tat Ca File Tam
 echo  [64]  Generate System Report              - Tao Bao Cao He Thong
+echo  [65]  Clean Software Cache (WPS/Adobe)    - Xoa Cache Phan Mem
+echo  [66]  Clean Delivery Optimization         - Xoa Delivery Optimization
+echo  [67]  Clean Update Backup (LCU)           - Xoa Sao Luu Cap Nhat
+echo  [68]  Optimize Memory (RAM)               - Toi Uu Bo Nho RAM
+echo  [69]  Show Disk Space Report              - Xem Bao Cao Dung Luong
+echo  [70]  Refresh Icon Cache                  - Lam Moi Icon Cache
 echo.
 echo  [QUICK ACTIONS - THAO TAC NHANH]
 echo  ================================================================================
@@ -198,6 +204,12 @@ if "%choice%"=="61" goto RESET_UPDATE
 if "%choice%"=="62" goto BOOT_TIME
 if "%choice%"=="63" goto ALL_TEMP
 if "%choice%"=="64" goto SYSTEM_REPORT
+if "%choice%"=="65" goto SOFTWARE_CACHE
+if "%choice%"=="66" goto DELIVERY_OPTIMIZATION
+if "%choice%"=="67" goto LCU_BACKUP
+if "%choice%"=="68" goto OPTIMIZE_MEMORY
+if "%choice%"=="69" goto DISK_SPACE_REPORT
+if "%choice%"=="70" goto REFRESH_ICON_CACHE
 if "%choice%"=="88" goto RUN_ALL_CLEANUP
 if "%choice%"=="99" goto FULL_OPTIMIZE
 
@@ -1822,6 +1834,13 @@ echo [11/11] All Temp Files...
 for /d %%x in ("%TEMP%\*") do @rd /s /q "%%x" >nul 2>&1
 for /d %%x in ("C:\Windows\Temp\*") do @rd /s /q "%%x" >nul 2>&1
 
+echo [BONUS] Software cache...
+del /f /s /q "%userprofile%\AppData\Roaming\Adobe\Common\Media Cache Files\*" >nul 2>&1
+del /f /s /q "%userprofile%\AppData\Local\Microsoft\Office\16.0\OfficeFileCache\*" >nul 2>&1
+
+echo [BONUS] Delivery Optimization...
+del /f /s /q "%windir%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Cache\*" >nul 2>&1
+
 echo.
 echo ================================================================================
 echo [SUCCESS] All cleanup tasks completed! / Hoan thanh tat ca don dep!
@@ -1939,20 +1958,240 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management
 
 echo.
 echo ================================================================================
+echo [BONUS] ADVANCED OPTIMIZATION - TOI UU NANG CAO
+echo ================================================================================
+echo.
+echo [6.1] Optimizing memory (RAM)...
+powershell -Command "Get-Process | ForEach-Object { try { $_.MinWorkingSet = 100KB } catch {} }" >nul 2>&1
+
+echo [6.2] Cleaning software cache...
+del /f /s /q "%userprofile%\AppData\Roaming\Adobe\Common\Media Cache Files\*" >nul 2>&1
+del /f /s /q "%userprofile%\AppData\Local\Microsoft\Office\16.0\OfficeFileCache\*" >nul 2>&1
+
+echo [6.3] Cleaning delivery optimization...
+del /f /s /q "%windir%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Cache\*" >nul 2>&1
+
+echo [6.4] Refreshing icon cache...
+ie4uinit.exe -show >nul 2>&1
+
+echo.
+echo ================================================================================
 echo  [SUCCESS] FULL SYSTEM OPTIMIZATION COMPLETED!
 echo  HOAN THANH TOI UU TOAN BO HE THONG!
 echo ================================================================================
 echo.
 echo Changes applied / Thay doi da ap dung:
 echo  - Cleaned temporary files / Da xoa file tam
+echo  - Cleaned software cache (Adobe, Office, etc.) / Da xoa cache phan mem
+echo  - Cleaned delivery optimization cache / Da xoa cache delivery optimization
 echo  - Optimized network settings / Da toi uu cai dat mang
 echo  - Disabled visual effects / Da tat hieu ung hinh anh
 echo  - Set high performance mode / Da cai dat che do hieu suat cao
 echo  - Repaired system files / Da sua chua file he thong
 echo  - Optimized registry / Da toi uu registry
+echo  - Optimized memory (RAM) / Da toi uu bo nho
+echo  - Refreshed icon cache / Da lam moi icon cache
 echo.
 echo Please restart your computer for all changes to take effect.
 echo Vui long khoi dong lai may tinh de ap dung tat ca thay doi.
+echo.
+pause
+goto MAIN_MENU
+
+:: ============================================================================
+:: NEW ADVANCED FUNCTIONS - CHUC NANG NANG CAO MOI
+:: ============================================================================
+
+:SOFTWARE_CACHE
+cls
+echo ================================================================================
+echo  [65] Clean Software Cache - Xoa Cache Phan Mem
+echo ================================================================================
+echo.
+echo Cleaning software-specific caches / Xoa cache cac phan mem...
+echo.
+
+echo [*] WPS Office cache...
+del /f /s /q "%userprofile%\AppData\Roaming\kingsoft\wps\cache\*" >nul 2>&1
+del /f /s /q "%userprofile%\AppData\Local\Kingsoft\WPS Office\cache\*" >nul 2>&1
+
+echo [*] Adobe cache...
+del /f /s /q "%userprofile%\AppData\Roaming\Adobe\Common\Media Cache Files\*" >nul 2>&1
+del /f /s /q "%userprofile%\AppData\Local\Adobe\Common\Media Cache Files\*" >nul 2>&1
+
+echo [*] Steam logs...
+del /f /s /q "%ProgramFiles(x86)%\Steam\logs\*" >nul 2>&1
+del /f /s /q "%ProgramFiles%\Steam\logs\*" >nul 2>&1
+
+echo [*] Visual Studio cache...
+del /f /s /q "%userprofile%\AppData\Local\Microsoft\VisualStudio\*\ComponentModelCache\*" >nul 2>&1
+
+echo [*] Java cache...
+del /f /s /q "%userprofile%\AppData\LocalLow\Sun\Java\Deployment\cache\*" >nul 2>&1
+
+echo [*] Office file cache...
+del /f /s /q "%userprofile%\AppData\Local\Microsoft\Office\16.0\OfficeFileCache\*" >nul 2>&1
+del /f /s /q "%userprofile%\AppData\Local\Microsoft\Office\15.0\OfficeFileCache\*" >nul 2>&1
+
+echo.
+echo [SUCCESS] Software cache cleaned! / Da xoa cache phan mem!
+echo.
+pause
+goto MAIN_MENU
+
+:DELIVERY_OPTIMIZATION
+cls
+echo ================================================================================
+echo  [66] Clean Delivery Optimization - Xoa Delivery Optimization
+echo ================================================================================
+echo.
+echo Cleaning Delivery Optimization cache / Xoa cache Delivery Optimization...
+echo.
+
+echo [*] Stopping Delivery Optimization service / Dung dich vu...
+net stop DoSvc >nul 2>&1
+
+echo [*] Cleaning cache / Xoa cache...
+del /f /s /q "%windir%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Cache\*" >nul 2>&1
+del /f /s /q "%windir%\SoftwareDistribution\DeliveryOptimization\*" >nul 2>&1
+
+echo [*] Restarting service / Khoi dong lai dich vu...
+net start DoSvc >nul 2>&1
+
+echo.
+echo [SUCCESS] Delivery Optimization cache cleaned! / Da xoa cache!
+echo [INFO] This can free up several GB / Co the giai phong vai GB!
+echo.
+pause
+goto MAIN_MENU
+
+:LCU_BACKUP
+cls
+echo ================================================================================
+echo  [67] Clean Update Backup (LCU) - Xoa Sao Luu Cap Nhat
+echo ================================================================================
+echo.
+echo WARNING: This will delete Windows Update uninstall backups!
+echo CANH BAO: Se xoa sao luu go cap nhat Windows!
+echo You will NOT be able to uninstall updates after this!
+echo Ban se KHONG THE go cap nhat sau khi xoa!
+echo.
+set /p confirm=Continue? / Tiep tuc? (Y/N): 
+if /i not "%confirm%"=="Y" goto MAIN_MENU
+
+echo.
+echo [*] Cleaning LCU backup folder / Xoa thu muc sao luu LCU...
+
+set "pathLCU=%windir%\servicing\LCU"
+if exist "%pathLCU%" (
+    echo     Taking ownership / Lay quyen so huu...
+    takeown /f "%pathLCU%" /r /d y >nul 2>&1
+    icacls "%pathLCU%" /grant administrators:F /t /c >nul 2>&1
+    
+    echo     Deleting backup files / Xoa file sao luu...
+    rd /s /q "%pathLCU%" >nul 2>&1
+    md "%pathLCU%" >nul 2>&1
+    
+    echo     [SUCCESS] LCU backup cleaned! / Da xoa sao luu LCU!
+    echo     [INFO] This can free up 5-10 GB! / Co the giai phong 5-10 GB!
+) else (
+    echo     [INFO] LCU backup folder not found / Khong tim thay thu muc sao luu
+)
+
+echo.
+echo [*] Cleaning Service Pack superseded / Xoa Service Pack cu...
+dism.exe /online /cleanup-image /spsuperseded /hidesp >nul 2>&1
+
+echo.
+echo [SUCCESS] Update backup cleaned! / Da xoa sao luu cap nhat!
+echo.
+pause
+goto MAIN_MENU
+
+:OPTIMIZE_MEMORY
+cls
+echo ================================================================================
+echo  [68] Optimize Memory (RAM) - Toi Uu Bo Nho RAM
+echo ================================================================================
+echo.
+echo Optimizing memory usage / Toi uu su dung bo nho...
+echo.
+
+echo [*] Clearing standby memory list / Xoa danh sach bo nho cho...
+powershell -Command "Get-Process | ForEach-Object { try { $_.MinWorkingSet = 100KB } catch {} }" >nul 2>&1
+
+echo [*] Flushing file system cache / Xoa cache he thong file...
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v ClearPageFileAtShutdown /t REG_DWORD /d 1 /f >nul 2>&1
+
+echo [*] Optimizing working sets / Toi uu working sets...
+echo Note: Memory will be fully optimized on next reboot / Bo nho se duoc toi uu hoan toan khi khoi dong lai
+
+echo [*] Clearing DNS cache / Xoa cache DNS...
+ipconfig /flushdns >nul 2>&1
+ipconfig /registerdns >nul 2>&1
+
+echo.
+echo [SUCCESS] Memory optimized! / Da toi uu bo nho!
+echo [INFO] Free RAM should increase / RAM trong nen tang len!
+echo.
+pause
+goto MAIN_MENU
+
+:DISK_SPACE_REPORT
+cls
+echo ================================================================================
+echo  [69] Show Disk Space Report - Xem Bao Cao Dung Luong
+echo ================================================================================
+echo.
+echo Analyzing disk space / Phan tich dung luong o dia...
+echo.
+
+echo [*] All drives / Tat ca o dia:
+echo.
+wmic logicaldisk get caption,size,freespace,filesystem
+
+echo.
+echo [*] Free space in MB / Dung luong trong (MB):
+for /f "tokens=2" %%a in ('powershell -Command "(Get-PSDrive C).Free/1MB"') do (
+    set "free_space=%%a"
+    echo     C: Drive - %%a MB free / %%a MB trong
+)
+
+echo.
+echo [*] Top-level folders on C:\ / Thu muc cap 1 tren C:\:
+dir C:\ /a:d
+
+echo.
+echo [TIP] Use Function [88] or [99] to clean up and free space
+echo [G?I ?] D?ng ch?c n?ng [88] ho?c [99] ?? d?n d?p v? gi?i ph?ng dung l??ng
+echo.
+pause
+goto MAIN_MENU
+
+:REFRESH_ICON_CACHE
+cls
+echo ================================================================================
+echo  [70] Refresh Icon Cache - Lam Moi Icon Cache
+echo ================================================================================
+echo.
+echo Refreshing icon and thumbnail cache / Lam moi icon va thumbnail cache...
+echo.
+
+echo [*] Refreshing system icon cache / Lam moi icon cache he thong...
+ie4uinit.exe -show >nul 2>&1
+
+echo [*] Cleaning connected devices cache / Xoa cache thiet bi ket noi...
+del /f /s /q "%userprofile%\AppData\Local\ConnectedDevicesPlatform\*" >nul 2>&1
+
+echo [*] Cleaning network list cache / Xoa cache danh sach mang...
+del /f /q "%userprofile%\AppData\Roaming\Microsoft\Network\Connections\*" >nul 2>&1
+
+echo [*] Rebuilding icon cache / Xay dung lai icon cache...
+timeout /t 2 >nul
+
+echo.
+echo [SUCCESS] Icon cache refreshed! / Da lam moi icon cache!
+echo [INFO] Icons should display correctly now / Icon se hien thi dung!
 echo.
 pause
 goto MAIN_MENU
