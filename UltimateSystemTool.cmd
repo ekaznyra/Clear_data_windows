@@ -255,6 +255,13 @@ if "%choice%"=="97" goto RUN_ALL_CLEANUP
 if "%choice%"=="98" goto RUN_ALL
 if "%choice%"=="99" goto FULL_OPTIMIZE
 
+
+:: Invalid choice - return to menu
+echo.
+echo  [ERROR] Invalid choice. Please select 0-99.
+timeout /t 2 /nobreak >nul
+goto MAIN_MENU
+
 echo  [!] Invalid choice / Lua chon khong hop le!
 timeout /t 2 /nobreak >nul
 goto MAIN_MENU
