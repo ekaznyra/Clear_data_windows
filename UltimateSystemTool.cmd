@@ -502,8 +502,8 @@ echo  Processing / Dang xu ly...
 echo.
 
 echo  [*] Cleaning Temp files / Xoa file Temp...
-del /f /s /q "%TEMP%\*" >nul 2>&1 2>nul
-del /f /s /q "C:\Windows\Temp\*" >nul 2>&1 2>nul
+del /f /s /q "%TEMP%\*" >nul 2>&1
+del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
 for /d %%x in ("%TEMP%\*") do @rd /s /q "%%x" >nul 2>&1
 for /d %%x in ("C:\Windows\Temp\*") do @rd /s /q "%%x" >nul 2>&1
 
@@ -514,7 +514,7 @@ echo  [*] Flushing DNS Cache / Xoa cache DNS...
 ipconfig /flushdns >nul 2>&1
 
 echo  [*] Cleaning Windows prefetch / Xoa prefetch...
-del /f /s /q C:\Windows\Prefetch\* >nul 2>&1 2>nul
+del /f /s /q C:\Windows\Prefetch\* >nul 2>&1
 
 echo.
 echo  Quick Cleanup Completed! / Hoan thanh don dep nhanh!
@@ -533,29 +533,29 @@ echo  This will take several minutes / Qua trinh nay mat vai phut...
 echo.
 
 echo  [*] Cleaning all Temp folders / Xoa tat ca thu muc Temp...
-del /f /s /q "%TEMP%\*" >nul 2>&1 2>nul
-del /f /s /q "C:\Windows\Temp\*" >nul 2>&1 2>nul
-for /d %%u in ("C:\Users\*") do del /f /s /q "%%u\AppData\Local\Temp\*" >nul 2>&1 2>nul
+del /f /s /q "%TEMP%\*" >nul 2>&1
+del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
+for /d %%u in ("C:\Users\*") do del /f /s /q "%%u\AppData\Local\Temp\*" >nul 2>&1
 
 echo  [*] Cleaning Windows logs / Xoa log Windows...
-del /f /s /q C:\Windows\Logs\* >nul 2>&1 2>nul
-del /f /s /q C:\Windows\Panther\* >nul 2>&1 2>nul
+del /f /s /q C:\Windows\Logs\* >nul 2>&1
+del /f /s /q C:\Windows\Panther\* >nul 2>&1
 
 echo  [*] Cleaning Windows Update cache / Xoa cache Windows Update...
 net stop wuauserv >nul 2>&1
 net stop bits >nul 2>&1
-del /f /s /q C:\Windows\SoftwareDistribution\Download\* >nul 2>&1 2>nul
+del /f /s /q C:\Windows\SoftwareDistribution\Download\* >nul 2>&1
 net start wuauserv >nul 2>&1
 net start bits >nul 2>&1
 
 echo  [*] Cleaning Windows Error Reporting / Xoa bao cao loi...
-del /f /s /q C:\ProgramData\Microsoft\Windows\WER\* >nul 2>&1 2>nul
+del /f /s /q C:\ProgramData\Microsoft\Windows\WER\* >nul 2>&1
 
 echo  [*] Cleaning thumbnail cache / Xoa thumbnail cache...
-del /f /s /q "%LocalAppData%\Microsoft\Windows\Explorer\thumbcache_*.db" >nul 2>&1 2>nul
+del /f /s /q "%LocalAppData%\Microsoft\Windows\Explorer\thumbcache_*.db" >nul 2>&1
 
 echo  [*] Cleaning icon cache / Xoa icon cache...
-del /f /s /q "%LocalAppData%\IconCache.db" >nul 2>&1 2>nul
+del /f /s /q "%LocalAppData%\IconCache.db" >nul 2>&1
 
 echo  [*] Running DISM cleanup / Chay DISM cleanup...
 Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase >nul 2>&1
@@ -583,20 +583,20 @@ echo  [*] Chrome/Edge cache...
 taskkill /F /IM chrome.exe >nul 2>&1
 taskkill /F /IM msedge.exe >nul 2>&1
 timeout /t 2 >nul
-del /f /s /q "%LocalAppData%\Google\Chrome\User Data\Default\Cache\*" >nul 2>&1 2>nul
-del /f /s /q "%LocalAppData%\Google\Chrome\User Data\Default\Code Cache\*" >nul 2>&1 2>nul
-del /f /s /q "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache\*" >nul 2>&1 2>nul
-del /f /s /q "%LocalAppData%\Microsoft\Edge\User Data\Default\Code Cache\*" >nul 2>&1 2>nul
+del /f /s /q "%LocalAppData%\Google\Chrome\User Data\Default\Cache\*" >nul 2>&1
+del /f /s /q "%LocalAppData%\Google\Chrome\User Data\Default\Code Cache\*" >nul 2>&1
+del /f /s /q "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache\*" >nul 2>&1
+del /f /s /q "%LocalAppData%\Microsoft\Edge\User Data\Default\Code Cache\*" >nul 2>&1
 
 echo  [*] Firefox cache...
 taskkill /F /IM firefox.exe >nul 2>&1
 timeout /t 2 >nul
-for /d %%p in ("%LocalAppData%\Mozilla\Firefox\Profiles\*") do del /f /s /q "%%p\cache2\*" >nul 2>&1 2>nul
+for /d %%p in ("%LocalAppData%\Mozilla\Firefox\Profiles\*") do del /f /s /q "%%p\cache2\*" >nul 2>&1
 
 echo  [*] Opera cache...
 taskkill /F /IM opera.exe >nul 2>&1
 timeout /t 2 >nul
-del /f /s /q "%AppData%\Opera Software\Opera Stable\Cache\*" >nul 2>&1 2>nul
+del /f /s /q "%AppData%\Opera Software\Opera Stable\Cache\*" >nul 2>&1
 
 echo.
 echo  Browser caches cleaned! / Da xoa cache trinh duyet!
@@ -620,24 +620,24 @@ wsreset.exe >nul 2>&1
 echo  [*] Teams cache...
 taskkill /F /IM Teams.exe >nul 2>&1
 timeout /t 2 >nul
-del /f /s /q "%AppData%\Microsoft\Teams\Cache\*" >nul 2>&1 2>nul
+del /f /s /q "%AppData%\Microsoft\Teams\Cache\*" >nul 2>&1
 
 echo  [*] Discord cache...
 taskkill /F /IM Discord.exe >nul 2>&1
 timeout /t 2 >nul
-del /f /s /q "%AppData%\Discord\Cache\*" >nul 2>&1 2>nul
-del /f /s /q "%AppData%\Discord\Code Cache\*" >nul 2>&1 2>nul
+del /f /s /q "%AppData%\Discord\Cache\*" >nul 2>&1
+del /f /s /q "%AppData%\Discord\Code Cache\*" >nul 2>&1
 
 echo  [*] Slack cache...
 taskkill /F /IM slack.exe >nul 2>&1
 timeout /t 2 >nul
-del /f /s /q "%AppData%\Slack\Cache\*" >nul 2>&1 2>nul
+del /f /s /q "%AppData%\Slack\Cache\*" >nul 2>&1
 
 echo  [*] Spotify cache...
-del /f /s /q "%AppData%\Spotify\Storage\*" >nul 2>&1 2>nul
+del /f /s /q "%AppData%\Spotify\Storage\*" >nul 2>&1
 
 echo  [*] Adobe cache...
-for /d %%a in ("%LocalAppData%\Adobe\*") do del /f /s /q "%%a\Cache\*" >nul 2>&1 2>nul
+for /d %%a in ("%LocalAppData%\Adobe\*") do del /f /s /q "%%a\Cache\*" >nul 2>&1
 
 echo.
 echo  Application caches cleaned! / Da xoa cache ung dung!
@@ -661,8 +661,8 @@ net stop bits >nul 2>&1
 net stop dosvc >nul 2>&1
 
 echo  [*] Deleting update cache / Xoa cache update...
-del /f /s /q C:\Windows\SoftwareDistribution\Download\* >nul 2>&1 2>nul
-del /f /s /q C:\Windows\SoftwareDistribution\DataStore\* >nul 2>&1 2>nul
+del /f /s /q C:\Windows\SoftwareDistribution\Download\* >nul 2>&1
+del /f /s /q C:\Windows\SoftwareDistribution\DataStore\* >nul 2>&1
 
 echo  [*] Restarting services / Khoi dong lai dich vu...
 net start wuauserv >nul 2>&1
@@ -744,7 +744,7 @@ echo  [*] Stopping font cache service / Dung dich vu font cache...
 net stop "Windows Font Cache Service" >nul 2>&1
 
 echo  [*] Deleting font cache files / Xoa file font cache...
-del /f /s /q C:\Windows\ServiceProfiles\LocalService\AppData\Local\FontCache\* >nul 2>&1 2>nul
+del /f /s /q C:\Windows\ServiceProfiles\LocalService\AppData\Local\FontCache\* >nul 2>&1
 del /f /a /q C:\Windows\System32\FNTCACHE.DAT >nul 2>&1
 
 echo  [*] Starting font cache service / Khoi dong dich vu font cache...
@@ -767,7 +767,7 @@ echo  Cleaning Windows Installer cache / Xoa cache Windows Installer...
 echo.
 
 echo  [*] Cleaning installer temp files / Xoa file tam installer...
-del /f /s /q C:\Windows\Installer\$PatchCache$\* >nul 2>&1 2>nul
+del /f /s /q C:\Windows\Installer\$PatchCache$\* >nul 2>&1
 
 echo  [*] Note: MSI cache cleanup skipped for safety / Bo qua xoa MSI cache de dam bao an toan...
 
@@ -842,7 +842,7 @@ del /f /q C:\Windows\MEMORY.DMP >nul 2>&1
 del /f /q C:\Windows\Minidump\*.dmp >nul 2>&1
 
 echo  [*] Deleting error report files / Xoa file bao cao loi...
-del /f /s /q C:\ProgramData\Microsoft\Windows\WER\* >nul 2>&1 2>nul
+del /f /s /q C:\ProgramData\Microsoft\Windows\WER\* >nul 2>&1
 
 echo.
 echo  Memory dump files cleaned! / Da xoa file dump!
@@ -866,9 +866,9 @@ echo  Clearing recent documents / Xoa tai lieu gan day...
 echo.
 
 echo  [*] Clearing Recent folder / Xoa thu muc Recent...
-del /f /s /q "%AppData%\Microsoft\Windows\Recent\*" >nul 2>&1 2>nul
-del /f /s /q "%AppData%\Microsoft\Windows\Recent\AutomaticDestinations\*" >nul 2>&1 2>nul
-del /f /s /q "%AppData%\Microsoft\Windows\Recent\CustomDestinations\*" >nul 2>&1 2>nul
+del /f /s /q "%AppData%\Microsoft\Windows\Recent\*" >nul 2>&1
+del /f /s /q "%AppData%\Microsoft\Windows\Recent\AutomaticDestinations\*" >nul 2>&1
+del /f /s /q "%AppData%\Microsoft\Windows\Recent\CustomDestinations\*" >nul 2>&1
 
 echo  [*] Clearing Jump Lists / Xoa Jump Lists...
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs" /f >nul 2>&1
@@ -932,7 +932,7 @@ echo  [*] Clearing clipboard / Xoa clipboard...
 echo  off | clip
 
 echo  [*] Clearing clipboard history / Xoa lich su clipboard...
-del /f /s /q "%LocalAppData%\Microsoft\Windows\Clipboard\*" >nul 2>&1 2>nul
+del /f /s /q "%LocalAppData%\Microsoft\Windows\Clipboard\*" >nul 2>&1
 
 echo.
 echo  Clipboard history cleared! / Da xoa lich su clipboard!
@@ -951,8 +951,8 @@ echo  Clearing error reports / Xoa bao cao loi...
 echo.
 
 echo  [*] Deleting error reports / Xoa bao cao loi...
-del /f /s /q C:\ProgramData\Microsoft\Windows\WER\* >nul 2>&1 2>nul
-for /d %%u in ("C:\Users\*") do del /f /s /q "%%u\AppData\Local\Microsoft\Windows\WER\*" >nul 2>&1 2>nul
+del /f /s /q C:\ProgramData\Microsoft\Windows\WER\* >nul 2>&1
+for /d %%u in ("C:\Users\*") do del /f /s /q "%%u\AppData\Local\Microsoft\Windows\WER\*" >nul 2>&1
 
 echo  [*] Disabling error reporting / Tat bao cao loi...
 reg add "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /v Disabled /t REG_DWORD /d 1 /f >nul 2>&1
@@ -1405,7 +1405,7 @@ echo  Clearing prefetch files / Xoa file prefetch...
 echo.
 
 echo  [*] Deleting prefetch files / Xoa file prefetch...
-del /f /s /q C:\Windows\Prefetch\* >nul 2>&1 2>nul
+del /f /s /q C:\Windows\Prefetch\* >nul 2>&1
 
 echo.
 echo  Prefetch files cleared! / Da xoa file prefetch!
@@ -1427,7 +1427,7 @@ echo  [*] Stopping SuperFetch service / Dung dich vu SuperFetch...
 sc stop SysMain >nul 2>&1
 
 echo  [*] Clearing cache / Xoa cache...
-del /f /s /q C:\Windows\Prefetch\* >nul 2>&1 2>nul
+del /f /s /q C:\Windows\Prefetch\* >nul 2>&1
 
 echo  [*] Starting SuperFetch service / Khoi dong dich vu SuperFetch...
 sc start SysMain >nul 2>&1
@@ -1550,7 +1550,7 @@ echo  [*] Stopping search service / Dung dich vu tim kiem...
 net stop WSearch >nul 2>&1
 
 echo  [*] Deleting search index / Xoa chi muc tim kiem...
-del /f /s /q C:\ProgramData\Microsoft\Search\Data\Applications\Windows\* >nul 2>&1 2>nul
+del /f /s /q C:\ProgramData\Microsoft\Search\Data\Applications\Windows\* >nul 2>&1
 
 echo  [*] Restarting search service / Khoi dong lai dich vu tim kiem...
 net start WSearch >nul 2>&1
@@ -1979,7 +1979,7 @@ echo.
 
 echo  [*] Clearing Windows Store cache / Xoa cache Windows Store...
 for /d %%u in ("C:\Users\*") do (
-    del /f /s /q "%%u\AppData\Local\Packages\Microsoft.WindowsStore_*\LocalCache\*" >nul 2>&1 2>nul
+    del /f /s /q "%%u\AppData\Local\Packages\Microsoft.WindowsStore_*\LocalCache\*" >nul 2>&1
 )
 
 echo.
@@ -2057,21 +2057,21 @@ echo  Cleaning all temporary files / Xoa tat ca file tam...
 echo.
 
 echo  [*] User temp / Temp nguoi dung...
-del /f /s /q "%TEMP%\*" >nul 2>&1 2>nul
+del /f /s /q "%TEMP%\*" >nul 2>&1
 for /d %%x in ("%TEMP%\*") do @rd /s /q "%%x" >nul 2>&1
 
 echo  [*] Windows temp / Temp Windows...
-del /f /s /q "C:\Windows\Temp\*" >nul 2>&1 2>nul
+del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
 for /d %%x in ("C:\Windows\Temp\*") do @rd /s /q "%%x" >nul 2>&1
 
 echo  [*] All users temp / Temp tat ca nguoi dung...
-for /d %%u in ("C:\Users\*") do del /f /s /q "%%u\AppData\Local\Temp\*" >nul 2>&1 2>nul
+for /d %%u in ("C:\Users\*") do del /f /s /q "%%u\AppData\Local\Temp\*" >nul 2>&1
 
 echo  [*] Prefetch...
-del /f /s /q "C:\Windows\Prefetch\*" >nul 2>&1 2>nul
+del /f /s /q "C:\Windows\Prefetch\*" >nul 2>&1
 
 echo  [*] Recent items / Muc gan day...
-del /f /s /q "%AppData%\Microsoft\Windows\Recent\*" >nul 2>&1 2>nul
+del /f /s /q "%AppData%\Microsoft\Windows\Recent\*" >nul 2>&1
 
 echo.
 echo  All temporary files cleaned! / Da xoa tat ca file tam!
@@ -2121,31 +2121,31 @@ echo  Running all cleanup tasks / Chay tat ca cac tac vu don dep...
 echo.
 
 echo  [1/11] Quick Cleanup...
-del /f /s /q "%TEMP%\*" >nul 2>&1 2>nul
-del /f /s /q "C:\Windows\Temp\*" >nul 2>&1 2>nul
+del /f /s /q "%TEMP%\*" >nul 2>&1
+del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
 rd /s /q C:\$Recycle.Bin >nul 2>&1
 ipconfig /flushdns >nul 2>&1
-del /f /s /q C:\Windows\Prefetch\* >nul 2>&1 2>nul
+del /f /s /q C:\Windows\Prefetch\* >nul 2>&1
 
 echo  [2/11] Browser Cache...
 taskkill /F /IM chrome.exe >nul 2>&1
 taskkill /F /IM msedge.exe >nul 2>&1
 taskkill /F /IM firefox.exe >nul 2>&1
 timeout /t 2 >nul
-del /f /s /q "%LocalAppData%\Google\Chrome\User Data\Default\Cache\*" >nul 2>&1 2>nul
-del /f /s /q "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache\*" >nul 2>&1 2>nul
-for /d %%p in ("%LocalAppData%\Mozilla\Firefox\Profiles\*") do del /f /s /q "%%p\cache2\*" >nul 2>&1 2>nul
+del /f /s /q "%LocalAppData%\Google\Chrome\User Data\Default\Cache\*" >nul 2>&1
+del /f /s /q "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache\*" >nul 2>&1
+for /d %%p in ("%LocalAppData%\Mozilla\Firefox\Profiles\*") do del /f /s /q "%%p\cache2\*" >nul 2>&1
 
 echo  [3/11] Application Cache...
 taskkill /F /IM Teams.exe >nul 2>&1
 taskkill /F /IM Discord.exe >nul 2>&1
-del /f /s /q "%AppData%\Microsoft\Teams\Cache\*" >nul 2>&1 2>nul
-del /f /s /q "%AppData%\Discord\Cache\*" >nul 2>&1 2>nul
+del /f /s /q "%AppData%\Microsoft\Teams\Cache\*" >nul 2>&1
+del /f /s /q "%AppData%\Discord\Cache\*" >nul 2>&1
 
 echo  [4/11] Windows Update Cache...
 net stop wuauserv >nul 2>&1
 net stop bits >nul 2>&1
-del /f /s /q C:\Windows\SoftwareDistribution\Download\* >nul 2>&1 2>nul
+del /f /s /q C:\Windows\SoftwareDistribution\Download\* >nul 2>&1
 net start wuauserv >nul 2>&1
 net start bits >nul 2>&1
 
@@ -2159,7 +2159,7 @@ del /f /a /q "%LocalAppData%\IconCache.db" >nul 2>&1
 
 echo  [7/11] Font Cache...
 net stop "Windows Font Cache Service" >nul 2>&1
-del /f /s /q C:\Windows\ServiceProfiles\LocalService\AppData\Local\FontCache\* >nul 2>&1 2>nul
+del /f /s /q C:\Windows\ServiceProfiles\LocalService\AppData\Local\FontCache\* >nul 2>&1
 net start "Windows Font Cache Service" >nul 2>&1
 
 echo  [8/11] Recycle Bin...
@@ -2170,18 +2170,18 @@ echo  [9/11] DNS Cache...
 ipconfig /flushdns >nul 2>&1
 
 echo  [10/11] Prefetch...
-del /f /s /q C:\Windows\Prefetch\* >nul 2>&1 2>nul
+del /f /s /q C:\Windows\Prefetch\* >nul 2>&1
 
 echo  [11/11] All Temp Files...
 for /d %%x in ("%TEMP%\*") do @rd /s /q "%%x" >nul 2>&1
 for /d %%x in ("C:\Windows\Temp\*") do @rd /s /q "%%x" >nul 2>&1
 
 echo  [BONUS] Software cache...
-del /f /s /q "%userprofile%\AppData\Roaming\Adobe\Common\Media Cache Files\*" >nul 2>&1 2>nul
-del /f /s /q "%userprofile%\AppData\Local\Microsoft\Office\16.0\OfficeFileCache\*" >nul 2>&1 2>nul
+del /f /s /q "%userprofile%\AppData\Roaming\Adobe\Common\Media Cache Files\*" >nul 2>&1
+del /f /s /q "%userprofile%\AppData\Local\Microsoft\Office\16.0\OfficeFileCache\*" >nul 2>&1
 
 echo  [BONUS] Delivery Optimization...
-del /f /s /q "%windir%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Cache\*" >nul 2>&1 2>nul
+del /f /s /q "%windir%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Cache\*" >nul 2>&1
 
 echo.
 echo  ================================================================================
@@ -2214,20 +2214,20 @@ echo  [STEP 1/5] CLEANUP - DON DEP
 echo  ================================================================================
 echo.
 echo  [1.1] Temp files...
-del /f /s /q "%TEMP%\*" >nul 2>&1 2>nul
-del /f /s /q "C:\Windows\Temp\*" >nul 2>&1 2>nul
+del /f /s /q "%TEMP%\*" >nul 2>&1
+del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
 
 echo  [1.2] Browser cache...
 taskkill /F /IM chrome.exe >nul 2>&1
 taskkill /F /IM msedge.exe >nul 2>&1
 taskkill /F /IM firefox.exe >nul 2>&1
 timeout /t 2 >nul
-del /f /s /q "%LocalAppData%\Google\Chrome\User Data\Default\Cache\*" >nul 2>&1 2>nul
-del /f /s /q "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache\*" >nul 2>&1 2>nul
+del /f /s /q "%LocalAppData%\Google\Chrome\User Data\Default\Cache\*" >nul 2>&1
+del /f /s /q "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache\*" >nul 2>&1
 
 echo  [1.3] Windows Update cache...
 net stop wuauserv >nul 2>&1
-del /f /s /q C:\Windows\SoftwareDistribution\Download\* >nul 2>&1 2>nul
+del /f /s /q C:\Windows\SoftwareDistribution\Download\* >nul 2>&1
 net start wuauserv >nul 2>&1
 
 echo  [1.4] Icon and thumbnail cache...
@@ -2240,7 +2240,7 @@ echo  [1.5] DNS cache...
 ipconfig /flushdns >nul 2>&1
 
 echo  [1.6] Prefetch...
-del /f /s /q C:\Windows\Prefetch\* >nul 2>&1 2>nul
+del /f /s /q C:\Windows\Prefetch\* >nul 2>&1
 
 echo.
 echo  ================================================================================
@@ -2308,11 +2308,11 @@ echo  [6.1] Optimizing memory (RAM)...
 powershell -Command "Get-Process | ForEach-Object { try { $_.MinWorkingSet = 100KB } catch {} }" >nul 2>&1
 
 echo  [6.2] Cleaning software cache...
-del /f /s /q "%userprofile%\AppData\Roaming\Adobe\Common\Media Cache Files\*" >nul 2>&1 2>nul
-del /f /s /q "%userprofile%\AppData\Local\Microsoft\Office\16.0\OfficeFileCache\*" >nul 2>&1 2>nul
+del /f /s /q "%userprofile%\AppData\Roaming\Adobe\Common\Media Cache Files\*" >nul 2>&1
+del /f /s /q "%userprofile%\AppData\Local\Microsoft\Office\16.0\OfficeFileCache\*" >nul 2>&1
 
 echo  [6.3] Cleaning delivery optimization...
-del /f /s /q "%windir%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Cache\*" >nul 2>&1 2>nul
+del /f /s /q "%windir%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Cache\*" >nul 2>&1
 
 echo  [6.4] Refreshing icon cache...
 ie4uinit.exe -show >nul 2>&1
@@ -2357,26 +2357,26 @@ echo  Cleaning software-specific caches / Xoa cache cac phan mem...
 echo.
 
 echo  [*] WPS Office cache...
-del /f /s /q "%userprofile%\AppData\Roaming\kingsoft\wps\cache\*" >nul 2>&1 2>nul
-del /f /s /q "%userprofile%\AppData\Local\Kingsoft\WPS Office\cache\*" >nul 2>&1 2>nul
+del /f /s /q "%userprofile%\AppData\Roaming\kingsoft\wps\cache\*" >nul 2>&1
+del /f /s /q "%userprofile%\AppData\Local\Kingsoft\WPS Office\cache\*" >nul 2>&1
 
 echo  [*] Adobe cache...
-del /f /s /q "%userprofile%\AppData\Roaming\Adobe\Common\Media Cache Files\*" >nul 2>&1 2>nul
-del /f /s /q "%userprofile%\AppData\Local\Adobe\Common\Media Cache Files\*" >nul 2>&1 2>nul
+del /f /s /q "%userprofile%\AppData\Roaming\Adobe\Common\Media Cache Files\*" >nul 2>&1
+del /f /s /q "%userprofile%\AppData\Local\Adobe\Common\Media Cache Files\*" >nul 2>&1
 
 echo  [*] Steam logs...
-del /f /s /q "%ProgramFiles(x86)%\Steam\logs\*" >nul 2>&1 2>nul
-del /f /s /q "%ProgramFiles%\Steam\logs\*" >nul 2>&1 2>nul
+del /f /s /q "%ProgramFiles(x86)%\Steam\logs\*" >nul 2>&1
+del /f /s /q "%ProgramFiles%\Steam\logs\*" >nul 2>&1
 
 echo  [*] Visual Studio cache...
-del /f /s /q "%userprofile%\AppData\Local\Microsoft\VisualStudio\*\ComponentModelCache\*" >nul 2>&1 2>nul
+del /f /s /q "%userprofile%\AppData\Local\Microsoft\VisualStudio\*\ComponentModelCache\*" >nul 2>&1
 
 echo  [*] Java cache...
-del /f /s /q "%userprofile%\AppData\LocalLow\Sun\Java\Deployment\cache\*" >nul 2>&1 2>nul
+del /f /s /q "%userprofile%\AppData\LocalLow\Sun\Java\Deployment\cache\*" >nul 2>&1
 
 echo  [*] Office file cache...
-del /f /s /q "%userprofile%\AppData\Local\Microsoft\Office\16.0\OfficeFileCache\*" >nul 2>&1 2>nul
-del /f /s /q "%userprofile%\AppData\Local\Microsoft\Office\15.0\OfficeFileCache\*" >nul 2>&1 2>nul
+del /f /s /q "%userprofile%\AppData\Local\Microsoft\Office\16.0\OfficeFileCache\*" >nul 2>&1
+del /f /s /q "%userprofile%\AppData\Local\Microsoft\Office\15.0\OfficeFileCache\*" >nul 2>&1
 
 echo.
 echo  Software cache cleaned! / Da xoa cache phan mem!
@@ -2398,8 +2398,8 @@ echo  [*] Stopping Delivery Optimization service / Dung dich vu...
 net stop DoSvc >nul 2>&1
 
 echo  [*] Cleaning cache / Xoa cache...
-del /f /s /q "%windir%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Cache\*" >nul 2>&1 2>nul
-del /f /s /q "%windir%\SoftwareDistribution\DeliveryOptimization\*" >nul 2>&1 2>nul
+del /f /s /q "%windir%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Cache\*" >nul 2>&1
+del /f /s /q "%windir%\SoftwareDistribution\DeliveryOptimization\*" >nul 2>&1
 
 echo  [*] Restarting service / Khoi dong lai dich vu...
 net start DoSvc >nul 2>&1
@@ -2531,7 +2531,7 @@ echo  [*] Refreshing system icon cache / Lam moi icon cache he thong...
 ie4uinit.exe -show >nul 2>&1
 
 echo  [*] Cleaning connected devices cache / Xoa cache thiet bi ket noi...
-del /f /s /q "%userprofile%\AppData\Local\ConnectedDevicesPlatform\*" >nul 2>&1 2>nul
+del /f /s /q "%userprofile%\AppData\Local\ConnectedDevicesPlatform\*" >nul 2>&1
 
 echo  [*] Cleaning network list cache / Xoa cache danh sach mang...
 del /f /q "%userprofile%\AppData\Roaming\Microsoft\Network\Connections\*" >nul 2>&1
@@ -2729,8 +2729,8 @@ if "%office_choice%"=="3" (
 
 if "%office_choice%"=="4" (
     echo [*] Clearing Office cache / Xoa cache Office...
-    del /f /s /q "%LocalAppData%\Microsoft\Office\16.0\OfficeFileCache\*" >nul 2>&1 2>nul
-    del /f /s /q "%LocalAppData%\Microsoft\Office\15.0\OfficeFileCache\*" >nul 2>&1 2>nul
+    del /f /s /q "%LocalAppData%\Microsoft\Office\16.0\OfficeFileCache\*" >nul 2>&1
+    del /f /s /q "%LocalAppData%\Microsoft\Office\15.0\OfficeFileCache\*" >nul 2>&1
     echo Office cache cleared! / Da xoa cache Office!
 )
 
@@ -4157,40 +4157,40 @@ if /i not "%confirm%"=="Y" goto MAIN_MENU
 
 echo.
 echo   [1/10] Dang xoa Temp files...
-del /f /s /q "%TEMP%\*" >nul 2>&1 2>nul
-del /f /s /q "C:\Windows\Temp\*" >nul 2>&1 2>nul
+del /f /s /q "%TEMP%\*" >nul 2>&1
+del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
 
 echo   [2/10] Dang xoa Windows Update cache...
 net stop wuauserv >nul 2>&1
-del /f /s /q "C:\Windows\SoftwareDistribution\Download\*" >nul 2>&1 2>nul
+del /f /s /q "C:\Windows\SoftwareDistribution\Download\*" >nul 2>&1
 net start wuauserv >nul 2>&1
 
 echo   [3/10] Dang xoa Prefetch files...
-del /f /s /q "C:\Windows\Prefetch\*" >nul 2>&1 2>nul
+del /f /s /q "C:\Windows\Prefetch\*" >nul 2>&1
 
 echo   [4/10] Dang xoa Thumbnail cache...
-del /f /s /q "%LOCALAPPDATA%\Microsoft\Windows\Explorer\thumbcache_*.db" >nul 2>&1 2>nul
+del /f /s /q "%LOCALAPPDATA%\Microsoft\Windows\Explorer\thumbcache_*.db" >nul 2>&1
 
 echo   [5/10] Dang xoa Browser cache...
 taskkill /f /im chrome.exe >nul 2>&1
 taskkill /f /im msedge.exe >nul 2>&1
 taskkill /f /im firefox.exe >nul 2>&1
 timeout /t 2 /nobreak >nul
-del /f /s /q "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Cache\*" >nul 2>&1 2>nul
-del /f /s /q "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Cache\*" >nul 2>&1 2>nul
+del /f /s /q "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Cache\*" >nul 2>&1
+del /f /s /q "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Cache\*" >nul 2>&1
 
 echo   [6/10] Dang xoa Windows Error Reports...
-del /f /s /q "C:\ProgramData\Microsoft\Windows\WER\*" >nul 2>&1 2>nul
+del /f /s /q "C:\ProgramData\Microsoft\Windows\WER\*" >nul 2>&1
 
 echo   [7/10] Dang xoa Log files...
-del /f /s /q "C:\Windows\Logs\*" >nul 2>&1 2>nul
+del /f /s /q "C:\Windows\Logs\*" >nul 2>&1
 
 echo   [8/10] Dang xoa Recycle Bin...
 PowerShell.exe -NoProfile -Command Clear-RecycleBin -Force -ErrorAction SilentlyContinue
 
 echo   [9/10] Dang xoa Memory dumps...
 del /f /q "C:\Windows\MEMORY.DMP" >nul 2>&1
-del /f /s /q "C:\Windows\Minidump\*" >nul 2>&1 2>nul
+del /f /s /q "C:\Windows\Minidump\*" >nul 2>&1
 
 echo   [10/10] Dang chay Disk Cleanup...
 cleanmgr /sagerun:1 >nul 2>&1
@@ -4330,14 +4330,14 @@ if "%printer%"=="1" (
 if "%printer%"=="2" (
     echo  [*] Dang xoa hang doi in...
     net stop spooler
-    del /f /s /q "%SystemRoot%\System32\spool\PRINTERS\*" >nul 2>&1 2>nul
+    del /f /s /q "%SystemRoot%\System32\spool\PRINTERS\*" >nul 2>&1
     net start spooler
     echo  [+] Hang doi in da duoc xoa!
 )
 if "%printer%"=="3" (
     echo  [*] Dang reset Print Spooler...
     net stop spooler
-    del /f /s /q "%SystemRoot%\System32\spool\PRINTERS\*" >nul 2>&1 2>nul
+    del /f /s /q "%SystemRoot%\System32\spool\PRINTERS\*" >nul 2>&1
     reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Print\Printers" /f >nul 2>&1
     net start spooler
     echo  [+] Print Spooler da duoc reset!
@@ -4778,15 +4778,15 @@ echo   [*] Bat dau chay tat ca tien ich...
 echo.
 
 echo   [1/7] Xoa file rac...
-del /f /s /q "%TEMP%\*" >nul 2>&1 2>nul
-del /f /s /q "C:\Windows\Temp\*" >nul 2>&1 2>nul
+del /f /s /q "%TEMP%\*" >nul 2>&1
+del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
 
 echo   [2/7] Hien file an...
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v Hidden /t REG_DWORD /d 1 /f >nul
 
 echo   [3/7] Xoa hang doi in...
 net stop spooler >nul 2>&1
-del /f /s /q "%SystemRoot%\System32\spool\PRINTERS\*" >nul 2>&1 2>nul
+del /f /s /q "%SystemRoot%\System32\spool\PRINTERS\*" >nul 2>&1
 net start spooler >nul 2>&1
 
 echo   [4/7] Cap nhat Defender...
@@ -4826,8 +4826,8 @@ echo.
 echo   [STEP 1/8] CLEANUP
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
 
-del /f /s /q "%TEMP%\*" >nul 2>&1 2>nul
-del /f /s /q "C:\Windows\Temp\*" >nul 2>&1 2>nul
+del /f /s /q "%TEMP%\*" >nul 2>&1
+del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
 cleanmgr /sagerun:1 >nul 2>&1
 
 echo.
@@ -7393,7 +7393,7 @@ if "%ws%"=="1" (
 if "%ws%"=="2" (
     echo.
     echo  Clearing Store cache...
-    del /f /s /q "%LOCALAPPDATA%\Packages\Microsoft.WindowsStore_*\LocalState\*" >nul 2>&1 2>nul
+    del /f /s /q "%LOCALAPPDATA%\Packages\Microsoft.WindowsStore_*\LocalState\*" >nul 2>&1
     echo  Store cache CLEARED!
 )
 if "%ws%"=="3" (
@@ -7642,8 +7642,8 @@ if "%edge%"=="2" (
     echo.
     echo  Clearing Edge cache...
     taskkill /F /IM msedge.exe >nul 2>&1
-    del /f /s /q "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Cache\*" >nul 2>&1 2>nul
-    del /f /s /q "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Code Cache\*" >nul 2>&1 2>nul
+    del /f /s /q "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Cache\*" >nul 2>&1
+    del /f /s /q "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Code Cache\*" >nul 2>&1
     echo  Edge cache CLEARED!
 )
 if "%edge%"=="3" (
