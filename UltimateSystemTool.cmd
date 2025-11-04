@@ -1,18 +1,17 @@
 @echo off
 setlocal enabledelayedexpansion
 :: ============================================================================
-:: ULTIMATE WINDOWS SYSTEM TOOL v5.0 - PROFESSIONAL EDITION
-:: Complete System Optimization Suite - Bilingual (English/Vietnamese)
+:: ULTIMATE WINDOWS SYSTEM TOOL v5.0 - COMPLETE EDITION
+:: Full System Optimization + Installation Suite - Bilingual
 :: ============================================================================
 :: Author: Nguyen Ngoc Anh Tu
-:: Based on open-source tools: BleachBit, CCleaner, PrivaZer, Wise Care 365
-:: NEW v5.0: Backup/Recovery, System utilities, Bloatware removal, Bitlocker
-:: v4.5: Auto-elevate, Software cache, LCU cleanup, Memory optimization
-:: Compatible with: Windows 7, 8, 8.1, 10, 11 (32-bit & 64-bit)
+:: Based on: BleachBit, CCleaner, PrivaZer, Wise Care 365
+:: NEW v5.0: 96 Functions Total (82 Optimization + 14 Installation/Utilities)
+:: Compatible: Windows 7, 8, 8.1, 10, 11 (32-bit & 64-bit)
 :: All commands are SAFE and tested
 :: ============================================================================
 
-title Ultimate Windows System Tool v5.0 - Professional Edition
+title Ultimate Windows System Tool v5.0 - Complete Edition
 color 0B
 
 :: Detect Windows Version
@@ -23,27 +22,7 @@ if "%version%" == "6.2" set WIN_VER=8
 if "%version%" == "6.1" set WIN_VER=7
 if not defined WIN_VER set WIN_VER=10
 
-:: Set default language (EN = English, VI = Vietnamese)
-if not defined LANG set LANG=EN
-
-:: Welcome Screen with Loading Animation
-cls
-color 0B
-echo.
-echo.
-echo   ========================================================================
-echo                                                                          
-echo            ULTIMATE WINDOWS SYSTEM TOOL v5.0 - PROFESSIONAL             
-echo                Comprehensive System Optimization Suite                  
-echo                                                                          
-echo   ========================================================================
-echo.
-echo                       Loading / Dang tai...
-echo.
-echo.
-timeout /t 1 /nobreak >nul
-
-:: Check Administrator privileges and AUTO-ELEVATE
+:: Check Administrator and AUTO-ELEVATE
 net session >nul 2>&1
 if %errorLevel% neq 0 (
     cls
@@ -55,18 +34,17 @@ if %errorLevel% neq 0 (
     echo                                                                          
     echo   ========================================================================
     echo.
-    echo   This tool requires Administrator privileges to function properly.
-    echo   Cong cu nay can quyen Administrator de hoat dong dung cach.
+    echo   This tool requires Administrator privileges.
+    echo   Cong cu nay can quyen Administrator.
     echo.
-    echo   Auto-elevating to Administrator...
-    echo   Tu dong xin quyen Administrator...
+    echo   Auto-elevating... / Tu dong xin quyen...
     echo.
     timeout /t 2 /nobreak >nul
     powershell -Command "Start-Process cmd -ArgumentList '/c \"%~0\"' -Verb RunAs" 2>nul
     exit
 )
 
-:: Admin rights confirmed - Show success
+:: Admin confirmed
 cls
 color 0A
 echo.
@@ -79,166 +57,143 @@ echo.
 timeout /t 1 /nobreak >nul
 
 :MAIN_MENU
-:: Use bilingual menu (beautiful side-by-side layout)
-goto MAIN_MENU_BILINGUAL
-
-:MAIN_MENU_BILINGUAL
 cls
 color 0B
 echo.
 echo  ================================================================================
 echo                                                                                
-echo               ULTIMATE WINDOWS SYSTEM TOOL v5.0 - PROFESSIONAL                
-echo               Comprehensive Optimization Suite - 82 Functions                 
-echo                Backup, Restore, Optimize, Clean - All-in-One Tool             
+echo             ULTIMATE WINDOWS SYSTEM TOOL v5.0 - COMPLETE EDITION              
+echo              96 Functions - Full Optimization + Installation Suite            
 echo                                                                                
 echo  ================================================================================
 echo.
 echo  -------------------------------------------------------------------------------
-echo   CATEGORY 1: SYSTEM CLEANUP [1-12] - DON DEP HE THONG                       
+echo   CATEGORY 1: SYSTEM CLEANUP [1-12]
 echo  -------------------------------------------------------------------------------
-echo   [1]  Quick System Cleanup                  - Don Dep Nhanh He Thong       
-echo   [2]  Deep System Cleanup                   - Don Dep Sau He Thong         
-echo   [3]  Browser Cache Cleanup                 - Don Dep Cache Trinh Duyet    
-echo   [4]  Application Cache Cleanup             - Don Dep Cache Ung Dung       
-echo   [5]  Windows Update Cleanup                - Don Dep Windows Update        
-echo   [6]  Thumbnail Cache Cleanup               - Don Dep Thumbnail Cache       
-echo   [7]  Icon Cache Cleanup                    - Don Dep Icon Cache            
-echo   [8]  Font Cache Cleanup                    - Don Dep Font Cache            
-echo   [9]  Windows Installer Cleanup             - Don Dep Windows Installer     
-echo   [10] Old Windows Installation Cleanup      - Don Dep Windows Cu            
-echo   [11] Recycle Bin Cleanup                   - Don Dep Thung Rac             
-echo   [12] Memory Dump Files Cleanup             - Don Dep File Dump Bo Nho      
+echo   [1]  Quick System Cleanup           [2]  Deep System Cleanup
+echo   [3]  Browser Cache Cleanup          [4]  Application Cache Cleanup
+echo   [5]  Windows Update Cleanup         [6]  Thumbnail Cache Cleanup
+echo   [7]  Icon Cache Cleanup             [8]  Font Cache Cleanup
+echo   [9]  Windows Installer Cleanup      [10] Old Windows Installation Cleanup
+echo   [11] Recycle Bin Cleanup            [12] Memory Dump Files Cleanup
 echo  -------------------------------------------------------------------------------
 echo.
 echo  -------------------------------------------------------------------------------
-echo   CATEGORY 2: PRIVACY PROTECTION [13-20] - BAO VE RIENG TU                   
+echo   CATEGORY 2: PRIVACY PROTECTION [13-20]
 echo  -------------------------------------------------------------------------------
-echo   [13] Clear Recent Documents                - Xoa Tai Lieu Gan Day          
-echo   [14] Clear Run History                     - Xoa Lich Su Run               
-echo   [15] Clear Search History                  - Xoa Lich Su Tim Kiem          
-echo   [16] Clear Clipboard History               - Xoa Lich Su Clipboard         
-echo   [17] Clear Windows Error Reports           - Xoa Bao Cao Loi Windows       
-echo   [18] Disable Telemetry and Tracking        - Tat Thu Thap Du Lieu          
-echo   [19] Clear Event Logs                      - Xoa Nhat Ky Su Kien           
-echo   [20] Clear DNS Cache                       - Xoa Cache DNS                 
+echo   [13] Clear Recent Documents         [14] Clear Run History
+echo   [15] Clear Search History           [16] Clear Clipboard History
+echo   [17] Clear Windows Error Reports    [18] Disable Telemetry
+echo   [19] Clear Event Logs               [20] Clear DNS Cache
 echo  -------------------------------------------------------------------------------
 echo.
 echo  -------------------------------------------------------------------------------
-echo   CATEGORY 3: NETWORK OPTIMIZATION [21-26] - TOI UU MANG                     
+echo   CATEGORY 3: NETWORK OPTIMIZATION [21-26]
 echo  -------------------------------------------------------------------------------
-echo   [21] Reset Network Settings                - Reset Cai Dat Mang            
-echo   [22] Optimize Network Performance          - Toi Uu Hieu Suat Mang         
-echo   [23] Clear ARP Cache                       - Xoa Cache ARP                 
-echo   [24] Reset Winsock                         - Reset Winsock                 
-echo   [25] Renew IP Address                      - Lam Moi Dia Chi IP            
-echo   [26] Fix Network Adapter                   - Sua Card Mang                 
+echo   [21] Reset Network Settings         [22] Optimize Network Performance
+echo   [23] Clear ARP Cache                [24] Reset Winsock
+echo   [25] Renew IP Address               [26] Fix Network Adapter
 echo  -------------------------------------------------------------------------------
 echo.
 echo  -------------------------------------------------------------------------------
-echo   CATEGORY 4: DISK MANAGEMENT [27-32] - QUAN LY O DIA                        
+echo   CATEGORY 4: DISK MANAGEMENT [27-32]
 echo  -------------------------------------------------------------------------------
-echo   [27] Disk Cleanup (Windows Built-in)       - Don Dep O Dia (Tich Hop)      
-echo   [28] Disk Error Check                      - Kiem Tra Loi O Dia            
-echo   [29] Disk Optimization (Defrag/TRIM)       - Toi Uu O Dia                  
-echo   [30] Analyze Disk Space                    - Phan Tich Dung Luong          
-echo   [31] Clean Windows.old Folder              - Xoa Thu Muc Windows.old       
-echo   [32] Compact OS (Compress System)          - Nen He Thong                  
+echo   [27] Disk Cleanup                   [28] Disk Error Check
+echo   [29] Disk Optimization              [30] Analyze Disk Space
+echo   [31] Clean Windows.old Folder       [32] Compact OS
 echo  -------------------------------------------------------------------------------
 echo.
 echo  -------------------------------------------------------------------------------
-echo   CATEGORY 5: PERFORMANCE OPTIMIZATION [33-44] - TOI UU HIEU SUAT            
+echo   CATEGORY 5: PERFORMANCE OPTIMIZATION [33-44]
 echo  -------------------------------------------------------------------------------
-echo   [33] Disable Startup Programs              - Tat Chuong Trinh Khoi Dong    
-echo   [34] Optimize Services                     - Toi Uu Dich Vu                
-echo   [35] Clear Prefetch Files                  - Xoa File Prefetch             
-echo   [36] Clear SuperFetch Cache                - Xoa Cache SuperFetch          
-echo   [37] Disable Visual Effects                - Tat Hieu Ung Hinh Anh         
-echo   [38] Optimize Power Plan (High Perf)       - Toi Uu Che Do Nguon           
-echo   [39] Disable Hibernation                   - Tat Che Do Ngu Dong           
-echo   [40] Clear Memory Cache                    - Xoa Cache Bo Nho              
-echo   [41] Optimize Search Index                 - Toi Uu Tim Kiem               
-echo   [42] Disable Windows Animations            - Tat Hoat Anh Windows          
-echo   [43] Optimize SSD Settings                 - Toi Uu SSD                    
-echo   [44] Reduce Menu Show Delay                - Giam Tre Hien Thi Menu        
+echo   [33] Disable Startup Programs       [34] Optimize Services
+echo   [35] Clear Prefetch Files           [36] Clear SuperFetch Cache
+echo   [37] Disable Visual Effects         [38] Optimize Power Plan
+echo   [39] Disable Hibernation            [40] Clear Memory Cache
+echo   [41] Optimize Search Index          [42] Disable Windows Animations
+echo   [43] Optimize SSD Settings          [44] Reduce Menu Show Delay
 echo  -------------------------------------------------------------------------------
 echo.
 echo  -------------------------------------------------------------------------------
-echo   CATEGORY 6: SYSTEM MAINTENANCE [45-50] - BAO TRI HE THONG                  
+echo   CATEGORY 6: SYSTEM MAINTENANCE [45-50]
 echo  -------------------------------------------------------------------------------
-echo   [45] System File Checker (SFC)             - Kiem Tra File He Thong        
-echo   [46] DISM System Repair                    - Sua Chua He Thong DISM        
-echo   [47] Windows Component Cleanup             - Don Dep Thanh Phan Windows    
-echo   [48] Update Windows Drivers                - Cap Nhat Driver Windows       
-echo   [49] Rebuild Icon Cache                    - Xay Dung Lai Icon Cache       
-echo   [50] Rebuild Windows Search Index          - Xay Dung Lai Tim Kiem         
+echo   [45] System File Checker (SFC)      [46] DISM System Repair
+echo   [47] Windows Component Cleanup      [48] Update Windows Drivers
+echo   [49] Rebuild Icon Cache             [50] Rebuild Search Index
 echo  -------------------------------------------------------------------------------
 echo.
 echo  -------------------------------------------------------------------------------
-echo   CATEGORY 7: REGISTRY OPTIMIZATION [51-55] - TOI UU REGISTRY                
+echo   CATEGORY 7: REGISTRY OPTIMIZATION [51-55]
 echo  -------------------------------------------------------------------------------
-echo   [51] Clean Registry (Safe)                 - Don Dep Registry (An Toan)    
-echo   [52] Optimize Registry                     - Toi Uu Registry               
-echo   [53] Backup Registry                       - Sao Luu Registry              
-echo   [54] Disable Cortana                       - Tat Cortana                   
-echo   [55] Disable Windows Tips                  - Tat Goi Y Windows             
+echo   [51] Clean Registry (Safe)          [52] Optimize Registry
+echo   [53] Backup Registry                [54] Disable Cortana
+echo   [55] Disable Windows Tips
 echo  -------------------------------------------------------------------------------
 echo.
 echo  -------------------------------------------------------------------------------
-echo   CATEGORY 8: ADVANCED TOOLS [56-70] - CONG CU NANG CAO                      
+echo   CATEGORY 8: ADVANCED TOOLS [56-70]
 echo  -------------------------------------------------------------------------------
-echo   [56] Create System Restore Point           - Tao Diem Khoi Phuc He Thong   
-echo   [57] View System Information               - Xem Thong Tin He Thong        
-echo   [58] Export Installed Programs List        - Xuat Danh Sach Chuong Trinh   
-echo   [59] Check Disk Health (SMART)             - Kiem Tra Suc Khoe O Dia       
-echo   [60] Clear Windows Store Cache             - Xoa Cache Windows Store       
-echo   [61] Reset Windows Update Components       - Reset Thanh Phan Update        
-echo   [62] Optimize Boot Time                    - Toi Uu Thoi Gian Khoi Dong    
-echo   [63] Clean All Temporary Files             - Xoa Tat Ca File Tam           
-echo   [64] Generate System Report                - Tao Bao Cao He Thong          
-echo   [65] Clean Software Cache (WPS/Adobe)      - Xoa Cache Phan Mem            
-echo   [66] Clean Delivery Optimization           - Xoa Delivery Optimization     
-echo   [67] Clean Update Backup (LCU)             - Xoa Sao Luu Cap Nhat          
-echo   [68] Optimize Memory (RAM)                 - Toi Uu Bo Nho RAM             
-echo   [69] Show Disk Space Report                - Xem Bao Cao Dung Luong        
-echo   [70] Refresh Icon Cache                    - Lam Moi Icon Cache            
+echo   [56] Create Restore Point           [57] View System Information
+echo   [58] Export Programs List           [59] Check Disk Health (SMART)
+echo   [60] Clear Windows Store Cache      [61] Reset Windows Update
+echo   [62] Optimize Boot Time             [63] Clean All Temp Files
+echo   [64] Generate System Report         [65] Clean Software Cache
+echo   [66] Clean Delivery Optimization    [67] Clean Update Backup (LCU)
+echo   [68] Optimize Memory (RAM)          [69] Show Disk Space Report
+echo   [70] Refresh Icon Cache
 echo  -------------------------------------------------------------------------------
 echo.
 echo  -------------------------------------------------------------------------------
-echo   CATEGORY 9: SYSTEM UTILITIES [71-76] - TIEN ICH HE THONG            
+echo   CATEGORY 9: SYSTEM UTILITIES [71-76]
 echo  -------------------------------------------------------------------------------
-echo   [71] Check System Information              - Kiem Tra Thong Tin May        
-echo   [72] Windows Settings Center               - Trung Tam Cai Dat Windows     
-echo   [73] Office Repair and Reset               - Sua Chua va Reset Office      
-echo   [74] Remove Bloatware (Safe)               - Xoa Ung Dung Rac (An Toan)    
-echo   [75] Bitlocker Management                  - Quan Ly Bitlocker             
-echo   [76] Check Activation Status               - Kiem Tra Trang Thai Kich Hoat 
+echo   [71] Check System Information       [72] Windows Settings Center
+echo   [73] Office Repair and Reset        [74] Remove Bloatware (Safe)
+echo   [75] Bitlocker Management           [76] Check Activation Status
 echo  -------------------------------------------------------------------------------
 echo.
 echo  -------------------------------------------------------------------------------
-echo   CATEGORY 10: BACKUP AND RECOVERY [77-82] - SAO LUU VA KHOI PHUC (NEW!)     
+echo   CATEGORY 10: BACKUP AND RECOVERY [77-82]
 echo  -------------------------------------------------------------------------------
-echo   [77] Backup Wifi Passwords                 - Sao Luu Mat Khau Wifi         
-echo   [78] Backup Drivers                        - Sao Luu Driver                
-echo   [79] Backup User Data                      - Sao Luu Du Lieu Nguoi Dung    
-echo   [80] Backup Zalo Data                      - Sao Luu Du Lieu Zalo          
-echo   [81] Backup Product Keys                   - Sao Luu Ban Quyen             
-echo   [82] Data Recovery Tools                   - Cong Cu Khoi Phuc Du Lieu     
+echo   [77] Backup WiFi Passwords          [78] Backup Drivers
+echo   [79] Backup User Data               [80] Backup Zalo Data
+echo   [81] Backup Product Keys            [82] Data Recovery Tools
 echo  -------------------------------------------------------------------------------
 echo.
-echo  ================================================================================
-echo                         QUICK ACTIONS - THAO TAC NHANH                        
-echo  ================================================================================
-echo   [88] RUN ALL CLEANUP TASKS                 - CHAY TAT CA DON DEP           
-echo   [99] FULL SYSTEM OPTIMIZATION              - TOI UU TOAN BO HE THONG       
 echo  -------------------------------------------------------------------------------
-echo   [0]  EXIT - THOAT                          [L]  Language / Ngon ngu          
-echo  ================================================================================
+echo   CATEGORY 11: INSTALLATION [83-87] ** NEW **
+echo  -------------------------------------------------------------------------------
+echo   [83] Install Software (Chocolatey)  [84] Install Office Suite
+echo   [85] Create WinPE Boot USB          [86] Store for Win LTSC
+echo   [87] Install Win via Win To HDD
+echo  -------------------------------------------------------------------------------
 echo.
-set /p choice=   SELECT FUNCTION / CHON CHUC NANG (0-99 or L): 
+echo  -------------------------------------------------------------------------------
+echo   CATEGORY 12: UTILITIES [88-96] ** NEW **
+echo  -------------------------------------------------------------------------------
+echo   [88] Clean Junk Files (Advanced)    [89] Show/Hide Files
+echo   [90] Enable/Disable Update          [91] Fix Printer Issues
+echo   [92] Check and Test Tools           [93] Windows Defender Manage
+echo   [94] Windows ISO Repository         [95] Intel RST Drivers
+echo   [96] Product Key Management
+echo  -------------------------------------------------------------------------------
+echo.
+echo  -------------------------------------------------------------------------------
+echo   QUICK ACTIONS
+echo  -------------------------------------------------------------------------------
+echo   [97] RUN ALL CLEANUP                [98] RUN ALL UTILITIES
+echo   [99] FULL SYSTEM OPTIMIZATION       [0]  EXIT
+echo  -------------------------------------------------------------------------------
+echo.
 
-if /i "%choice%"=="L" goto SWITCH_LANGUAGE
+set /p choice="  SELECT FUNCTION [0-99]: "
+
 if "%choice%"=="0" goto EXIT
+
+:: ============================================================================
+:: FUNCTION ROUTING
+:: ============================================================================
+
+:: Original 82 functions [1-82]
 if "%choice%"=="1" goto QUICK_CLEANUP
 if "%choice%"=="2" goto DEEP_CLEANUP
 if "%choice%"=="3" goto BROWSER_CACHE
@@ -247,42 +202,42 @@ if "%choice%"=="5" goto WINDOWS_UPDATE_CLEANUP
 if "%choice%"=="6" goto THUMBNAIL_CACHE
 if "%choice%"=="7" goto ICON_CACHE
 if "%choice%"=="8" goto FONT_CACHE
-if "%choice%"=="9" goto INSTALLER_CLEANUP
+if "%choice%"=="9" goto WINDOWS_INSTALLER
 if "%choice%"=="10" goto OLD_WINDOWS
 if "%choice%"=="11" goto RECYCLE_BIN
-if "%choice%"=="12" goto MEMORY_DUMP
-if "%choice%"=="13" goto RECENT_DOCS
-if "%choice%"=="14" goto RUN_HISTORY
-if "%choice%"=="15" goto SEARCH_HISTORY
-if "%choice%"=="16" goto CLIPBOARD_HISTORY
-if "%choice%"=="17" goto ERROR_REPORTS
+if "%choice%"=="12" goto MEMORY_DUMPS
+if "%choice%"=="13" goto CLEAR_RECENT
+if "%choice%"=="14" goto CLEAR_RUN
+if "%choice%"=="15" goto CLEAR_SEARCH
+if "%choice%"=="16" goto CLEAR_CLIPBOARD
+if "%choice%"=="17" goto CLEAR_ERROR_REPORTS
 if "%choice%"=="18" goto DISABLE_TELEMETRY
-if "%choice%"=="19" goto EVENT_LOGS
-if "%choice%"=="20" goto DNS_CACHE
+if "%choice%"=="19" goto CLEAR_EVENT_LOGS
+if "%choice%"=="20" goto CLEAR_DNS
 if "%choice%"=="21" goto RESET_NETWORK
 if "%choice%"=="22" goto OPTIMIZE_NETWORK
-if "%choice%"=="23" goto ARP_CACHE
-if "%choice%"=="24" goto WINSOCK_RESET
+if "%choice%"=="23" goto CLEAR_ARP
+if "%choice%"=="24" goto RESET_WINSOCK
 if "%choice%"=="25" goto RENEW_IP
 if "%choice%"=="26" goto FIX_ADAPTER
 if "%choice%"=="27" goto DISK_CLEANUP
 if "%choice%"=="28" goto DISK_CHECK
 if "%choice%"=="29" goto DISK_OPTIMIZE
-if "%choice%"=="30" goto DISK_SPACE
-if "%choice%"=="31" goto WINDOWS_OLD
+if "%choice%"=="30" goto ANALYZE_DISK
+if "%choice%"=="31" goto CLEAN_OLD_WIN
 if "%choice%"=="32" goto COMPACT_OS
 if "%choice%"=="33" goto DISABLE_STARTUP
 if "%choice%"=="34" goto OPTIMIZE_SERVICES
-if "%choice%"=="35" goto PREFETCH
-if "%choice%"=="36" goto SUPERFETCH
-if "%choice%"=="37" goto VISUAL_EFFECTS
-if "%choice%"=="38" goto POWER_PLAN
-if "%choice%"=="39" goto HIBERNATION
-if "%choice%"=="40" goto MEMORY_CACHE
-if "%choice%"=="41" goto SEARCH_INDEX
-if "%choice%"=="42" goto ANIMATIONS
-if "%choice%"=="43" goto SSD_OPTIMIZE
-if "%choice%"=="44" goto MENU_DELAY
+if "%choice%"=="35" goto CLEAR_PREFETCH
+if "%choice%"=="36" goto CLEAR_SUPERFETCH
+if "%choice%"=="37" goto DISABLE_EFFECTS
+if "%choice%"=="38" goto OPTIMIZE_POWER
+if "%choice%"=="39" goto DISABLE_HIBERNATE
+if "%choice%"=="40" goto CLEAR_MEM_CACHE
+if "%choice%"=="41" goto OPTIMIZE_SEARCH
+if "%choice%"=="42" goto DISABLE_ANIMATIONS
+if "%choice%"=="43" goto OPTIMIZE_SSD
+if "%choice%"=="44" goto REDUCE_DELAY
 if "%choice%"=="45" goto SFC_SCAN
 if "%choice%"=="46" goto DISM_REPAIR
 if "%choice%"=="47" goto COMPONENT_CLEANUP
@@ -294,40 +249,65 @@ if "%choice%"=="52" goto OPTIMIZE_REGISTRY
 if "%choice%"=="53" goto BACKUP_REGISTRY
 if "%choice%"=="54" goto DISABLE_CORTANA
 if "%choice%"=="55" goto DISABLE_TIPS
-if "%choice%"=="56" goto RESTORE_POINT
-if "%choice%"=="57" goto SYSTEM_INFO
+if "%choice%"=="56" goto CREATE_RESTORE
+if "%choice%"=="57" goto VIEW_SYSINFO
 if "%choice%"=="58" goto EXPORT_PROGRAMS
-if "%choice%"=="59" goto DISK_HEALTH
-if "%choice%"=="60" goto STORE_CACHE
+if "%choice%"=="59" goto CHECK_DISK_HEALTH
+if "%choice%"=="60" goto CLEAR_STORE
 if "%choice%"=="61" goto RESET_UPDATE
-if "%choice%"=="62" goto BOOT_TIME
-if "%choice%"=="63" goto ALL_TEMP
-if "%choice%"=="64" goto SYSTEM_REPORT
-if "%choice%"=="65" goto SOFTWARE_CACHE
-if "%choice%"=="66" goto DELIVERY_OPTIMIZATION
-if "%choice%"=="67" goto LCU_BACKUP
+if "%choice%"=="62" goto OPTIMIZE_BOOT
+if "%choice%"=="63" goto CLEAN_ALL_TEMP
+if "%choice%"=="64" goto GENERATE_REPORT
+if "%choice%"=="65" goto CLEAN_SOFTWARE
+if "%choice%"=="66" goto CLEAN_DELIVERY
+if "%choice%"=="67" goto CLEAN_LCU
 if "%choice%"=="68" goto OPTIMIZE_MEMORY
-if "%choice%"=="69" goto DISK_SPACE_REPORT
-if "%choice%"=="70" goto REFRESH_ICON_CACHE
-if "%choice%"=="71" goto SYSTEM_INFO_FULL
-if "%choice%"=="72" goto WINDOWS_SETTINGS
+if "%choice%"=="69" goto DISK_REPORT
+if "%choice%"=="70" goto REFRESH_ICON
+if "%choice%"=="71" goto CHECK_SYSINFO
+if "%choice%"=="72" goto SETTINGS_CENTER
 if "%choice%"=="73" goto OFFICE_REPAIR
 if "%choice%"=="74" goto REMOVE_BLOATWARE
-if "%choice%"=="75" goto BITLOCKER_MGMT
+if "%choice%"=="75" goto BITLOCKER_MANAGE
 if "%choice%"=="76" goto CHECK_ACTIVATION
 if "%choice%"=="77" goto BACKUP_WIFI
 if "%choice%"=="78" goto BACKUP_DRIVERS
-if "%choice%"=="79" goto BACKUP_USER_DATA
+if "%choice%"=="79" goto BACKUP_USER
 if "%choice%"=="80" goto BACKUP_ZALO
-if "%choice%"=="81" goto BACKUP_PRODUCT_KEYS
-if "%choice%"=="82" goto DATA_RECOVERY
-if "%choice%"=="88" goto RUN_ALL_CLEANUP
-if "%choice%"=="99" goto FULL_OPTIMIZE
+if "%choice%"=="81" goto BACKUP_KEYS
+if "%choice%"=="82" goto RECOVERY_TOOLS
 
-echo.
-echo Invalid choice / Lua chon khong hop le!
-timeout /t 2 >nul
+:: New Installation functions [83-87]
+if "%choice%"=="83" goto INSTALL_SOFTWARE
+if "%choice%"=="84" goto INSTALL_OFFICE
+if "%choice%"=="85" goto CREATE_WINPE
+if "%choice%"=="86" goto LTSC_STORE
+if "%choice%"=="87" goto WIN_TO_HDD
+
+:: New Utility functions [88-96]
+if "%choice%"=="88" goto CLEAN_JUNK
+if "%choice%"=="89" goto SHOW_HIDDEN
+if "%choice%"=="90" goto UPDATE_TOGGLE
+if "%choice%"=="91" goto FIX_PRINTER
+if "%choice%"=="92" goto CHECK_TEST
+if "%choice%"=="93" goto DEFENDER_MANAGE
+if "%choice%"=="94" goto ISO_REPO
+if "%choice%"=="95" goto IRST_DRIVERS
+if "%choice%"=="96" goto SKU_MANAGE
+
+:: Quick Actions
+if "%choice%"=="97" goto RUN_ALL_CLEANUP
+if "%choice%"=="98" goto RUN_ALL_UTILITIES
+if "%choice%"=="99" goto OPTIMIZE_ALL
+
+echo  [!] Invalid choice / Lua chon khong hop le!
+timeout /t 2 /nobreak >nul
 goto MAIN_MENU
+
+
+:: ============================================================================
+:: FUNCTION IMPLEMENTATIONS [1-82] - OPTIMIZATION
+:: ============================================================================
 
 :: ============================================================================
 :: SYSTEM CLEANUP FUNCTIONS - CHUC NANG DON DEP HE THONG
@@ -3509,13 +3489,1100 @@ echo Lua chon khong hop le!
 timeout /t 2 >nul
 goto MAIN_MENU_VI
 
+
+
+:: ============================================================================
+:: FUNCTION IMPLEMENTATIONS [83-96] - INSTALLATION & UTILITIES
+:: ============================================================================
+
+:INSTALL_SOFTWARE
+cls
+color 0E
+echo.
+echo  ================================================================================
+echo   [1] CAI DAT PHAN MEM - INSTALL SOFTWARE
+echo  ================================================================================
+echo.
+echo  Su dung Chocolatey - Windows Package Manager
+echo.
+echo  [*] Kiem tra Chocolatey...
+
+where choco >nul 2>&1
+if %errorLevel% neq 0 (
+    echo  [!] Chocolatey chua cai dat
+    echo  [*] Dang cai dat Chocolatey...
+    powershell -NoProfile -ExecutionPolicy Bypass -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
+    if %errorLevel% equ 0 (
+        echo  [+] Chocolatey da duoc cai dat thanh cong!
+    ) else (
+        echo  [!] Loi khi cai dat Chocolatey
+        pause
+        goto MAIN_MENU
+    )
+) else (
+    echo  [+] Chocolatey da duoc cai dat!
+)
+
+echo.
+echo  -------------------------------------------------------------------------------
+echo   CHON PHAN MEM CAN CAI / SELECT SOFTWARE TO INSTALL
+echo  -------------------------------------------------------------------------------
+echo.
+echo   [1]  Google Chrome          [2]  Firefox
+echo   [3]  7-Zip                  [4]  WinRAR
+echo   [5]  VLC Media Player       [6]  Adobe Reader
+echo   [7]  Notepad++              [8]  Visual Studio Code
+echo   [9]  Git                    [10] Python
+echo   [11] Java JDK               [12] Node.js
+echo   [13] CCleaner               [14] TeamViewer
+echo   [15] Zoom                   [16] Discord
+echo   [17] Telegram               [18] Skype
+echo   [19] Cai Tat Ca Tien Ich   [0]  Quay lai / Back
+echo.
+
+set /p sw="  Chon phan mem (0-19): "
+
+if "%sw%"=="0" goto MAIN_MENU
+if "%sw%"=="1" choco install googlechrome -y
+if "%sw%"=="2" choco install firefox -y
+if "%sw%"=="3" choco install 7zip -y
+if "%sw%"=="4" choco install winrar -y
+if "%sw%"=="5" choco install vlc -y
+if "%sw%"=="6" choco install adobereader -y
+if "%sw%"=="7" choco install notepadplusplus -y
+if "%sw%"=="8" choco install vscode -y
+if "%sw%"=="9" choco install git -y
+if "%sw%"=="10" choco install python -y
+if "%sw%"=="11" choco install openjdk -y
+if "%sw%"=="12" choco install nodejs -y
+if "%sw%"=="13" choco install ccleaner -y
+if "%sw%"=="14" choco install teamviewer -y
+if "%sw%"=="15" choco install zoom -y
+if "%sw%"=="16" choco install discord -y
+if "%sw%"=="17" choco install telegram -y
+if "%sw%"=="18" choco install skype -y
+if "%sw%"=="19" (
+    echo  [*] Cai dat tat ca phan mem tien ich...
+    choco install googlechrome firefox 7zip vlc notepadplusplus vscode -y
+)
+
+echo.
+echo  [+] HOAN THANH! / COMPLETED!
+echo.
+pause
+goto MAIN_MENU
+
+:INSTALL_OFFICE
+cls
+color 0E
+echo.
+echo  ================================================================================
+echo   [2] CAI DAT OFFICE - INSTALL OFFICE SUITE
+echo  ================================================================================
+echo.
+echo  [*] Dang kiem tra Office...
+echo.
+
+:: Check if Office is installed
+reg query "HKLM\SOFTWARE\Microsoft\Office" >nul 2>&1
+if %errorLevel% equ 0 (
+    echo  [+] Office da duoc cai dat!
+    echo.
+    echo  [1] Sua chua Office / Repair Office
+    echo  [2] Kich hoat Office / Activate Office
+    echo  [3] Xoa Office / Uninstall Office
+    echo  [0] Quay lai / Back
+    echo.
+    set /p off="  Chon (0-3): "
+    
+    if "!off!"=="1" (
+        echo  [*] Sua chua Office...
+        start /wait control /name Microsoft.ProgramsAndFeatures
+    )
+    if "!off!"=="2" goto ACTIVATE_OFFICE
+    if "!off!"=="3" (
+        echo  [*] Xoa Office...
+        echo  [!] Vui long xoa qua Control Panel
+        start /wait control /name Microsoft.ProgramsAndFeatures
+    )
+    if "!off!"=="0" goto MAIN_MENU
+) else (
+    echo  [!] Office chua duoc cai dat
+    echo.
+    echo  [1] Tai Office Online (Microsoft 365)
+    echo  [2] Tai Office Offline Installer
+    echo  [3] Huong dan cai dat thu cong
+    echo  [0] Quay lai / Back
+    echo.
+    set /p off2="  Chon (0-3): "
+    
+    if "!off2!"=="1" (
+        echo  [*] Mo trang tai Office...
+        start https://www.office.com/
+    )
+    if "!off2!"=="2" (
+        echo  [*] Mo trang tai Office Tool...
+        start https://otp.landian.vip/
+    )
+    if "!off2!"=="3" (
+        echo.
+        echo  HUONG DAN CAI DAT OFFICE:
+        echo  -------------------------
+        echo  1. Tai Office Tool Plus: https://otp.landian.vip/
+        echo  2. Chon phien ban Office muon cai
+        echo  3. Chon cac ung dung (Word, Excel, PowerPoint...)
+        echo  4. Click "Start Install"
+        echo.
+    )
+)
+
+pause
+goto MAIN_MENU
+
+:ACTIVATE_OFFICE
+echo.
+echo  [*] KICH HOAT OFFICE / ACTIVATE OFFICE
+echo  =======================================
+echo.
+echo  [!] LUU Y: Chi dung cho muc dich test!
+echo  [!] NOTE: For testing purposes only!
+echo.
+echo  [1] Tu dong kich hoat (KMS)
+echo  [2] Nhap Product Key
+echo  [0] Huy / Cancel
+echo.
+set /p act="  Chon (0-2): "
+
+if "%act%"=="1" (
+    echo  [*] Dang kich hoat Office...
+    cd /d "%ProgramFiles%\Microsoft Office\Office16" 2>nul || cd /d "%ProgramFiles(x86)%\Microsoft Office\Office16" 2>nul
+    if exist ospp.vbs (
+        cscript ospp.vbs /sethst:kms.digiboy.ir
+        cscript ospp.vbs /act
+        echo  [+] Hoan thanh!
+    ) else (
+        echo  [!] Khong tim thay Office!
+    )
+)
+if "%act%"=="2" (
+    set /p key="  Nhap Product Key: "
+    cd /d "%ProgramFiles%\Microsoft Office\Office16" 2>nul || cd /d "%ProgramFiles(x86)%\Microsoft Office\Office16" 2>nul
+    if exist ospp.vbs (
+        cscript ospp.vbs /inpkey:!key!
+        cscript ospp.vbs /act
+        echo  [+] Hoan thanh!
+    ) else (
+        echo  [!] Khong tim thay Office!
+    )
+)
+
+pause
+goto MAIN_MENU
+
+:CREATE_WINPE
+cls
+color 0E
+echo.
+echo  ================================================================================
+echo   [3] TAO WINPE BOOT - CREATE WINPE BOOTABLE USB
+echo  ================================================================================
+echo.
+echo  [*] Yeu cau / Requirements:
+echo      - Windows ADK (Assessment and Deployment Kit)
+echo      - USB drive (8GB+)
+echo.
+echo  [1] Tai Windows ADK
+echo  [2] Tai WinPE Add-on
+echo  [3] Tao WinPE (Yeu cau ADK da cai)
+echo  [4] Huong dan chi tiet
+echo  [0] Quay lai / Back
+echo.
+set /p winpe="  Chon (0-4): "
+
+if "%winpe%"=="1" (
+    echo  [*] Mo trang tai Windows ADK...
+    start https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install
+)
+if "%winpe%"=="2" (
+    echo  [*] Mo trang tai WinPE Add-on...
+    start https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install
+)
+if "%winpe%"=="3" (
+    echo.
+    echo  [*] Kiem tra Windows ADK...
+    
+    if exist "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools" (
+        echo  [+] Windows ADK da duoc cai dat!
+        echo.
+        echo  [*] Bat dau tao WinPE...
+        echo.
+        
+        call "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\DandISetEnv.bat"
+        
+        echo  [1] Tao WinPE workspace...
+        copype amd64 C:\WinPE_amd64
+        
+        echo  [2] Mount WinPE image...
+        Dism /Mount-Image /ImageFile:"C:\WinPE_amd64\media\sources\boot.wim" /index:1 /MountDir:"C:\WinPE_amd64\mount"
+        
+        echo  [3] Them drivers va tools...
+        echo  [!] Ban co the them drivers/tools vao C:\WinPE_amd64\mount
+        pause
+        
+        echo  [4] Unmount image...
+        Dism /Unmount-Image /MountDir:"C:\WinPE_amd64\mount" /commit
+        
+        echo  [5] Tao ISO...
+        MakeWinPEMedia /ISO C:\WinPE_amd64 C:\WinPE_amd64\WinPE_amd64.iso
+        
+        echo.
+        echo  [+] HOAN THANH!
+        echo  [+] File ISO: C:\WinPE_amd64\WinPE_amd64.iso
+        echo.
+    ) else (
+        echo  [!] Windows ADK chua duoc cai dat!
+        echo  [!] Vui long cai Windows ADK truoc
+    )
+)
+if "%winpe%"=="4" (
+    echo.
+    echo  HUONG DAN TAO WINPE:
+    echo  ====================
+    echo  1. Tai va cai Windows ADK
+    echo  2. Tai va cai WinPE Add-on
+    echo  3. Mo Deployment and Imaging Tools Environment (Admin)
+    echo  4. Chay lenh: copype amd64 C:\WinPE_amd64
+    echo  5. Tao USB boot: MakeWinPEMedia /UFD C:\WinPE_amd64 E:
+    echo     (Thay E: bang drive USB cua ban)
+    echo.
+)
+
+pause
+goto MAIN_MENU
+
+:LTSC_STORE
+cls
+color 0E
+echo.
+echo  ================================================================================
+echo   [4] STORE CHO WIN LTSC - MICROSOFT STORE FOR LTSC
+echo  ================================================================================
+echo.
+echo  [*] Cai dat Microsoft Store cho Windows 10/11 LTSC
+echo.
+echo  [!] LUU Y: Chi ho tro Windows 10/11 LTSC
+echo.
+
+set /p confirm="  Ban co muon tiep tuc? (Y/N): "
+if /i not "%confirm%"=="Y" goto MAIN_MENU
+
+echo.
+echo  [1] Dang tai Microsoft Store package...
+echo.
+
+:: Download and install Microsoft Store
+powershell -NoProfile -ExecutionPolicy Bypass -Command "& {Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.WindowsStore_8wekyb3d8bbwe}"
+
+if %errorLevel% equ 0 (
+    echo  [+] Microsoft Store da duoc cai dat!
+    echo  [+] Vui long khoi dong lai may
+) else (
+    echo  [!] Loi khi cai dat Store
+    echo.
+    echo  [*] Thu phuong phap khac...
+    powershell -NoProfile -ExecutionPolicy Bypass -Command "& {Get-AppxPackage -allusers Microsoft.WindowsStore | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register `"$($_.InstallLocation)\AppXManifest.xml`"}}"
+)
+
+echo.
+pause
+goto MAIN_MENU
+
+:WIN_TO_HDD
+cls
+color 0E
+echo.
+echo  ================================================================================
+echo   [5] CAI WIN BANG WIN TO HDD - INSTALL WINDOWS VIA WIN TO HDD
+echo  ================================================================================
+echo.
+echo  [*] WinToHDD - Cai Windows khong can USB/DVD
+echo.
+echo  [1] Tai WinToHDD Free
+echo  [2] Tai WinToHDD Professional
+echo  [3] Huong dan su dung
+echo  [0] Quay lai / Back
+echo.
+set /p winhdd="  Chon (0-3): "
+
+if "%winhdd%"=="1" (
+    echo  [*] Mo trang tai WinToHDD Free...
+    start https://www.easyuefi.com/wintohdd/index.html
+)
+if "%winhdd%"=="2" (
+    echo  [*] Mo trang tai WinToHDD Pro...
+    start https://www.easyuefi.com/wintohdd/wintohdd-pro.html
+)
+if "%winhdd%"=="3" (
+    echo.
+    echo  HUONG DAN SU DUNG WINTOHDD:
+    echo  ============================
+    echo  1. Tai va cai dat WinToHDD
+    echo  2. Chon "Reinstall Windows"
+    echo  3. Chon file ISO Windows
+    echo  4. Chon phien ban Windows muon cai
+    echo  5. Chon phan vung de cai Windows
+    echo  6. Click "Next" de bat dau
+    echo.
+    echo  [!] LUU Y: Sao luu du lieu truoc khi cai!
+    echo.
+)
+
+pause
+goto MAIN_MENU
+
+:: ============================================================================
+:: UTILITIES FUNCTIONS [6-14]
+:: ============================================================================
+
+:CLEAN_JUNK
+cls
+color 0A
+echo.
+echo  ================================================================================
+echo   [6] XOA FILE RAC - CLEAN JUNK FILES (ADVANCED)
+echo  ================================================================================
+echo.
+echo  [*] Don dep nang cao tat ca file rac trong he thong
+echo.
+
+set /p confirm="  Tiep tuc? (Y/N): "
+if /i not "%confirm%"=="Y" goto MAIN_MENU
+
+echo.
+echo  [1/10] Dang xoa Temp files...
+del /f /s /q "%TEMP%\*" >nul 2>&1
+del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
+
+echo  [2/10] Dang xoa Windows Update cache...
+net stop wuauserv >nul 2>&1
+del /f /s /q "C:\Windows\SoftwareDistribution\Download\*" >nul 2>&1
+net start wuauserv >nul 2>&1
+
+echo  [3/10] Dang xoa Prefetch files...
+del /f /s /q "C:\Windows\Prefetch\*" >nul 2>&1
+
+echo  [4/10] Dang xoa Thumbnail cache...
+del /f /s /q "%LOCALAPPDATA%\Microsoft\Windows\Explorer\thumbcache_*.db" >nul 2>&1
+
+echo  [5/10] Dang xoa Browser cache...
+taskkill /f /im chrome.exe >nul 2>&1
+taskkill /f /im msedge.exe >nul 2>&1
+taskkill /f /im firefox.exe >nul 2>&1
+timeout /t 2 /nobreak >nul
+del /f /s /q "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Cache\*" >nul 2>&1
+del /f /s /q "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Cache\*" >nul 2>&1
+
+echo  [6/10] Dang xoa Windows Error Reports...
+del /f /s /q "C:\ProgramData\Microsoft\Windows\WER\*" >nul 2>&1
+
+echo  [7/10] Dang xoa Log files...
+del /f /s /q "C:\Windows\Logs\*" >nul 2>&1
+
+echo  [8/10] Dang xoa Recycle Bin...
+PowerShell.exe -NoProfile -Command Clear-RecycleBin -Force -ErrorAction SilentlyContinue
+
+echo  [9/10] Dang xoa Memory dumps...
+del /f /q "C:\Windows\MEMORY.DMP" >nul 2>&1
+del /f /s /q "C:\Windows\Minidump\*" >nul 2>&1
+
+echo  [10/10] Dang chay Disk Cleanup...
+cleanmgr /sagerun:1 >nul 2>&1
+
+echo.
+echo  [+] HOAN THANH! File rac da duoc xoa sach!
+echo.
+pause
+goto MAIN_MENU
+
+:SHOW_HIDDEN
+cls
+color 0A
+echo.
+echo  ================================================================================
+echo   [7] HIEN FILE AN - SHOW HIDDEN FILES
+echo  ================================================================================
+echo.
+echo  [1] Hien tat ca file an / Show all hidden files
+echo  [2] An file he thong / Hide system files
+echo  [3] Hien file va folder an / Show hidden files and folders
+echo  [4] Hien file extension / Show file extensions
+echo  [0] Quay lai / Back
+echo.
+set /p hidden="  Chon (0-4): "
+
+if "%hidden%"=="1" (
+    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v Hidden /t REG_DWORD /d 1 /f >nul
+    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v ShowSuperHidden /t REG_DWORD /d 1 /f >nul
+    echo  [+] Hien tat ca file an: BAT
+)
+if "%hidden%"=="2" (
+    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v Hidden /t REG_DWORD /d 2 /f >nul
+    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v ShowSuperHidden /t REG_DWORD /d 0 /f >nul
+    echo  [+] An file he thong: BAT
+)
+if "%hidden%"=="3" (
+    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v Hidden /t REG_DWORD /d 1 /f >nul
+    echo  [+] Hien file va folder an: BAT
+)
+if "%hidden%"=="4" (
+    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v HideFileExt /t REG_DWORD /d 0 /f >nul
+    echo  [+] Hien file extension: BAT
+)
+
+if not "%hidden%"=="0" (
+    echo  [*] Khoi dong lai Explorer...
+    taskkill /f /im explorer.exe >nul
+    start explorer.exe
+    echo  [+] HOAN THANH!
+)
+
+pause
+goto MAIN_MENU
+
+:UPDATE_TOGGLE
+cls
+color 0E
+echo.
+echo  ================================================================================
+echo   [8] DAT/TAT UPDATE - ENABLE/DISABLE WINDOWS UPDATE
+echo  ================================================================================
+echo.
+echo  [1] TAT Windows Update (Disable)
+echo  [2] BAT Windows Update (Enable)
+echo  [3] Tam dung Update (Pause for 7 days)
+echo  [4] Kiem tra trang thai Update
+echo  [0] Quay lai / Back
+echo.
+set /p upd="  Chon (0-4): "
+
+if "%upd%"=="1" (
+    echo  [*] Dang TAT Windows Update...
+    sc config wuauserv start= disabled >nul
+    net stop wuauserv >nul 2>&1
+    sc config bits start= disabled >nul
+    net stop bits >nul 2>&1
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate /t REG_DWORD /d 1 /f >nul
+    echo  [+] Windows Update da duoc TAT!
+)
+if "%upd%"=="2" (
+    echo  [*] Dang BAT Windows Update...
+    sc config wuauserv start= auto >nul
+    net start wuauserv >nul 2>&1
+    sc config bits start= auto >nul
+    net start bits >nul 2>&1
+    reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate /f >nul 2>&1
+    echo  [+] Windows Update da duoc BAT!
+)
+if "%upd%"=="3" (
+    echo  [*] Tam dung Update trong 7 ngay...
+    reg add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v PauseUpdatesExpiryTime /t REG_SZ /d "2025-01-11T12:00:00Z" /f >nul
+    echo  [+] Update da duoc tam dung!
+)
+if "%upd%"=="4" (
+    echo  [*] Kiem tra trang thai...
+    sc query wuauserv | find "STATE"
+    echo.
+    reg query "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate 2>nul
+    if %errorLevel% equ 0 (
+        echo  [!] Windows Update: DISABLED
+    ) else (
+        echo  [+] Windows Update: ENABLED
+    )
+)
+
+echo.
+pause
+goto MAIN_MENU
+
+:FIX_PRINTER
+cls
+color 0A
+echo.
+echo  ================================================================================
+echo   [9] FIX LOI MAY IN - FIX PRINTER ISSUES
+echo  ================================================================================
+echo.
+echo  [1] Khoi dong lai Print Spooler
+echo  [2] Xoa hang doi in (Print Queue)
+echo  [3] Reset Print Spooler
+echo  [4] Cai dat lai driver may in
+echo  [5] Chay Printer Troubleshooter
+echo  [0] Quay lai / Back
+echo.
+set /p printer="  Chon (0-5): "
+
+if "%printer%"=="1" (
+    echo  [*] Dang khoi dong lai Print Spooler...
+    net stop spooler
+    net start spooler
+    echo  [+] Print Spooler da duoc khoi dong lai!
+)
+if "%printer%"=="2" (
+    echo  [*] Dang xoa hang doi in...
+    net stop spooler
+    del /f /s /q "%SystemRoot%\System32\spool\PRINTERS\*" >nul 2>&1
+    net start spooler
+    echo  [+] Hang doi in da duoc xoa!
+)
+if "%printer%"=="3" (
+    echo  [*] Dang reset Print Spooler...
+    net stop spooler
+    del /f /s /q "%SystemRoot%\System32\spool\PRINTERS\*" >nul 2>&1
+    reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Print\Printers" /f >nul 2>&1
+    net start spooler
+    echo  [+] Print Spooler da duoc reset!
+)
+if "%printer%"=="4" (
+    echo  [*] Mo Device Manager...
+    devmgmt.msc
+    echo.
+    echo  [!] Vui long:
+    echo      1. Tim may in trong "Printers"
+    echo      2. Right-click → Uninstall device
+    echo      3. Restart may tinh
+    echo      4. Cai lai driver
+)
+if "%printer%"=="5" (
+    echo  [*] Chay Printer Troubleshooter...
+    msdt.exe /id PrinterDiagnostic
+)
+
+echo.
+pause
+goto MAIN_MENU
+
+:CHECK_TEST
+cls
+color 0B
+echo.
+echo  ================================================================================
+echo   [10] CHECK - TEST - SYSTEM TEST TOOLS
+echo  ================================================================================
+echo.
+echo  [1]  Kiem tra RAM (Windows Memory Diagnostic)
+echo  [2]  Kiem tra o dia (CHKDSK)
+echo  [3]  Kiem tra file he thong (SFC)
+echo  [4]  Kiem tra SMART disk health
+echo  [5]  Test GPU (DirectX Diagnostic)
+echo  [6]  Test CPU (Performance Monitor)
+echo  [7]  Xem thong tin chi tiet (System Info)
+echo  [8]  Kiem tra lich su crash
+echo  [9]  Test mang (Network Diagnostic)
+echo  [10] Chay tat ca test
+echo  [0]  Quay lai / Back
+echo.
+set /p test="  Chon (0-10): "
+
+if "%test%"=="1" (
+    echo  [*] Chay Windows Memory Diagnostic...
+    mdsched.exe
+)
+if "%test%"=="2" (
+    echo  [*] Chay CHKDSK...
+    echo Y | chkdsk C: /f /r /x
+    echo  [!] May se tu dong restart de kiem tra
+)
+if "%test%"=="3" (
+    echo  [*] Chay System File Checker...
+    sfc /scannow
+)
+if "%test%"=="4" (
+    echo  [*] Kiem tra SMART disk health...
+    wmic diskdrive get status
+    echo.
+    wmic diskdrive get model,serialnumber,size,status
+)
+if "%test%"=="5" (
+    echo  [*] Chay DirectX Diagnostic Tool...
+    dxdiag
+)
+if "%test%"=="6" (
+    echo  [*] Chay Performance Monitor...
+    perfmon
+)
+if "%test%"=="7" (
+    echo  [*] Xem System Information...
+    msinfo32
+)
+if "%test%"=="8" (
+    echo  [*] Kiem tra lich su crash...
+    eventvwr.msc
+)
+if "%test%"=="9" (
+    echo  [*] Test mang...
+    echo.
+    echo  Ping Google:
+    ping -n 4 8.8.8.8
+    echo.
+    echo  Traceroute:
+    tracert -d -h 10 8.8.8.8
+    echo.
+    echo  Network Configuration:
+    ipconfig /all
+)
+if "%test%"=="10" (
+    echo  [*] Chay tat ca test...
+    echo  [1/5] System File Check...
+    sfc /scannow
+    echo  [2/5] Disk Check...
+    echo Y | chkdsk C: /f
+    echo  [3/5] DISM Repair...
+    Dism /Online /Cleanup-Image /RestoreHealth
+    echo  [4/5] Network Reset...
+    ipconfig /flushdns
+    netsh winsock reset
+    echo  [5/5] Event Log...
+    wevtutil el
+    echo  [+] HOAN THANH!
+)
+
+echo.
+pause
+goto MAIN_MENU
+
+:DEFENDER_MANAGE
+cls
+color 0C
+echo.
+echo  ================================================================================
+echo   [11] WINDOWS DEFENDER - DEFENDER MANAGEMENT
+echo  ================================================================================
+echo.
+echo  [1] BAT Windows Defender
+echo  [2] TAT Windows Defender (Tam thoi)
+echo  [3] Quet nhanh (Quick Scan)
+echo  [4] Quet day du (Full Scan)
+echo  [5] Update Defender definitions
+echo  [6] Xem lich su quet
+echo  [7] Quan ly exclusions
+echo  [8] Mo Windows Security
+echo  [0] Quay lai / Back
+echo.
+set /p def="  Chon (0-8): "
+
+if "%def%"=="1" (
+    echo  [*] Dang BAT Windows Defender...
+    powershell -Command "Set-MpPreference -DisableRealtimeMonitoring $false"
+    sc config WinDefend start= auto
+    net start WinDefend
+    echo  [+] Windows Defender da duoc BAT!
+)
+if "%def%"=="2" (
+    echo  [*] Dang TAT Windows Defender...
+    powershell -Command "Set-MpPreference -DisableRealtimeMonitoring $true"
+    echo  [+] Windows Defender da duoc TAT tam thoi!
+    echo  [!] Se tu dong BAT lai sau khi restart
+)
+if "%def%"=="3" (
+    echo  [*] Chay Quick Scan...
+    powershell -Command "Start-MpScan -ScanType QuickScan"
+    echo  [+] Scan hoan thanh!
+)
+if "%def%"=="4" (
+    echo  [*] Chay Full Scan...
+    echo  [!] Co the mat vai phut...
+    powershell -Command "Start-MpScan -ScanType FullScan"
+    echo  [+] Scan hoan thanh!
+)
+if "%def%"=="5" (
+    echo  [*] Cap nhat Defender definitions...
+    powershell -Command "Update-MpSignature"
+    echo  [+] Cap nhat hoan thanh!
+)
+if "%def%"=="6" (
+    echo  [*] Lich su quet:
+    powershell -Command "Get-MpThreatDetection"
+)
+if "%def%"=="7" (
+    echo  [*] Quan ly exclusions...
+    powershell -Command "Get-MpPreference | Select-Object -Property ExclusionPath,ExclusionExtension,ExclusionProcess"
+)
+if "%def%"=="8" (
+    echo  [*] Mo Windows Security...
+    start windowsdefender:
+)
+
+echo.
+pause
+goto MAIN_MENU
+
+:ISO_REPO
+cls
+color 0B
+echo.
+echo  ================================================================================
+echo   [12] KHO ISO WINDOWS - WINDOWS ISO REPOSITORY
+echo  ================================================================================
+echo.
+echo  [1] Tai Windows 11 (Official)
+echo  [2] Tai Windows 10 (Official)
+echo  [3] Tai Windows 8.1
+echo  [4] Tai Windows 7
+echo  [5] Tai Windows Server
+echo  [6] Tai Media Creation Tool
+echo  [7] Tai Rufus (Tao USB boot)
+echo  [8] Kiem tra toan ven ISO
+echo  [0] Quay lai / Back
+echo.
+set /p iso="  Chon (0-8): "
+
+if "%iso%"=="1" (
+    echo  [*] Mo trang tai Windows 11...
+    start https://www.microsoft.com/software-download/windows11
+)
+if "%iso%"=="2" (
+    echo  [*] Mo trang tai Windows 10...
+    start https://www.microsoft.com/software-download/windows10
+)
+if "%iso%"=="3" (
+    echo  [*] Mo trang tai Windows 8.1...
+    start https://www.microsoft.com/software-download/windows8
+)
+if "%iso%"=="4" (
+    echo  [*] Mo trang tai Windows 7...
+    start https://www.microsoft.com/software-download/windows7
+)
+if "%iso%"=="5" (
+    echo  [*] Mo trang tai Windows Server...
+    start https://www.microsoft.com/evalcenter/evaluate-windows-server
+)
+if "%iso%"=="6" (
+    echo  [*] Tai Media Creation Tool...
+    start https://go.microsoft.com/fwlink/?LinkId=691209
+)
+if "%iso%"=="7" (
+    echo  [*] Tai Rufus...
+    start https://rufus.ie/
+)
+if "%iso%"=="8" (
+    echo  [*] Kiem tra ISO integrity...
+    set /p isopath="  Nhap duong dan ISO: "
+    if exist "!isopath!" (
+        echo  [*] Tinh toan hash...
+        certutil -hashfile "!isopath!" SHA256
+    ) else (
+        echo  [!] File khong ton tai!
+    )
+)
+
+echo.
+pause
+goto MAIN_MENU
+
+:IRST_DRIVERS
+cls
+color 0B
+echo.
+echo  ================================================================================
+echo   [13] KHO DRIVER IRST - INTEL RST DRIVERS
+echo  ================================================================================
+echo.
+echo  [*] Intel Rapid Storage Technology Drivers
+echo.
+echo  [1] Kiem tra IRST hien tai
+echo  [2] Tai driver IRST moi nhat
+echo  [3] Tai driver cho Windows 11
+echo  [4] Tai driver cho Windows 10
+echo  [5] Tai driver cho Windows 7
+echo  [6] Mo Intel Driver Support Assistant
+echo  [0] Quay lai / Back
+echo.
+set /p irst="  Chon (0-6): "
+
+if "%irst%"=="1" (
+    echo  [*] Kiem tra IRST...
+    reg query "HKLM\SOFTWARE\Intel\IntelRST" 2>nul
+    if %errorLevel% equ 0 (
+        echo  [+] IRST da duoc cai dat!
+        wmic path win32_systemdriver where "name='iaStorA'" get displayname,state,status
+    ) else (
+        echo  [!] IRST chua duoc cai dat
+    )
+)
+if "%irst%"=="2" (
+    echo  [*] Mo trang tai IRST...
+    start https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-10th-and-11th-gen-platforms.html
+)
+if "%irst%"=="3" (
+    echo  [*] Tai IRST cho Windows 11...
+    start https://www.intel.com/content/www/us/en/download/19512/
+)
+if "%irst%"=="4" (
+    echo  [*] Tai IRST cho Windows 10...
+    start https://www.intel.com/content/www/us/en/download/15667/
+)
+if "%irst%"=="5" (
+    echo  [*] Tai IRST cho Windows 7...
+    start https://www.intel.com/content/www/us/en/download/29917/
+)
+if "%irst%"=="6" (
+    echo  [*] Tai Intel Driver Support Assistant...
+    start https://www.intel.com/content/www/us/en/support/intel-driver-support-assistant.html
+)
+
+echo.
+pause
+goto MAIN_MENU
+
+:SKU_MANAGE
+cls
+color 0E
+echo.
+echo  ================================================================================
+echo   [14] SKUS WIN/OFFICE - PRODUCT KEY MANAGEMENT
+echo  ================================================================================
+echo.
+echo  [1] Xem Product Key Windows
+echo  [2] Xem Product Key Office
+echo  [3] Kich hoat Windows
+echo  [4] Kich hoat Office
+echo  [5] Xem trang thai kich hoat
+echo  [6] Thay doi Product Key
+echo  [7] Backup Product Keys
+echo  [0] Quay lai / Back
+echo.
+set /p sku="  Chon (0-7): "
+
+if "%sku%"=="1" (
+    echo  [*] Product Key Windows:
+    wmic path softwarelicensingservice get OA3xOriginalProductKey 2>nul
+    echo.
+    powershell -Command "(Get-WmiObject -query 'select * from SoftwareLicensingService').OA3xOriginalProductKey"
+)
+if "%sku%"=="2" (
+    echo  [*] Product Key Office:
+    cd /d "%ProgramFiles%\Microsoft Office\Office16" 2>nul || cd /d "%ProgramFiles(x86)%\Microsoft Office\Office16" 2>nul
+    if exist ospp.vbs (
+        cscript ospp.vbs /dstatus
+    ) else (
+        echo  [!] Office khong duoc tim thay
+    )
+)
+if "%sku%"=="3" (
+    echo  [*] KICH HOAT WINDOWS
+    echo  =====================
+    echo.
+    echo  [1] Tu dong kich hoat (KMS)
+    echo  [2] Nhap Product Key
+    echo  [0] Huy
+    echo.
+    set /p wact="  Chon (0-2): "
+    
+    if "!wact!"=="1" (
+        echo  [*] Dang kich hoat...
+        slmgr /skms kms.digiboy.ir
+        slmgr /ato
+        echo  [+] Hoan thanh!
+    )
+    if "!wact!"=="2" (
+        set /p wkey="  Nhap Product Key: "
+        slmgr /ipk !wkey!
+        slmgr /ato
+        echo  [+] Hoan thanh!
+    )
+)
+if "%sku%"=="4" goto ACTIVATE_OFFICE
+if "%sku%"=="5" (
+    echo  [*] TRANG THAI KICH HOAT
+    echo  ========================
+    echo.
+    echo  WINDOWS:
+    slmgr /dli
+    echo.
+    echo  OFFICE:
+    cd /d "%ProgramFiles%\Microsoft Office\Office16" 2>nul || cd /d "%ProgramFiles(x86)%\Microsoft Office\Office16" 2>nul
+    if exist ospp.vbs cscript ospp.vbs /dstatus
+)
+if "%sku%"=="6" (
+    echo  [*] THAY DOI PRODUCT KEY
+    echo  ========================
+    echo.
+    echo  [1] Thay doi key Windows
+    echo  [2] Thay doi key Office
+    echo.
+    set /p change="  Chon (1-2): "
+    
+    if "!change!"=="1" (
+        set /p newkey="  Nhap key Windows moi: "
+        slmgr /ipk !newkey!
+        slmgr /ato
+    )
+    if "!change!"=="2" (
+        set /p offkey="  Nhap key Office moi: "
+        cd /d "%ProgramFiles%\Microsoft Office\Office16" 2>nul || cd /d "%ProgramFiles(x86)%\Microsoft Office\Office16" 2>nul
+        if exist ospp.vbs (
+            cscript ospp.vbs /inpkey:!offkey!
+            cscript ospp.vbs /act
+        )
+    )
+)
+if "%sku%"=="7" (
+    echo  [*] BACKUP PRODUCT KEYS
+    echo  =======================
+    echo.
+    set "backup=%USERPROFILE%\Desktop\ProductKeys_Backup_%date:~-4%%date:~3,2%%date:~0,2%.txt"
+    echo  Product Keys Backup > "!backup!"
+    echo  Created: %date% %time% >> "!backup!"
+    echo. >> "!backup!"
+    echo  WINDOWS KEY: >> "!backup!"
+    wmic path softwarelicensingservice get OA3xOriginalProductKey >> "!backup!" 2>nul
+    echo. >> "!backup!"
+    echo  WINDOWS STATUS: >> "!backup!"
+    slmgr /dli >> "!backup!" 2>nul
+    echo.
+    echo  [+] Backup saved to: !backup!
+)
+
+echo.
+pause
+goto MAIN_MENU
+
+:: ============================================================================
+:: QUICK ACTIONS [88, 99]
+:: ============================================================================
+
+:RUN_ALL
+cls
+color 0A
+echo.
+echo  ================================================================================
+echo   [88] CHAY TAT CA TIEN ICH - RUN ALL UTILITIES
+echo  ================================================================================
+echo.
+set /p confirm="  Chay tat ca cong cu tien ich? (Y/N): "
+if /i not "%confirm%"=="Y" goto MAIN_MENU
+
+echo.
+echo  [*] Bat dau chay tat ca tien ich...
+echo.
+
+echo  [1/7] Xoa file rac...
+del /f /s /q "%TEMP%\*" >nul 2>&1
+del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
+
+echo  [2/7] Hien file an...
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v Hidden /t REG_DWORD /d 1 /f >nul
+
+echo  [3/7] Xoa hang doi in...
+net stop spooler >nul 2>&1
+del /f /s /q "%SystemRoot%\System32\spool\PRINTERS\*" >nul 2>&1
+net start spooler >nul 2>&1
+
+echo  [4/7] Cap nhat Defender...
+powershell -Command "Update-MpSignature" >nul 2>&1
+
+echo  [5/7] Kiem tra file he thong...
+sfc /scannow
+
+echo  [6/7] Reset network...
+ipconfig /flushdns >nul
+
+echo  [7/7] Don dep registry...
+reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache" /f >nul 2>&1
+
+echo.
+echo  [+] HOAN THANH TAT CA!
+echo.
+pause
+goto MAIN_MENU
+
+:OPTIMIZE_ALL
+cls
+color 0A
+echo.
+echo  ================================================================================
+echo   [99] TOI UU TOAN BO - FULL SYSTEM OPTIMIZATION
+echo  ================================================================================
+echo.
+set /p confirm="  Toi uu toan bo he thong? (Y/N): "
+if /i not "%confirm%"=="Y" goto MAIN_MENU
+
+echo.
+echo  [*] Bat dau toi uu toan bo...
+echo.
+
+echo  [STEP 1/8] CLEANUP
+echo  ==================
+del /f /s /q "%TEMP%\*" >nul 2>&1
+del /f /s /q "C:\Windows\Temp\*" >nul 2>&1
+cleanmgr /sagerun:1 >nul 2>&1
+
+echo.
+echo  [STEP 2/8] NETWORK
+echo  ==================
+netsh int tcp set global autotuninglevel=normal >nul
+netsh int tcp set global rss=enabled >nul
+ipconfig /flushdns >nul
+
+echo.
+echo  [STEP 3/8] SERVICES
+echo  ===================
+sc config "DiagTrack" start= disabled >nul
+sc config "dmwappushservice" start= disabled >nul
+
+echo.
+echo  [STEP 4/8] REGISTRY
+echo  ===================
+reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v RegistrySizeLimit /t REG_DWORD /d 0x40000000 /f >nul
+
+echo.
+echo  [STEP 5/8] PERFORMANCE
+echo  ======================
+powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c >nul 2>&1
+
+echo.
+echo  [STEP 6/8] SYSTEM FILES
+echo  =======================
+sfc /scannow >nul 2>&1
+
+echo.
+echo  [STEP 7/8] DEFENDER
+echo  ===================
+powershell -Command "Update-MpSignature" >nul 2>&1
+
+echo.
+echo  [STEP 8/8] FINALIZE
+echo  ===================
+taskkill /f /im explorer.exe >nul
+start explorer.exe
+
+echo.
+echo  ================================================================================
+echo   [+] TOI UU HOAN THANH! / OPTIMIZATION COMPLETE!
+echo  ================================================================================
+echo.
+echo   Vui long khoi dong lai may tinh de ap dung tat ca thay doi
+echo   Please restart computer to apply all changes
+echo.
+pause
+goto MAIN_MENU
+
+
+
 :EXIT
 cls
+color 0B
 echo.
-echo ================================================================================
-echo  Thank you for using Ultimate Windows System Tool!
-echo  Cam on ban da su dung Ultimate Windows System Tool!
-echo ================================================================================
+echo  ================================================================================
 echo.
-timeout /t 3
+echo                Thank you for using Ultimate System Tools v5.0!
+echo                 Cam on ban da su dung Ultimate System Tools!
+echo.
+echo                        Created by: Nguyen Ngoc Anh Tu
+echo                         Version 5.0 - Complete Edition
+echo                         96 Functions - All-in-One Tool
+echo.
+echo  ================================================================================
+echo.
+timeout /t 3 /nobreak >nul
 exit
