@@ -34,10 +34,12 @@ if %errorLevel% neq 0 (
     color 0C
     echo.
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
     echo                                                                          
     echo          ADMINISTRATOR RIGHTS REQUIRED / CAN QUYEN ADMINISTRATOR        
     echo                                                                          
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
     echo.
     echo   This tool requires Administrator privileges.
     echo   Cong cu nay can quyen Administrator.
@@ -55,10 +57,12 @@ cls
 color 0B
 echo.
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo                                                                          
 echo        ADMINISTRATOR RIGHTS CONFIRMED / XAC NHAN QUYEN ADMINISTRATOR    
 echo                                                                          
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 timeout /t 1 /nobreak >nul
 
@@ -67,12 +71,13 @@ timeout /t 1 /nobreak >nul
 cls
 color 0B
 echo.
-echo   ================================================================================
-echo                                                                                
-echo             ULTIMATE WINDOWS SYSTEM TOOL v5.0 - COMPLETE EDITION              
-echo              96 Functions - Full Optimization + Installation Suite            
-echo                                                                                
-echo   ================================================================================
+echo   ╔════════════════════════════════════════════════════════════════════════════════════════╗
+echo   ║                                                                                        ║
+echo   ║                  ⚡ ULTIMATE WINDOWS SYSTEM TOOL v6.0 ⚡                               ║
+echo   ║                      151 FUNCTIONS • 20 CATEGORIES                                     ║
+echo   ║                                                                                        ║
+echo   ║              Author: Nguyen Ngoc Anh Tu  │  Quality: FAST • SAFE • TESTED             ║
+echo   ╚════════════════════════════════════════════════════════════════════════════════════════╝
 echo.
 echo   ╔════════════════════════════════════════════════════════════════════════════════════════╗
 echo   🧹 CATEGORY 1: SYSTEM CLEANUP [1-12]
@@ -512,7 +517,7 @@ echo  [*] Cleaning Windows prefetch / Xoa prefetch...
 del /f /s /q C:\Windows\Prefetch\* >nul 2>&1 2>nul
 
 echo.
-echo  [SUCCESS] Quick Cleanup Completed! / Hoan thanh don dep nhanh!
+echo  Quick Cleanup Completed! / Hoan thanh don dep nhanh!
 echo.
 pause
 goto MAIN_MENU
@@ -559,7 +564,7 @@ echo  [*] Clearing event logs / Xoa nhat ky su kien...
 for /f "tokens=*" %%G in ('wevtutil.exe el') do (wevtutil.exe cl "%%G" >nul 2>&1)
 
 echo.
-echo  [SUCCESS] Deep Cleanup Completed! / Hoan thanh don dep sau!
+echo  Deep Cleanup Completed! / Hoan thanh don dep sau!
 echo.
 pause
 goto MAIN_MENU
@@ -594,7 +599,7 @@ timeout /t 2 >nul
 del /f /s /q "%AppData%\Opera Software\Opera Stable\Cache\*" >nul 2>&1 2>nul
 
 echo.
-echo  [SUCCESS] Browser caches cleaned! / Da xoa cache trinh duyet!
+echo  Browser caches cleaned! / Da xoa cache trinh duyet!
 echo.
 pause
 goto MAIN_MENU
@@ -635,7 +640,7 @@ echo  [*] Adobe cache...
 for /d %%a in ("%LocalAppData%\Adobe\*") do del /f /s /q "%%a\Cache\*" >nul 2>&1 2>nul
 
 echo.
-echo  [SUCCESS] Application caches cleaned! / Da xoa cache ung dung!
+echo  Application caches cleaned! / Da xoa cache ung dung!
 echo.
 pause
 goto MAIN_MENU
@@ -668,7 +673,7 @@ echo  [*] Running update cleanup / Chay cleanup update...
 Dism.exe /online /Cleanup-Image /StartComponentCleanup >nul 2>&1
 
 echo.
-echo  [SUCCESS] Windows Update cleaned! / Da xoa Windows Update!
+echo  Windows Update cleaned! / Da xoa Windows Update!
 echo.
 pause
 goto MAIN_MENU
@@ -694,7 +699,7 @@ echo  [*] Restarting Windows Explorer / Khoi dong lai Explorer...
 start explorer.exe
 
 echo.
-echo  [SUCCESS] Thumbnail cache cleaned! / Da xoa thumbnail cache!
+echo  Thumbnail cache cleaned! / Da xoa thumbnail cache!
 echo.
 pause
 goto MAIN_MENU
@@ -720,7 +725,7 @@ echo  [*] Restarting Windows Explorer / Khoi dong lai Explorer...
 start explorer.exe
 
 echo.
-echo  [SUCCESS] Icon cache cleaned! / Da xoa icon cache!
+echo  Icon cache cleaned! / Da xoa icon cache!
 echo.
 pause
 goto MAIN_MENU
@@ -746,7 +751,7 @@ echo  [*] Starting font cache service / Khoi dong dich vu font cache...
 net start "Windows Font Cache Service" >nul 2>&1
 
 echo.
-echo  [SUCCESS] Font cache cleaned! / Da xoa font cache!
+echo  Font cache cleaned! / Da xoa font cache!
 echo.
 pause
 goto MAIN_MENU
@@ -767,7 +772,7 @@ del /f /s /q C:\Windows\Installer\$PatchCache$\* >nul 2>&1 2>nul
 echo  [*] Note: MSI cache cleanup skipped for safety / Bo qua xoa MSI cache de dam bao an toan...
 
 echo.
-echo  [SUCCESS] Windows Installer cleaned! / Da xoa Windows Installer!
+echo  Windows Installer cleaned! / Da xoa Windows Installer!
 echo.
 pause
 goto MAIN_MENU
@@ -795,7 +800,7 @@ echo  [*] Deleting previous Windows installations / Xoa cai dat Windows truoc...
 Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase >nul 2>&1
 
 echo.
-echo  [SUCCESS] Old Windows cleaned! / Da xoa Windows cu!
+echo  Old Windows cleaned! / Da xoa Windows cu!
 echo.
 pause
 goto MAIN_MENU
@@ -817,7 +822,7 @@ rd /s /q E:\$Recycle.Bin >nul 2>&1
 rd /s /q F:\$Recycle.Bin >nul 2>&1
 
 echo.
-echo  [SUCCESS] Recycle Bin emptied! / Da lam trong thung rac!
+echo  Recycle Bin emptied! / Da lam trong thung rac!
 echo.
 pause
 goto MAIN_MENU
@@ -840,7 +845,7 @@ echo  [*] Deleting error report files / Xoa file bao cao loi...
 del /f /s /q C:\ProgramData\Microsoft\Windows\WER\* >nul 2>&1 2>nul
 
 echo.
-echo  [SUCCESS] Memory dump files cleaned! / Da xoa file dump!
+echo  Memory dump files cleaned! / Da xoa file dump!
 echo.
 pause
 goto MAIN_MENU
@@ -869,7 +874,7 @@ echo  [*] Clearing Jump Lists / Xoa Jump Lists...
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs" /f >nul 2>&1
 
 echo.
-echo  [SUCCESS] Recent documents cleared! / Da xoa tai lieu gan day!
+echo  Recent documents cleared! / Da xoa tai lieu gan day!
 echo.
 pause
 goto MAIN_MENU
@@ -888,7 +893,7 @@ echo  [*] Deleting Run history from registry / Xoa lich su Run tu registry...
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /f >nul 2>&1
 
 echo.
-echo  [SUCCESS] Run history cleared! / Da xoa lich su Run!
+echo  Run history cleared! / Da xoa lich su Run!
 echo.
 pause
 goto MAIN_MENU
@@ -908,7 +913,7 @@ reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\WordWheelQue
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\TypedPaths" /f >nul 2>&1
 
 echo.
-echo  [SUCCESS] Search history cleared! / Da xoa lich su tim kiem!
+echo  Search history cleared! / Da xoa lich su tim kiem!
 echo.
 pause
 goto MAIN_MENU
@@ -930,7 +935,7 @@ echo  [*] Clearing clipboard history / Xoa lich su clipboard...
 del /f /s /q "%LocalAppData%\Microsoft\Windows\Clipboard\*" >nul 2>&1 2>nul
 
 echo.
-echo  [SUCCESS] Clipboard history cleared! / Da xoa lich su clipboard!
+echo  Clipboard history cleared! / Da xoa lich su clipboard!
 echo.
 pause
 goto MAIN_MENU
@@ -953,7 +958,7 @@ echo  [*] Disabling error reporting / Tat bao cao loi...
 reg add "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /v Disabled /t REG_DWORD /d 1 /f >nul 2>&1
 
 echo.
-echo  [SUCCESS] Error reports cleared! / Da xoa bao cao loi!
+echo  Error reports cleared! / Da xoa bao cao loi!
 echo.
 pause
 goto MAIN_MENU
@@ -982,7 +987,7 @@ echo  [*] Disabling activity history / Tat lich su hoat dong...
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v PublishUserActivities /t REG_DWORD /d 0 /f >nul 2>&1
 
 echo.
-echo  [SUCCESS] Telemetry disabled! / Da tat thu thap du lieu!
+echo  Telemetry disabled! / Da tat thu thap du lieu!
 echo.
 pause
 goto MAIN_MENU
@@ -1004,7 +1009,7 @@ for /f "tokens=*" %%G in ('wevtutil.exe el') do (
 )
 
 echo.
-echo  [SUCCESS] Event logs cleared! / Da xoa nhat ky su kien!
+echo  Event logs cleared! / Da xoa nhat ky su kien!
 echo.
 pause
 goto MAIN_MENU
@@ -1023,7 +1028,7 @@ echo  [*] Flushing DNS resolver cache / Xoa DNS resolver cache...
 ipconfig /flushdns
 
 echo.
-echo  [SUCCESS] DNS cache cleared! / Da xoa cache DNS!
+echo  DNS cache cleared! / Da xoa cache DNS!
 echo.
 pause
 goto MAIN_MENU
@@ -1059,7 +1064,7 @@ echo  [*] Renewing IP / Lam moi IP...
 ipconfig /renew
 
 echo.
-echo  [SUCCESS] Network settings reset! / Da reset cai dat mang!
+echo  Network settings reset! / Da reset cai dat mang!
 echo  [INFO] Please restart computer / Vui long khoi dong lai may!
 echo.
 pause
@@ -1088,7 +1093,7 @@ echo  [*] Disabling bandwidth reservation / Tat dat truoc bang thong...
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Psched" /v NonBestEffortLimit /t REG_DWORD /d 0 /f >nul 2>&1
 
 echo.
-echo  [SUCCESS] Network optimized! / Da toi uu mang!
+echo  Network optimized! / Da toi uu mang!
 echo.
 pause
 goto MAIN_MENU
@@ -1107,7 +1112,7 @@ echo  [*] Deleting ARP cache / Xoa ARP cache...
 netsh interface ip delete arpcache
 
 echo.
-echo  [SUCCESS] ARP cache cleared! / Da xoa cache ARP!
+echo  ARP cache cleared! / Da xoa cache ARP!
 echo.
 pause
 goto MAIN_MENU
@@ -1129,7 +1134,7 @@ echo  [*] Resetting IP configuration / Reset cau hinh IP...
 netsh int ip reset
 
 echo.
-echo  [SUCCESS] Winsock reset! / Da reset Winsock!
+echo  Winsock reset! / Da reset Winsock!
 echo  [INFO] Please restart computer / Vui long khoi dong lai may!
 echo.
 pause
@@ -1155,7 +1160,7 @@ echo  [*] Flushing DNS / Xoa DNS...
 ipconfig /flushdns
 
 echo.
-echo  [SUCCESS] IP address renewed! / Da lam moi dia chi IP!
+echo  IP address renewed! / Da lam moi dia chi IP!
 echo.
 pause
 goto MAIN_MENU
@@ -1184,7 +1189,7 @@ echo  [*] Resetting Winsock / Reset Winsock...
 netsh winsock reset
 
 echo.
-echo  [SUCCESS] Network adapter fixed! / Da sua card mang!
+echo  Network adapter fixed! / Da sua card mang!
 echo.
 pause
 goto MAIN_MENU
@@ -1207,7 +1212,7 @@ echo.
 cleanmgr /sagerun:1
 
 echo.
-echo  [SUCCESS] Disk cleanup completed! / Hoan thanh don dep o dia!
+echo  Disk cleanup completed! / Hoan thanh don dep o dia!
 echo.
 pause
 goto MAIN_MENU
@@ -1228,7 +1233,7 @@ echo  Y | chkdsk %drive%: /f /r /x
 
 echo.
 echo  [INFO] Disk check scheduled for next reboot / Da len lich kiem tra khi khoi dong lai!
-echo  [SUCCESS] Please restart your computer / Vui long khoi dong lai may tinh!
+echo  Please restart your computer / Vui long khoi dong lai may tinh!
 echo.
 pause
 goto MAIN_MENU
@@ -1247,7 +1252,7 @@ echo  [*] Analyzing and optimizing drives / Phan tich va toi uu o dia...
 defrag /C /O /H /U
 
 echo.
-echo  [SUCCESS] Disk optimization completed! / Hoan thanh toi uu o dia!
+echo  Disk optimization completed! / Hoan thanh toi uu o dia!
 echo.
 pause
 goto MAIN_MENU
@@ -1296,7 +1301,7 @@ echo  [*] Deleting Windows.old / Xoa Windows.old...
 rd /s /q C:\Windows.old >nul 2>&1
 
 echo.
-echo  [SUCCESS] Windows.old deleted! / Da xoa Windows.old!
+echo  Windows.old deleted! / Da xoa Windows.old!
 echo.
 pause
 goto MAIN_MENU
@@ -1323,7 +1328,7 @@ echo  [*] Compressing system files / Nen file he thong...
 compact /compactos:always
 
 echo.
-echo  [SUCCESS] System compressed! / Da nen he thong!
+echo  System compressed! / Da nen he thong!
 echo.
 pause
 goto MAIN_MENU
@@ -1383,7 +1388,7 @@ sc stop HomeGroupProvider >nul 2>&1
 echo  NOTE: Print Spooler kept enabled for printer support / Giu Print Spooler de ho tro may in...
 
 echo.
-echo  [SUCCESS] Services optimized! / Da toi uu dich vu!
+echo  Services optimized! / Da toi uu dich vu!
 echo  [INFO] Some changes require restart / Mot so thay doi can khoi dong lai!
 echo.
 pause
@@ -1403,7 +1408,7 @@ echo  [*] Deleting prefetch files / Xoa file prefetch...
 del /f /s /q C:\Windows\Prefetch\* >nul 2>&1 2>nul
 
 echo.
-echo  [SUCCESS] Prefetch files cleared! / Da xoa file prefetch!
+echo  Prefetch files cleared! / Da xoa file prefetch!
 echo.
 pause
 goto MAIN_MENU
@@ -1428,7 +1433,7 @@ echo  [*] Starting SuperFetch service / Khoi dong dich vu SuperFetch...
 sc start SysMain >nul 2>&1
 
 echo.
-echo  [SUCCESS] SuperFetch cache cleared! / Da xoa cache SuperFetch!
+echo  SuperFetch cache cleared! / Da xoa cache SuperFetch!
 echo.
 pause
 goto MAIN_MENU
@@ -1453,7 +1458,7 @@ echo  [*] Disabling transparency / Tat trong suot...
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v EnableTransparency /t REG_DWORD /d 0 /f >nul 2>&1
 
 echo.
-echo  [SUCCESS] Visual effects disabled! / Da tat hieu ung hinh anh!
+echo  Visual effects disabled! / Da tat hieu ung hinh anh!
 echo  [INFO] Please log off and log back in / Vui long dang xuat va dang nhap lai!
 echo.
 pause
@@ -1481,7 +1486,7 @@ powercfg -change -disk-timeout-ac 0
 powercfg -change -disk-timeout-dc 0
 
 echo.
-echo  [SUCCESS] Power plan optimized! / Da toi uu che do nguon!
+echo  Power plan optimized! / Da toi uu che do nguon!
 echo.
 pause
 goto MAIN_MENU
@@ -1503,7 +1508,7 @@ echo  [*] Deleting hiberfil.sys / Xoa hiberfil.sys...
 del C:\hiberfil.sys /f /q >nul 2>&1
 
 echo.
-echo  [SUCCESS] Hibernation disabled! / Da tat che do ngu dong!
+echo  Hibernation disabled! / Da tat che do ngu dong!
 echo  [INFO] This freed up several GB of disk space / Da giai phong vai GB dung luong!
 echo.
 pause
@@ -1526,7 +1531,7 @@ echo  [*] Emptying working sets / Lam trong working sets...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v ClearPageFileAtShutdown /t REG_DWORD /d 1 /f >nul 2>&1
 
 echo.
-echo  [SUCCESS] Memory cache cleared! / Da xoa cache bo nho!
+echo  Memory cache cleared! / Da xoa cache bo nho!
 echo.
 pause
 goto MAIN_MENU
@@ -1551,7 +1556,7 @@ echo  [*] Restarting search service / Khoi dong lai dich vu tim kiem...
 net start WSearch >nul 2>&1
 
 echo.
-echo  [SUCCESS] Search index optimized! / Da toi uu tim kiem!
+echo  Search index optimized! / Da toi uu tim kiem!
 echo.
 pause
 goto MAIN_MENU
@@ -1576,7 +1581,7 @@ echo  [*] Disabling menu animations / Tat hoat anh menu...
 reg add "HKCU\Control Panel\Desktop" /v UserPreferencesMask /t REG_BINARY /d 9012038010000000 /f >nul 2>&1
 
 echo.
-echo  [SUCCESS] Animations disabled! / Da tat hoat anh!
+echo  Animations disabled! / Da tat hoat anh!
 echo.
 pause
 goto MAIN_MENU
@@ -1608,7 +1613,7 @@ echo  [*] Disabling prefetch / Tat prefetch...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v EnablePrefetcher /t REG_DWORD /d 0 /f >nul 2>&1
 
 echo.
-echo  [SUCCESS] SSD optimized! / Da toi uu SSD!
+echo  SSD optimized! / Da toi uu SSD!
 echo.
 pause
 goto MAIN_MENU
@@ -1627,7 +1632,7 @@ echo  [*] Setting menu show delay to 0ms / Cai dat tre menu thanh 0ms...
 reg add "HKCU\Control Panel\Desktop" /v MenuShowDelay /t REG_SZ /d 0 /f >nul 2>&1
 
 echo.
-echo  [SUCCESS] Menu delay reduced! / Da giam tre menu!
+echo  Menu delay reduced! / Da giam tre menu!
 echo.
 pause
 goto MAIN_MENU
@@ -1651,7 +1656,7 @@ echo.
 sfc /scannow
 
 echo.
-echo  [SUCCESS] SFC scan completed! / Hoan thanh kiem tra SFC!
+echo  SFC scan completed! / Hoan thanh kiem tra SFC!
 echo.
 pause
 goto MAIN_MENU
@@ -1677,7 +1682,7 @@ echo  [*] Restoring health / Khoi phuc suc khoe...
 Dism /Online /Cleanup-Image /RestoreHealth
 
 echo.
-echo  [SUCCESS] DISM repair completed! / Hoan thanh sua chua DISM!
+echo  DISM repair completed! / Hoan thanh sua chua DISM!
 echo.
 pause
 goto MAIN_MENU
@@ -1699,7 +1704,7 @@ echo  [*] Resetting base / Reset base...
 Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
 
 echo.
-echo  [SUCCESS] Component cleanup completed! / Hoan thanh don dep thanh phan!
+echo  Component cleanup completed! / Hoan thanh don dep thanh phan!
 echo.
 pause
 goto MAIN_MENU
@@ -1743,7 +1748,7 @@ echo  [*] Restarting Windows Explorer / Khoi dong lai Explorer...
 start explorer.exe
 
 echo.
-echo  [SUCCESS] Icon cache rebuilt! / Da xay dung lai icon cache!
+echo  Icon cache rebuilt! / Da xay dung lai icon cache!
 echo.
 pause
 goto MAIN_MENU
@@ -1794,7 +1799,7 @@ echo  [*] Cleaning obsolete entries / Xoa muc cu...
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32" /f >nul 2>&1
 
 echo.
-echo  [SUCCESS] Registry cleaned! / Da don dep registry!
+echo  Registry cleaned! / Da don dep registry!
 echo.
 pause
 goto MAIN_MENU
@@ -1816,7 +1821,7 @@ echo  [*] Enabling registry caching / Bat cache registry...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v IoPageLockLimit /t REG_DWORD /d 0xf000000 /f >nul 2>&1
 
 echo.
-echo  [SUCCESS] Registry optimized! / Da toi uu registry!
+echo  Registry optimized! / Da toi uu registry!
 echo.
 pause
 goto MAIN_MENU
@@ -1839,7 +1844,7 @@ reg export HKLM "C:\RegistryBackup\HKLM_%date:~-4,4%%date:~-7,2%%date:~-10,2%.re
 reg export HKCU "C:\RegistryBackup\HKCU_%date:~-4,4%%date:~-7,2%%date:~-10,2%.reg" /y >nul 2>&1
 
 echo.
-echo  [SUCCESS] Registry backed up to C:\RegistryBackup\ / Da sao luu vao C:\RegistryBackup\
+echo  Registry backed up to C:\RegistryBackup\ / Da sao luu vao C:\RegistryBackup\
 echo.
 pause
 goto MAIN_MENU
@@ -1861,7 +1866,7 @@ echo  [*] Disabling search web / Tat tim kiem web...
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v BingSearchEnabled /t REG_DWORD /d 0 /f >nul 2>&1
 
 echo.
-echo  [SUCCESS] Cortana disabled! / Da tat Cortana!
+echo  Cortana disabled! / Da tat Cortana!
 echo.
 pause
 goto MAIN_MENU
@@ -1881,7 +1886,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v SoftLandingEnabled /t REG_DWORD /d 0 /f >nul 2>&1
 
 echo.
-echo  [SUCCESS] Windows tips disabled! / Da tat goi y Windows!
+echo  Windows tips disabled! / Da tat goi y Windows!
 echo.
 pause
 goto MAIN_MENU
@@ -1905,7 +1910,7 @@ echo  [*] Creating restore point / Tao diem khoi phuc...
 powershell -Command "Checkpoint-Computer -Description 'Ultimate System Tool Backup' -RestorePointType 'MODIFY_SETTINGS'"
 
 echo.
-echo  [SUCCESS] Restore point created! / Da tao diem khoi phuc!
+echo  Restore point created! / Da tao diem khoi phuc!
 echo.
 pause
 goto MAIN_MENU
@@ -1940,7 +1945,7 @@ echo  [*] Creating list / Tao danh sach...
 wmic product get name,version /format:csv > "%USERPROFILE%\Desktop\InstalledPrograms.csv"
 
 echo.
-echo  [SUCCESS] List saved to Desktop\InstalledPrograms.csv / Da luu vao Desktop\InstalledPrograms.csv
+echo  List saved to Desktop\InstalledPrograms.csv / Da luu vao Desktop\InstalledPrograms.csv
 echo.
 pause
 goto MAIN_MENU
@@ -1978,7 +1983,7 @@ for /d %%u in ("C:\Users\*") do (
 )
 
 echo.
-echo  [SUCCESS] Windows Store cache cleared! / Da xoa cache Windows Store!
+echo  Windows Store cache cleared! / Da xoa cache Windows Store!
 echo  [INFO] If issues persist, run: wsreset.exe / Neu con loi, chay: wsreset.exe
 echo.
 pause
@@ -2011,7 +2016,7 @@ net start bits >nul 2>&1
 net start msiserver >nul 2>&1
 
 echo.
-echo  [SUCCESS] Windows Update reset! / Da reset Windows Update!
+echo  Windows Update reset! / Da reset Windows Update!
 echo.
 pause
 goto MAIN_MENU
@@ -2036,7 +2041,7 @@ echo  [*] Disabling boot GUI / Tat GUI khoi dong...
 bcdedit /set quietboot on >nul 2>&1
 
 echo.
-echo  [SUCCESS] Boot time optimized! / Da toi uu thoi gian khoi dong!
+echo  Boot time optimized! / Da toi uu thoi gian khoi dong!
 echo.
 pause
 goto MAIN_MENU
@@ -2069,7 +2074,7 @@ echo  [*] Recent items / Muc gan day...
 del /f /s /q "%AppData%\Microsoft\Windows\Recent\*" >nul 2>&1 2>nul
 
 echo.
-echo  [SUCCESS] All temporary files cleaned! / Da xoa tat ca file tam!
+echo  All temporary files cleaned! / Da xoa tat ca file tam!
 echo.
 pause
 goto MAIN_MENU
@@ -2089,7 +2094,7 @@ echo  [*] Creating report / Tao bao cao...
 perfmon /report
 
 echo.
-echo  [SUCCESS] Report generated! / Da tao bao cao!
+echo  Report generated! / Da tao bao cao!
 echo.
 pause
 goto MAIN_MENU
@@ -2180,7 +2185,7 @@ del /f /s /q "%windir%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Wi
 
 echo.
 echo  ================================================================================
-echo  [SUCCESS] All cleanup tasks completed! / Hoan thanh tat ca don dep!
+echo  All cleanup tasks completed! / Hoan thanh tat ca don dep!
 echo  ================================================================================
 echo.
 pause
@@ -2314,7 +2319,7 @@ ie4uinit.exe -show >nul 2>&1
 
 echo.
 echo  ================================================================================
-echo   [SUCCESS] FULL SYSTEM OPTIMIZATION COMPLETED!
+echo   FULL SYSTEM OPTIMIZATION COMPLETED!
 echo   HOAN THANH TOI UU TOAN BO HE THONG!
 echo  ================================================================================
 echo.
@@ -2374,7 +2379,7 @@ del /f /s /q "%userprofile%\AppData\Local\Microsoft\Office\16.0\OfficeFileCache\
 del /f /s /q "%userprofile%\AppData\Local\Microsoft\Office\15.0\OfficeFileCache\*" >nul 2>&1 2>nul
 
 echo.
-echo  [SUCCESS] Software cache cleaned! / Da xoa cache phan mem!
+echo  Software cache cleaned! / Da xoa cache phan mem!
 echo.
 pause
 goto MAIN_MENU
@@ -2400,7 +2405,7 @@ echo  [*] Restarting service / Khoi dong lai dich vu...
 net start DoSvc >nul 2>&1
 
 echo.
-echo  [SUCCESS] Delivery Optimization cache cleaned! / Da xoa cache!
+echo  Delivery Optimization cache cleaned! / Da xoa cache!
 echo  [INFO] This can free up several GB / Co the giai phong vai GB!
 echo.
 pause
@@ -2434,7 +2439,7 @@ if exist "%pathLCU%" (
     rd /s /q "%pathLCU%" >nul 2>&1
     md "%pathLCU%" >nul 2>&1
     
-    echo     [SUCCESS] LCU backup cleaned! / Da xoa sao luu LCU!
+    echo     LCU backup cleaned! / Da xoa sao luu LCU!
     echo     [INFO] This can free up 5-10 GB! / Co the giai phong 5-10 GB!
 ) else (
     echo     [INFO] LCU backup folder not found / Khong tim thay thu muc sao luu
@@ -2445,7 +2450,7 @@ echo  [*] Cleaning Service Pack superseded / Xoa Service Pack cu...
 dism.exe /online /cleanup-image /spsuperseded /hidesp >nul 2>&1
 
 echo.
-echo  [SUCCESS] Update backup cleaned! / Da xoa sao luu cap nhat!
+echo  Update backup cleaned! / Da xoa sao luu cap nhat!
 echo.
 pause
 goto MAIN_MENU
@@ -2474,7 +2479,7 @@ ipconfig /flushdns >nul 2>&1
 ipconfig /registerdns >nul 2>&1
 
 echo.
-echo  [SUCCESS] Memory optimized! / Da toi uu bo nho!
+echo  Memory optimized! / Da toi uu bo nho!
 echo  [INFO] Free RAM should increase / RAM trong nen tang len!
 echo.
 pause
@@ -2535,7 +2540,7 @@ echo  [*] Rebuilding icon cache / Xay dung lai icon cache...
 timeout /t 2 >nul
 
 echo.
-echo  [SUCCESS] Icon cache refreshed! / Da lam moi icon cache!
+echo  Icon cache refreshed! / Da lam moi icon cache!
 echo  [INFO] Icons should display correctly now / Icon se hien thi dung!
 echo.
 pause
@@ -2604,7 +2609,7 @@ echo  [*] Opening detailed system info / Mo thong tin chi tiet...
 msinfo32
 
 echo.
-echo  [SUCCESS] System information displayed! / Da hien thi thong tin he thong!
+echo  System information displayed! / Da hien thi thong tin he thong!
 echo  [INFO] Detailed report opened in MSInfo32 / Bao cao chi tiet da mo trong MSInfo32
 echo.
 pause
@@ -2665,7 +2670,7 @@ if %WIN_VER% GEQ 10 (
 )
 
 echo.
-echo  [SUCCESS] Settings opened! / Da mo cai dat!
+echo  Settings opened! / Da mo cai dat!
 echo.
 timeout /t 2
 goto MAIN_MENU
@@ -2719,14 +2724,14 @@ if "%office_choice%"=="3" (
     echo [*] Resetting Office settings / Reset cai dat Office...
     del /f /q "%AppData%\Microsoft\Office\*.*" >nul 2>&1
     del /f /q "%LocalAppData%\Microsoft\Office\*.*" >nul 2>&1
-    echo [SUCCESS] Office settings reset! / Da reset cai dat Office!
+    echo Office settings reset! / Da reset cai dat Office!
 )
 
 if "%office_choice%"=="4" (
     echo [*] Clearing Office cache / Xoa cache Office...
     del /f /s /q "%LocalAppData%\Microsoft\Office\16.0\OfficeFileCache\*" >nul 2>&1 2>nul
     del /f /s /q "%LocalAppData%\Microsoft\Office\15.0\OfficeFileCache\*" >nul 2>&1 2>nul
-    echo [SUCCESS] Office cache cleared! / Da xoa cache Office!
+    echo Office cache cleared! / Da xoa cache Office!
 )
 
 if "%office_choice%"=="5" (
@@ -2822,7 +2827,7 @@ if %WIN_VER% GEQ 10 (
 )
 
 echo.
-echo  [SUCCESS] Bloatware removed! / Da xoa ung dung rac!
+echo  Bloatware removed! / Da xoa ung dung rac!
 echo  [INFO] You can reinstall from Microsoft Store if needed / Co the cai lai tu Microsoft Store
 echo.
 pause
@@ -2860,7 +2865,7 @@ if "%bitlocker_choice%"=="1" (
     if /i "!confirm_disable!"=="Y" (
         echo [*] Disabling Bitlocker / Tat Bitlocker...
         manage-bde -off C:
-        echo [SUCCESS] Bitlocker disabled! / Da tat Bitlocker!
+        echo Bitlocker disabled! / Da tat Bitlocker!
     )
 )
 
@@ -2975,6 +2980,7 @@ echo.
 echo  [*] Creating summary file / Tao file tom tat...
 echo  WiFi Backup Report > "%BackupDir%\WiFi_Passwords.txt"
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo  Created: %date% %time% >> "%BackupDir%\WiFi_Passwords.txt"
 echo. >> "%BackupDir%\WiFi_Passwords.txt"
 
@@ -2987,7 +2993,7 @@ for /f "tokens=2 delims=:" %%i in ('netsh wlan show profiles ^| findstr "All Use
 )
 
 echo.
-echo  [SUCCESS] WiFi passwords backed up! / Da sao luu mat khau WiFi!
+echo  WiFi passwords backed up! / Da sao luu mat khau WiFi!
 echo  [INFO] Location / Vi tri: Documents\WiFi_Backup_[DATE]
 echo  [INFO] Full path / Duong dan: %BackupDir%
 echo.
@@ -3024,7 +3030,7 @@ echo  [*] Exporting detailed driver information / Xuat thong tin chi tiet driver
 powershell -Command "Get-WmiObject Win32_PnPSignedDriver | Select-Object DeviceName,DriverVersion,Manufacturer,DriverDate | Export-Csv '%DriverBackup%\Driver_Details.csv' -NoTypeInformation"
 
 echo.
-echo  [SUCCESS] Drivers backed up! / Da sao luu driver!
+echo  Drivers backed up! / Da sao luu driver!
 echo  [INFO] Location / Vi tri: Documents\Driver_Backup_[DATE]
 echo  [INFO] Full path / Duong dan: %DriverBackup%
 echo.
@@ -3105,7 +3111,7 @@ if "%backup_choice%"=="3" (
 )
 
 echo.
-echo  [SUCCESS] User data backed up! / Da sao luu du lieu nguoi dung!
+echo  User data backed up! / Da sao luu du lieu nguoi dung!
 echo  [INFO] Location / Vi tri: Documents\UserData_Backup_[DATE]
 echo  [INFO] Full path / Duong dan: %DataBackup%
 echo.
@@ -3174,7 +3180,7 @@ if exist "%LOCALAPPDATA%\ZaloPC" (
 )
 
 echo.
-echo  [SUCCESS] Zalo data backed up! / Da sao luu du lieu Zalo!
+echo  Zalo data backed up! / Da sao luu du lieu Zalo!
 echo  [INFO] Location / Vi tri: Documents\Zalo_Backup_[DATE]
 echo  [INFO] Full path / Duong dan: %ZaloBackup%
 echo.
@@ -3236,13 +3242,14 @@ echo.
 echo  [*] Creating summary file / Tao file tom tat...
 echo  Product Keys Backup Report > "%KeyBackup%\Product_Keys_Summary.txt"
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo  Created: %date% %time% >> "%KeyBackup%\Product_Keys_Summary.txt"
 echo. >> "%KeyBackup%\Product_Keys_Summary.txt"
 echo  IMPORTANT: Keep these files safe and secure! >> "%KeyBackup%\Product_Keys_Summary.txt"
 echo  QUAN TRONG: Giu cac file nay an toan va bao mat! >> "%KeyBackup%\Product_Keys_Summary.txt"
 
 echo.
-echo  [SUCCESS] Product keys backed up! / Da sao luu ban quyen!
+echo  Product keys backed up! / Da sao luu ban quyen!
 echo  [INFO] Location / Vi tri: Documents\ProductKeys_Backup_[DATE]
 echo  [INFO] Full path / Duong dan: %KeyBackup%
 echo.
@@ -3360,7 +3367,7 @@ color 0B
 echo.
 echo   ================================================================================
 echo                                                                                
-echo               ULTIMATE WINDOWS SYSTEM TOOL v5.0 - PROFESSIONAL                
+echo               ULTIMATE WINDOWS SYSTEM TOOL v6.0 - PROFESSIONAL                
 echo               Comprehensive Optimization Suite - 82 Functions                 
 echo                     Press L to switch language                                
 echo                                                                                
@@ -3567,7 +3574,7 @@ color 0B
 echo.
 echo   ================================================================================
 echo                                                                                
-echo               CONG CU TOI UU HE THONG WINDOWS v5.0 - CHUYEN NGHIEP            
+echo               CONG CU TOI UU HE THONG WINDOWS v6.0 - CHUYEN NGHIEP            
 echo                   Bo Cong Cu Toi Uu Toan Dien - 82 Chuc Nang                  
 echo                     Nhan L de chuyen doi ngon ngu                              
 echo                                                                                
@@ -3673,7 +3680,7 @@ echo   ════════════════════════�
 echo   [0]  THOAT                            [L]  Chuyen sang tieng Anh
 echo   ================================================================================
 echo.
-set /p choice=   CHON CHUC NANG (0-99 hoac L): 
+set /p choice=   CHON CHUC NANG (0-150 hoac L): 
 
 if /i "%choice%"=="L" goto SWITCH_LANGUAGE
 if "%choice%"=="0" goto EXIT
@@ -3924,6 +3931,7 @@ goto MAIN_MENU
 echo.
 echo   [*] KICH HOAT OFFICE / ACTIVATE OFFICE
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [!] LUU Y: Chi dung cho muc dich test!
 echo   [!] NOTE: For testing purposes only!
@@ -4030,6 +4038,7 @@ if "%winpe%"=="4" (
     echo.
     echo  HUONG DAN TAO WINPE:
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
     echo  1. Tai va cai Windows ADK
     echo  2. Tai va cai WinPE Add-on
     echo  3. Mo Deployment and Imaging Tools Environment (Admin)
@@ -4111,6 +4120,7 @@ if "%winhdd%"=="3" (
     echo.
     echo  HUONG DAN SU DUNG WINTOHDD:
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
     echo  1. Tai va cai dat WinToHDD
     echo  2. Chon "Reinstall Windows"
     echo  3. Chon file ISO Windows
@@ -4666,6 +4676,7 @@ if "%sku%"=="2" (
 if "%sku%"=="3" (
     echo  [*] KICH HOAT WINDOWS
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
     echo.
     echo  [1] Tu dong kich hoat (KMS)
     echo  [2] Nhap Product Key
@@ -4690,6 +4701,7 @@ if "%sku%"=="4" goto ACTIVATE_OFFICE
 if "%sku%"=="5" (
     echo  [*] TRANG THAI KICH HOAT
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
     echo.
     echo  WINDOWS:
     slmgr /dli
@@ -4701,6 +4713,7 @@ echo  ════════════════════════�
 if "%sku%"=="6" (
     echo  [*] THAY DOI PRODUCT KEY
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
     echo.
     echo  [1] Thay doi key Windows
     echo  [2] Thay doi key Office
@@ -4724,6 +4737,7 @@ echo  ════════════════════════�
 if "%sku%"=="7" (
     echo  [*] BACKUP PRODUCT KEYS
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
     echo.
     set "backup=%USERPROFILE%\Desktop\ProductKeys_Backup_%date:~-4%%date:~3,2%%date:~0,2%.txt"
     echo  Product Keys Backup > "!backup!"
@@ -4811,6 +4825,7 @@ echo.
 
 echo   [STEP 1/8] CLEANUP
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 del /f /s /q "%TEMP%\*" >nul 2>&1 2>nul
 del /f /s /q "C:\Windows\Temp\*" >nul 2>&1 2>nul
 cleanmgr /sagerun:1 >nul 2>&1
@@ -4818,6 +4833,7 @@ cleanmgr /sagerun:1 >nul 2>&1
 echo.
 echo   [STEP 2/8] NETWORK
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 netsh int tcp set global autotuninglevel=normal >nul
 netsh int tcp set global rss=enabled >nul
 ipconfig /flushdns >nul
@@ -4825,32 +4841,38 @@ ipconfig /flushdns >nul
 echo.
 echo   [STEP 3/8] SERVICES
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 sc config "DiagTrack" start= disabled >nul
 sc config "dmwappushservice" start= disabled >nul
 
 echo.
 echo   [STEP 4/8] REGISTRY
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v RegistrySizeLimit /t REG_DWORD /d 0x40000000 /f >nul
 
 echo.
 echo   [STEP 5/8] PERFORMANCE
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c >nul 2>&1
 
 echo.
 echo   [STEP 6/8] SYSTEM FILES
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 sfc /scannow >nul 2>&1
 
 echo.
 echo   [STEP 7/8] DEFENDER
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 powershell -Command "Update-MpSignature" >nul 2>&1
 
 echo.
 echo   [STEP 8/8] FINALIZE
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 taskkill /f /im explorer.exe >nul
 start explorer.exe
 
@@ -4872,12 +4894,12 @@ color 0B
 echo.
 echo   ================================================================================
 echo.
-echo                Thank you for using Ultimate System Tools v5.0!
+echo                Thank you for using Ultimate System Tools v6.0!
 echo                 Cam on ban da su dung Ultimate System Tools!
 echo.
 echo                        Created by: Nguyen Ngoc Anh Tu
 echo                         Version 5.0 - Complete Edition
-echo                         96 Functions - All-in-One Tool
+echo                         151 Functions - All-in-One Tool
 echo.
 echo   ================================================================================
 echo.
@@ -4904,6 +4926,7 @@ color 0C
 echo.
 echo   [100] Dark Mode Toggle - Chuyen Doi Che Do Toi
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Enable Dark Mode (System-wide)
 echo   [2] Enable Light Mode (System-wide)
@@ -4918,21 +4941,21 @@ if "%dm%"=="1" (
     echo  Enabling Dark Mode...
     reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v AppsUseLightTheme /t REG_DWORD /d 0 /f >nul
     reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v SystemUsesLightTheme /t REG_DWORD /d 0 /f >nul
-    echo  Dark Mode ENABLED! [SUCCESS] / Da BAT Che Do Toi!
+    echo  Dark Mode ENABLED! / Da BAT Che Do Toi!
 )
 if "%dm%"=="2" (
     echo.
     echo  Enabling Light Mode...
     reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v AppsUseLightTheme /t REG_DWORD /d 1 /f >nul
     reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v SystemUsesLightTheme /t REG_DWORD /d 1 /f >nul
-    echo  Light Mode ENABLED! [SUCCESS] / Da BAT Che Do Sang!
+    echo  Light Mode ENABLED! / Da BAT Che Do Sang!
 )
 if "%dm%"=="3" (
     echo.
     echo  Dark Mode for Apps only...
     reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v AppsUseLightTheme /t REG_DWORD /d 0 /f >nul
     reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v SystemUsesLightTheme /t REG_DWORD /d 1 /f >nul
-    echo  Apps Dark Mode ENABLED! [SUCCESS]
+    echo  Apps Dark Mode ENABLED!
 )
 if "%dm%"=="4" (
     echo.
@@ -4951,6 +4974,7 @@ color 0C
 echo.
 echo   [101] Taskbar Customization - Tuy Chinh Taskbar
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Hide Taskbar Icons (People, Task View, etc)
 echo   [2] Show All Taskbar Icons
@@ -5013,6 +5037,7 @@ color 0C
 echo.
 echo   [102] File Explorer Tweaks - Tuy Chinh File Explorer
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Show File Extensions
 echo   [2] Hide File Extensions
@@ -5083,6 +5108,7 @@ color 0C
 echo.
 echo   [103] Context Menu Editor - Sua Menu Chuot Phai
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   POPULAR ADDITIONS:
 echo   [1] Add "Take Ownership" to Context Menu
@@ -5137,6 +5163,7 @@ color 0C
 echo.
 echo   [104] Transparency Effects - Hieu Ung Trong Suot
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Enable Transparency Effects (Aero)
 echo   [2] Disable Transparency Effects
@@ -5169,6 +5196,7 @@ color 0C
 echo.
 echo   [105] Mouse and Cursor Tweaks - Tuy Chinh Chuot
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Disable Mouse Acceleration (Enhanced Precision)
 echo   [2] Enable Mouse Acceleration
@@ -5193,7 +5221,7 @@ if "%mouse%"=="2" (
     reg add "HKCU\Control Panel\Mouse" /v MouseSpeed /t REG_SZ /d "1" /f >nul
     reg add "HKCU\Control Panel\Mouse" /v MouseThreshold1 /t REG_SZ /d "6" /f >nul
     reg add "HKCU\Control Panel\Mouse" /v MouseThreshold2 /t REG_SZ /d "10" /f >nul
-    echo  Mouse acceleration ENABLED! [SUCCESS]
+    echo  Mouse acceleration ENABLED!
 )
 if "%mouse%"=="5" (
     control main.cpl
@@ -5209,6 +5237,7 @@ color 0C
 echo.
 echo   [106] Keyboard Shortcuts Manager - Quan Ly Phim Tat
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Disable Windows Key
 echo   [2] Enable Windows Key
@@ -5229,7 +5258,7 @@ if "%kb%"=="2" (
     echo.
     echo  Enabling Windows Key...
     reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v NoWinKeys /f >nul 2>&1
-    echo  Windows Key ENABLED! [SUCCESS]
+    echo  Windows Key ENABLED!
 )
 if "%kb%"=="5" (
     start https://support.microsoft.com/en-us/windows/keyboard-shortcuts-in-windows-dcc61a57-8ff0-cffe-9796-cb9706c75eec
@@ -5245,6 +5274,7 @@ color 0C
 echo.
 echo   [107] System Sounds Manager - Quan Ly Am Thanh He Thong
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Disable All System Sounds
 echo   [2] Enable All System Sounds
@@ -5265,7 +5295,7 @@ if "%snd%"=="2" (
     echo.
     echo  Enabling all system sounds...
     reg add "HKCU\AppEvents\Schemes" /ve /t REG_SZ /d ".Default" /f >nul
-    echo  All system sounds ENABLED! [SUCCESS]
+    echo  All system sounds ENABLED!
 )
 if "%snd%"=="3" (
     echo.
@@ -5277,7 +5307,7 @@ if "%snd%"=="4" (
     echo.
     echo  Enabling startup sound...
     reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v DisableStartupSound /t REG_DWORD /d 0 /f >nul
-    echo  Startup sound ENABLED! [SUCCESS]
+    echo  Startup sound ENABLED!
 )
 if "%snd%"=="5" (
     control mmsys.cpl sounds
@@ -5300,6 +5330,7 @@ color 0C
 echo.
 echo   [108] Game Mode Optimization - Toi Uu Game Mode
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Enable Game Mode (Windows 10/11)
 echo   [2] Disable Game Mode
@@ -5315,7 +5346,7 @@ if "%gm%"=="1" (
     echo  Enabling Game Mode...
     reg add "HKCU\SOFTWARE\Microsoft\GameBar" /v AllowAutoGameMode /t REG_DWORD /d 1 /f >nul
     reg add "HKCU\SOFTWARE\Microsoft\GameBar" /v AutoGameModeEnabled /t REG_DWORD /d 1 /f >nul
-    echo  Game Mode ENABLED! [SUCCESS]
+    echo  Game Mode ENABLED!
 )
 if "%gm%"=="2" (
     echo.
@@ -5358,6 +5389,7 @@ color 0C
 echo.
 echo   [109] GPU Performance Boost - Tang Cuong GPU
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Set GPU to Maximum Performance
 echo   [2] Set GPU to Balanced
@@ -5391,6 +5423,7 @@ if "%gpu%"=="5" (
     echo.
     echo  GPU Information:
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
     wmic path win32_VideoController get name,driverversion
 )
 echo.
@@ -5404,6 +5437,7 @@ color 0C
 echo.
 echo   [110] Xbox Services Control - Quan Ly Dich Vu Xbox
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Disable All Xbox Services
 echo   [2] Enable All Xbox Services
@@ -5430,7 +5464,7 @@ if "%xbox%"=="2" (
     sc config "XblGameSave" start= demand >nul
     sc config "XboxNetApiSvc" start= demand >nul
     sc config "XboxGipSvc" start= demand >nul
-    echo  All Xbox services ENABLED! [SUCCESS]
+    echo  All Xbox services ENABLED!
 )
 if "%xbox%"=="3" (
     echo.
@@ -5456,6 +5490,7 @@ color 0C
 echo.
 echo   [111] Gaming Network Tweaks - Toi Uu Mang Cho Game
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Low Latency Network Settings
 echo   [2] Prioritize Gaming Traffic
@@ -5499,6 +5534,7 @@ color 0C
 echo.
 echo   [112] DirectX and Runtime Manager - Quan Ly DirectX
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Check DirectX Version
 echo   [2] Run DirectX Diagnostic Tool
@@ -5546,6 +5582,7 @@ color 0C
 echo.
 echo   [113] Firewall Manager - Quan Ly Tuong Lua
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Enable Windows Firewall (All Profiles)
 echo   [2] Disable Windows Firewall (All Profiles)
@@ -5603,6 +5640,7 @@ color 0C
 echo.
 echo   [114] UAC Settings Control - Cai Dat UAC
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Set UAC to Maximum (Secure)
 echo   [2] Set UAC to Default
@@ -5659,6 +5697,7 @@ color 0C
 echo.
 echo   [115] Windows Sandbox Enable - Bat Windows Sandbox
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   Windows Sandbox allows you to run untrusted software in isolated environment.
 echo   (Requires Windows 10 Pro/Enterprise or Windows 11)
@@ -5676,7 +5715,7 @@ if "%sb%"=="1" (
     echo  This may take a few minutes...
     dism /online /Enable-Feature /FeatureName:"Containers-DisposableClientVM" /All /NoRestart
     echo.
-    echo  Windows Sandbox ENABLED! [SUCCESS]
+    echo  Windows Sandbox ENABLED!
     echo  Restart required to use it.
 )
 if "%sb%"=="2" (
@@ -5701,6 +5740,7 @@ color 0C
 echo.
 echo   [116] Ransomware Protection - Bao Ve Khoi Ransomware
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Enable Controlled Folder Access
 echo   [2] Disable Controlled Folder Access
@@ -5715,7 +5755,7 @@ if "%rp%"=="1" (
     echo.
     echo  Enabling Controlled Folder Access...
     powershell -Command "Set-MpPreference -EnableControlledFolderAccess Enabled" 2>nul
-    echo  Ransomware Protection ENABLED! [SUCCESS]
+    echo  Ransomware Protection ENABLED!
     echo  Your important folders are now protected.
 )
 if "%rp%"=="2" (
@@ -5749,6 +5789,7 @@ color 0C
 echo.
 echo   [117] App and Browser Control - Kiem Soat Ung Dung
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Enable SmartScreen (Recommended)
 echo   [2] Disable SmartScreen
@@ -5764,7 +5805,7 @@ if "%abc%"=="1" (
     echo  Enabling SmartScreen...
     reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v SmartScreenEnabled /t REG_SZ /d "RequireAdmin" /f >nul
     powershell -Command "Set-MpPreference -EnableNetworkProtection Enabled" 2>nul
-    echo  SmartScreen ENABLED! [SUCCESS]
+    echo  SmartScreen ENABLED!
 )
 if "%abc%"=="2" (
     echo.
@@ -5776,7 +5817,7 @@ if "%abc%"=="3" (
     echo.
     echo  Enabling PUA (Potentially Unwanted Applications) Protection...
     powershell -Command "Set-MpPreference -PUAProtection Enabled" 2>nul
-    echo  PUA Protection ENABLED! [SUCCESS]
+    echo  PUA Protection ENABLED!
 )
 if "%abc%"=="4" (
     echo.
@@ -5798,6 +5839,7 @@ color 0C
 echo.
 echo   [118] Encryption Manager - Quan Ly Ma Hoa
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Check BitLocker Status
 echo   [2] Enable BitLocker (System Drive)
@@ -5847,6 +5889,7 @@ color 0C
 echo.
 echo   [119] Secure DNS Configuration - Cau Hinh DNS Bao Mat
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Set Cloudflare DNS (1.1.1.1) - Fast and Private
 echo   [2] Set Google DNS (8.8.8.8) - Reliable
@@ -5909,6 +5952,7 @@ color 0C
 echo.
 echo   [120] Security Hardening - Tang Cuong Bao Mat
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   APPLY SECURITY HARDENING:
 echo   [1] Enable All Security Features (Recommended)
@@ -5988,6 +6032,7 @@ color 0C
 echo.
 echo   [121] Performance Monitor Live - Giam Sat Hieu Nang Truc Tiep
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Open Resource Monitor
 echo   [2] Open Performance Monitor
@@ -6036,6 +6081,7 @@ color 0C
 echo.
 echo   [122] Temperature Monitor - Giam Sat Nhiet Do
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   NOTE: Windows doesn't provide built-in CPU temperature.
 echo   Recommended: Install HWMonitor, Core Temp, or Open Hardware Monitor
@@ -6081,6 +6127,7 @@ color 0C
 echo.
 echo   [123] Network Bandwidth Monitor - Giam Sat Bang Thong Mang
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] View Current Network Statistics
 echo   [2] Monitor Network Activity (5 sec intervals)
@@ -6128,6 +6175,7 @@ color 0C
 echo.
 echo   [124] Disk Health Monitor - Giam Sat Suc Khoe O Dia
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Check All Drives Health (SMART)
 echo   [2] View Disk Information
@@ -6175,6 +6223,7 @@ color 0C
 echo.
 echo   [125] Battery Report Generator - Tao Bao Cao Pin
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Generate Full Battery Report
 echo   [2] View Battery Status
@@ -6233,6 +6282,7 @@ color 0C
 echo.
 echo   [126] Process Explorer - Trinh Quan Ly Tien Trinh
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Open Task Manager (Enhanced View)
 echo   [2] List All Running Processes
@@ -6285,6 +6335,7 @@ color 0C
 echo.
 echo   [127] Startup Impact Analyzer - Phan Tich Tac Dong Khoi Dong
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] View All Startup Programs
 echo   [2] Measure Boot Time
@@ -6339,6 +6390,7 @@ color 0C
 echo.
 echo   [128] System Stability Report - Bao Cao On Dinh He Thong
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] View Reliability Monitor
 echo   [2] Check System Errors (Last 7 days)
@@ -6399,6 +6451,7 @@ color 0C
 echo.
 echo   [129] Ultimate Performance Plan - Ke Hoach Hieu Nang Toi Da
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Enable Ultimate Performance Plan
 echo   [2] Set High Performance Plan
@@ -6414,7 +6467,7 @@ if "%up%"=="1" (
     echo  Enabling Ultimate Performance power plan...
     powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
     powercfg /setactive e9a42b02-d5df-448d-aa00-03f14749eb61
-    echo  Ultimate Performance plan ENABLED! [SUCCESS]
+    echo  Ultimate Performance plan ENABLED!
     echo  This provides maximum performance at the cost of power consumption.
 )
 if "%up%"=="2" (
@@ -6454,6 +6507,7 @@ color 0C
 echo.
 echo   [130] CPU Parking Control - Kiem Soat CPU Parking
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   CPU Parking can reduce performance in favor of power saving.
 echo   Disabling it improves performance but uses more power.
@@ -6479,7 +6533,7 @@ if "%cp%"=="2" (
     powercfg -setacvalueindex scheme_current sub_processor CPMINCORES 50
     powercfg -setactive scheme_current
     reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\0cc5b647-c1df-4637-891a-dec35c318583" /v ValueMax /t REG_DWORD /d 100 /f >nul
-    echo  CPU Parking ENABLED! [SUCCESS]
+    echo  CPU Parking ENABLED!
 )
 if "%cp%"=="3" (
     echo.
@@ -6497,6 +6551,7 @@ color 0C
 echo.
 echo   [131] USB Selective Suspend - Tam Dung USB Chon Loc
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Disable USB Selective Suspend (Better Responsiveness)
 echo   [2] Enable USB Selective Suspend (Power Saving)
@@ -6517,7 +6572,7 @@ if "%usb%"=="2" (
     echo  Enabling USB Selective Suspend...
     powercfg -setacvalueindex scheme_current 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 1
     powercfg -setactive scheme_current
-    echo  USB Selective Suspend ENABLED! [SUCCESS]
+    echo  USB Selective Suspend ENABLED!
 )
 if "%usb%"=="3" (
     echo.
@@ -6535,6 +6590,7 @@ color 0C
 echo.
 echo   [132] Sleep Settings Manager - Quan Ly Cai Dat Ngu
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Disable Sleep (Never Sleep)
 echo   [2] Set Sleep after 30 minutes
@@ -6589,6 +6645,7 @@ color 0C
 echo.
 echo   [133] Fast Startup Control - Kiem Soat Khoi Dong Nhanh
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   Fast Startup can cause issues with dual-boot systems and some hardware.
 echo.
@@ -6604,7 +6661,7 @@ if "%fs%"=="1" (
     echo  Enabling Fast Startup...
     reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v HiberbootEnabled /t REG_DWORD /d 1 /f >nul
     powercfg /h on
-    echo  Fast Startup ENABLED! [SUCCESS]
+    echo  Fast Startup ENABLED!
 )
 if "%fs%"=="2" (
     echo.
@@ -6635,6 +6692,7 @@ color 0C
 echo.
 echo   [133] VPN Manager - Quan Ly VPN
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Create New VPN Connection
 echo   [2] View VPN Connections
@@ -6681,6 +6739,7 @@ color 0C
 echo.
 echo   [135] Hosts File Editor - Sua File Hosts
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Open Hosts File in Notepad
 echo   [2] Block Website (Add to Hosts)
@@ -6735,6 +6794,7 @@ color 0C
 echo.
 echo   [136] MAC Address Changer - Thay Doi Dia Chi MAC
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   WARNING: Changing MAC address may violate network policies.
 echo.
@@ -6784,6 +6844,7 @@ color 0C
 echo.
 echo   [137] Network Adapter Priority - Uu Tien Bo Dieu Hop Mang
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] View Network Adapters and Metrics
 echo   [2] Set WiFi Priority (Lower Metric)
@@ -6836,6 +6897,7 @@ color 0C
 echo.
 echo   [138] Network Reset Advanced - Dat Lai Mang Nang Cao
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   WARNING: This will reset ALL network settings!
 echo.
@@ -6905,6 +6967,7 @@ color 0C
 echo.
 echo   [139] Proxy Settings Manager - Quan Ly Cai Dat Proxy
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] View Current Proxy Settings
 echo   [2] Set HTTP Proxy
@@ -6947,6 +7010,7 @@ color 0C
 echo.
 echo   [140] Network Sharing Manager - Quan Ly Chia Se Mang
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Enable Network Discovery
 echo   [2] Disable Network Discovery
@@ -6962,7 +7026,7 @@ if "%ns%"=="1" (
     echo.
     echo  Enabling network discovery...
     netsh advfirewall firewall set rule group="Network Discovery" new enable=Yes
-    echo  Network discovery ENABLED! [SUCCESS]
+    echo  Network discovery ENABLED!
 )
 if "%ns%"=="2" (
     echo.
@@ -6974,7 +7038,7 @@ if "%ns%"=="3" (
     echo.
     echo  Enabling file and printer sharing...
     netsh advfirewall firewall set rule group="File and Printer Sharing" new enable=Yes
-    echo  File and Printer Sharing ENABLED! [SUCCESS]
+    echo  File and Printer Sharing ENABLED!
 )
 if "%ns%"=="4" (
     echo.
@@ -7008,6 +7072,7 @@ color 0C
 echo.
 echo   [141] System Image Backup - Sao Luu Hinh Anh He Thong
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Create System Image Backup
 echo   [2] Restore from System Image
@@ -7058,6 +7123,7 @@ color 0C
 echo.
 echo   [142] Recovery Drive Creator - Tao O Phuc Hoi
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Create Recovery Drive (USB)
 echo   [2] Open Recovery Options
@@ -7088,7 +7154,7 @@ if "%rd%"=="4" (
     echo.
     echo  Enabling Windows Recovery Environment...
     reagentc /enable
-    echo  Recovery Environment ENABLED! [SUCCESS]
+    echo  Recovery Environment ENABLED!
 )
 if "%rd%"=="5" (
     echo.
@@ -7110,6 +7176,7 @@ color 0C
 echo.
 echo   [143] Boot Repair Tools - Cong Cu Sua Loi Khoi Dong
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Repair Boot Records (MBR/GPT)
 echo   [2] Rebuild BCD (Boot Configuration Data)
@@ -7174,6 +7241,7 @@ color 0C
 echo.
 echo   [144] System Restore Manager - Quan Ly Khoi Phuc He Thong
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Create Restore Point Now
 echo   [2] Restore to Previous Point
@@ -7217,7 +7285,7 @@ if "%rm%"=="6" (
     echo.
     echo  Enabling System Restore on C: drive...
     powershell -Command "Enable-ComputerRestore -Drive 'C:\'" 2>nul
-    echo  System Restore ENABLED! [SUCCESS]
+    echo  System Restore ENABLED!
 )
 if "%rm%"=="7" (
     echo.
@@ -7239,6 +7307,7 @@ color 0C
 echo.
 echo   [145] Activate Safe Mode Options - Kich Hoat Safe Mode
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Restart in Safe Mode
 echo   [2] Restart in Safe Mode with Networking
@@ -7305,6 +7374,7 @@ color 0C
 echo.
 echo   [146] Windows Store Reset - Dat Lai Windows Store
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Reset Windows Store (Fix Issues)
 echo   [2] Clear Store Cache
@@ -7354,6 +7424,7 @@ color 0C
 echo.
 echo   [147] App Permissions Manager - Quan Ly Quyen Ung Dung
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Open Privacy Settings
 echo   [2] Disable Camera Access (All Apps)
@@ -7379,7 +7450,7 @@ if "%ap%"=="3" (
     echo.
     echo  Enabling camera access...
     reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\webcam" /v Value /t REG_SZ /d "Allow" /f >nul
-    echo  Camera access ENABLED! [SUCCESS]
+    echo  Camera access ENABLED!
 )
 if "%ap%"=="4" (
     echo.
@@ -7391,7 +7462,7 @@ if "%ap%"=="5" (
     echo.
     echo  Enabling microphone access...
     reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\microphone" /v Value /t REG_SZ /d "Allow" /f >nul
-    echo  Microphone access ENABLED! [SUCCESS]
+    echo  Microphone access ENABLED!
 )
 if "%ap%"=="6" (
     echo.
@@ -7418,6 +7489,7 @@ color 0C
 echo.
 echo   [148] Default Apps Manager - Quan Ly Ung Dung Mac Dinh
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Open Default Apps Settings
 echo   [2] Reset All Default Apps
@@ -7478,6 +7550,7 @@ color 0C
 echo.
 echo   [149] Winget Package Manager - Trinh Quan Ly Goi Winget
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Check Winget Version
 echo   [2] Search for Package
@@ -7541,6 +7614,7 @@ color 0C
 echo.
 echo   [150] Microsoft Edge Manager - Quan Ly Microsoft Edge
 echo  ═══════════════════════════════════════════════════════════════════════════════════════
+
 echo.
 echo   [1] Reset Microsoft Edge
 echo   [2] Clear Edge Cache and Data
@@ -7582,7 +7656,7 @@ if "%edge%"=="4" (
     echo.
     echo  Enabling Edge Startup Boost...
     reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v StartupBoostEnabled /t REG_DWORD /d 1 /f >nul
-    echo  Startup Boost ENABLED! [SUCCESS]
+    echo  Startup Boost ENABLED!
 )
 if "%edge%"=="5" (
     echo.
@@ -7612,4 +7686,5 @@ goto MAIN_MENU
 :: ═══════════════════════════════════════════════════════════════════════════
 :: END OF v6.0 NEW FUNCTIONS
 :: ═══════════════════════════════════════════════════════════════════════════
+
 
