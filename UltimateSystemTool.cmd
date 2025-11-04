@@ -183,9 +183,12 @@ echo  --------------------------------------------------------------------------
 echo   [97] RUN ALL CLEANUP                [98] RUN ALL UTILITIES
 echo   [99] FULL SYSTEM OPTIMIZATION       [0]  EXIT
 echo  -------------------------------------------------------------------------------
+echo   [T]  Switch to Vietnamese / Chuyen sang Tieng Viet
+echo  -------------------------------------------------------------------------------
 echo(
-set /p choice="  SELECT FUNCTION [0-99]: "
+set /p choice="  SELECT FUNCTION [0-99 or T]: "
 
+if /i "%choice%"=="T" goto SWITCH_LANGUAGE
 if "%choice%"=="0" goto EXIT
 
 :: ============================================================================
@@ -3100,12 +3103,12 @@ echo   THAO TAC NHANH
 echo  ================================================================================
 echo   [88] CHAY TAT CA DON DEP             [99] TOI UU TOAN BO HE THONG
 echo  -------------------------------------------------------------------------------
-echo   [0]  THOAT                            [L]  Chuyen sang tieng Anh
+echo   [0]  THOAT                            [T]  Chuyen sang tieng Anh
 echo  ================================================================================
 echo(
-set /p choice=   CHON CHUC NANG (0-99 hoac L): 
+set /p choice=   CHON CHUC NANG (0-99 hoac T): 
 
-if /i "%choice%"=="L" goto SWITCH_LANGUAGE
+if /i "%choice%"=="T" goto SWITCH_LANGUAGE
 if "%choice%"=="0" goto EXIT
 if "%choice%"=="1" goto QUICK_CLEANUP
 if "%choice%"=="2" goto DEEP_CLEANUP
