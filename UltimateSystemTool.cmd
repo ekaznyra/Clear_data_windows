@@ -21,6 +21,7 @@ color 0B
 for /f "tokens=4-5 delims=. " %%i in ('ver') do set VERSION=%%i.%%j
 set WIN_VER=Unknown
 set WIN_NAME=Unknown Windows
+set BUILD=0
 
 :: Detect Windows Version precisely
 if "%version%" == "10.0" (
@@ -84,7 +85,7 @@ echo              U L T I M A T E   W I N D O W S   S Y S T E M   T O O L
 echo                           VERSION 5.0 - COMPLETE EDITION                      
 echo                                                                                
 echo          Author: Nguyen Ngoc Anh Tu - facebook.com/NguyenNgocAnhTu.VN        
-if defined BUILD (echo          System: %WIN_NAME% - Build %BUILD%) else (echo          System: Windows - Build Unknown)
+echo                                                                                
 echo                                                                                
 echo    ===============================================================================
 echo.
