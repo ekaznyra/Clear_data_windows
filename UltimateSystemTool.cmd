@@ -176,7 +176,7 @@ echo   [81] Backup Product Keys            [82] Data Recovery Tools
 echo  -------------------------------------------------------------------------------
 echo(
 echo  -------------------------------------------------------------------------------
-echo   CATEGORY 11: INSTALLATION [83-87] ** NEW **
+echo   CATEGORY 11: INSTALLATION [83-87] 
 echo  -------------------------------------------------------------------------------
 echo   [83] Install Software (Chocolatey)  [84] Install Office Suite
 echo   [85] Create WinPE Boot USB          [86] Store for Win LTSC
@@ -184,7 +184,7 @@ echo   [87] Install Win via Win To HDD
 echo  -------------------------------------------------------------------------------
 echo(
 echo  -------------------------------------------------------------------------------
-echo   CATEGORY 12: UTILITIES [88-96] ** NEW **
+echo   CATEGORY 12: UTILITIES [88-96] 
 echo  -------------------------------------------------------------------------------
 echo   [88] Clean Junk Files (Advanced)    [89] Show/Hide Files
 echo   [90] Enable/Disable Update          [91] Fix Printer Issues
