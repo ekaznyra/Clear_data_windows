@@ -1,4 +1,4 @@
-﻿# Clear Data Windows
+# Clear Data Windows
 
 Ban toi uu chay truc tiep tren PowerShell, khong GUI de nhe va nhanh hon.
 
@@ -36,3 +36,7 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 - Chi xoa cache/temp/log/dump trong danh sach an toan.
 - Khong xoa Desktop, Documents, Downloads, System32, Program Files.
 - Khong tu tat ung dung dang chay.
+ 
+## Version 3.10.0
+- Added InstallAutoScan UninstallSchedules RunAsAdmin.
+

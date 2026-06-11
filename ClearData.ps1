@@ -23,7 +23,7 @@ try { chcp 65001 | Out-Null } catch {}
 [Console]::InputEncoding = [System.Text.UTF8Encoding]::new($true)
 $OutputEncoding = [System.Text.UTF8Encoding]::new($true)
 
-$Script:Version = '3.9.0'
+$Script:Version = '3.10.0'
 $Script:LogDir = Join-Path $PSScriptRoot 'logs'
 $Script:RulesFile = Join-Path $PSScriptRoot 'cleanup-rules.json'
 $Script:LogFile = Join-Path $Script:LogDir ('cleanup_' + (Get-Date -Format 'yyyy-MM-dd_HH-mm-ss') + '.log')
@@ -139,7 +139,15 @@ $Script:CleanupTargets = @(
     @{ Id=76; Mode='Deep'; Name='Tat ngu dong (Hibernation)'; Type='Hibernation'; Path=''; RequireAdmin=$true; Description='Tat che do ngu dong de xoa file hiberfil.sys' },
     @{ Id=77; Mode='Deep'; Name='Manh vo kiem tra o dia'; Type='MultiPath'; Paths=@('C:\Found.000','C:\Found.001','C:\Found.002'); RequireAdmin=$true; Description='Xoa cac file sua loi tu Check Disk (Found.000)' },
     @{ Id=78; Mode='Deep'; Name='Nhat ky may chu Web (IIS Logs)'; Type='FolderContents'; Path='C:\inetpub\logs\LogFiles'; MinAgeHours=24; RequireAdmin=$true; Description='Xoa nhat ky cua Windows IIS Web Server' },
-    @{ Id=79; Mode='Recommended'; Name='Quet dong moi App (Universal Cache)'; Type='DynamicAppCache'; Path=''; MinAgeHours=24; RequireAdmin=$false; Description='Tu dong truy tim moi thu muc ten Cache/logs cua cac ung dung la trong AppData' }
+    @{ Id=79; Mode='Recommended'; Name='Quet dong moi App (Universal Cache)'; Type='DynamicAppCache'; Path=''; MinAgeHours=24; RequireAdmin=$false; Description='Tu dong truy tim moi thu muc ten Cache/logs cua cac ung dung la trong AppData' },
+    @{ Id=80; Mode='Safe'; Name='Bo nho dem AI / LLMs'; Type='MultiPath'; Paths=@((UserPath '.ollama\models')+(UserPath '.cache\lm-studio')+(LocalPath 'nomic.ai\GPT4All')); MinAgeHours=168; RequireAdmin=$false; Description='Cac mo hinh AI cuc bo (Ollama, LM Studio, GPT4All)' },
+    @{ Id=81; Mode='Safe'; Name='Bo nho dem CapCut'; Type='MultiPath'; Paths=@(LocalPath 'CapCut\User Data\Cache'); MinAgeHours=24; RequireAdmin=$false; Description='Bo nho dem va proxy cua CapCut PC' },
+    @{ Id=82; Mode='Safe'; Name='Bo nho dem Arc Browser'; Type='MultiPath'; Paths=@((LocalPath 'Packages\BCC22284.Arc_cw5n1h2txyewy\LocalCache\Local\Arc')+(LocalPath 'Packages\BCC22284.Arc_cw5n1h2txyewy\LocalCache\Roaming\Arc')); MinAgeHours=24; RequireAdmin=$false; Description='Bo nho dem trinh duyet Arc' },
+    @{ Id=83; Mode='Safe'; Name='Bo nho dem Cursor IDE'; Type='MultiPath'; Paths=@((RoamPath 'Cursor\Cache')+(RoamPath 'Cursor\Code Cache')+(RoamPath 'Cursor\GPUCache')+(RoamPath 'Cursor\CachedData')); MinAgeHours=24; RequireAdmin=$false; Description='Bo nho dem cua trinh soan thao Cursor' },
+    @{ Id=84; Mode='Safe'; Name='Bo nho dem EA App'; Type='MultiPath'; Paths=@(LocalPath 'Electronic Arts\EA Desktop\Cache'); MinAgeHours=24; RequireAdmin=$false; Description='Bo nho dem ung dung EA Desktop' },
+    @{ Id=85; Mode='Safe'; Name='Lap trinh bo sung (Rust/Conda)'; Type='MultiPath'; Paths=@((UserPath '.rustup\downloads')+(UserPath 'miniconda3\pkgs')+(UserPath 'anaconda3\pkgs')); MinAgeHours=168; RequireAdmin=$false; Description='Bo nho dem Rustup, Conda packages' },
+    @{ Id=86; Mode='Safe'; Name='Bo nho dem Windows Widgets'; Type='MultiPath'; Paths=@(LocalPath 'Packages\MicrosoftWindows.Client.WebExperience_cw5n1h2txyewy\LocalCache'); MinAgeHours=24; RequireAdmin=$false; Description='Bo nho dem thanh Widgets tren Windows 11' },
+    @{ Id=87; Mode='Safe'; Name='Bo nho dem Winget'; Type='MultiPath'; Paths=@((LocalPath 'Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\DiagOutputDir')+(LocalPath 'Temp\WinGet')); MinAgeHours=24; RequireAdmin=$false; Description='Trinh quan ly goi Winget cua Windows 11' }
 )
 
 function Split-ConcatenatedWindowsPaths {
@@ -201,7 +209,9 @@ function Test-PathAllowedForCleanup {
         'windows.old','$windows.~','store','archives','deno','npm','data','zalo','zalopc','vivaldi','roblox',
         'gog','ubisoft','panther','line','clipboard','timeline','notification','uwp','teams','coccoc',
         'prefetch','download','softwaredistribution','fntcache','installer','cryptneturlcache','postman',
-        'notion','github','whatsapp','quarantine','found.000','found.001','found.002','inetpub'
+        'notion','github','whatsapp','quarantine','found.000','found.001','found.002','inetpub',
+        'ollama','lm-studio','gpt4all','capcut','arc_','cursor','ea desktop','rustup','miniconda3','anaconda3','webexperience',
+        'local storage','indexeddb','winget','desktopappinstaller'
     )
     $lower = $full.ToLowerInvariant()
     $hasSafeWord = $false
@@ -225,7 +235,10 @@ function Test-PathAllowedForCleanup {
         '\Docker\wsl\data','\ZaloPC','\Vivaldi','\Clipboard','\ConnectedDevicesPlatform','\Notifications','\Roblox',
         '\GOG.com','\Ubisoft','\LINE','\Panther','\FNTCACHE.DAT','\Installer','\media_cache','\CryptnetUrlCache',
         '\Postman','\Notion','\GitHub Desktop','\WhatsApp','\Quarantine','\System32\LogFiles',
-        '\Found.000','\Found.001','\Found.002','\inetpub\logs'
+        '\Found.000','\Found.001','\Found.002','\inetpub\logs',
+        '\.ollama\models','\.cache\lm-studio','\GPT4All','\CapCut\User Data','\Arc_','\Cursor',
+        '\EA Desktop','\.rustup\downloads','\miniconda3\pkgs','\anaconda3\pkgs','\WebExperience',
+        '\logs','\Local Storage','\IndexedDB','\WinGet','\DiagOutputDir'
     )
     foreach ($m in $markers) { 
         if ($full -like "*$m*") { return $true } 
@@ -445,13 +458,17 @@ function Show-Menu {
     Write-Host '      [11] Toi uu Giao dien & Trai nghiem (UI/UX, FPS)' -ForegroundColor White
     Write-Host '      [12] Toi uu Bao mat & Quyen rieng tu (Privacy, RAM)' -ForegroundColor White
     Write-Host '      [13] Toi uu Nguon & Luu tru (Fast Startup, Hibernate)' -ForegroundColor White
-    Write-Host '      [14] Tao diem phuc hoi Windows (Restore Point)' -ForegroundColor White
+    Write-Host '      [14] Nen o dia ao WSL2 (Compact WSL)' -ForegroundColor White
+    Write-Host '      [15] Khoi dong lai Windows Explorer (Fix loi RAM)' -ForegroundColor White
+    Write-Host '      [16] Khoi phuc & Xoa trang Windows Update (Hard Reset)' -ForegroundColor White
+    Write-Host '      [17] Nen he dieu hanh Windows (Compact OS)' -ForegroundColor White
+    Write-Host '      [18] Tao diem phuc hoi Windows (Restore Point)' -ForegroundColor White
     Write-Host ''
     Write-Host '    [*] LICH TRINH & BAO CAO:' -ForegroundColor Cyan
-    Write-Host '      [15] Dat lich don dep hang tuan' -ForegroundColor White
-    Write-Host '      [16] Dat lich quet rac hang ngay' -ForegroundColor White
-    Write-Host '      [17] Xem trang thai lich trinh tu dong' -ForegroundColor White
-    Write-Host '      [18] Go bo hoan toan lich tu dong' -ForegroundColor White
+    Write-Host '      [19] Dat lich don dep hang tuan' -ForegroundColor White
+    Write-Host '      [20] Dat lich quet rac hang ngay' -ForegroundColor White
+    Write-Host '      [21] Xem trang trang lich trinh tu dong' -ForegroundColor White
+    Write-Host '      [22] Go bo hoan toan lich tu dong' -ForegroundColor White
     Write-Host ''
     Write-Host '      [0]  Thoat chuong trinh' -ForegroundColor DarkGray
     Write-Host '    ========================================================================' -ForegroundColor Magenta
@@ -1235,6 +1252,91 @@ function Optimize-PowerAndStorage {
     } catch { Write-Host '    [LOI] Phat sinh loi trong qua trinh toi uu.' -ForegroundColor Red }
 }
 
+function Optimize-WSL {
+    Write-Host ''
+    Write-Host '    NEN O DIA AO WSL2 (COMPACT WSL)' -ForegroundColor Cyan
+    Write-Host '    Giai phong dung luong da xoa ben trong WSL2 (chi ho tro he thong co cai dat WSL).' -ForegroundColor DarkGray
+    if (-not (Confirm-YN 'Ban co muon thuc hien toi uu hoa WSL khong?')) { return }
+    if (-not (Get-Command wsl.exe -ErrorAction SilentlyContinue)) {
+        Write-Host '    [LOI] He thong chua cai dat hoac khong ho tro WSL.' -ForegroundColor Red
+        return
+    }
+    try {
+        Write-Host '    Dang tien hanh tat WSL va thu gon o dia. Qua trinh co the mat vai phut...' -ForegroundColor Yellow
+        wsl.exe --shutdown | Out-Null
+        $dists = wsl.exe --list --quiet | Where-Object { $_ -match '\S' } | ForEach-Object { $_ -replace "`0", "" }
+        if (-not $dists) {
+            Write-Host '    [LOI] Khong tim thay ban phan phoi WSL nao.' -ForegroundColor Yellow
+            return
+        }
+        foreach ($d in $dists) {
+            Write-Host "      Dang thu gon ban phan phoi: $d ..." -ForegroundColor Cyan
+            wsl.exe --manage $d --set-sparse true | Out-Null
+            Write-Host "      [OK] Da toi uu $d" -ForegroundColor Green
+        }
+        Write-Host '    Hoan tat thu gon WSL.' -ForegroundColor Green
+    } catch { Write-Host '    [LOI] Phat sinh loi trong qua trinh toi uu WSL.' -ForegroundColor Red }
+}
+
+function Restart-WindowsExplorer {
+    Write-Host ''
+    Write-Host '    KHOI DONG LAI WINDOWS EXPLORER (RESTART EXPLORER)' -ForegroundColor Cyan
+    Write-Host '    Giup giai phong RAM do memory leak cua Explorer va lam moi thanh Taskbar.' -ForegroundColor DarkGray
+    if (-not (Confirm-YN 'Ban co muon khoi dong lai Explorer ngay bay gio khong? (Man hinh se nhay mot chut)')) { return }
+    try {
+        Stop-Process -Name explorer -Force
+        Write-Host '    [OK] Da khoi dong lai Windows Explorer.' -ForegroundColor Green
+    } catch { Write-Host '    [LOI] Phat sinh loi khi khoi dong lai Explorer.' -ForegroundColor Red }
+}
+
+function Reset-WindowsUpdateDeep {
+    Write-Host ''
+    Write-Host '    KHOI PHUC & XOA TRANG WINDOWS UPDATE (HARD RESET)' -ForegroundColor Cyan
+    Write-Host '    Xoa toan bo thu muc SoftwareDistribution va catroot2 de sua loi Update.' -ForegroundColor DarkGray
+    Write-Host '    Luu y: May tinh se phai kiem tra ban cap nhat lai tu dau.' -ForegroundColor Yellow
+    if (-not (Confirm-YN 'Ban co chac chan muon thuc hien khong?')) { return }
+    if (-not (Test-AdminRights)) { Write-Host '    [LOI] Vui long chay duoi quyen Administrator.' -ForegroundColor Red; return }
+    try {
+        Write-Host '    Dang dung cac dich vu Update...' -ForegroundColor Yellow
+        Stop-Service -Name wuauserv -Force -ErrorAction SilentlyContinue
+        Stop-Service -Name cryptSvc -Force -ErrorAction SilentlyContinue
+        Stop-Service -Name bits -Force -ErrorAction SilentlyContinue
+        Stop-Service -Name msiserver -Force -ErrorAction SilentlyContinue
+        
+        Write-Host '    Dang xoa thu muc bo nho dem...' -ForegroundColor Cyan
+        if (Test-Path "C:\Windows\SoftwareDistribution") { Remove-Item "C:\Windows\SoftwareDistribution" -Recurse -Force -ErrorAction SilentlyContinue }
+        if (Test-Path "C:\Windows\System32\catroot2") { Remove-Item "C:\Windows\System32\catroot2" -Recurse -Force -ErrorAction SilentlyContinue }
+        
+        Write-Host '    Dang khoi dong lai cac dich vu...' -ForegroundColor Yellow
+        Start-Service -Name wuauserv -ErrorAction SilentlyContinue
+        Start-Service -Name cryptSvc -ErrorAction SilentlyContinue
+        Start-Service -Name bits -ErrorAction SilentlyContinue
+        Start-Service -Name msiserver -ErrorAction SilentlyContinue
+        
+        Write-Host '    [OK] Da khoi phuc hoan toan Windows Update.' -ForegroundColor Green
+    } catch { Write-Host '    [LOI] Phat sinh loi trong qua trinh khoi phuc.' -ForegroundColor Red }
+}
+
+function Enable-CompactOS {
+    Write-Host ''
+    Write-Host '    NEN HE DIEU HANH WINDOWS (COMPACT OS)' -ForegroundColor Cyan
+    Write-Host '    Su dung tinh nang nen an cua Windows de tiet kiem 2-4GB o dia C:.' -ForegroundColor DarkGray
+    Write-Host '    Hoan toan an toan, khong loi file. Qua trinh co the mat 5-15 phut.' -ForegroundColor Yellow
+    if (-not (Confirm-YN 'Ban co muon bat dau nien he dieu hanh khong?')) { return }
+    if (-not (Test-AdminRights)) { Write-Host '    [LOI] Vui long chay duoi quyen Administrator.' -ForegroundColor Red; return }
+    try {
+        Write-Host '    Dang kiem tra trang thai Compact OS...' -ForegroundColor Yellow
+        $status = compact.exe /compactos:query | Out-String
+        if ($status -match 'is in the Compact state') {
+            Write-Host '    [THONG BAO] He dieu hanh da duoc nen tu truoc.' -ForegroundColor Green
+        } else {
+            Write-Host '    Dang tien hanh nen he dieu hanh. VUI LONG DOI VA KHONG TAT MAY...' -ForegroundColor Cyan
+            compact.exe /compactos:always | Out-Null
+            Write-Host '    [OK] Da nen he dieu hanh thanh cong. Kiem tra dung luong o C: cua ban nhe!' -ForegroundColor Green
+        }
+    } catch { Write-Host '    [LOI] Phat sinh loi khi thuc thi Compact OS.' -ForegroundColor Red }
+}
+
 function Export-ScanCsv {
     param([array]$Results)
     Ensure-LogDir
@@ -1371,7 +1473,7 @@ function Invoke-SelfTest {
     $readme = Get-Content $ReadmePath -Raw -Encoding UTF8
     $bat = Get-Content $BatPath -Raw -Encoding UTF8
 
-    Assert-True ($script -match '\$Script:Version = ''3\.9\.0''') 'Phien ban la 3.9.0'
+    Assert-True ($script -match '\$Script:Version = ''3\.10\.0''') 'Phien ban la 3.10.0'
     Assert-True ($script -match 'Tao lich quet tu dong hang ngay') 'Menu ho tro tao lich quet tu dong hang ngay'
     Assert-True ($script -match 'Register-DailyAutoScanTask') 'Ham lap lich quet hang ngay ton tai'
     Assert-True ($script -match 'InstallAutoScan' -and $script -match 'InstallAutoClean' -and $script -match 'UninstallSchedules') 'Tham so lich trinh CLI ton tai'
@@ -1403,7 +1505,7 @@ function Invoke-SelfTest {
     Assert-True ($script -match 'Fit-Text') 'Bang quet tu dong rut gon ten dai'
     Assert-True ($script -match 'ImportOnly') 'Tham so ImportOnly hoat dong chinh xac'
     Assert-True ($script -match 'Desktop.*Documents.*Downloads') 'Cac thu muc ca nhan duoc bao ve tuyet doi'
-    Assert-True ($readme -match '3\.9\.0') 'Tai lieu README ghi nhan lich su phien ban 3.9.0'
+    Assert-True ($readme -match '3\.10\.0') 'Tai lieu README ghi nhan lich su phien ban 3.10.0'
     Assert-True ($readme -match 'InstallAutoScan' -and $readme -match 'UninstallSchedules') 'Tai lieu README ghi nhan tham so lich trinh CLI'
     Assert-True ($readme -match 'RunAsAdmin') 'Tai lieu README ghi nhan co che tu nang quyen Admin'
     Assert-True ($bat -match 'Run_ClearData.bat' -or $bat -match 'powershell') 'File chay Run_ClearData.bat hop le'
@@ -1494,11 +1596,15 @@ function Start-MainLoop {
             '11'{Optimize-UserExperience; Pause-Back}
             '12'{Optimize-PrivacyAndBackground; Pause-Back}
             '13'{Optimize-PowerAndStorage; Pause-Back}
-            '14'{New-SafeRestorePoint; Pause-Back}
-            '15'{Register-WeeklyCleanupTask; Pause-Back}
-            '16'{Register-DailyAutoScanTask; Pause-Back}
-            '17'{Show-ClearDataSchedules; Pause-Back}
-            '18'{Unregister-ClearDataSchedules; Pause-Back}
+            '14'{Optimize-WSL; Pause-Back}
+            '15'{Restart-WindowsExplorer; Pause-Back}
+            '16'{Reset-WindowsUpdateDeep; Pause-Back}
+            '17'{Enable-CompactOS; Pause-Back}
+            '18'{New-SafeRestorePoint; Pause-Back}
+            '19'{Register-WeeklyCleanupTask; Pause-Back}
+            '20'{Register-DailyAutoScanTask; Pause-Back}
+            '21'{Show-ClearDataSchedules; Pause-Back}
+            '22'{Unregister-ClearDataSchedules; Pause-Back}
             '0'{return}
             default{Write-Host '    Lua chon khong hop le.' -ForegroundColor Red; Start-Sleep 1}
         }
